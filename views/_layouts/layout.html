@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Index - Global News</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+      <!-- ********************Layout Styles******************************* -->
+		<link href="css/common.css" rel="stylesheet" media="all"/>
+		<link href="css/flexslider.css" rel="stylesheet" media="all"/>
+		<link href="css/style.css" rel="stylesheet" media="all"/>
+		<link href="css/responsive.css" rel="stylesheet" media="all"/>
+		<link href="css/skin.css" rel="stylesheet" media="all"/>
+      <!-- ***************************Icons******************************* -->
+		<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+      <!-- ********************Layout Scripts******************************* -->
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/jquery.ad-gallery.pack.js"></script>
+		<script src="js/jquery.flexslider-min.js"></script>
+		<script src="js/jquery.colorbox-min.js"></script>
+		<script src="js/custom.js"></script>
+		<script src="js/script.js"></script>
+		<!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+		<![endif]-->
+		<!-- ********************Page Styles******************************* -->
+		{{{yield-pageStyles}}}
+		<!-- ********************Page Scripts******************************* -->
+		{{{yield-pageScripts}}}
+	</head>
+	<body class="two_sidebars dark_blue">
+		<!--[if lte IE 8]>
+			<div id="ie_message">
+			<div class="wrapper">
+			<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+				<img src="images/banner_ie.png" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
+			</a></div>
+			</div>
+		<![endif]-->
+		<div id="wrapper">
+			<!-- header -->
+			<header>
+				<div id="above_header">
+					<div class="inner">
+						<div class="region">
+							<div id="block_header_time" class="block">
+								<p>
+									Today: {{ sss }}
+									<time datetime="2013-02-07" class="today">
+										Tuesday, February 7, 2013
+									</time>
+									Last Update:
+									<time datetime="2013-02-07" class="last_update">
+										3:54 AM ET
+									</time>
+								</p>
+							</div>
+							<div id="block_header_login" class="block">
+								<p>
+									<a href="#">Login</a> | <a href="#">Register</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="header">
+					<div class="wrapper">
+						<h1 id="logo"><a href="index.html" title="Home"><img src="images/logo.png" alt="Global News"/></a></h1>
+						<div class="region">
+							<div id="block-search-form" class="block">
+								<form method="post" action="#">
+									<div class="form-type-textfield">
+										<input type="text" class="form-text" maxlength="128" size="15" value="Search" onblur="if(this.value=='') this.value='Search'" onfocus="if(this.value =='Search' ) this.value=''"/>
+									</div>
+									<div class="form-actions">
+										<input type="submit" class="form-submit" value=""/>
+									</div>
+								</form>
+							</div>
+							<div id="block_header_rss" class="block">
+								<p>
+									<a href="#" class="social_icons social_icons_right rss">RSS Feed</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="banner" class="flexslider">
+							<ul class="slides">
+								<li>
+									<a href="/index.html">
+             						<img alt="home" src="images/banner.jpg">
+									</a>
+								</li>
+								<li>
+									<a href="/index.html">
+             						<img alt="home" src="images/banner1.jpg">
+									</a>
+								</li>
+								<li>
+									<a href="/index.html">
+             						<img alt="home" src="images/banner2.jpg">
+									</a>
+								</li>
+								<li>
+									<a href="/index.html">
+             						<img alt="home" src="images/banner3.jpg">
+									</a>
+								</li>
+							</ul>
+						</div>
+            </div>
+				<div id="under_header">
+					<div class="region">
+						<div id="block_main_menu" class="block">
+							<div class="inner">
+								<nav>
+									<ul>
+										<li class="first active">
+											<a href="index.html"><span class="bg">Home</span></a>
+											<ul>
+												<li class="active">
+													<a href="index.html">Red</a>
+												</li>
+												<li>
+													<a href="index_blue.html">Blue</a>
+												</li>
+												<li>
+													<a href="index_orange.html">Orange</a>
+												</li>
+												<li>
+													<a href="index_green.html">Green</a>
+												</li>
+												<li>
+													<a href="index_grey.html">Grey</a>
+												</li>
+												<li>
+													<a href="index_dark_blue.html">Dark Blue</a>
+												</li>
+												<li>
+													<a href="index_dark_grey.html">Dark Grey</a>
+												</li>
+												<li>
+													<a href="index_fixed_layout.html">Fixed Layout</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="fullwidth.html"><span class="bg">Pages</span></a>
+											<ul>
+												<li>
+													<a href="fullwidth.html">Fullwidth Text Page</a>
+												</li>
+												<li>
+													<a href="page_with_sidebar.html">Text Page With Sidebar</a>
+												</li>
+												<li>
+													<a href="blog_fullwidth.html">Fullwidth Blog</a>
+												</li>
+												<li>
+													<a href="blog_with_sidebar.html">Blog With Sidebar</a>
+												</li>
+												<li>
+													<a href="blog_post.html">Blog Post</a>
+												</li>
+												<li>
+													<a href="contacts.html">Contacts</a>
+												</li>
+												<li>
+													<a href="archives.html">Archives</a>
+												</li>
+												<li>
+													<a href="404.html">404 Error Page</a>
+												</li>
+												<li>
+													<a href="sitemap.html">Site Map</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="typography.html"><span class="bg">Features</span></a>
+											<ul>
+												<li>
+													<a href="typography.html">Typography</a>
+												</li>
+												<li>
+													<a href="layouts.html">Layouts</a>
+												</li>
+												<li>
+													<a href="shortcodes.html">Shortcodes</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="gallery_3columns.html"><span class="bg">Gallery</span></a>
+											<ul>
+												<li>
+													<a href="gallery_3columns.html">3 Columns</a>
+												</li>
+												<li>
+													<a href="gallery_4columns.html">4 Columns</a>
+												</li>
+												<li>
+													<a href="gallery_page.html">Gallery Page</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="#"><span class="bg">World</span></a>
+										</li>
+										<li>
+											<a href="#"><span class="bg">U.S.</span></a>
+										</li>
+										<li>
+											<a href="#"><span class="bg">Business</span></a>
+										</li>
+										<li>
+											<a href="#"><span class="bg">Sports</span></a>
+										</li>
+										<li>
+											<a href="#"><span class="bg">Entertainment</span></a>
+										</li>
+										<li>
+											<a href="#"><span class="bg">Health</span></a>
+										</li>
+										<li>
+											<a href="#"><span class="bg">Tech</span></a>
+										</li>
+										<li>
+											<a href="#"><span class="bg">Weather</span></a>
+										</li>
+									</ul>
+								</nav>
+								<div class="responsive-menu-items">
+
+								</div>
+							</div>
+						</div>
+						<div id="block_secondary_menu" class="block">
+							<div class="inner">
+								<ul>
+									<li class="first active">
+										<a href="index.html">Red</a>
+									</li>
+									<li>
+										<a href="index_blue.html">Blue</a>
+									</li>
+									<li>
+										<a href="index_orange.html">Orange</a>
+									</li>
+									<li>
+										<a href="index_green.html">Green</a>
+									</li>
+									<li>
+										<a href="index_grey.html">Grey</a>
+									</li>
+									<li>
+										<a href="index_dark_blue.html">Dark Blue</a>
+									</li>
+									<li>
+										<a href="index_dark_grey.html">Dark Grey</a>
+									</li>
+									<li>
+										<a href="index_fixed_layout.html">Fixed Layout</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<aside id="block_login_register" class="block">
+					<div class="region">
+						<div class="inner">
+							<div class="wrapper">
+								<div id="user_register" class="one_third">
+									<h3 class="block_title">Register Now</h3>
+									<div class="content">
+										<form action="#" method="post">
+											<span class="form-required">All fields are required</span>
+											<div class="form-item">
+												<label for="edit_register_email">E-Mail address:</label>
+												<div class="form-text_l">
+													<div class="form-text_r">
+														<input type="email" class="form-text" id="edit_register_email" name="edit_register_email" required />
+													</div>
+												</div>
+											</div>
+											<div class="form-item">
+												<label for="edit_password">Password:</label>
+												<div class="form-text_l">
+													<div class="form-text_r">
+														<input type="password" class="form-text" id="edit_password" name="edit_password" required />
+													</div>
+												</div>
+											</div>
+											<div class="form-item">
+												<label for="edit_password2">Retype password:</label>
+												<div class="form-text_l">
+													<div class="form-text_r">
+														<input type="password" class="form-text" id="edit_password2" name="edit_password2" required />
+													</div>
+												</div>
+											</div>
+											<div id="edit-actions">
+												<button type="submit">
+													<span class="view_all active"><span><span>sign up</span></span></span>
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="one_third">
+									<h3 class="block_title">Need Help?</h3>
+									<div class="content">
+										<p>
+											Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus.Vestibulum libero nisl, porta vel, scelerisque eget.
+											<br/>
+											<br/>
+											Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse sollicitudin velit sed leo.
+										</p>
+									</div>
+								</div>
+								<div id="user_login" class="one_third last">
+									<h3 class="block_title">member LogIn</h3>
+									<div class="content">
+										<form action="#" method="post">
+											<div class="form-item">
+												<label for="edit_login">Username:</label>
+												<div class="form-text_l">
+													<div class="form-text_r">
+														<input type="text" class="form-text" id="edit_login" name="edit_login" required />
+													</div>
+												</div>
+											</div>
+											<div class="form-item">
+												<label for="edit_login_password">Password:</label>
+												<div class="form-text_l">
+													<div class="form-text_r">
+														<input type="password" class="form-text" id="edit_login_password" name="edit_login_password" required />
+													</div>
+												</div>
+											</div>
+											<div id="edit_login_remember_wrapper" class="form-item">
+												<input type="checkbox" id="edit_login_remember" name="edit_login_remember" class="checkbox_replace"/>
+												<label for="edit_login_remember">Remember me</label>
+												<a href="#">Forgot Password?</a>
+											</div>
+											<div id="edit-actions">
+												<button type="submit">
+													<span class="view_all active"><span><span>log in</span></span></span>
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="wrapper close">
+						<a href="#">Close</a>
+					</div>
+				</aside>
+			</header>
+			<!-- end header -->
+
+			<!-- page content -->
+			{{{yield}}}
+			<!--end page content-->
+
+			<!-- footer -->
+			<footer>
+				<div class="region">
+					<div id="block_footer_menu" class="block">
+						<nav>
+							<ul>
+								<li class="first active">
+									<a href="index.html">Home</a>
+								</li>
+								<li>
+									<a href="fullwidth.html">Pages</a>
+								</li>
+								<li>
+									<a href="typography.html">Features</a>
+								</li>
+								<li>
+									<a href="gallery_3columns.html">Gallery</a>
+								</li>
+								<li>
+									<a href="#">World</a>
+								</li>
+								<li>
+									<a href="#">U.S.</a>
+								</li>
+								<li>
+									<a href="#">Business</a>
+								</li>
+								<li>
+									<a href="#">Sports</a>
+								</li>
+								<li>
+									<a href="#">Entertainment</a>
+								</li>
+								<li>
+									<a href="#">Health</a>
+								</li>
+								<li>
+									<a href="#">Tech</a>
+								</li>
+								<li>
+									<a href="#">Weather</a>
+								</li>
+								<li>
+									<a href="#">About Us</a>
+								</li>
+								<li>
+									<a href="contacts.html">Contacts</a>
+								</li>
+								<li>
+									<a href="sitemap.html">Site Map</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<div id="block_copyright" class="block">
+						<p>
+							Copyright &copy; 2013 Global News. All rights reserved.
+						</p>
+					</div>
+				</div>
+			</footer>
+			<!-- end footer -->
+		</div>
+	</body>
+</html>
