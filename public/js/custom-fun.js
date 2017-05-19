@@ -48,7 +48,7 @@
      removalDelay: 500, //delay removal by X to allow out-animation
      callbacks: {
        beforeOpen: function() {
-         // just a hack that adds mfp-anim class to markup 
+         // just a hack that adds mfp-anim class to markup
          this.st.image.markup = this.st.image.markup.replace(
            'mfp-figure', 'mfp-figure mfp-with-anim');
          this.st.mainClass = this.st.el.attr('data-effect');
@@ -132,7 +132,8 @@
      date = null;
    var update = function() {
      date = moment(new Date())
-     datetime.html(date.format('dddd, D MMMM  YYYY, h:mm:ss a'));
+     date.locale('pt-BR')
+     datetime.html(date.format('dddd, D [de] MMMM [de] YYYY, H:mm:ss'));
    };
    datetime = $('#time-date')
    update();
@@ -421,6 +422,24 @@
      isPause = false;
    })
 
+   /* -------------------------------------------------------------------------*
+   * MINES
+   * -------------------------------------------------------------------------*/
+   /*BANNER owlCarousel*/
+   var bannerCarousel = $("#banner");
+   bannerCarousel.owlCarousel({
+     loop:true,
+     autoPlay : 10000,
+     stopOnHover : true,
+     navigation:true,
+     paginationSpeed : 10000,
+     goToFirstSpeed : 10000,
+     singleItem : true,
+     autoHeight : true,
+     transitionStyle:"fade",
+     pagination: false
+   });
+
 
  });
 
@@ -429,7 +448,7 @@
   * -------------------------------------------------------------------------*/
  $.simpleWeather({
    location: '',
-   woeid: '1521894',
+   woeid: '455913',
    unit: 'c',
    success: function(weather) {
      html = '<i class="icon-' + weather.code + '"></i> ' + weather.city +
