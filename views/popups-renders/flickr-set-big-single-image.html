@@ -1,0 +1,122 @@
+<style>
+   #owl-flickr-set {
+     background-color: black;
+     padding-top: 10px;
+     padding-left: 10px;
+     padding-right: 10px;
+   }
+
+   #owl-flickr-set-container {
+      padding-top: 10px;
+      text-align: center;
+      background-color: black;
+
+   }
+
+   #owl-flickr-set-container h1 {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 15pt;
+   }
+
+   #owl-flickr-set-container h2 {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 11pt;
+   }
+
+   #owl-flickr-set-container button.mfp-close {
+     background-color: black;
+     color: white;
+   }
+
+   #owl-flickr-set .item .img-container {
+      background-color: white;
+      display: inline-block;
+      margin-right: auto; margin-left: auto;
+   }
+
+   #owl-flickr-set .item img {
+      display: block;
+      margin:auto;
+      font-weight: bold;
+   }
+
+   #owl-flickr-set .item .img-title {
+     background-color: rgba(61, 86, 110, 0.8);
+     color: #ffffff;
+     text-align: left;
+     padding-left: 5px;
+   }
+
+   @media screen and (min-height: 100px) {
+      #owl-flickr-set .item img{
+        max-height: 100px;
+      }
+   }
+
+   @media screen and (min-height: 200px) {
+      #owl-flickr-set .item img{
+        max-height: 200px;
+      }
+   }
+
+   @media screen and (min-height: 300px) {
+      #owl-flickr-set .item img{
+        max-height: 300px;
+      }
+   }
+
+   @media screen and (min-height: 400px) {
+      #owl-flickr-set .item img{
+        max-height: 400px;
+      }
+   }
+
+   @media screen and (min-height: 500px) {
+      #owl-flickr-set .item img{
+        max-height: 500px;
+      }
+   }
+
+   @media screen and (min-height: 600px) {
+      #owl-flickr-set .item img{
+        max-height: 600px;
+      }
+   }
+
+   @media screen and (min-height: 700px) {
+      #owl-flickr-set .item img{
+        max-height: 700px;
+      }
+   }
+
+</style>
+
+<div id="owl-flickr-set-container">
+   <h1>Exposição de Quadros "Sorocaba de Todos os Tempos"</h1>
+   <h2>01/02/2016</h2>
+   <div id="owl-flickr-set" class="owl-carousel">
+      <!--TODO this title must not be hardcoded //-->
+      {{#photos}}
+         <div class="item">
+            <div class="img-container">
+               <img class="lazyOwl" data-src="{{url}}" alt="{{title}}">
+               <div class="img-title">
+                  {{title}}
+               </div>
+            </div>
+         </div>
+     {{/photos}}
+   </div>
+</div>
+
+<script>
+    $('owl-flickr-set-container').ready(function() {
+        $("#owl-flickr-set").owlCarousel({
+          items : 1,
+          lazyLoad : true,
+          navigation : true
+        });
+    });
+</script>

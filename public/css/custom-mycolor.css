@@ -354,6 +354,8 @@ blockquote p {
 .img-thumbnail {
 	background-color: #f8f8f8;
 	border: 1px solid #ededed;
+	margin: 4px;
+	padding: 0px;
 }
 .text-danger {
 	color: #626262;
@@ -678,7 +680,7 @@ commented by rodrigo moraes, the original template file had this style actived
 	background-color: #ffffff;
 }
 .navbar-inverse .navbar-nav .open a, .navbar-inverse .navbar-nav .open a:hover, .navbar-inverse .navbar-nav .open a:focus {
-	color: #e74c3c;
+	color: #fff;
 	background: none;
 }
 .navbar-inverse .navbar-nav li a, .navbar-inverse .navbar-nav li a:hover, .navbar-inverse .navbar-nav li a:focus {
@@ -694,7 +696,7 @@ commented by rodrigo moraes, the original template file had this style actived
 }
 .navbar-inverse .navbar-toggle, .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 	border: none;
-	background: #e74c3c;
+	background: #3d566e;
 	float: left;
 }
 /*5-2 CHILD NAVIGATION*/
@@ -889,7 +891,7 @@ none;
 .ticker-swipe span {
 	margin-left: 1px;
 	background-color: #fff;
-	border-bottom: 1px solid #e74c3c;
+	border-bottom: 1px solid #3d566e;
 	height: 12px;
 	width: 7px;
 	display: block;
@@ -1087,6 +1089,7 @@ none;
 .box:hover .overlay-info {
 	opacity: 1;
 }
+
 .cat {
 	position: absolute;
 	text-transform: capitalize;
@@ -1130,13 +1133,13 @@ none;
 .info {
 	display: block;
 	position: absolute;
-	left: 15px;
+	left: 10px;
 	bottom: 0;
-	z-index: 100;
+	z-index: 10;
 	text-align: center;
 	color: #fff;
-	height: 36px;
-	line-height: 36px;
+	height: 25px;
+	line-height: 25px;
 	font-weight: normal;
 	font-size: 12px;
 	opacity: 0;
@@ -1146,7 +1149,7 @@ none;
 	transition: all 0.3s;
 }
 .banner-outer-thumb .info {
-	bottom: 10px;
+	bottom: 0px;
 	opacity: 1;
 }
 .info span {
@@ -1158,7 +1161,7 @@ none;
 	padding-left: 0;
 }
 .box:hover .info {
-	bottom: 10px;
+	bottom: 0px;
 	opacity: 1;
 }
 .banner-outer-thumb {
@@ -1209,18 +1212,21 @@ none;
 }
 .banner-outer .carousel-caption {
 	position: absolute;
-	left: 15px;
+	background-color: rgba(61, 86, 110, 0.8);
+	left: 0px;
 	right: 8%;
-	bottom: 10px;
+	bottom: 0px;
 	z-index: 10;
-	padding-top: 20px;
-	padding-bottom: 30px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 23px;
 	color: #ffffff;
 	text-align: left;
 	text-shadow: none;
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 24px;
+	width: 100%;
 }
 .banner-outer a p, .banner-outer a:hover p {
 	color: #fff;
@@ -1241,13 +1247,13 @@ none;
 	height: 212px;
 }
 /*8-4 OWL CAROUSEL SYNC*/
-#sync2 .item {
+#rotativeHeadlinesSlider .item {
 	margin: 0 5px;
 	cursor: pointer;
 }
-#sync2 .owl-wrapper-outer {
+#rotativeHeadlinesSlider .owl-wrapper-outer {
 }
-#sync2 .synced .item {
+#rotativeHeadlinesSlider .synced .item {
 	border: 2px solid rgb(114, 146, 177);
 }
 /*------------------------------------*\
@@ -2256,10 +2262,10 @@ footer .stars {
 	min-height: inherit;
 }
 .open {
-	background: #e74c3c;
+	background: #3d566e;
 }
 .open li {
-	border-bottom: 1px solid #da4839;
+	border-bottom: 1px solid #fff;
 }
 .open li a {
 	padding-top: 10px !important;
@@ -2444,6 +2450,35 @@ footer .stars {
 }
 
 /* Mines */
+#agenda .events-exist {
+	background-color: rgb(114, 146, 177);
+	color: white
+}
+
+#agenda .pmu-selected {
+	font-weight: bolder;
+	background-color: #3d566e;
+}
+
+.place {
+	padding-right: 10px;
+	display: inline-block;
+}
+
+.media-body .place {
+	padding-left: 10px;
+	font-size: 12px;
+}
+
+.list-item-without-img {
+      margin-left: 10px;
+		padding-right: 10px;
+}
+
+.more_items {
+	text-align: right;
+}
+
 footer  .list-unstyled li a:hover h4 {
 	color: #fff;
 }
@@ -2484,4 +2519,8 @@ footer  .list-unstyled li a:hover h4 {
 
 #banner .owl-next {
 	right: 11px
+}
+
+.box:hover .carousel-caption {
+	background-color: transparent;
 }

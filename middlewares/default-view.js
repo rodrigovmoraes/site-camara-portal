@@ -5,7 +5,7 @@
 var fs = require('fs');
 
 /**
- * This middleware check if there is a html file in the view
+ * defaultViewMiddleware: This middleware check if there is a html file in the view
  * folder corresponding to the file in the path of request. If the file exists in
  * the views folder, it renders the file applying the default view layout
  * @param {string} viewsFolder - the path of the folder containing the views files
@@ -13,20 +13,21 @@ var fs = require('fs');
 module.exports = function(viewsFolder) {
 
    return function(req, res, next) {
+      var reqPath = req.path ? req.path.trim() : "";
+
       //chech only html files
-      if(req.path.endsWith('.html'))
-      {
+      if(reqPath.endsWith('.html')) {
          //does the file exist ?
-         fs.stat(viewsFolder + req.path, function(err, stats) {
+         fs.stat(viewsFolder + reqPath, function(err, stats) {
             if(!err) {
                //render the file applying the layout
 
                //to pass the file to method render it's needed to
                //remove the / character from the path if it exists
-               if(req.path.length > 0 && req.path[0] === '/') {
-                  res.render(req.path.substring(1));
+               if(reqPath.length > 0 && reqPath[0] === '/') {
+                  res.render(reqPath.substring(1));
                }else {
-                  res.render(req.path);
+                  res.render(reqPath);
                }
             }else {
                next(); //file doesn't exist
@@ -37,4 +38,9 @@ module.exports = function(viewsFolder) {
       }
    }
 
+}
+
+//for test purposes
+module.exports._setFs = function(_fs) {
+   fs = _fs;
 }

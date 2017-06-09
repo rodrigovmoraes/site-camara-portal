@@ -9,12 +9,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var config = require('config');
 
 /*****************************************************************************
 *************************** DEPENDENCIES SECTION *****************************
 ******************************* (APPS MODULES) *******************************
 /*****************************************************************************/
 var defaultViewMiddleware = require('./middlewares/default-view.js')('./views');
+var FlickrService = require('./services/FlickrService.js');
 
 //-----------------------------------------------------------------------------
 var app = express();
@@ -37,6 +39,7 @@ app.engine('html', require('hogan-express'));
 // portal routes
 var portalRoutes = require('./routes/index.js')
 app.use('/', portalRoutes);
+
 //if an existing file in the views folder is requested,
 //return its content applying the layout
 app.use(defaultViewMiddleware);
@@ -51,6 +54,20 @@ app.use(function(req, res, next) {
     next(err);
 });
 
+/*****************************************************************************
+***************************** APP CONFIG SECTION *****************************
+/*****************************************************************************/
+//Services
+var FlickServiceConfig = config.get('Services.FlickrService');
+FlickrService.setFlickrApiBaseUrl(FlickServiceConfig.flickrApiBaseUrl);
+FlickrService.setFlickrApiKey(FlickServiceConfig.flickrApiKey);
+FlickrService.setFlickrApiGetPhotosMethod(FlickServiceConfig.flickrApiGetPhotosMethod);
+FlickrService.setUnexpectedFlickrDataFormatErrorMessage(FlickServiceConfig.unexpectedFlickrDataFormatErrorMessage);
+FlickrService.setFlickrPhotoUrlPattern(FlickServiceConfig.flickrPhotoUrlPattern);
+
+/*****************************************************************************
+************************** ERROR HANDLING SECTION ****************************
+/*****************************************************************************/
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -58,7 +75,8 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err
+            error: err.toString(),
+            layout: false
         });
     });
 }

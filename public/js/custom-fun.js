@@ -65,6 +65,7 @@
      preloader: true,
      fixedContentPos: false
    });
+
    $('.popup-img').magnificPopup({
      type: 'image'
    });
@@ -121,8 +122,97 @@
    /* -------------------------------------------------------------------------*
     * CALENDAR
     * -------------------------------------------------------------------------*/
-   $('.single').pickmeup({
-     flat: true
+    //the next events
+    //TODO: events should be get from a Data Service (Camara Data Service)
+    var events = [ { date: '20170608', date_description: '19h00', description: 'Sessão Solene: Dia Municipal do Nordestino e Semana da Nordestinidade', place: 'Plenário'},
+                   { date: '20170609', date_description: '19h30', description: 'Sessão Solene: Dia do Pastor', place: 'Plenário'},
+                   { date: '20170609', date_description: '20h00', description: 'Audiência Pública: Combate ao trabalho infantil', place: 'Plenário'},
+                   { date: '20170611', date_description: '19h10', description: 'Sessão Solene: Dia Municipal do Nordestino e Semana da Nordestinidade', place: 'Plenário'},
+                   { date: '20170611', date_description: '20h00', description: 'Audiência Pública: Políticas Públicas Sociais', place: 'Plenário'},
+                   { date: '20170613', date_description: '19h00', description: 'Entrega de Comenda Mérito em Educação para Leonette Georges Kayal Stefano', place: 'Plenário'},
+                   { date: '20170616', date_description: '19h30', description: 'TCE Prof. Hudson Luiz Pissini', place: 'Plenário'}
+                ];
+   //map of events indexed by day
+   var eventsMap = {};
+
+   var buildDateMapForAgenda =  function(pvents, peventsMap) {
+      var i;
+      for(i = 0; i < pvents.length; i++) {
+         var year = pvents[i].date.substr(0, 4);
+         var month = pvents[i].date.substr(4, 2);
+         var day = pvents[i].date.substr(6, 2);
+         var cdate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+         if(peventsMap[cdate]) {
+            peventsMap[cdate].push(pvents[i])
+         }else{
+            peventsMap[cdate] = [];
+            peventsMap[cdate].push(pvents[i])
+         }
+
+      }
+   };
+
+   //build a map for the next events indexed by day
+   buildDateMapForAgenda(events, eventsMap);
+   var arrMonthsShort = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Aug", "Set", "Out", "Nov", "Dez"];
+
+   $('#agenda').pickmeup({
+     flat: true,
+     locale:
+      { // Object, that contains localized days of week names and months
+         days: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
+         daysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+         daysMin: ["Do", "Se", "Te", "Qu", "Qu", "Se", "Sa", "Do"],
+         months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Augosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+         monthsShort: arrMonthsShort
+      },
+      formatted: false,
+      mode: 'single',
+      date:  new Date(2017, 6 - 1, 8), //TODO: should be now, it is for prototyping purposes
+      render: function(date) {
+         var cdate = eventsMap[date];
+         if(cdate){
+            return { class_name: 'events-exist' };
+         } else {
+            return { class_name: 'events-not-exist' };
+         }
+      },
+      change: function () {
+         var newDate = $('#agenda').pickmeup('get_date', false);
+         var todayEvents = eventsMap[newDate];
+         var eventsDay = newDate.getDate();
+         var eventsMonth = arrMonthsShort[newDate.getMonth()];
+         if(todayEvents) {
+            var sHtmlAgendaTitle = 'Eventos do dia ' + eventsDay + '/' + eventsMonth;
+            $('#agenda-title').html(sHtmlAgendaTitle);
+
+            var sHtml = '';
+            var i;
+            for(i = 0; i < todayEvents.length; i++) {
+               var eventDescription = todayEvents[i].description;
+               var eventDateDescription = todayEvents[i].date_description;
+               var eventPlace = todayEvents[i].place;
+               sHtml += '<li>'  +
+                        '   <div class="row">'  +
+                        '      <div class="col-sm-16  col-md-16 list-item-without-img">'  +
+                        '         <h4>' + eventDescription + '</h4>'  +
+                        '         <div class="text-danger sub-info">'  +
+                        '            <div class="time"><span class="ion-android-data icon"></span>' + eventDateDescription + '</div>'  +
+                        '            <div class="place"><span class="ion-location icon"></span>Local: ' + eventPlace + '</div>'  +
+                        '         </div>'  +
+                        '      </div>'  +
+                        '   </div>'  +
+                        '</li>';
+            }
+            $('#day_events').html(sHtml);
+
+         }else {
+            $('#agenda-title').html('Agenda');
+            $('#day_events').html('');
+         }
+         return true;
+      },
+
    });
 
    /* -------------------------------------------------------------------------*
@@ -202,6 +292,13 @@
    /* -------------------------------------------------------------------------*
     * STICKY NAVIGATION
     * -------------------------------------------------------------------------*/
+    /*
+    Date: 22/05/2017
+    author: Rodrigo Vieira de Moraes
+
+    commented by Rodrigo Moraes to enhance the user experience on mobile
+    devices
+
    $(window).scroll(function() {
      if ($(window).scrollTop() >= 99) {
        $('.nav-search-outer').addClass('navbar-fixed-top');
@@ -214,7 +311,7 @@
        $('.nav-search-outer').removeClass('show navbar-fixed-top');
      }
    });
-
+   */
 
    /* -------------------------------------------------------------------------*
     * HOT NEWS
@@ -287,16 +384,17 @@
      singleItem: true,
    });
 
-   var time = 4; // time in seconds
+   var time = 10; // time in seconds
    var $progressBar,
      $bar,
      $elem,
      isPause,
      tick,
      percentTime;
-   var sync1 = $("#sync1");
-   var sync2 = $("#sync2");
-   sync1.owlCarousel({
+   var rotativeHeadlines = $("#rotativeHeadlines");
+   var rotativeHeadlinesSlider = $("#rotativeHeadlinesSlider");
+   rotativeHeadlines.owlCarousel({
+     autoPlay: false,
      singleItem: true,
      slideSpeed: 1000,
      navigation: true,
@@ -308,7 +406,7 @@
      afterMove: moved,
      startDragging: pauseOnDragging
    });
-   sync2.owlCarousel({
+   rotativeHeadlinesSlider.owlCarousel({
      items: 4,
      itemsDesktop: [1199,
        4
@@ -327,40 +425,40 @@
 
    function syncPosition(el) {
      var current = this.currentItem;
-     $("#sync2").find(".owl-item").removeClass("synced").eq(current).addClass(
+     $("#rotativeHeadlinesSlider").find(".owl-item").removeClass("synced").eq(current).addClass(
        "synced")
-     if ($("#sync2").data("owlCarousel") !== undefined) {
+     if ($("#rotativeHeadlinesSlider").data("owlCarousel") !== undefined) {
        center(current)
      }
    }
-   $("#sync2").on("click", ".owl-item", function(e) {
+   $("#rotativeHeadlinesSlider").on("click", ".owl-item", function(e) {
      e.preventDefault();
      var number = $(this).data("owlItem");
-     sync1.trigger("owl.goTo", number);
+     rotativeHeadlines.trigger("owl.goTo", number);
    });
 
    function center(number) {
-       var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
+       var rotativeHeadlinesSliderVisible = rotativeHeadlinesSlider.data("owlCarousel").owl.visibleItems;
        var num = number;
        var found = false;
-       for (var i in sync2visible) {
-         if (num === sync2visible[i]) {
+       for (var i in rotativeHeadlinesSliderVisible) {
+         if (num === rotativeHeadlinesSliderVisible[i]) {
            var found = true;
          }
        }
        if (found === false) {
-         if (num > sync2visible[sync2visible.length - 1]) {
-           sync2.trigger("owl.goTo", num - sync2visible.length + 2)
+         if (num > rotativeHeadlinesSliderVisible[rotativeHeadlinesSliderVisible.length - 1]) {
+           rotativeHeadlinesSlider.trigger("owl.goTo", num - rotativeHeadlinesSliderVisible.length + 2)
          } else {
            if (num - 1 === -1) {
              num = 0;
            }
-           sync2.trigger("owl.goTo", num);
+           rotativeHeadlinesSlider.trigger("owl.goTo", num);
          }
-       } else if (num === sync2visible[sync2visible.length - 1]) {
-         sync2.trigger("owl.goTo", sync2visible[1])
-       } else if (num === sync2visible[0]) {
-         sync2.trigger("owl.goTo", num - 1)
+       } else if (num === rotativeHeadlinesSliderVisible[rotativeHeadlinesSliderVisible.length - 1]) {
+         rotativeHeadlinesSlider.trigger("owl.goTo", rotativeHeadlinesSliderVisible[1])
+       } else if (num === rotativeHeadlinesSliderVisible[0]) {
+         rotativeHeadlinesSlider.trigger("owl.goTo", num - 1)
        }
      }
      //Init progressBar where elem is $("#owl-demo")
@@ -387,7 +485,7 @@
      percentTime = 0;
      isPause = false;
      //run interval every 0.01 second
-     tick = setInterval(interval, 10);
+     //tick = setInterval(interval, 10);
    };
 
    function interval() {
@@ -425,11 +523,27 @@
    /* -------------------------------------------------------------------------*
    * MINES
    * -------------------------------------------------------------------------*/
+   $.extend(true, $.magnificPopup.defaults, {
+      tClose: 'Fechar (Esc)', // Alt text on close button
+      tLoading: 'Carregando...', // Text that is displayed during loading. Can contain %curr% and %total% keys
+      gallery: {
+         tPrev: 'Anterior (Tecla de seta para a esquerda)', // Alt text on left arrow
+         tNext: 'Próximo (Tecla de seta para a direita)', // Alt text on right arrow
+         tCounter: '%curr% de %total%' // Markup for "1 of 7" counter
+      },
+      image: {
+         tError: '<a href="%url%">A imagem</a> não pôde ser carregada.' // Error message when image could not be loaded
+      },
+      ajax: {
+         tError: '<a href="%url%">O conteúdo</a> não pôde ser carregado.' // Error message when ajax request failed
+      }
+   });
+
    /*BANNER owlCarousel*/
    var bannerCarousel = $("#banner");
    bannerCarousel.owlCarousel({
-     loop:true,
-     autoPlay : 10000,
+     loop: true,
+     autoPlay : false,
      stopOnHover : true,
      navigation:true,
      paginationSpeed : 10000,
@@ -440,23 +554,56 @@
      pagination: false
    });
 
+   $('.popup-youtube-live-channel').magnificPopup({
+     disableOn: 700,
+     type: 'iframe',
+     mainClass: 'mfp-fade',
+     removalDelay: 160,
+     preloader: true,
+     fixedContentPos: false,
+     iframe: {
+          markup: '<div class="mfp-iframe-scaler">'+
+                    '<div class="mfp-close"></div>'+
+                    '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+                  '</div>', // HTML markup of popup, `mfp-close` will be replaced by the close button
+          patterns: {
+            youtube: {
+              index: 'www.youtube.com/embed/live_stream', // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
+
+              id: 'channel=', // String that splits URL in a two parts, second part should be %id%
+              // Or null - full URL will be returned
+              // Or a function that should return %id%, for example:
+              // id: function(url) { return 'parsed id'; }
+
+              src: 'https://www.youtube.com/embed/live_stream?channel=%id%&autoplay=1' // URL that will be set as a source for iframe.
+            },
+            srcAction: 'iframe_src', // Templating object key. First part defines CSS selector, second attribute. "iframe_src" means: find "iframe" and set attribute "src".
+          }
+     }
+   });
+
+   $('.popup-flickr-gallery').magnificPopup({
+      type: 'ajax',
+      closeOnContentClick: false,
+      closeOnBgClick: false
+   });
 
  });
 
  /* -------------------------------------------------------------------------*
-  * WEATHER
-  * -------------------------------------------------------------------------*/
- $.simpleWeather({
+ * WEATHER
+ * -------------------------------------------------------------------------*/
+$.simpleWeather({
    location: '',
    woeid: '455913',
    unit: 'c',
    success: function(weather) {
      html = '<i class="icon-' + weather.code + '"></i> ' + weather.city +
-       ', ' + weather.region + ' ' + weather.temp + '&deg;' +
-       weather.units.temp + ' ';
+      ', ' + weather.region + ' ' + weather.temp + '&deg;' +
+      weather.units.temp + ' ';
      $("#weather").html(html);
    },
    error: function(error) {
      $("#weather").html('<p>' + error + '</p>');
    }
- });
+});
