@@ -96,19 +96,22 @@
 </style>
 
 <div id="owl-flickr-set-container">
-   <!--TODO title and date must not be hardcoded //-->
-   <h1>Entrega do Título de Cidadão  Emérito ao Sr. João Martins César</h1>
-   <h2>01/02/2016</h2>
+   <a href="https://www.flickr.com/photos/{{owner}}/sets/{{id}}" target="_blank">
+      <h1>{{title}}&nbsp;&nbsp;&nbsp;<img src="/images/flickr_logo.png" height="15" width="50"/></h1>
+   </a>
+   <h2>{{creationDate}}</h2>
    <div id="owl-flickr-set" class="owl-carousel">
       {{#photos}}
-         <div class="item">
-            <div class="img-container">
-               <img class="lazyOwl" data-src="{{url}}" alt="{{title}}">
-               <div class="img-title">
-                  {{title}}
+         <a href="https://www.flickr.com/photos/{{owner}}/sets/{{id}}" target="_blank">
+            <div class="item">
+               <div class="img-container">
+                  <img class="lazyOwl" data-src="{{url}}" alt="{{title}}">
+                  <div class="img-title">
+                     {{title}}
+                  </div>
                </div>
             </div>
-         </div>
+         </a>
      {{/photos}}
    </div>
 </div>

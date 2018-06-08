@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+
+     {{#newsItem}}
+        <div class="page-header">
+           <h1>{{title}}</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <li><a href="/news.html">Notícias</a></li>
+             <li><a href="#">Notícia</a></li>
+           </ol>
+        </div>
+        <div class="text-danger sub-info-bordered">
+         <div class="time"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+         {{#changedDate}}
+            <div class="time"><span class="ion-android-data icon"></span>atualizado em: {{ changedDate }}</div>
+         {{/changedDate}}
+         {{#views}}
+            <div class="comments">
+               <span class="ion-ios7-eye icon"></span>
+               {{views}}
+            </div>
+         {{/views}}
+        </div>
+        {{#headline}}
+        <span class="newsitemHeadline">
+           <p>{{headline}}</p>
+        </span>
+        {{/headline}}
+        <span class="newsitem">
+           {{{body}}}
+        </span>
+     {{/newsItem}}
+
+  </div>
+</div>

@@ -1,0 +1,162 @@
+{{#fbreakingNewsItemTypeLink}}
+<a href="{{url}}" target="{{target}}">
+   <div class="box">
+      <div class="carousel-caption">{{title}}</div>
+      <img class="match-height" src="{{imageFileURL}}" width="{{imageWidth}}" height="{{imageHeight}}"  alt="" />
+      <div class="overlay"></div>
+      <div class="overlay-info">
+        <div class="cat">
+         <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+        </div>
+        <div class="info">
+         <p>
+            <span class="ion-android-data"></span>{{date}}
+            {{#fbreakingNewsItemTypeLink.views}}
+               <span class="ion-ios7-eye"></span>{{fbreakingNewsItemTypeLink.views}}
+            {{/fbreakingNewsItemTypeLink.views}}
+         </p>
+        </div>
+      </div>
+   </div>
+</a>
+{{/fbreakingNewsItemTypeLink}}
+
+{{#fbreakingNewsItemTypeNews}}
+<a href="/newsitem.html?id={{accessId}}" target="_self">
+   <div class="box">
+      <div class="carousel-caption">{{title}}</div>
+      <img class="match-height" src="{{imageFileURL}}" width="{{imageWidth}}" height="{{imageHeight}}"  alt="" />
+      <div class="overlay"></div>
+      <div class="overlay-info">
+        <div class="cat">
+         <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+        </div>
+        <div class="info">
+         <p>
+            <span class="ion-android-data"></span>{{date}}
+            {{#fbreakingNewsItemTypeLink.views}}
+               <span class="ion-ios7-eye"></span>{{fbreakingNewsItemTypeLink.views}}
+            {{/fbreakingNewsItemTypeLink.views}}
+         </p>
+        </div>
+      </div>
+   </div>
+</a>
+{{/fbreakingNewsItemTypeNews}}
+
+{{#fbreakingNewsItemTypePage}}
+<a href="/page.html?id={{accessId}}">
+   <div class="box">
+      <div class="carousel-caption">{{title}}</div>
+      <img class="match-height" src="{{imageFileURL}}" width="{{imageWidth}}" height="{{imageHeight}}"  alt="" />
+      <div class="overlay"></div>
+      <div class="overlay-info">
+        <div class="cat">
+         <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+        </div>
+        <div class="info">
+         <p>
+            <span class="ion-android-data"></span>{{date}}
+            {{#fbreakingNewsItemTypeLink.views}}
+               <span class="ion-ios7-eye"></span>{{fbreakingNewsItemTypeLink.views}}
+            {{/fbreakingNewsItemTypeLink.views}}
+         </p>
+        </div>
+      </div>
+   </div>
+</a>
+{{/fbreakingNewsItemTypePage}}
+
+{{#fbreakingNewsItemTypeYoutube}}
+<a class="popup-youtube" href="https://www.youtube.com/watch?v={{videoId}}">
+   <div class="box">
+      <div class="carousel-caption">{{title}}</div>
+      <img class="match-height" src="{{imageFileURL}}" width="{{imageWidth}}" height="{{imageHeight}}"  alt="" />
+      <div class="overlay"></div>
+      <div class="overlay-info">
+        <div class="cat">
+         <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+        </div>
+        <div class="info">
+         <p>
+            <span class="ion-android-data"></span>{{date}}
+            {{#fbreakingNewsItemTypeLink.views}}
+               <span class="ion-ios7-eye"></span>{{fbreakingNewsItemTypeLink.views}}
+            {{/fbreakingNewsItemTypeLink.views}}
+         </p>
+        </div>
+      </div>
+   </div>
+</a>
+{{/fbreakingNewsItemTypeYoutube}}
+
+{{#fbreakingNewsItemTypeYoutube_live}}
+<a class="popup-youtube-live-channel" href="https://www.youtube.com/embed/live_stream?channel={{channelId}}">
+   <div class="box">
+      <div class="carousel-caption">{{title}}</div>
+      <img class="match-height" src="{{imageFileURL}}" width="{{imageWidth}}" height="{{imageHeight}}"  alt="" />
+      <div class="overlay"></div>
+      <div class="overlay-info">
+        <div class="cat">
+         <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+        </div>
+        <div class="info">
+         <p>
+            <span class="ion-android-data"></span>{{date}}
+            {{#fbreakingNewsItemTypeLink.views}}
+               <span class="ion-ios7-eye"></span>{{fbreakingNewsItemTypeLink.views}}
+            {{/fbreakingNewsItemTypeLink.views}}
+         </p>
+        </div>
+      </div>
+   </div>
+</a>
+{{/fbreakingNewsItemTypeYoutube_live}}
+
+{{#fbreakingNewsItemTypeFlickr}}
+   {{#onePerLineShowMode}}
+   <a class="popup-flickr-gallery" href="/popup-render-flickr-set-big-single-image.html?setId={{accessId}}">
+      <div class="box">
+         <div class="carousel-caption">{{title}}</div>
+         <img class="match-height" src="{{imageFileURL}}" width="{{imageWidth}}" height="{{imageHeight}}"  alt="" />
+         <div class="overlay"></div>
+         <div class="overlay-info">
+           <div class="cat">
+            <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+           </div>
+           <div class="info">
+            <p>
+               <span class="ion-android-data"></span>{{date}}
+               {{#fbreakingNewsItemTypeLink.views}}
+                  <span class="ion-ios7-eye"></span>{{fbreakingNewsItemTypeLink.views}}
+               {{/fbreakingNewsItemTypeLink.views}}
+            </p>
+           </div>
+         </div>
+      </div>
+   </a>
+   {{/onePerLineShowMode}}
+
+   {{#threePerLineShowMode}}
+   <a class="popup-flickr-gallery" href="/popup-render-flickr-set-carousel.html?setId={{accessId}}">
+      <div class="box">
+         <div class="carousel-caption">{{title}}</div>
+         <img class="match-height" src="{{imageFileURL}}" width="{{imageWidth}}" height="{{imageHeight}}"  alt="" />
+         <div class="overlay"></div>
+         <div class="overlay-info">
+           <div class="cat">
+            <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+           </div>
+           <div class="info">
+            <p>
+               <span class="ion-android-data"></span>{{date}}
+               {{#fbreakingNewsItemTypeLink.views}}
+                  <span class="ion-ios7-eye"></span>{{fbreakingNewsItemTypeLink.views}}
+               {{/fbreakingNewsItemTypeLink.views}}
+            </p>
+           </div>
+         </div>
+      </div>
+   </a>
+   {{/threePerLineShowMode}}
+{{/fbreakingNewsItemTypeFlickr}}

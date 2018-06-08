@@ -1,15 +1,3 @@
-/*
-TODOS:
-
-- Retocar o layout:
-    -ok: cor de fundo que combine com o portal
-    -ok: margem
-    -ok: títulos nas fotos
-
-- Fazer sendResponse e sendError, sendJson ou algo assim
-
-*/
-
 /*****************************************************************************
 *************************** DEPENDENCIES SECTION *****************************
 ******************************* (LIBS MODULES) *******************************
@@ -27,7 +15,11 @@ module.exports.flickrSetPopupRenderControllerCarousel = function(req, res){
    _FlickrService.getPhotoThumbnailUrlsFromSet(req.query.setId, 'b').then(function(data){
          res.render('popups-renders/flickr-set-carousel', {
            layout: false,
-           photos: data.photos
+           id: data.id,
+           photos: data.photos,
+           title: data.title,
+           owner: data.owner,
+           creationDate: data.creationDate
          });
    }).catch(function(error) {
       res.status(500);
@@ -44,7 +36,11 @@ module.exports.flickrSetPopupRenderControllerBigSingleImage = function(req, res)
    _FlickrService.getPhotoThumbnailUrlsFromSet(req.query.setId, 'b').then(function(data){
          res.render('popups-renders/flickr-set-big-single-image', {
            layout: false,
-           photos: data.photos
+           id: data.id,
+           photos: data.photos,
+           title: data.title,
+           owner: data.owner,
+           creationDate: data.creationDate
          });
    }).catch(function(error) {
       res.status(500);

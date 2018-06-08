@@ -1,0 +1,115 @@
+{{^menuItemHasAccess}}
+<a href="#">
+   {{#isRoot}}
+      <span class="nav-sub-icn"></span>
+   {{/isRoot}}
+
+   {{^isRoot}}
+      <span class="ion-ios7-arrow-right nav-sub-icn"></span>
+   {{/isRoot}}
+
+   {{ title }}
+</a>
+{{/menuItemHasAccess}}
+
+{{#menuItemHasAccess}}
+   {{#menuItemTypeLink}}
+      <a href="{{url}}" target="{{target}}">
+         {{#isRoot}}
+            <span class="nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{^isRoot}}
+            <span class="ion-ios7-arrow-right nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{ title }}
+      </a>
+   {{/menuItemTypeLink}}
+
+   {{#menuItemTypeNews}}
+      <a href="/newsitem.html?id={{accessId}}" target="_self">
+         {{#isRoot}}
+            <span class="nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{^isRoot}}
+            <span class="ion-ios7-arrow-right nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{ title }}
+      </a>
+   {{/menuItemTypeNews}}
+
+   {{#menuItemTypePage}}
+      <a href="/page.html?id={{accessId}}">
+         {{#isRoot}}
+            <span class="nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{^isRoot}}
+            <span class="ion-ios7-arrow-right nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{ title }}
+      </a>
+   {{/menuItemTypePage}}
+
+   {{#menuItemTypeYoutube}}
+      <a class="popup-youtube" href="https://www.youtube.com/watch?v={{videoId}}">
+         {{#isRoot}}
+            <span class="nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{^isRoot}}
+            <span class="ion-ios7-arrow-right nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{ title }}
+      </a>
+   {{/menuItemTypeYoutube}}
+
+   {{#menuItemTypeYoutube_live}}
+      <a class="popup-youtube-live-channel" href="https://www.youtube.com/embed/live_stream?channel={{channelId}}">
+         {{#isRoot}}
+            <span class="nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{^isRoot}}
+            <span class="ion-ios7-arrow-right nav-sub-icn"></span>
+         {{/isRoot}}
+
+         {{ title }}
+      </a>
+   {{/menuItemTypeYoutube_live}}
+
+   {{#menuItemTypeFlickr}}
+      {{#onePerLineShowMode}}
+         <a  class="popup-flickr-gallery" href="/popup-render-flickr-set-big-single-image.html?setId={{accessId}}">
+            {{#isRoot}}
+               <span class="nav-sub-icn"></span>
+            {{/isRoot}}
+
+            {{^isRoot}}
+               <span class="ion-ios7-arrow-right nav-sub-icn"></span>
+            {{/isRoot}}
+
+            {{ title }}
+         </a>
+      {{/onePerLineShowMode}}
+
+      {{#threePerLineShowMode}}
+         <a  class="popup-flickr-gallery" href="/popup-render-flickr-set-carousel.html?setId={{accessId}}">
+            {{#isRoot}}
+               <span class="nav-sub-icn"></span>
+            {{/isRoot}}
+
+            {{^isRoot}}
+               <span class="ion-ios7-arrow-right nav-sub-icn"></span>
+            {{/isRoot}}
+
+            {{ title }}
+         </a>
+      {{/threePerLineShowMode}}
+   {{/menuItemTypeFlickr}}
+{{/menuItemHasAccess}}

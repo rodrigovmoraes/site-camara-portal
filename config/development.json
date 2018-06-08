@@ -1,11 +1,48 @@
 {
    "Services" : {
       "FlickrService" : {
-            "flickrApiBaseUrl": "https://api.flickr.com/services/rest/",
-            "flickrApiKey": "0f90801c8a3de3619be8252f7e6d9d71",
-            "flickrApiGetPhotosMethod": "flickr.photosets.getPhotos",
+            "baseUrl": "https://api.flickr.com/services/rest/",
+            "apiKey": "0f90801c8a3de3619be8252f7e6d9d71",
+            "getPhotosMethod": "flickr.photosets.getPhotos",
+            "getPhotosetInfoMethod": "flickr.photosets.getInfo",
             "unexpectedFlickrDataFormatErrorMessage":  "The Flickr service has returned an unexpected data format",
-            "flickrPhotoUrlPattern": "https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_{image_type}.jpg"
+            "photoUrlPattern": "https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_{image_type}.jpg"
+       },
+       "CamaraApi" : {
+          "baseUrl" : "http://localhost:3002/",
+          "portalMenuMethodPath" : "menuPortalTree",
+          "newsMethodPath" : "newsItems",
+          "newsItemMethodPath" : "newsItem",
+          "incrementNewsViewsMethodPath" : "incrementNewsViews",
+          "pageMethodPath" : "page",
+          "bannersMethodPath" : "banners",
+          "hotNewsMethodPath" : "hotnews",
+          "breakingNewsMethodPath" : "breakingNews",
+          "fbreakingNewsMethodPath" : "fbreakingNews"
        }
+   },
+   "Log" : {
+      "level": "debug",
+      "levels": {
+            "error": 0,
+            "warn": 1,
+            "info": 2,
+            "verbose": 3,
+            "debug": 4
+      },
+      "levelsColors": {
+            "error": "red",
+            "warn": "magenta",
+            "info": "blue",
+            "verbose": "green",
+            "debug": "yellow"
+      }
+   },
+   "FBreakingNews" : {
+      "imagesDimensions" : {
+         "1" : { "width": 205, "height": 434},
+         "2" : { "width": 349, "height": 212},
+         "3" : { "width": 349, "height": 212}
+      }
    }
 }

@@ -1,159 +1,279 @@
+{{#yield-scripts}}
+   <script src="js/index.js"></script>
+{{/yield-scripts}}
+
 <div class="container">
   <div class="row">
 
-    <!-- hot news start -->
+     {{#hotNewsItems}}
+     <li class="news-item" style="display: none">
+             {{#hotNewsItemTypeLink}}
+                <a href="{{url}}" id="hotnewslink_{{id}}" target="{{target}}">
+                  {{title}}
+                </a>
+             {{/hotNewsItemTypeLink}}
+
+             {{#hotNewsItemTypeNews}}
+                <a href="/newsitem.html?id={{accessId}}" id="hotnewslink_{{id}}" target="_self">
+                  {{title}}
+                </a>
+             {{/hotNewsItemTypeNews}}
+
+             {{#hotNewsItemTypePage}}
+                <a href="/page.html?id={{accessId}}" id="hotnewslink_{{id}}">
+                  {{title}}
+                </a>
+             {{/hotNewsItemTypePage}}
+
+             {{#hotNewsItemTypeYoutube}}
+                <a class="popup-youtube" id="hotnewslink_{{id}}" href="https://www.youtube.com/watch?v={{videoId}}">
+                  {{title}}
+                </a>
+             {{/hotNewsItemTypeYoutube}}
+
+             {{#hotNewsItemTypeYoutube_live}}
+                <a class="popup-youtube-live-channel" id="hotnewslink_{{id}}" href="https://www.youtube.com/embed/live_stream?channel={{channelId}}">
+                  {{title}}
+                </a>
+             {{/hotNewsItemTypeYoutube_live}}
+
+             {{#hotNewsItemTypeFlickr}}
+
+                {{#onePerLineShowMode}}
+                    <a  class="popup-flickr-gallery" id="hotnewslink_{{id}}" href="/popup-render-flickr-set-big-single-image.html?setId={{accessId}}">
+                       {{title}}
+                    </a>
+                {{/onePerLineShowMode}}
+
+                {{#threePerLineShowMode}}
+                  <a  class="popup-flickr-gallery" id="hotnewslink_{{id}}" href="/popup-render-flickr-set-carousel.html?setId={{accessId}}">
+                     {{title}}
+                  </a>
+                {{/threePerLineShowMode}}
+             {{/hotNewsItemTypeFlickr}}
+     </li>
+     {{/hotNewsItems}}
+
+     <!-- hot news start -->
+    {{#hotNewsItems.length}}
     <div class="col-sm-16 hot-news hidden-xs">
-      <div class="row">
-        <div class="col-sm-15"> <span class="ion-ios7-timer icon-news pull-left"></span>
-          <ul id="js-news" class="js-hidden">
-            <!--TODO Hot news: get from a service, for each hot news ("notícias quentes")-->
-            <li class="news-item"><a href="">Presidente da Câmara prestigia solenidade pelos 60 anos da Faculdade de Direito de Sorocaba</a></li>
-            <li class="news-item"><a href="">Vereador sugere à Secretaria de Saúde que Sorocaba adira ao Projeto Olhar Brasil</a></li>
-            <li class="news-item"><a href="">Câmara de Sorocaba inaugura Escola do Legislativo</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-1 shuffle text-right"><a href="#"><span class="ion-shuffle"></span></a></div>
-      </div>
+       <div class="row">
+            <div class="col-sm-15">
+              <span class="ion-ios7-timer icon-news pull-left"></span>
+              <ul id="js-news" class="js-hidden">
+                  {{#hotNewsItems}}
+                  <li class="news-item">
+                       <a href="javascript:$('#hotnewslink_{{id}}')[0].click()">
+                         {{title}}
+                       </a>
+                  </li>
+                  {{/hotNewsItems}}
+              </ul>
+            </div>
+            <div class="col-sm-1 shuffle text-right">
+               <a href="#">
+                 <span class="ion-shuffle"></span>
+               </a>
+            </div>
+       </div>
     </div>
+    {{/hotNewsItems.length}}
     <!-- hot news end -->
 
     <!-- banner outer start -->
-    <!--TODO USE AS A SECONDARY BREAKING NEWS WITH IMAGES: "NOTÍCIAS DE APRESENTAÇÃO"-->
+    <!--START: Breaking News Items (Rotative and Fixed)-->
     <div  class="col-sm-16 banner-outer wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
       <div class="row">
         <div class="col-sm-16 col-md-10 col-lg-8">
 
           <!-- carousel start -->
           <div id="rotativeHeadlines" class="owl-carousel owl-theme">
-            <!-- TODO FOR EACH BREAKING NEWS (ROTATIVE)-->
+            <!-- START: FOR EACH BREAKING NEWS (ROTATIVE)-->
+            {{#breakingNewsItems}}
             <div class="box item">
-               <a href="#">
-                    <div class="carousel-caption">Fim do Holocausto e Independência de Israel são celebrados na Câmara Municipal de Sorocaba</div>
-                    <img class="img-responsive" src="images/secondary_hot_news/rotative_secondary_hot_new_01_image.jpg" width="1600" height="972" alt=""/>
+               {{#breakingNewsItemTypeLink}}
+               <a href="{{url}}" target="{{target}}">
+                    <div class="carousel-caption">{{title}}</div>
+                    <img class="img-responsive" src="{{imageFileURL}}" width="1600" height="972" alt=""/>
                     <div class="overlay"></div>
                     <div class="overlay-info">
                       <div class="cat">
-                       <p class="cat-data"><span class="ion-ios7-people"></span>Sessão Solene</p>
+                       <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
                       </div>
                       <div class="info">
-                       <p><span class="ion-android-data"></span>18/05/2017<span class="ion-ios7-eye"></span>351</p>
+                          <p>
+                             <span class="ion-android-data"></span>{{date}}
+                             {{#breakingNewsItems.views}}
+                                 <span class="ion-ios7-eye"></span>{{breakingNewsItems.views}}
+                             {{/breakingNewsItems.views}}
+                          </p>
                       </div>
                     </div>
                </a>
-           </div>
+               {{/breakingNewsItemTypeLink}}
 
-            <div class="box item"> <a href="#">
-             <div class="carousel-caption">Audiência Pública debate criação do Conselho Municipal LGBT</div>
-             <img class="img-responsive"  src="images/secondary_hot_news/rotative_secondary_hot_new_02_image.jpg"  width="1600" height="972" alt=""/>
-             <div class="overlay"></div>
-             <div class="overlay-info">
-                <div class="cat">
-                  <p class="cat-data"><span class="ion-android-friends"></span>Audiência Pública</p>
-                </div>
-                <div class="info">
-                  <p><span class="ion-android-data"></span>17/05/2017<span class="ion-ios7-eye"></span>150</p>
-                </div>
-             </div>
-             </a>
-           </div>
+               {{#breakingNewsItemTypeNews}}
+               <a href="/newsitem.html?id={{accessId}}" target="_self">
+                    <div class="carousel-caption">{{title}}</div>
+                    <img class="img-responsive" src="{{imageFileURL}}" width="1600" height="972" alt=""/>
+                    <div class="overlay"></div>
+                    <div class="overlay-info">
+                      <div class="cat">
+                       <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+                      </div>
+                      <div class="info">
+                          <p>
+                             <span class="ion-android-data"></span>{{date}}
+                             {{#breakingNewsItems.views}}
+                                 <span class="ion-ios7-eye"></span>{{breakingNewsItems.views}}
+                             {{/breakingNewsItems.views}}
+                          </p>
+                      </div>
+                    </div>
+               </a>
+               {{/breakingNewsItemTypeNews}}
 
-           <div class="box item">
-             <a  class="popup-flickr-gallery" href="/popup-render-flickr-set-carousel.html?setId=72157681507101933">
-                <div class="carousel-caption">Entrega do Título de Cidadão  Emérito ao Sr. João Martins César</div>
-                <img class="img-responsive"  src="images/secondary_hot_news/rotative_secondary_hot_new_03_image.jpg"  width="1600" height="972" alt=""/>
-                <div class="overlay"></div>
-                <div class="overlay-info">
-                   <div class="cat">
-                        <p class="cat-data"><span class="ion-ios7-people"></span>Sessão Solene</p>
-                   </div>
-                   <div class="info">
-                        <p><span class="ion-android-data"></span>11/05/2017<span class="ion-ios7-eye"></span>20</p>
-                   </div>
-               </div>
-             </a>
-           </div>
+               {{#breakingNewsItemTypePage}}
+               <a href="/page.html?id={{accessId}}">
+                    <div class="carousel-caption">{{title}}</div>
+                    <img class="img-responsive" src="{{imageFileURL}}" width="1600" height="972" alt=""/>
+                    <div class="overlay"></div>
+                    <div class="overlay-info">
+                      <div class="cat">
+                       <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+                      </div>
+                      <div class="info">
+                          <p>
+                             <span class="ion-android-data"></span>{{date}}
+                             {{#breakingNewsItems.views}}
+                                 <span class="ion-ios7-eye"></span>{{breakingNewsItems.views}}
+                             {{/breakingNewsItems.views}}
+                          </p>
+                      </div>
+                    </div>
+               </a>
+               {{/breakingNewsItemTypePage}}
 
-           <div class="box item"> <a href="#">
-             <div class="carousel-caption">Vereador reivindica lombotravessia na Avenida Juscelino Kubitscheck de Oliveira</div>
-             <img class="img-responsive" src="images/secondary_hot_news/rotative_secondary_hot_new_04_image.jpg"  width="1600" height="972" alt=""/>
-             <div class="overlay"></div>
-             <div class="overlay-info">
-                <div class="cat">
-                  <p class="cat-data"><span class="ion-information-circled"></span>Legislativo em Ação</p>
-                </div>
-                <div class="info">
-                  <p><span class="ion-android-data"></span>09/05/2017<span class="ion-ios7-eye"></span>89</p>
-                </div>
-             </div>
-             </a>
-           </div>
+               {{#breakingNewsItemTypeYoutube}}
+               <a class="popup-youtube" href="https://www.youtube.com/watch?v={{videoId}}">
+                    <div class="carousel-caption">{{title}}</div>
+                    <img class="img-responsive" src="{{imageFileURL}}" width="1600" height="972" alt=""/>
+                    <div class="overlay"></div>
+                    <div class="overlay-info">
+                      <div class="cat">
+                       <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+                      </div>
+                      <div class="info">
+                          <p>
+                             <span class="ion-android-data"></span>{{date}}
+                             {{#breakingNewsItems.views}}
+                                 <span class="ion-ios7-eye"></span>{{breakingNewsItems.views}}
+                             {{/breakingNewsItems.views}}
+                          </p>
+                      </div>
+                    </div>
+               </a>
+               {{/breakingNewsItemTypeYoutube}}
+
+               {{#breakingNewsItemTypeYoutube_live}}
+               <a class="popup-youtube-live-channel" href="https://www.youtube.com/embed/live_stream?channel={{channelId}}">
+                    <div class="carousel-caption">{{title}}</div>
+                    <img class="img-responsive" src="{{imageFileURL}}" width="1600" height="972" alt=""/>
+                    <div class="overlay"></div>
+                    <div class="overlay-info">
+                      <div class="cat">
+                       <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+                      </div>
+                      <div class="info">
+                          <p>
+                             <span class="ion-android-data"></span>{{date}}
+                             {{#breakingNewsItems.views}}
+                                 <span class="ion-ios7-eye"></span>{{breakingNewsItems.views}}
+                             {{/breakingNewsItems.views}}
+                          </p>
+                      </div>
+                    </div>
+               </a>
+               {{/breakingNewsItemTypeYoutube_live}}
+
+               {{#breakingNewsItemTypeFlickr}}
+                  {{#onePerLineShowMode}}
+                  <a class="popup-flickr-gallery" href="/popup-render-flickr-set-big-single-image.html?setId={{accessId}}">
+                       <div class="carousel-caption">{{title}}</div>
+                       <img class="img-responsive" src="{{imageFileURL}}" width="1600" height="972" alt=""/>
+                       <div class="overlay"></div>
+                       <div class="overlay-info">
+                         <div class="cat">
+                          <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+                         </div>
+                         <div class="info">
+                             <p>
+                                <span class="ion-android-data"></span>{{date}}
+                                {{#breakingNewsItems.views}}
+                                    <span class="ion-ios7-eye"></span>{{breakingNewsItems.views}}
+                                {{/breakingNewsItems.views}}
+                             </p>
+                         </div>
+                       </div>
+                  </a>
+                  {{/onePerLineShowMode}}
+
+                  {{#threePerLineShowMode}}
+                  <a class="popup-flickr-gallery" href="/popup-render-flickr-set-carousel.html?setId={{accessId}}">
+                       <div class="carousel-caption">{{title}}</div>
+                       <img class="img-responsive" src="{{imageFileURL}}" width="1600" height="972" alt=""/>
+                       <div class="overlay"></div>
+                       <div class="overlay-info">
+                         <div class="cat">
+                          <p class="cat-data"><span class="{{headlineIcon}}"></span>{{headline}}</p>
+                         </div>
+                         <div class="info">
+                             <p>
+                                <span class="ion-android-data"></span>{{date}}
+                                {{#breakingNewsItems.views}}
+                                    <span class="ion-ios7-eye"></span>{{breakingNewsItems.views}}
+                                {{/breakingNewsItems.views}}
+                             </p>
+                         </div>
+                       </div>
+                  </a>
+                  {{/threePerLineShowMode}}
+               {{/breakingNewsItemTypeFlickr}}
+            </div>
+            {{/breakingNewsItems}}
+            <!-- END: FOR EACH BREAKING NEWS (ROTATIVE)-->
           </div>
           <div class="row">
             <div id="rotativeHeadlinesSlider" class="owl-carousel">
-             <div class="item"><img class="img-responsive" src="images/secondary_hot_news/rotative_secondary_hot_new_01_image.jpg" alt=""/></div>
-             <div class="item"><img class="img-responsive" src="images/secondary_hot_news/rotative_secondary_hot_new_02_image.jpg"  width="1600" height="972" alt=""/></div>
-             <div class="item"><img class="img-responsive" src="images/secondary_hot_news/rotative_secondary_hot_new_03_image.jpg"  width="1600" height="972" alt=""/></div>
-             <div class="item"><img class="img-responsive " src="images/secondary_hot_news/rotative_secondary_hot_new_04_image.jpg"  width="1600" height="972" alt=""/></div>
+             {{#breakingNewsItems}}
+               <div class="item">
+                  <img class="img-responsive" src="{{imageFileURL}}" width="1600" height="972" alt=""/>
+               </div>
+             {{/breakingNewsItems}}
             </div>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-8 hidden-sm hidden-xs">
           <div class="row">
             <div class="col-lg-6 hidden-md">
-                 <!-- TODO FIXED BREAKING NEWS #1-->
-                 <a class="popup-flickr-gallery" href="/popup-render-flickr-set-big-single-image.html?setId=72157624639456254">
-                    <div class="box">
-                      <div class="carousel-caption">Exposição de Quadros "Sorocaba de Todos os Tempos"</div>
-                      <img class="match-height" src="images/secondary_hot_news/static_secondary_hot_new_01_image.jpg" width="205" height="434"  alt="" />
-                      <div class="overlay"></div>
-                      <div class="overlay-info">
-                       <div class="cat">
-                          <p class="cat-data"><span class="ion-images"></span>Exposição de Quadros</p>
-                       </div>
-                       <div class="info">
-                          <p><span class="ion-android-data"></span>15/10/2010<span class="ion-ios7-eye"></span>53</p>
-                       </div>
-                      </div>
-                    </div>
-                 </a>
+                 <!--FIXED BREAKING NEWS #1-->
+                 {{#fbreakingNewsItem1}}
+                    {{>fbreaking_news_item_tpl}}
+                 {{/fbreakingNewsItem1}}
            </div>
            <div class="col-md-16 col-lg-10">
              <div class="row">
                 <div class="col-sm-16 right-img-top ">
-                   <!-- TODO FIXED BREAKING NEW #2-->
-                   <a class="popup-youtube-live-channel" href="https://www.youtube.com/embed/live_stream?channel=UCWQR_GgpIhrfoG1vikt94bA">
-                     <div class="box">
-                       <div class="carousel-caption">TV Câmara Sorocaba - Ao Vivo</div>
-                       <img class="img-responsive" src="images/secondary_hot_news/static_secondary_hot_new_02_image.jpg" width="440" height="292" alt=""/>
-                       <div class="overlay"></div>
-                       <div class="overlay-info">
-                         <div class="cat">
-                            <p class="cat-data"><span class="ion-ios7-videocam"></span>TV ao vivo</p>
-                         </div>
-                         <div class="info">
-                           <p><span class="ion-android-data"></span>24/05/2017<span class="ion-ios7-eye"></span>11</p>
-                         </div>
-                       </div>
-                     </div>
-                   </a>
+                   <!--FIXED BREAKING NEW #2-->
+                   {{#fbreakingNewsItem2}}
+                     {{>fbreaking_news_item_tpl}}
+                   {{/fbreakingNewsItem2}}
                 </div>
-                <!-- TODO FIXED BREAKING NEW #3-->
+                <!--FIXED BREAKING NEW #3-->
                 <div class="col-sm-16 right-img-btm ">
-                  <a class="popup-youtube" href="https://www.youtube.com/watch?v=DPv162tVQfc">
-                     <div class="box">
-                       <div class="carousel-caption">30&ordf; Sessão Ordinária</div>
-                       <img class="img-responsive" src="images/secondary_hot_news/static_secondary_hot_new_03_image.jpg" width="440" height="292" alt=""/>
-                       <div class="overlay"></div>
-                       <div class="overlay-info">
-                         <div class="cat">
-                           <p class="cat-data"><span class="ion-android-book"></span>Sessão Ordinária</p>
-                         </div>
-                         <div class="info">
-                           <p><span class="ion-android-data"></span>23/05/2017<span class="ion-ios7-eye"></span>12</p>
-                         </div>
-                       </div>
-                     </div>
-                  </a>
+                   {{#fbreakingNewsItem3}}
+                     {{>fbreaking_news_item_tpl}}
+                   {{/fbreakingNewsItem3}}
                 </div>
 
              </div>
@@ -162,8 +282,7 @@
         </div>
       </div>
     </div>
-    <!-- banner outer end -->
-
+    <!--END: Breaking News Items (Rotative and Fixed)-->
   </div>
 </div>
 <!-- top sec end -->
@@ -178,170 +297,305 @@
         <!-- last news -->
         <div class="col-sm-16 business  wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="50">
           <div class="main-title-outer pull-left">
-            <a href="#"><div class="main-title">Últimas notíciasS</div><a/>
-            <div class="span-outer"><span class="pull-right text-danger last-update"><span class="ion-android-data icon"></span>Última atualização: 2 horas atrás</span> </div>
+            <a href="#"><div class="main-title">Últimas notícias</div><a/>
+            {{#lastNewsUpdate}}
+            <div class="span-outer">
+               <span class="pull-right text-danger last-update"><span class="ion-android-data icon"></span>Última atualização: {{lastNewsUpdate}}</span>
+            </div>
+            {{/lastNewsUpdate}}
           </div>
           <div class="row">
             <div class="col-md-16 col-sm-16">
              <div class="row">
                 <div class="col-md-8 col-sm-9 col-xs-16">
                      <!--Headline//-->
-                     <!--TODO GET THE HEADLINE FROM DATA SERVICE-->
+                     {{#news0}}
                      <div class="topic">
-                        <a href="#">
-                           <img class="img-thumbnail" src="images/last_news/news_hot.jpg" width="600" height="398" alt=""/>
-                              <h3>Publicada lei que denomina a Escola do Legislativo de Sorocaba</h3>
+                        <a href="newsitem.html?id={{id}}">
+                           <img class="img-thumbnail" src="{{ thumbnailUrl }}"  alt=""/>
+                              <h3>{{ title }}</h3>
                               <div class="text-danger sub-info-bordered">
-                                 <div class="time"><span class="ion-android-data icon"></span>05/06/2017</div>
-                                 <div class="comments"><span class="ion-ios7-eye icon"></span>204</div>
+                                 <div class="time"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                 {{#views}}
+                                    <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                 {{/views}}
                               </div>
                         </a>
-                        <p>A Resolução nº 448 denomina “Clotilde Schimming Jardini” à Escola do Legislativo da Câmara Municipal</p>
+                        <p>{{ headline }}</p>
                      </div>
+                     {{/news0}}
+                     {{^news0}}
+                     <div class="topic">
+                        <a href="#">
+                           <img class="img-thumbnail" src="/images/news/fake_news_thumbnail.jpg"  alt="notícia não carregada"/>
+                           <h3>NOTÍCIA NÃO CARREGADA</h3>
+                        </a>
+                        <p>{{ headline }}</p>
+                     </div>
+                     {{/news0}}
+
                      <!--End Headline//-->
 
                   <ul class="list-unstyled">
                     <!--News #6//-->
-                    <!--TODO GET FROM DATA SERVICE-->
+                    {{#news6}}
+                      <li>
+                         <a href="newsitem.html?id={{id}}">
+                           <div class="row">
+                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
+                              <div class="col-sm-12 col-md-16 col-lg-12">
+                                 <h4>{{ title }}</h4>
+                                 <div class="text-danger sub-info">
+                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                       {{#views}}
+                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                       {{/views}}
+                                 </div>
+                              </div>
+                           </div>
+                         </a>
+                      </li>
+                    {{/news6}}
+                    {{^news6}}
                     <li>
                        <a href="#">
                          <div class="row">
-                             <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="images/last_news/news_05.jpg" width="150" height="150" alt=""/> </div>
-                             <div class="col-sm-12 col-md-16 col-lg-12">
-                                <h4>AUDIÊNCIA PÚBLICA: Conselho Municipal de Defesa dos Animais será encaminhado à Câmara</h4>
-                                <div class="text-danger sub-info">
-                                     <div class="time"><span class="ion-android-data icon"></span>02/06/2017</div>
-                                     <div class="comments"><span class="ion-ios7-eye icon"></span>10</div>
-                                </div>
-                             </div>
+                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
+                            <div class="col-sm-12 col-md-16 col-lg-12">
+                               <h4>NOTÍCIA NÃO CARREGADA</h4>
+                            </div>
                          </div>
                        </a>
                     </li>
+                    {{/news6}}
                     <!--News #8//-->
-                    <!--TODO GET FROM DATA SERVICE-->
+                    {{#news8}}
+                      <li>
+                         <a href="newsitem.html?id={{id}}">
+                           <div class="row">
+                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
+                              <div class="col-sm-12 col-md-16 col-lg-12">
+                                 <h4>{{ title }}</h4>
+                                 <div class="text-danger sub-info">
+                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                       {{#views}}
+                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                       {{/views}}
+                                 </div>
+                              </div>
+                           </div>
+                         </a>
+                      </li>
+                    {{/news8}}
+                    {{^news8}}
                     <li>
                        <a href="#">
                          <div class="row">
-                             <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="images/last_news/news_07.jpg" width="150" height="150"  alt=""/> </div>
-                             <div class="col-sm-12 col-md-16 col-lg-12">
-                                <h4>Vereador solicita melhorias em sinalização de rua no Wanel Ville III</h4>
-                                <div class="text-danger sub-info">
-                                     <div class="time"><span class="ion-android-data icon"></span>02/06/2017</div>
-                                     <div class="comments"><span class="ion-ios7-eye icon"></span>10</div>
-                                </div>
-                             </div>
+                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
+                            <div class="col-sm-12 col-md-16 col-lg-12">
+                               <h4>NOTÍCIA NÃO CARREGADA</h4>
+                            </div>
                          </div>
                        </a>
                     </li>
+                    {{/news8}}
                   </ul>
                 </div>
                 <div class="col-md-8 col-sm-7 col-xs-16">
                   <ul class="list-unstyled">
                     <!--News #1//-->
-                    <!--TODO GET FROM DATA SERVICE-->
+                    {{#news1}}
+                      <li>
+                         <a href="newsitem.html?id={{id}}">
+                           <div class="row">
+                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
+                              <div class="col-sm-12 col-md-16 col-lg-12">
+                                 <h4>{{ title }}</h4>
+                                 <div class="text-danger sub-info">
+                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                       {{#views}}
+                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                       {{/views}}
+                                 </div>
+                              </div>
+                           </div>
+                         </a>
+                      </li>
+                    {{/news1}}
+                    {{^news1}}
                     <li>
                        <a href="#">
                          <div class="row">
-                             <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="images/last_news/news_01.jpg" width="150" height="150" alt=""/> </div>
-                             <div class="col-sm-12 col-md-16 col-lg-12">
-                                <h4>Vereadores visitam base da Polícia Militar no Éden</h4>
-                                <div class="text-danger sub-info">
-                                     <div class="time"><span class="ion-android-data icon"></span>05/06/2017</div>
-                                     <div class="comments"><span class="ion-ios7-eye icon"></span>11</div>
-                                </div>
-                             </div>
+                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
+                            <div class="col-sm-12 col-md-16 col-lg-12">
+                               <h4>NOTÍCIA NÃO CARREGADA</h4>
+                            </div>
                          </div>
                        </a>
                     </li>
+                    {{/news1}}
                     <!--News #2//-->
-                    <!--TODO GET FROM DATA SERVICE-->
+                    {{#news2}}
+                      <li>
+                         <a href="newsitem.html?id={{id}}">
+                           <div class="row">
+                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
+                              <div class="col-sm-12 col-md-16 col-lg-12">
+                                 <h4>{{ title }}</h4>
+                                 <div class="text-danger sub-info">
+                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                       {{#views}}
+                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                       {{/views}}
+                                 </div>
+                              </div>
+                           </div>
+                         </a>
+                      </li>
+                    {{/news2}}
+                    {{^news2}}
                     <li>
                        <a href="#">
                          <div class="row">
-                             <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="images/last_news/news_02.jpg" width="150" height="150" alt=""/> </div>
-                             <div class="col-sm-12 col-md-16 col-lg-12">
-                                <h4>Vereadores visitam base da Polícia Militar no Éden</h4>
-                                <div class="text-danger sub-info">
-                                     <div class="time"><span class="ion-android-data icon"></span>05/06/2017</div>
-                                     <div class="comments"><span class="ion-ios7-eye icon"></span>12</div>
-                                </div>
-                             </div>
+                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
+                            <div class="col-sm-12 col-md-16 col-lg-12">
+                               <h4>NOTÍCIA NÃO CARREGADA</h4>
+                            </div>
                          </div>
                        </a>
                     </li>
+                    {{/news2}}
                     <!--News #3//-->
-                    <!--TODO GET FROM DATA SERVICE-->
+                    {{#news3}}
+                      <li>
+                         <a href="newsitem.html?id={{id}}">
+                           <div class="row">
+                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
+                              <div class="col-sm-12 col-md-16 col-lg-12">
+                                 <h4>{{ title }}</h4>
+                                 <div class="text-danger sub-info">
+                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                       {{#views}}
+                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                       {{/views}}
+                                 </div>
+                              </div>
+                           </div>
+                         </a>
+                      </li>
+                    {{/news3}}
+                    {{^news3}}
                     <li>
                        <a href="#">
                          <div class="row">
-                             <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="images/last_news/news_03.jpg" width="150" height="150" alt=""/> </div>
-                             <div class="col-sm-12 col-md-16 col-lg-12">
-                                <h4>Vereadores visitam base da Polícia Militar no Éden</h4>
-                                <div class="text-danger sub-info">
-                                     <div class="time"><span class="ion-android-data icon"></span>05/06/2017</div>
-                                     <div class="comments"><span class="ion-ios7-eye icon"></span>20</div>
-                                </div>
-                             </div>
+                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
+                            <div class="col-sm-12 col-md-16 col-lg-12">
+                               <h4>NOTÍCIA NÃO CARREGADA</h4>
+                            </div>
                          </div>
                        </a>
                     </li>
+                    {{/news3}}
                     <!--News #4//-->
-                    <!--TODO GET FROM DATA SERVICE-->
+                    {{#news4}}
+                      <li>
+                         <a href="newsitem.html?id={{id}}">
+                           <div class="row">
+                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
+                              <div class="col-sm-12 col-md-16 col-lg-12">
+                                 <h4>{{ title }}</h4>
+                                 <div class="text-danger sub-info">
+                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                       {{#views}}
+                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                       {{/views}}
+                                 </div>
+                              </div>
+                           </div>
+                         </a>
+                      </li>
+                    {{/news4}}
+                    {{^news4}}
                     <li>
                        <a href="#">
                          <div class="row">
-                             <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="images/last_news/news_04.jpg" width="150" height="150" alt=""/> </div>
-                             <div class="col-sm-12 col-md-16 col-lg-12">
-                                <h4>AUDIÊNCIA PÚBLICA: Direitos dos animais será tema de debate na Câmara Municipal de Sorocaba</h4>
-                                <div class="text-danger sub-info">
-                                     <div class="time"><span class="ion-android-data icon"></span>02/06/2017</div>
-                                     <div class="comments"><span class="ion-ios7-eye icon"></span>20</div>
-                                </div>
-                             </div>
+                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
+                            <div class="col-sm-12 col-md-16 col-lg-12">
+                               <h4>NOTÍCIA NÃO CARREGADA</h4>
+                            </div>
                          </div>
                        </a>
                     </li>
+                    {{/news4}}
                     <!--News #5//-->
-                    <!--TODO GET FROM DATA SERVICE-->
+                    {{#news5}}
+                      <li>
+                         <a href="newsitem.html?id={{id}}">
+                           <div class="row">
+                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
+                              <div class="col-sm-12 col-md-16 col-lg-12">
+                                 <h4>{{ title }}</h4>
+                                 <div class="text-danger sub-info">
+                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                       {{#views}}
+                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                       {{/views}}
+                                 </div>
+                              </div>
+                           </div>
+                         </a>
+                      </li>
+                    {{/news5}}
+                    {{^news5}}
                     <li>
                        <a href="#">
                          <div class="row">
-                             <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="images/last_news/news_06.jpg" width="150" height="150" alt=""/> </div>
-                             <div class="col-sm-12 col-md-16 col-lg-12">
-                                <h4>Vereador solicita redutor de velocidade na Zona Industrial e é atendido pela Urbes</h4>
-                                <div class="text-danger sub-info">
-                                     <div class="time"><span class="ion-android-data icon"></span>02/06/2017</div>
-                                     <div class="comments"><span class="ion-ios7-eye icon"></span>20</div>
-                                </div>
-                             </div>
+                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
+                            <div class="col-sm-12 col-md-16 col-lg-12">
+                               <h4>NOTÍCIA NÃO CARREGADA</h4>
+                            </div>
                          </div>
                        </a>
                     </li>
+                    {{/news5}}
                     <!--News #7//-->
-                    <!--TODO GET FROM DATA SERVICE-->
+                    {{#news7}}
+                      <li>
+                         <a href="newsitem.html?id={{id}}">
+                           <div class="row">
+                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
+                              <div class="col-sm-12 col-md-16 col-lg-12">
+                                 <h4>{{ title }}</h4>
+                                 <div class="text-danger sub-info">
+                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
+                                       {{#views}}
+                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
+                                       {{/views}}
+                                 </div>
+                              </div>
+                           </div>
+                         </a>
+                      </li>
+                    {{/news7}}
+                    {{^news7}}
                     <li>
                        <a href="#">
                          <div class="row">
-                             <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="images/last_news/news_08.jpg" width="150" height="150" alt=""/> </div>
-                             <div class="col-sm-12 col-md-16 col-lg-12">
-                                <h4>Vereador debate sobre ampliação da Tarifa Social com diretor do Saae</h4>
-                                <div class="text-danger sub-info">
-                                     <div class="time"><span class="ion-android-data icon"></span>02/06/2017</div>
-                                     <div class="comments"><span class="ion-ios7-eye icon"></span>15</div>
-                                </div>
-                             </div>
-
+                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
+                            <div class="col-sm-12 col-md-16 col-lg-12">
+                               <h4>NOTÍCIA NÃO CARREGADA</h4>
+                            </div>
                          </div>
                        </a>
                     </li>
+                    {{/news7}}
                     <li>
                        <div class="more_items">
-                          <a href="#">
+                          <a href="/news.html">
                              <div><span class="ion-ios7-browsers icon"></span>mais notícias ...</div>
                           </a>
                        </div>
                     </li>
-
                   </ul>
                 </div>
              </div>
@@ -1155,7 +1409,7 @@
                               <div><span class="ion-ios7-browsers icon"></span>outros certames ...</div>
                           </a>
                         </div>
-                     </li>
+                      </li>
 
                     </ul>
                   </div>

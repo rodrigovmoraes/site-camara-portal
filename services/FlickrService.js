@@ -5,12 +5,14 @@
 var _ = require('lodash');
 var winston = require('winston');
 var _requestService = require('request-promise');
+var Utils = require('./camara/Utils.js');
 /*****************************************************************************
 ****************************** Flickr API Config  ****************************
 /*****************************************************************************/
 var _flickrApiBaseUrl; //Ex, "https://api.flickr.com/services/rest/"
 var _flickrApiKey; //Ex, "0f90801c8a3de3619be8252f7e6d9d71"
 var _flickrApiGetPhotosMethod; //Ex, "flickr.photosets.getPhotos"
+var _flickrApiGetPhotosetInfoMethod; //Ex, "flickr.photosets.getInfo"
 var _unexpectedFlickrDataFormatErrorMessage; //Ex, "The Flickr service has returned an unexpected data format"
 /* Url pattern used to build the photo url. The built url is used in order to
 *  obtain the photos from Flickr. Each word embraced by {}
@@ -43,6 +45,10 @@ module.exports.setFlickrApiKey = function(flickrApiKey) {
 
 module.exports.setFlickrApiGetPhotosMethod = function(flickrApiGetPhotosMethod) {
    _flickrApiGetPhotosMethod = flickrApiGetPhotosMethod;
+}
+
+module.exports.setFlickrApiGetPhotosetInfoMethod = function(flickrApiGetPhotosetInfoMethod) {
+   _flickrApiGetPhotosetInfoMethod = flickrApiGetPhotosetInfoMethod;
 }
 
 module.exports._setRequestService = function(requestService) {
@@ -86,6 +92,7 @@ module.exports.getPhotoThumbnailUrlsFromSet = function(photoSetId, imageType) {
    if(imageType === undefined) {
       imageType = 'q';
    }
+   var lPhotos = null;
    return _requestService({
       url: _flickrApiBaseUrl,
       method: "GET",
@@ -108,7 +115,7 @@ module.exports.getPhotoThumbnailUrlsFromSet = function(photoSetId, imageType) {
             winston.debug("data = [%s]", JSON.stringify(data));
 
             throw error;
-         }else {
+         } else {
             //valid data
             var photosFromFlickr = data.photoset.photo;
             var photos = _.map(photosFromFlickr, function(photoItem, index) {
@@ -121,8 +128,33 @@ module.exports.getPhotoThumbnailUrlsFromSet = function(photoSetId, imageType) {
                                  title: photoItem.title
                               };
                          });
-            return {'photos': photos}
+            lPhotos = photos;
+            return module.exports.getPhotosetInfo(data.photoset.id, data.photoset.owner);
          }
+   }).then(function(result) {
+      return {  'title': result.photoset.title._content,
+                'id': result.photoset.id,
+                'owner' : result.photoset.owner,
+                'creationDate': Utils.toDDMMYYYY(new Date(parseInt(result.photoset.date_create) * 1000)),
+                'photos': lPhotos
+             }
    });
 
+}
+
+module.exports.getPhotosetInfo = function(photoSetId, userId) {
+   return _requestService({
+      url: _flickrApiBaseUrl,
+      method: "GET",
+      json: true,
+      body: {},
+      qs: {
+         method: _flickrApiGetPhotosetInfoMethod,
+         api_key: _flickrApiKey,
+         photoset_id: photoSetId,
+         user_id: userId,
+         format: 'json',
+         nojsoncallback: 1
+      }
+   })
 }

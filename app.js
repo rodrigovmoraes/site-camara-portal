@@ -6,6 +6,7 @@ require('dotenv').load();
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var winston = require('winston');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -17,6 +18,7 @@ var config = require('config');
 /*****************************************************************************/
 var defaultViewMiddleware = require('./middlewares/default-view.js')('./views');
 var FlickrService = require('./services/FlickrService.js');
+var CamaraApiConfigService = require('./services/camara/CamaraApiConfigService.js');
 
 //-----------------------------------------------------------------------------
 var app = express();
@@ -33,11 +35,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');    // use .html extension for templates
 app.set('layout', '_layouts/layout');       // use layout.html as the default layout
+//partials, "templates"
+app.set('partials', {
+   menu: '_templates/menu',
+   submenu: '_templates/submenu',
+   menu_access: '_templates/menu-access',
+   fbreaking_news_item_tpl: '_templates/fbreaking-news-item-tpl'
+});
 app.enable('view cache');
 app.engine('html', require('hogan-express'));
 //routes config
 // portal routes
-var portalRoutes = require('./routes/index.js')
+var portalRoutes = require('./routes/index.js');
 app.use('/', portalRoutes);
 
 //if an existing file in the views folder is requested,
@@ -57,26 +66,49 @@ app.use(function(req, res, next) {
 /*****************************************************************************
 ***************************** APP CONFIG SECTION *****************************
 /*****************************************************************************/
+//logger
+var logConfig = config.get("Log")
+//log configuration
+winston.setLevels(logConfig.levels);
+winston.addColors(logConfig.levelsColors);
+winston.configure({
+    transports: [
+      new (winston.transports.Console)({ colorize: true })
+    ]
+ });
+winston.level = logConfig.level;
 //Services
 var FlickServiceConfig = config.get('Services.FlickrService');
-FlickrService.setFlickrApiBaseUrl(FlickServiceConfig.flickrApiBaseUrl);
-FlickrService.setFlickrApiKey(FlickServiceConfig.flickrApiKey);
-FlickrService.setFlickrApiGetPhotosMethod(FlickServiceConfig.flickrApiGetPhotosMethod);
+FlickrService.setFlickrApiBaseUrl(FlickServiceConfig.baseUrl);
+FlickrService.setFlickrApiKey(FlickServiceConfig.apiKey);
+FlickrService.setFlickrApiGetPhotosMethod(FlickServiceConfig.getPhotosMethod);
+FlickrService.setFlickrApiGetPhotosetInfoMethod(FlickServiceConfig.getPhotosetInfoMethod);
 FlickrService.setUnexpectedFlickrDataFormatErrorMessage(FlickServiceConfig.unexpectedFlickrDataFormatErrorMessage);
-FlickrService.setFlickrPhotoUrlPattern(FlickServiceConfig.flickrPhotoUrlPattern);
+FlickrService.setFlickrPhotoUrlPattern(FlickServiceConfig.photoUrlPattern);
+
+var camaraApiConfig = config.get('Services.CamaraApi');
+CamaraApiConfigService.setBaseUrl(camaraApiConfig.baseUrl);
+CamaraApiConfigService.setPortalMenuMethodPath(camaraApiConfig.portalMenuMethodPath);
+CamaraApiConfigService.setNewsMethodPath(camaraApiConfig.newsMethodPath);
+CamaraApiConfigService.setNewsItemMethodPath(camaraApiConfig.newsItemMethodPath);
+CamaraApiConfigService.setIncrementNewsViewsMethodPath(camaraApiConfig.incrementNewsViewsMethodPath);
+CamaraApiConfigService.setPageMethodPath(camaraApiConfig.pageMethodPath);
+CamaraApiConfigService.setBannersMethodPath(camaraApiConfig.bannersMethodPath);
+CamaraApiConfigService.setHotNewsMethodPath(camaraApiConfig.hotNewsMethodPath);
+CamaraApiConfigService.setBreakingNewsMethodPath(camaraApiConfig.breakingNewsMethodPath);
+CamaraApiConfigService.setFBreakingNewsMethodPath(camaraApiConfig.fbreakingNewsMethodPath);
 
 /*****************************************************************************
 ************************** ERROR HANDLING SECTION ****************************
 /*****************************************************************************/
 // development error handler
-// will print stacktrace
+// it prints stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
             error: err.toString(),
-            layout: false
         });
     });
 }

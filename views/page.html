@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+
+     {{#page}}
+        <div class="page-header">
+           <h1>{{title}}</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <!--TODO: get from menu service if there
+             is a menu item linked to this page//-->
+             <li><a href="#">Página</a></li>
+           </ol>
+        </div>
+
+        <span class="newsitem">
+           {{{body}}}
+        </span>
+     {{/page}}
+
+  </div>
+</div>
