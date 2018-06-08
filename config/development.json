@@ -5,7 +5,7 @@
             "apiKey": "0f90801c8a3de3619be8252f7e6d9d71",
             "getPhotosMethod": "flickr.photosets.getPhotos",
             "getPhotosetInfoMethod": "flickr.photosets.getInfo",
-            "unexpectedFlickrDataFormatErrorMessage":  "The Flickr service has returned an unexpected data format",
+            "unexpectedFlickrDataFormatErrorMessage":  "The Flickr service has returned an unexpected data format!",
             "photoUrlPattern": "https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_{image_type}.jpg"
        },
        "CamaraApi" : {
