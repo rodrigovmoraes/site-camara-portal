@@ -2,7 +2,7 @@
    "Services" : {
       "FlickrService" : {
             "baseUrl": "https://api.flickr.com/services/rest/",
-            "apiKey": "0f90801c8a3de3619be8252f7e6d9d71",
+            "apiKey": "",
             "getPhotosMethod": "flickr.photosets.getPhotos",
             "getPhotosetInfoMethod": "flickr.photosets.getInfo",
             "unexpectedFlickrDataFormatErrorMessage":  "The Flickr service has returned an unexpected data format",
