@@ -4,7 +4,7 @@
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Globalnews - Home</title>
+   <title>Câmara Municipal de Sorocaba</title>
    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
    <link href="images/favicon.ico" rel="icon" type="image/x-icon">
    <!-- bootstrap styles-->
@@ -18,10 +18,12 @@
    <!-- animation styles -->
    <link href="css/animate.css" rel="stylesheet"/>
    <!-- calendar-->
-   <link href="css/pickmeup.css" rel="stylesheet" id="style">
+   <link href="css/pickmeup.css" rel="stylesheet">
+   <!-- full calendar-->
+   <link href="css/fullcalendar.min.css" rel="stylesheet">
    <!-- custom styles -->
-   <link href="css/custom-nav.css" rel="stylesheet" id="style">
-   <link href="css/custom-mycolor.css" rel="stylesheet" id="style">
+   <link href="css/custom-nav.css" rel="stylesheet">
+   <link href="css/custom-mycolor.css" rel="stylesheet">
    <!-- owl carousel styles-->
    <link href="css/owl.carousel.css" rel="stylesheet">
    <link href="css/owl.transitions.css" rel="stylesheet">
@@ -37,9 +39,9 @@
          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    <![endif]-->
 
-   <!-- BEGIN specific page scripts //-->
+   <!-- BEGIN specific page styles //-->
    {{{yield-styles}}}
-   <!-- END specific page scripts //-->
+   <!-- END specific pages tyles//-->
 </head>
 <body>
 <!-- preloader start -->
@@ -51,6 +53,7 @@
 <!-- wrapper start -->
 <div class="wrapper">
   <!-- header toolbar start -->
+  {{^print}}
   <div class="header-toolbar">
     <div class="container">
       <div class="row">
@@ -76,10 +79,12 @@
       </div>
     </div>
   </div>
+  {{/print}}
   <!-- header toolbar end -->
 
   <!-- sticky header start -->
   <!-- header start -->
+  {{^print}}
   <div id="banner" class="sticky-header owl-carousel owl-theme">
 
        {{#banners}}
@@ -131,9 +136,11 @@
           </div>
        {{/banners}}
   </div>
+  {{/print}}
   <!-- header end -->
 
   <!-- nav and search start -->
+  {{^print}}
   <div class="nav-search-outer">
      <!-- nav start -->
      <nav class="navbar navbar-inverse" role="navigation">
@@ -169,6 +176,7 @@
       </nav>
      <!--nav end-->
   </div>
+  {{/print}}
   <!-- nav and search end-->
 
   <!-- sticky header end -->
@@ -176,6 +184,7 @@
   {{{yield}}}
 
   <!-- Footer start -->
+  {{^print}}
   <footer>
     <div class="btm-sec">
       <div class="container">
@@ -197,6 +206,7 @@
       </div>
     </div>
   </footer>
+  {{/print}}
   <!-- Footer end -->
 </div>
 <!-- wrapper end -->
@@ -234,6 +244,13 @@
 <script src="js/masonry.pkgd.js"></script>
 <!--media queries to js-->
 <script src="js/enquire.js"></script>
+<!--lodash library-->
+<script src="js/lodash.js"></script>
+<!--full calendar-->
+<script src="js/fullcalendar.min.js"></script>
+<script src="js/fullcalendar-locale/pt-br.js"></script>
+<!--camara config-->
+<script src="js/camara-utils/utils.js"></script>
 <!--custom js-->
 <script src="js/custom-fun.js"></script>
 

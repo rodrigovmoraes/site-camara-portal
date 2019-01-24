@@ -1,4 +1,4 @@
- $(document).ready(function() {
+$(document).ready(function() {
    "use strict";
 
    /* -------------------------------------------------------------------------*
@@ -41,6 +41,11 @@
        }
      },
      midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+   });
+   $('.open-popup-div').magnificPopup({
+      type:'inline',
+      midClick: true, // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+      overflowY: 'scroll'
    });
    $('#image-popups').magnificPopup({
      delegate: 'a',

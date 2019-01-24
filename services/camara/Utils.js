@@ -4,11 +4,12 @@
 /*****************************************************************************/
 var winston = require('winston');
 var _ = require('lodash');
+var _camaraApiConfigService = require('./CamaraApiConfigService.js');
 
 /*****************************************************************************
 ******************************* PRIVATE **************************************
 /*****************************************************************************/
-//...
+var _monthsDescription = ['JAN', 'Fev', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
 
 /*****************************************************************************
 ******************************* PUBLIC ***************************************
@@ -17,7 +18,7 @@ var _ = require('lodash');
 module.exports.toDateFromDDMMYYYY = function(strDate) {
    var dateParts = strDate.split("/");
    var days = parseInt(dateParts[0]);
-   var months = parseInt(dateParts[1]);
+   var months = parseInt(dateParts[1]) - 1;
    var years = parseInt(dateParts[2]);
    return new Date(years, months, days);
 }
@@ -77,7 +78,70 @@ module.exports.getElapsedTimeDescription = function(pdate) {
    }
 }
 
-module.exports.next = function(httpStatus, err, next){
-   err.status = httpStatus;
-   next(err);
+//build a string describing how much time (in day precision) has elapsed
+//since pdate
+module.exports.getElapsedTimeDescriptionDayPrecision = function(pdate) {
+   if(pdate) {
+      var now = new Date();
+      now.setMilliseconds(0);
+      now.setSeconds(0);
+      now.setMinutes(0);
+      now.setHours(0);
+      var anotherDate = new Date(pdate);
+      anotherDate.setMilliseconds(0);
+      anotherDate.setSeconds(0);
+      anotherDate.setMinutes(0);
+      anotherDate.setHours(0);
+
+      var desc = "";
+      var diff = now.getTime() - anotherDate.getTime();
+      //days, hours, minutes
+      var days = Math.floor( diff / (1000 * 60 * 60 * 24) );
+
+      if(days === 0) {
+         desc = "hoje";
+      } else if(days === 1) {
+         desc = "ontem";
+      } else if(days > 1) {
+         desc = days + " dias atrás";
+      } else {
+         desc = "";
+      }
+      return desc;
+   } else {
+      return "";
+   }
+}
+
+module.exports.getTodayRange = function(utcOffset) {
+   var now = new Date();
+   var day = _.padStart(now.getDate(), 2, '0');
+   var month = _.padStart(now.getMonth() + 1, 2, '0');
+   var year = _.padStart(now.getFullYear(), 4, '0');
+   var utcOffsetValue = _camaraApiConfigService.getEventsCalendarUTCOffset();
+   var utcOffset = _.padStart(Math.abs(utcOffsetValue), 2, '0');
+   var minDateStr = year + "-" + month + "-" + day + "T00:00:00" + (utcOffsetValue >= 0 ? "+" : "-") + utcOffset + ":00";
+
+   var minDate = new Date(minDateStr);
+   var maxDate = new Date(minDate.getTime());
+   maxDate.setDate(maxDate.getDate() + 1);
+   return { 'minDate' : minDate,
+            'maxDate' : maxDate
+          }
+}
+
+module.exports.getTodayDescription = function(utcOffset) {
+   var now = new Date();
+   return _.padStart(now.getDate(), 2, '0') + "/" + _monthsDescription[now.getMonth()];
+}
+
+module.exports.next = function(httpStatus, err, next) {
+   if(err) {
+      err.status = httpStatus ? httpStatus : 500;
+   }
+   if(err.error) {
+      next(err.error);
+   } else {
+      next(err);
+   }
 }

@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+
+     {{#licitacao}}
+        <div class="page-header">
+           <h1>Licitação nº {{licitacaoNumber}}</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <li><a href="/licitacoes.html">Licitações</a></li>
+             <li><a href="#">Licitação</a></li>
+           </ol>
+        </div>
+
+        <span class="newsitemHeadline">
+           <p>{{description}}</p>
+        </span>
+
+        <div class="text-danger sub-info-bordered">
+           <div class="time"><span class="ion-android-calendar icon"></span>Publicação: {{publicationDate}}</div>
+           <div class="time"><span class="ion-ios7-information icon"></span>Modalidade: {{categoryDescription}}</div>
+        </div>
+
+        {{#licitacaoEvents.length}}
+        <div class="col-md-11 col-sm-11">
+            <div class="row">
+                 <div class="col-sm-16">
+                   <hr>
+                   <h3>Eventos</h3>
+                   <hr>
+                 </div>
+
+                 {{#licitacaoEvents}}
+                 <div class="sec-topic col-sm-16">
+                   <div class="row">
+                     <div class="col-sm-9">
+                       <div class="sec-info">
+                         <p>{{licitacaoEventDescription}}</p>
+                         <div class="text-danger sub-info-bordered">
+                            <div class="time"  title="data do evento da licitação"><span class="ion-android-calendar icon"></span>{{licitacaoEventDate}}</div>
+                            <div class="time"><span class="ion-archive icon"></span><a href="{{licitacaoEventFileDownloadUrl}}" target="_blank">arquivo</a></div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 {{/licitacaoEvents}}
+
+            </div>
+        </div>
+        {{/licitacaoEvents.length}}
+
+
+     {{/licitacao}}
+
+  </div>
+</div>

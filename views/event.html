@@ -1,0 +1,42 @@
+<div class="white-popup">
+   <div class="main-title-outer pull-left">
+      <a href="#">
+            <div class="main-title" id="agenda-title">Evento</div>
+      </a>
+   </div>
+   {{#eventCalendar}}
+   <ul class="list-unstyled" id="day_events">
+      <li>
+         <div class="row">
+            <div class="col-sm-16  col-md-16 list-item-without-img">
+               <h4>{{eventCalendarTitle}}</h4>
+               <div class="text-danger">
+                  {{#eventCalendarAllDay}}
+                     <div class="time">
+                        <span class="ion-android-data icon"></span>
+                        Início: dia inteiro
+                     </div>
+                  {{/eventCalendarAllDay}}
+                  {{^eventCalendarAllDay}}
+                     <div class="time">
+                        <span class="ion-android-data icon"></span>
+                        Início: {{eventCalendarStartDateDescription}} {{eventCalendarStartTimeDescription}} ({{eventCalendarStartWeekdayDescription}})
+                     </div>
+                     <div class="time">
+                        <span class="ion-android-data icon"></span>
+                        Fim: {{eventCalendarEndDateDescription}} {{eventCalendarEndTimeDescription}} ({{eventCalendarEndWeekdayDescription}})
+                     </div>
+                  {{/eventCalendarAllDay}}
+                  {{#eventCalendarPlace}}
+                     <div class="place"><span class="ion-location icon"></span>Local: {{eventCalendarPlace}}</div>
+                  {{/eventCalendarPlace}}
+                  {{#eventCalendarDescription}}
+                     <div class="place"><span class="ion-ios7-information icon"></span>{{{eventCalendarDescription}}}</div>
+                  {{/eventCalendarDescription}}
+               </div>
+            </div>
+         </div>
+      </li>
+   </ul>
+   {{/eventCalendar}}
+</div>

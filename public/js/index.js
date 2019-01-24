@@ -3,98 +3,101 @@ $(document).ready(function() {
     /* -------------------------------------------------------------------------*
     * CALENDAR
     * -------------------------------------------------------------------------*/
-    //the next events
-    //TODO: events should be get from a Data Service (Camara Data Service)
-    var events = [ { date: '20170608', date_description: '19h00', description: 'Sessão Solene: Dia Municipal do Nordestino e Semana da Nordestinidade', place: 'Plenário'},
-                   { date: '20170609', date_description: '19h30', description: 'Sessão Solene: Dia do Pastor', place: 'Plenário'},
-                   { date: '20170609', date_description: '20h00', description: 'Audiência Pública: Combate ao trabalho infantil', place: 'Plenário'},
-                   { date: '20170611', date_description: '19h10', description: 'Sessão Solene: Dia Municipal do Nordestino e Semana da Nordestinidade', place: 'Plenário'},
-                   { date: '20170611', date_description: '20h00', description: 'Audiência Pública: Políticas Públicas Sociais', place: 'Plenário'},
-                   { date: '20170613', date_description: '19h00', description: 'Entrega de Comenda Mérito em Educação para Leonette Georges Kayal Stefano', place: 'Plenário'},
-                   { date: '20170616', date_description: '19h30', description: 'TCE Prof. Hudson Luiz Pissini', place: 'Plenário'}
-                ];
-   //map of events indexed by day
-   var eventsMap = {};
+    //next events
+    var settings = CamaraUtils.camaraConfig('js/config/settings');
+    var eventsCalendarUrl = settings.CamaraApi.baseUrlSiteCamaraApi + settings.CamaraApi.eventsCalendarMethodPath;
+    var now = new Date();
+    now.setHours(0);
+    now.setMinutes(0);
+    now.setSeconds(0);
+    now.setMilliseconds(0);
+    $.get( eventsCalendarUrl, {}, function( data ) {
+       var events = data.events
 
-   var buildDateMapForAgenda =  function(pvents, peventsMap) {
-      var i;
-      for(i = 0; i < pvents.length; i++) {
-         var year = pvents[i].date.substr(0, 4);
-         var month = pvents[i].date.substr(4, 2);
-         var day = pvents[i].date.substr(6, 2);
-         var cdate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-         if(peventsMap[cdate]) {
-            peventsMap[cdate].push(pvents[i])
-         }else{
-            peventsMap[cdate] = [];
-            peventsMap[cdate].push(pvents[i])
-         }
+       //map of events indexed by day
+       var eventsMap = {};
 
-      }
-   };
+       var buildDateMapForAgenda =  function(pvents, peventsMap) {
+          var i;
+          for(i = 0; i < pvents.length; i++) {
+             var year = pvents[i].start_date.substr(0, 4);
+             var month = pvents[i].start_date.substr(5, 2);
+             var day = pvents[i].start_date.substr(8, 2);
+             var cdate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+             if (peventsMap[cdate]) {
+                peventsMap[cdate].push(pvents[i])
+             } else {
+                peventsMap[cdate] = [];
+                peventsMap[cdate].push(pvents[i])
+             }
+          }
+       };
 
-   //build a map for the next events indexed by day
-   buildDateMapForAgenda(events, eventsMap);
-   var arrMonthsShort = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Aug", "Set", "Out", "Nov", "Dez"];
+       //build a map for the next events indexed by day
+       buildDateMapForAgenda(events, eventsMap);
+       var arrMonthsShort = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Aug", "Set", "Out", "Nov", "Dez"];
 
-   $('#agenda').pickmeup({
-     flat: true,
-     locale:
-      { // Object, that contains localized days of week names and months
-         days: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
-         daysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
-         daysMin: ["Do", "Se", "Te", "Qu", "Qu", "Se", "Sa", "Do"],
-         months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Augosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-         monthsShort: arrMonthsShort
-      },
-      formatted: true,
-      mode: 'single',
-      date:  new Date(2017, 6 - 1, 8), //TODO: should be now, it is for prototyping purposes
-      render: function(date) {
-         var cdate = eventsMap[date];
-         if(cdate) {
-            return { class_name: 'events-exist' };
-         } else {
-            return { class_name: 'events-not-exist' };
-         }
-      },
-      change: function () {
-         var newDate = $('#agenda').pickmeup('get_date', false);
-         var todayEvents = eventsMap[newDate];
-         var eventsDay = newDate.getDate();
-         var eventsMonth = arrMonthsShort[newDate.getMonth()];
-         if(todayEvents) {
-            var sHtmlAgendaTitle = 'Eventos do dia ' + eventsDay + '/' + eventsMonth;
-            $('#agenda-title').html(sHtmlAgendaTitle);
+       $('#agenda').pickmeup({
+         flat: true,
+         locale:
+          { // Object, that contains localized days of week names and months
+             days: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
+             daysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+             daysMin: ["Do", "Se", "Te", "Qu", "Qu", "Se", "Sa", "Do"],
+             months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+             monthsShort: arrMonthsShort
+          },
+          formatted: true,
+          mode: 'single',
+          date:  now,
+          render: function(date) {
+             var cdate = eventsMap[date];
+             if(cdate) {
+                return { class_name: 'events-exist' };
+             } else {
+                return { class_name: 'events-not-exist' };
+             }
+          },
+          change: function () {
+             var newDate = $('#agenda').pickmeup('get_date', false);
+             var todayEvents = eventsMap[newDate];
+             var eventsDay = newDate.getDate();
+             var eventsMonth = arrMonthsShort[newDate.getMonth()];
+             if(todayEvents) {
+                var sHtmlAgendaTitle = 'Eventos do dia ' + eventsDay + '/' + eventsMonth;
+                $('#agenda-title').html(sHtmlAgendaTitle);
 
-            var sHtml = '';
-            var i;
-            for(i = 0; i < todayEvents.length; i++) {
-               var eventDescription = todayEvents[i].description;
-               var eventDateDescription = todayEvents[i].date_description;
-               var eventPlace = todayEvents[i].place;
-               sHtml += '<li>'  +
-                        '   <div class="row">'  +
-                        '      <div class="col-sm-16  col-md-16 list-item-without-img">'  +
-                        '         <h4>' + eventDescription + '</h4>'  +
-                        '         <div class="text-danger sub-info">'  +
-                        '            <div class="time"><span class="ion-android-data icon"></span>' + eventDateDescription + '</div>'  +
-                        '            <div class="place"><span class="ion-location icon"></span>Local: ' + eventPlace + '</div>'  +
-                        '         </div>'  +
-                        '      </div>'  +
-                        '   </div>'  +
-                        '</li>';
-            }
-            $('#day_events').html(sHtml);
+                var sHtml = '';
+                var i;
+                for(i = 0; i < todayEvents.length; i++) {
+                   var eventId = todayEvents[i].id;
+                   var eventDescription = todayEvents[i].title;
+                   var eventTimeDescription = todayEvents[i].start_time_description;
+                   var eventPlace = todayEvents[i].place;
+                   sHtml += '<li>'  +
+                            '   <div class="row">'  +
+                            '      <div class="col-sm-16  col-md-16 list-item-without-img">'  +
+                            '         <h4><a href="javascript:CamaraUtils.openEventCalendar(\'' + eventId + '\');">' + eventDescription + '</a></h4>'  +
+                            '         <div class="text-danger sub-info">'  +
+                            '            <div class="time"><span class="ion-android-data icon"></span>Início: ' + eventTimeDescription + '</div>'  +
+                            (eventPlace ? ('            <div class="place"><span class="ion-location icon"></span>Local: ' + eventPlace + '</div>') : '') +
+                            '         </div>'  +
+                            '      </div>'  +
+                            '   </div>'  +
+                            '</li>';
+                }
+                $('#day_events').html(sHtml);
 
-         }else {
-            $('#agenda-title').html('Agenda');
-            $('#day_events').html('');
-         }
-         return true;
-      },
+             }else {
+                $('#agenda-title').html('Agenda');
+                $('#day_events').html('');
+             }
+             return true;
+          },
 
-   });
+       });
+    });
+
 
    /* -------------------------------------------------------------------------*
     * HOT NEWS

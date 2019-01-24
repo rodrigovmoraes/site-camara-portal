@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+
+     {{#legislativeProposition}}
+        <div class="page-header">
+           <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}} - Arquivos Anexos</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <li><a href="/proposituras.html">Legislação</a></li>
+             <li><a href="/propositura.html?id={{legislativePropositionId}}">Propositura</a></li>
+             <li><a href="#">Arquivos Anexos</a></li>
+           </ol>
+        </div>
+
+        <span class="legislativePropositionHeadline">
+           <p>{{legislativePropositionDescription}}</p>
+        </span>
+
+        <div class="text-danger sub-info-bordered" style="font-size: 16px">
+           <div class="time"><span class="ion-android-data icon"></span>Publicação: {{legislativePropositionDate}}</div>
+           <div class="time"><span class="ion-ios7-information icon"></span>Tipo: {{legislativePropositionTypeDescription}}</div>
+           <div class="time">
+             <a title="Clique aqui para abrir a redação da propositura" href="/propositura.html?id={{legislativePropositionId}}">
+                <span class="ion-ios7-paper-outline icon"></span>Texto
+             </a>
+           </div>
+           {{#legislativePropositionTextAttachment}}
+           <div class="time">
+             <a title="Clique aqui para abrir o texto anexo" href="/propositura_texto_anexo.html?id={{legislativePropositionId}}">
+                <span class="ion-ios7-paper icon"></span>Texto Anexo
+             </a>
+           </div>
+           {{/legislativePropositionTextAttachment}}
+        </div>
+
+        {{#legislativePropositionFileAttachments.length}}
+        <div class="col-md-11 col-sm-11">
+            <div class="row">
+                 <div class="col-sm-16">
+                   <hr>
+                   <h3>Arquivos Anexos</h3>
+                   <hr>
+                 </div>
+
+                 {{#legislativePropositionFileAttachments}}
+                 <div class="sec-topic col-sm-16">
+                   <div class="row">
+                     <div class="col-sm-9">
+                       <div class="sec-info">
+                         <div class="text-danger sub-info-bordered">
+                            <div class="time"><span class="ion-archive icon"></span><a href="{{legislativePropositionAttachmentURL}}" target="_blank">{{legislativePropositionAttachmentFileName}}</a></div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 {{/legislativePropositionFileAttachments}}
+
+            </div>
+        </div>
+        {{/legislativePropositionFileAttachments.length}}
+        {{^legislativePropositionFileAttachments.length}}
+        <div class="col-md-11 col-sm-11">
+            <div class="row">
+                 <div class="sec-topic col-sm-16">
+                   <div class="row">
+                     <div class="col-sm-9">
+                       <div class="sec-info">
+                         <div class="text-danger sub-info-bordered">
+                            <div class="time">Esta propositura não possui arquivos anexos.</div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+            </div>
+        </div>
+        {{/legislativePropositionFileAttachments.length}}
+
+     {{/legislativeProposition}}
+
+  </div>
+</div>

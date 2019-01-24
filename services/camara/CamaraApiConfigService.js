@@ -18,6 +18,18 @@ var _bannersMethodPath; //Ex, "banners"
 var _hotNewsMethodPath; //Ex, "hotnews"
 var _breakingNewsMethodPath; //Ex, "breakingNews"
 var _fbreakingNewsMethodPath; //Ex, "fbreakingNews"
+var _eventsCalendarMethodPath; //Ex, "eventsCalendar"
+var _eventCalendarMethodPath; //Ex, "eventCalendar"
+var _eventsCalendarUTCOffset; //Ex, -3
+var _lastLicitacoesEventsMethodPath; //Ex, "licitacao/events/last"
+var _licitacaoDownloadEventFilePath; //Ex, "licitacao/event/download"
+var _licitacoesMethodPath; //Ex, "licitacoes"
+var _licitacoesCategoriesMethodPath; //Ex, "licitacoesCategories"
+var _licitacaoMethodPath; //Ex, "licitacao"
+var _legislativePropositionsMethodPath; //Ex, "legislativePropositions"
+var _legislativePropositionTypesMethodPath; //Ex, "legislativePropositionTypes"
+var _legislativePropositionMethodPath; //Ex, "legislativeProposition"
+var _legislativePropositionDownloadFileAttachmentPath; //Ex, "legislativeProposition/attachment/download"
 
 /*****************************************************************************
 *************************** Private Methods **********************************
@@ -104,4 +116,100 @@ module.exports.setFBreakingNewsMethodPath = function(fbreakingNewsMethodPath) {
 
 module.exports.getFBreakingNewsMethodPath = function() {
    return _fbreakingNewsMethodPath;
+}
+
+module.exports.setEventsCalendarMethodPath = function(eventsCalendarMethodPath) {
+   _eventsCalendarMethodPath = eventsCalendarMethodPath;
+}
+
+module.exports.getEventsCalendarMethodPath = function() {
+   return _eventsCalendarMethodPath;
+}
+
+module.exports.setEventCalendarMethodPath = function(eventCalendarMethodPath) {
+   _eventCalendarMethodPath = eventCalendarMethodPath;
+}
+
+module.exports.getEventCalendarMethodPath = function() {
+   return _eventCalendarMethodPath;
+}
+
+module.exports.setEventsCalendarUTCOffset = function(eventsCalendarUTCOffset) {
+   _eventsCalendarUTCOffset = eventsCalendarUTCOffset;
+}
+
+module.exports.getEventsCalendarUTCOffset = function() {
+   return _eventsCalendarUTCOffset;
+}
+
+module.exports.setLastLicitacoesEventsMethodPath = function(lastLicitacoesEventsMethodPath) {
+   _lastLicitacoesEventsMethodPath = lastLicitacoesEventsMethodPath;
+}
+
+module.exports.getLastLicitacoesEventsMethodPath = function() {
+   return _lastLicitacoesEventsMethodPath;
+}
+
+module.exports.setLicitacaoDownloadEventFilePath = function(licitacaoDownloadEventFilePath) {
+   _licitacaoDownloadEventFilePath = licitacaoDownloadEventFilePath;
+}
+
+module.exports.getLicitacaoDownloadEventFilePath = function() {
+   return _licitacaoDownloadEventFilePath;
+}
+
+module.exports.setLicitacoesMethodPath = function(licitacoesMethodPath) {
+   _licitacoesMethodPath = licitacoesMethodPath;
+}
+
+module.exports.getLicitacoesMethodPath = function() {
+   return _licitacoesMethodPath;
+}
+
+module.exports.setLicitacoesCategoriesMethodPath = function(licitacoesCategoriesMethodPath) {
+   _licitacoesCategoriesMethodPath = licitacoesCategoriesMethodPath;
+}
+
+module.exports.getLicitacoesCategoriesMethodPath = function() {
+   return _licitacoesCategoriesMethodPath;
+}
+
+module.exports.setLicitacaoMethodPath = function(licitacaoMethodPath) {
+   _licitacaoMethodPath = licitacaoMethodPath;
+}
+
+module.exports.getLicitacaoMethodPath = function() {
+   return _licitacaoMethodPath;
+}
+
+module.exports.setLegislativePropositionsMethodPath = function(legislativePropositionsPath) {
+   _legislativePropositionsPath = legislativePropositionsPath;
+}
+
+module.exports.getLegislativePropositionsMethodPath = function() {
+   return _legislativePropositionsPath;
+}
+
+module.exports.setLegislativePropositionTypesMethodPath = function(legislativePropositionTypesMethodPath) {
+   _legislativePropositionTypesMethodPath = legislativePropositionTypesMethodPath;
+}
+
+module.exports.getLegislativePropositionTypesMethodPath = function() {
+   return _legislativePropositionTypesMethodPath;
+}
+
+module.exports.setLegislativePropositionMethodPath = function(legislativePropositionMethodPath) {
+   _legislativePropositionMethodPath = legislativePropositionMethodPath;
+}
+
+module.exports.getLegislativePropositionMethodPath = function() {
+   return _legislativePropositionMethodPath;
+}
+
+module.exports.setLegislativePropositionDownloadFileAttachmentPath = function(legislativePropositionDownloadFileAttachmentPath) {
+   _legislativePropositionDownloadFileAttachmentPath = legislativePropositionDownloadFileAttachmentPath;
+}
+
+module.exports.getLegislativePropositionDownloadFileAttachmentPath = function() {
+   return _legislativePropositionDownloadFileAttachmentPath;
 }

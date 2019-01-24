@@ -1,0 +1,122 @@
+<style>
+   #owl-flickr-set {
+     background-color: black;
+     padding-top: 10px;
+     padding-left: 10px;
+     padding-right: 10px;
+   }
+
+   #owl-flickr-set-container {
+      padding-top: 10px;
+      text-align: center;
+      background-color: black;
+
+   }
+
+   #owl-flickr-set-container h1 {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 15pt;
+   }
+
+   #owl-flickr-set-container h2 {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 11pt;
+   }
+
+   #owl-flickr-set-container button.mfp-close {
+     background-color: black;
+     color: white;
+   }
+
+   #owl-flickr-set .item .img-container {
+      background-color: white;
+      display: inline-block;
+      margin-right: auto; margin-left: auto;
+   }
+
+   #owl-flickr-set .item img {
+      display: block;
+      margin:auto;
+      font-weight: bold;
+   }
+
+   #owl-flickr-set .item .img-title {
+     background-color: rgba(61, 86, 110, 0.8);
+     color: #ffffff;
+     text-align: left;
+     padding-left: 5px;
+   }
+
+   @media screen and (min-height: 100px) {
+      #owl-flickr-set .item img{
+        max-height: 100px;
+      }
+   }
+
+   @media screen and (min-height: 200px) {
+      #owl-flickr-set .item img{
+        max-height: 200px;
+      }
+   }
+
+   @media screen and (min-height: 300px) {
+      #owl-flickr-set .item img{
+        max-height: 300px;
+      }
+   }
+
+   @media screen and (min-height: 400px) {
+      #owl-flickr-set .item img{
+        max-height: 400px;
+      }
+   }
+
+   @media screen and (min-height: 500px) {
+      #owl-flickr-set .item img{
+        max-height: 500px;
+      }
+   }
+
+   @media screen and (min-height: 600px) {
+      #owl-flickr-set .item img{
+        max-height: 600px;
+      }
+   }
+
+   @media screen and (min-height: 700px) {
+      #owl-flickr-set .item img{
+        max-height: 700px;
+      }
+   }
+
+</style>
+
+<div id="owl-flickr-set-container">
+   <a href="https://www.flickr.com/photos/{{owner}}/sets/{{setId}}" target="_blank">
+      <h1>{{title}}&nbsp;&nbsp;&nbsp;<img src="/images/flickr_logo.png" height="15" width="50"/></h1>
+   </a>
+   <div id="owl-flickr-set" class="owl-carousel">
+         <a class="popup-flickr-gallery" href="{{photoPageUrl}}" target="_blank">
+            <div class="item">
+               <div class="img-container">
+                  <img class="lazyOwl" data-src="{{photoUrl}}" alt="{{title}}">
+                  <div class="img-title">
+                     {{title}}
+                  </div>
+               </div>
+            </div>
+         </a>
+   </div>
+</div>
+
+<script>
+    $('owl-flickr-set-container').ready(function() {
+        $("#owl-flickr-set").owlCarousel({
+          items : 1,
+          lazyLoad : true,
+          navigation : true
+        });
+    });
+</script>

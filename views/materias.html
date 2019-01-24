@@ -1,0 +1,362 @@
+{{#yield-scripts}}
+   <script type="text/javascript">
+      $(document).ready(function() {
+          "use strict";
+
+          $('#dataApresentacaoInicialInput').datepicker();
+          $('#dataApresentacaoInicialInput').datepicker("option", "dateFormat", "dd/mm/yy");
+
+          $('#dataApresentacaoFinalInput').datepicker();
+          $('#dataApresentacaoFinalInput').datepicker("option", "dateFormat", "dd/mm/yy");
+
+          $('#dataPrazoExecutivoInicialInput').datepicker();
+          $('#dataPrazoExecutivoInicialInput').datepicker("option", "dateFormat", "dd/mm/yy");
+
+          $('#dataPrazoExecutivoFinalInput').datepicker();
+          $('#dataPrazoExecutivoFinalInput').datepicker("option", "dateFormat", "dd/mm/yy");
+
+          $('#dataPrazoProcessoInicialInput').datepicker();
+          $('#dataPrazoProcessoInicialInput').datepicker("option", "dateFormat", "dd/mm/yy");
+
+          $('#dataPrazoProcessoFinalInput').datepicker();
+          $('#dataPrazoProcessoFinalInput').datepicker("option", "dateFormat", "dd/mm/yy");
+      });
+
+      function postPesquisaMateria(page) {
+         $('#pageInput').val(page);
+         $('#printVersion').val(null);
+         $('#formPesquisaMaterias').attr("target", "_self");
+         $('#formPesquisaMaterias').submit();
+      }
+
+      function postPesquisaMateriaPrint() {
+         $('#formPesquisaMaterias').attr("target", "_blank");
+         $('#printVersion').val(1);
+         $('#formPesquisaMaterias').submit();
+      }
+   </script>
+{{/yield-scripts}}
+
+<div class="container">
+
+    <!-- BEGIN: title start -->
+    <div class="page-header">
+      <h1>Pesquisa de Matérias Legislativas</h1>
+      {{^print}}
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Matérias Legislativas</a></li>
+      </ol>
+      {{/print}}
+    </div>
+    <!-- END: title start -->
+    {{#print}}
+       {{#overPrint}}
+       <div class="alert alert-warning" role="alert">
+         Esta pesquisa retornou muitos elementos ({{printTotalCount}} elementos) e está sendo exibido apenas os {{printLimit}} primeiros elementos do resultado.
+         Para gerar uma versão de impressão de uma pesquisa, é recomendado realizar uma pesquisa com um filtro mais específico para retornar menos de {{printLimit}} elementos.
+       </div>
+       {{/overPrint}}
+    {{/print}}
+    {{^print}}
+    <!-- BEGIN: title start -->
+    <section>
+       <div class="container legislativePropositionFilter">
+          <div class="row ">
+            <div class="col-md-16 col-sm-16">
+
+               <form id="formPesquisaMaterias" target="" method="POST" role="form">
+                     <input type="hidden" name="page" id="pageInput" value="1">
+                     <input type="hidden" name="print" id="printVersion" value="">
+                     <div class="form-inline">
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="number" name="numeroMateria" style="width: 120px" class="form-control" id="numeroMateriaInput" placeholder="número" value="{{numeroMateria}}" title="Número da matéria">
+                             </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="number" name="anoMateria" style="width: 120px" class="form-control" id="anoInput" placeholder="ano"  value="{{anoMateria}}"  title="Ano da matéria">
+                             </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="tipoMateriaInput" name="tipoMateriaId" placeholder="Tipo de matéria"  title="Tipo de matéria legislativa">
+                            {{#tipoMateriaId}}
+                              <option disabled>Tipo de matéria</option>
+                            {{/tipoMateriaId}}
+                            {{^tipoMateriaId}}
+                              <option disabled selected>Tipo de matéria</option>
+                            {{/tipoMateriaId}}
+                            <option value="">Qualquer</option>
+                            {{#tiposDeMateria}}
+                              {{#tipoDeMateriaSelect}}
+                                 <option value="{{tipoDeMateriaId}}" selected>{{tipoDeMateriaDescricao}}</option>
+                              {{/tipoDeMateriaSelect}}
+                              {{^tipoDeMateriaSelect}}
+                                 <option value="{{tipoDeMateriaId}}">{{tipoDeMateriaDescricao}}</option>
+                              {{/tipoDeMateriaSelect}}
+                            {{/tiposDeMateria}}
+                          </select>
+                        </div>
+                     </div>
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" name="palavrasChave" value="{{palavrasChave}}" size="30" class="form-control" id="palavrasChaveInput" title="Palavras-chaves para o filtro" placeholder="Palavras-chave">
+                             </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                           <div class="input-group">
+                             <input type="text" class="form-control"  value="{{dataApresentacaoInicial}}" name="dataApresentacaoInicial" id="dataApresentacaoInicialInput" title="Data da apresentação inicial para o filtro" placeholder="Apresentação: inicial"/>
+                          </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                          <div class="input-group">
+                             <input type="text" class="form-control"  value="{{dataApresentacaoFinal}}"  name="dataApresentacaoFinal" id="dataApresentacaoFinalInput" title="Data da apresentação final para o filtro" placeholder="Apresentação: final"/>
+                          </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px" title="Filtro somente matérias em tramitação ou somente matérias fora de tramitação">
+                           Em tramitação:
+                           {{#emTramitacaoSim}}
+                           <input type="radio" name="emTramitacao" value="1" checked>&nbsp;Sim
+                           {{/emTramitacaoSim}}
+                           {{^emTramitacaoSim}}
+                           <input type="radio" name="emTramitacao" value="1">&nbsp;Sim
+                           {{/emTramitacaoSim}}
+
+                           {{#emTramitacaoNao}}
+                           <input type="radio" name="emTramitacao" value="0" checked>&nbsp;Não
+                           {{/emTramitacaoNao}}
+                           {{^emTramitacaoNao}}
+                           <input type="radio" name="emTramitacao" value="0">&nbsp;Não
+                           {{/emTramitacaoNao}}
+
+                           {{#emTramitacaoTodos}}
+                           <input type="radio" name="emTramitacao" value="null" checked>&nbsp;Todas
+                           {{/emTramitacaoTodos}}
+                           {{^emTramitacaoTodos}}
+                           <input type="radio" name="emTramitacao" value="null">&nbsp;Todas
+                           {{/emTramitacaoTodos}}
+                        </div>
+                     </div>
+
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                           <div class="input-group">
+                             <input type="text" class="form-control" style="width: 200px"  value="{{dataPrazoExecutivoInicial}}" name="dataPrazoExecutivoInicial" id="dataPrazoExecutivoInicialInput" title="Fim de prazo do Executivo, data inicial do filtro" placeholder="Prazo do Executivo: inicial"/>
+                          </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                          <div class="input-group">
+                             <input type="text" class="form-control" style="width: 200px"  value="{{dataPrazoExecutivoFinal}}"  name="dataPrazoExecutivoFinal" id="dataPrazoExecutivoFinalInput" title="Fim de prazo do Executivo, data final do filtro" placeholder="Prazo do Executivo: final"/>
+                          </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                           <div class="input-group">
+                             <input type="text" class="form-control" style="width: 200px" value="{{dataPrazoProcessoInicial}}" name="dataPrazoProcessoInicial" id="dataPrazoProcessoInicialInput" title="Fim de prazo do processo, data inicial do filtro" placeholder="Prazo do processo: inicial"/>
+                          </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                          <div class="input-group">
+                             <input type="text" class="form-control" style="width: 200px" value="{{dataPrazoProcessoFinal}}"  name="dataPrazoProcessoFinal" id="dataPrazoProcessoFinalInput" title="Fim de prazo do processo, data final do filtro" placeholder="Prazo do processo: final"/>
+                          </div>
+                        </div>
+                     </div>
+
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="autorIdInput" name="autorId" placeholder="Autor da matéria" title="Autor da matéria">
+                            {{#autorId}}
+                              <option disabled>Autor</option>
+                            {{/autorId}}
+                            {{^autorId}}
+                              <option disabled selected>Autor</option>
+                            {{/autorId}}
+                            <option value="">Qualquer</option>
+                            {{#materiaAutores}}
+                              {{#materiaAutoreSelect}}
+                                 <option value="{{materiaAutorId}}" selected>{{materiaAutorDescricao}}</option>
+                              {{/materiaAutoreSelect}}
+                              {{^materiaAutoreSelect}}
+                                 <option value="{{materiaAutorId}}">{{materiaAutorDescricao}}</option>
+                              {{/materiaAutoreSelect}}
+                            {{/materiaAutores}}
+                          </select>
+                        </div>
+
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="localizacaoInput" name="localizacaoId" placeholder="Localização atual" title="Localização atual">
+                            {{#localizacaoId}}
+                              <option disabled>Localização atual</option>
+                            {{/localizacaoId}}
+                            {{^localizacaoId}}
+                              <option disabled selected>Localização atual</option>
+                            {{/localizacaoId}}
+                            <option value="">Qualquer</option>
+                            {{#unidadesDeTramitacao}}
+                              {{#unidadeDeTramitacaoSelect}}
+                                 <option value="{{materiaUnidadeTramitacaoId}}" selected>{{materiaUnidadeTramitacaoDescricao}}</option>
+                              {{/unidadeDeTramitacaoSelect}}
+                              {{^unidadeDeTramitacaoSelect}}
+                                 <option value="{{materiaUnidadeTramitacaoId}}">{{materiaUnidadeTramitacaoDescricao}}</option>
+                              {{/unidadeDeTramitacaoSelect}}
+                            {{/unidadesDeTramitacao}}
+                          </select>
+                        </div>
+                     </div>
+
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="statusTramitacaoInput" name="statusTramitacaoId" placeholder="Situação atual" title="Situação da matéria">
+                            {{#statusTramitacaoId}}
+                              <option disabled>Situação da máteria</option>
+                            {{/statusTramitacaoId}}
+                            {{^statusTramitacaoId}}
+                              <option disabled selected>Situação da máteria</option>
+                            {{/statusTramitacaoId}}
+                            <option value="">Qualquer</option>
+                            {{#listaDeStatusDeTramitacao}}
+                              {{#statusDeTramitacaoSelect}}
+                                 <option value="{{statusDeTramitacaoId}}" selected>{{statusDeTramitacaoDescricao}}</option>
+                              {{/statusDeTramitacaoSelect}}
+                              {{^statusDeTramitacaoSelect}}
+                                 <option value="{{statusDeTramitacaoId}}">{{statusDeTramitacaoDescricao}}</option>
+                              {{/statusDeTramitacaoSelect}}
+                            {{/listaDeStatusDeTramitacao}}
+                          </select>
+                        </div>
+
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="classificacaoInput" name="classificacaoId" placeholder="Classificação" title="Classificação">
+                            {{#classificacaoId}}
+                              <option disabled>Classificação</option>
+                            {{/classificacaoId}}
+                            {{^classificacaoId}}
+                              <option disabled selected>Classificação</option>
+                            {{/classificacaoId}}
+                            <option value="">Qualquer</option>
+                            {{#classificacoes}}
+                              {{#classificacaoSelect}}
+                                 <option value="{{classificacaoId}}" selected>{{classificacaoDescricao}}</option>
+                              {{/classificacaoSelect}}
+                              {{^classificacaoSelect}}
+                                 <option value="{{classificacaoId}}">{{classificacaoDescricao}}</option>
+                              {{/classificacaoSelect}}
+                            {{/classificacoes}}
+                          </select>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="input-group">
+                             <button class="btn btn-default" id="btnSearchMateriasLegislativas" onclick="postPesquisaMateria();" title="Pesquisar matérias" style="height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-search"></span>
+                             </button>
+                             <button class="btn btn-default" id="btnSearchMateriasLegislativasPrint" onclick="postPesquisaMateriaPrint();" type="button" title="Versão de Impressão" style="margin-left: 7px; height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-print"></span>
+                             </button>
+                          </div>
+                        </div>
+                     </div>
+               </form>
+
+
+            </div>
+         </div>
+       </div>
+    </section>
+    <!-- END: title start -->
+    {{/print}}
+
+    <!-- BEGIN: proposituras body -->
+    {{#pageCount}}
+    <section>
+       <div class="container ">
+         <div class="row ">
+
+           <div class="col-md-16 col-sm-16">
+             <div class="row materiaLegislativas">
+               {{#materiasLegislativas}}
+                  <div class="sec-topic col-sm-16 col-md-5 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                       <a href="/materia.html?id={{materiaLegislativaId}}">
+                          <div class="sec-info">
+                            <h3 class="materiaLegislativaTitle">{{materiaLegislativaDescription}}</h3>
+                            <div class="text-danger sub-info-bordered">
+                               <div class="text-danger sub-info materiaLegislativaInfo">
+                                 <div class="time"  title="data de apresentação da matéria">
+                                    <span class="ion-android-calendar icon"></span>
+                                    {{materiaLegislativaDataApresentacao}}
+                                 </div>
+                                 <div class="time">
+                                    <span class="ion-ios7-information icon"></span>
+                                    {{materiaLegislativaTipoDocumento}}
+                                 </div>
+                                 {{#materiaLegislativaDataPublicacao}}
+                                    <div class="time"  title="data de publicação da matéria">
+                                       <span class="ion-android-calendar icon"></span>
+                                       Publicação: {{materiaLegislativaDataPublicacao}}
+                                    </div>
+                                 {{/materiaLegislativaDataPublicacao}}
+                                 {{#materiaLegislativaAutor}}
+                                    <div class="time">
+                                       <span class="ion-ios7-person icon"></span>
+                                       Autor: {{materiaLegislativaAutor}}
+                                    </div>
+                                 {{/materiaLegislativaAutor}}
+                                 {{#materiaLegislativaUltimaTramitacao}}
+                                    <div class="time">
+                                       <span class="ion-ios7-information icon"></span>
+                                       Estado: {{materiaLegislativaUltimaTramitacao}}
+                                    </div>
+                                 {{/materiaLegislativaUltimaTramitacao}}
+                                 {{#materiaLegislativaDataPrazoExecutivo}}
+                                    <div class="time"  title="data de fim de prazo do executivo">
+                                       <span class="ion-android-calendar icon"></span>
+                                       Prazo do Executivo: {{materiaLegislativaDataPrazoExecutivo}}
+                                    </div>
+                                 {{/materiaLegislativaDataPrazoExecutivo}}
+                                 {{#materiaLegislativaDataPrazoProcesso}}
+                                    <div class="time"  title="data de fim de prazo do processo">
+                                       <span class="ion-android-calendar icon"></span>
+                                       Prazo do processo: {{materiaLegislativaDataPrazoProcesso}}
+                                    </div>
+                                 {{/materiaLegislativaDataPrazoProcesso}}
+                               </div>
+                            </div>
+                          </div>
+                       </a>
+                       <p class="headline">{{materiaLegislativaEmenta}}</p>
+                  </div>
+               {{/materiasLegislativas}}
+
+               {{#showPagination}}
+               <div class="col-sm-16">
+                    <hr>
+                    <ul class="pagination">
+                      <li><a href="javascript:postPesquisaMateria('1')" title="Primeira página">«</a></li>
+                      {{#pages}}
+                        {{#active}}
+                           <li class="active"><a href="javascript:postPesquisaMateria('{{page}}')">{{page}}</a></li>
+                        {{/active}}
+                        {{^active}}
+                           <li><a href="javascript:postPesquisaMateria('{{page}}')">{{page}}</a></li>
+                        {{/active}}
+                      {{/pages}}
+                      <li><a href="javascript:postPesquisaMateria('{{pageCount}}')" title="Última página">»</a></li>
+                    </ul>
+               </div>
+               {{/showPagination}}
+             </div>
+           </div>
+
+         </div>
+       </div>
+    </section>
+    {{/pageCount}}
+    {{^pageCount}}
+         <div class="alert alert-warning" role="alert">Nenhuma materia legislativa encontrada.</div>
+    {{/pageCount}}
+    <!-- END: proposituras body -->
+  </div>                                                                                                                                                                                                                                                                                                                                      

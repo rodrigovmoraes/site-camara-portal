@@ -1,0 +1,161 @@
+{{#yield-scripts}}
+   <script type="text/javascript">
+      $(document).ready(function() {
+          "use strict";
+
+          $('#inputPublicationDate1').datepicker();
+          $('#inputPublicationDate1').datepicker("option", "dateFormat", "dd/mm/yy");
+
+          $('#inputPublicationDate2').datepicker();
+          $('#inputPublicationDate2').datepicker("option", "dateFormat", "dd/mm/yy");
+     });
+   </script>
+{{/yield-scripts}}
+
+<div class="container">
+
+    <!-- BEGIN: title start -->
+    <div class="page-header">
+      <h1>Licitações</h1>
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Licitações</a></li>
+      </ol>
+    </div>
+    <!-- END: title start -->
+
+    <!-- BEGIN: title start -->
+    <section>
+       <div class="container licitacoesFilter">
+          <div class="row ">
+            <div class="col-md-16 col-sm-16">
+
+               <form target="" method="GET" role="form">
+                     <div class="form-inline">
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="number" name="number" style="width: 120px" class="form-control" id="numberInput" placeholder="número" value="{{number}}">
+                             </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="number" name="year" style="width: 120px" class="form-control" id="yearInput" placeholder="ano"  value="{{year}}">
+                             </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                             <button class="btn btn-default" id="btnSearchNews" type="submit" title="Pesquisar licitações" style="height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-search"></span>
+                             </button>
+                          </div>
+                        </div>
+                     </div>
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" name="keywords" value="{{keywords}}" size="30" class="form-control" id="keywordsInput" title="Palavras-chaves para o filtro" placeholder="Palavras-chave">
+                             </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                           <div class="input-group">
+                             <input type="text" class="form-control"  value="{{publicationDate1}}" name="publicationDate1" id="inputPublicationDate1" title="Data da publicação inicial para o filtro" placeholder="Publicação: inicial"/>
+                          </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                           <div class="input-group">
+                             <input type="text" class="form-control"  value="{{publicationDate2}}"  name="publicationDate2" id="inputPublicationDate2" title="Data da publicação final para o filtro" placeholder="Publicação: final"/>
+                          </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="inputCategory" name="category" placeholder="Modalidade">
+                            {{#category}}
+                              <option disabled>Modalidade</option>
+                            {{/category}}
+                            {{^category}}
+                              <option disabled selected>Modalidade</option>
+                            {{/category}}
+                            <option value="">Qualquer</option>
+                            {{#licitacoesCategories}}
+                              {{#licitacaoCategorySelect}}
+                                 <option value="{{licitacaoCategoryId}}" selected>{{licitacaoCategoryDescription}}</option>
+                              {{/licitacaoCategorySelect}}
+                              {{^licitacaoCategorySelect}}
+                                 <option value="{{licitacaoCategoryId}}">{{licitacaoCategoryDescription}}</option>
+                              {{/licitacaoCategorySelect}}
+                            {{/licitacoesCategories}}
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                             <button class="btn btn-default" id="btnSearchNews" type="submit" title="Pesquisar licitações" style="height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-search"></span>
+                             </button>
+                          </div>
+                        </div>
+                     </div>
+               </form>
+
+
+            </div>
+         </div>
+       </div>
+    </section>
+    <!-- END: title start -->
+
+    <!-- BEGIN: licitacoes body -->
+    {{#pageCount}}
+    <section>
+       <div class="container ">
+         <div class="row ">
+
+           <div class="col-md-16 col-sm-16">
+             <div class="row licitacoes">
+               {{#licitacoes}}
+                  <div class="sec-topic col-sm-16 col-md-5 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                       <a href="/licitacao.html?id={{_id}}">
+                          <div class="sec-info">
+                            <h3 class="licitacaoTitle">Licitação nº {{licitacaoNumber}}</h3>
+                            <div class="text-danger sub-info-bordered">
+                               <div class="text-danger sub-info">
+                                    <div class="time"  title="data do evento da licitação"><span class="ion-android-calendar icon"></span>Publicação: {{publicationDate}}</div>
+                                    <div class="time"><span class="ion-ios7-information icon"></span>{{categoryDescription}}</div>
+                               </div>
+                            </div>
+                          </div>
+                       </a>
+                       <p class="headline">{{description}}</p>
+                  </div>
+               {{/licitacoes}}
+
+               {{#showPagination}}
+               <div class="col-sm-16">
+                    <hr>
+                    <ul class="pagination">
+                      <li><a href="/licitacoes.html?page=1&keywords={{keywords}}&publicationDate1={{publicationDate1}}&publicationDate2={{publicationDate2}}&category={{category}}&number={{number}}&year={{year}}" title="Primeira página">«</a></li>
+                      {{#pages}}
+                        {{#active}}
+                           <li class="active"><a href="/licitacoes.html?page={{page}}&keywords={{keywords}}&publicationDate1={{publicationDate1}}&publicationDate2={{publicationDate2}}&category={{category}}&number={{number}}&year={{year}}">{{page}}</a></li>
+                        {{/active}}
+                        {{^active}}
+                           <li><a href="/licitacoes.html?page={{page}}&keywords={{keywords}}&publicationDate1={{publicationDate1}}&publicationDate2={{publicationDate2}}&category={{category}}&number={{number}}&year={{year}}">{{page}}</a></li>
+                        {{/active}}
+                      {{/pages}}
+                      <li><a href="/licitacoes.html?page={{pageCount}}&keywords={{keywords}}&publicationDate1={{publicationDate1}}&publicationDate2={{publicationDate2}}&category={{category}}&number={{number}}&year={{year}}" title="Última página">»</a></li>
+                    </ul>
+               </div>
+               {{/showPagination}}
+             </div>
+           </div>
+
+         </div>
+       </div>
+    </section>
+    {{/pageCount}}
+    {{^pageCount}}
+         <div class="alert alert-warning" role="alert">Nenhuma licitação encontrada.</div>
+    {{/pageCount}}
+    <!-- END: licitacoes body -->
+  </div>                                                                                                                                                                                                                                                                                                                                      

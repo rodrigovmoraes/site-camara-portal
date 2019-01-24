@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+
+     {{#flickrPhotoset}}
+        <div class="page-header">
+           <h1>{{flickrPhotosetTitle}}</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <li><a href="/albuns.html">Álbuns</a></li>
+             <li><a href="#">Fotos</a></li>
+           </ol>
+        </div>
+
+        <span class="legislativePropositionHeadline">
+           <p>{{flickrPhotosetDescription}}</p>
+        </span>
+
+        <div class="text-danger sub-info-bordered" style="font-size: 16px">
+           <div class="time"><span class="ion-android-data icon"></span>Data: {{flickrPhotosetCreationDateDescription}}</div>
+        </div>
+
+        {{#flickrPhotoset.pageCount}}
+        <section>
+           <div class="container ">
+             <div class="row ">
+
+               <div class="col-md-16 col-sm-16">
+                 <div class="row photoset">
+                   {{#flickrPhotosetPhotos}}
+                      <div class="sec-topic col-sm-16 col-md-5 wow fadeInDown animated  animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                        <a class="popup-flickr-gallery" href="/flickr-photo-big-single-image.html?setId={{flickrPhotosetId}}&photoId={{photoid}}">
+                           <img width="378" height="252" alt="" style="width: 378px; height: 252px" src="{{url}}" class="img-thumbnail">
+                        </a>
+                      </div>
+                   {{/flickrPhotosetPhotos}}
+
+                   {{#showPagination}}
+                   <div class="col-sm-16">
+                        <hr>
+                        <ul class="pagination">
+                          <li><a href="/fotos.html?page=1&setId={{flickrPhotoset.setId}}" title="Primeira página">«</a></li>
+                          {{#pages}}
+                            {{#active}}
+                               <li class="active"><a href="/fotos.html?page={{page}}&setId={{flickrPhotoset.setId}}">{{page}}</a></li>
+                            {{/active}}
+                            {{^active}}
+                               <li><a href="/fotos.html?page={{page}}&setId={{flickrPhotoset.setId}}">{{page}}</a></li>
+                            {{/active}}
+                          {{/pages}}
+                          <li><a href="/fotos.html?page={{flickrPhotoset.pageCount}}&setId={{flickrPhotoset.setId}}" title="Última página">»</a></li>
+                        </ul>
+                   </div>
+                   {{/showPagination}}
+                 </div>
+               </div>
+
+             </div>
+           </div>
+        </section>
+        {{/flickrPhotoset.pageCount}}
+        {{^flickrPhotoset.pageCount}}
+             <div class="alert alert-warning" role="alert">Nenhuma foto neste álbum.</div>
+        {{/flickrPhotoset.pageCount}}
+     {{/flickrPhotoset}}
+  </div>
+</div>

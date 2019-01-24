@@ -16,7 +16,6 @@ var _camaraApiConfigService = require('./CamaraApiConfigService.js');
 /*****************************************************************************
 *************************** Private Methods **********************************
 /*****************************************************************************/
-
 var _getNewsMethodURL = function () {
    return _camaraApiConfigService.getBaseUrl() +
                _camaraApiConfigService.getNewsMethodPath();
@@ -81,7 +80,6 @@ var _transformNewsItems = function(newsItems) {
       newsItems.forEach(function(newsItem) {
          _transformNewsItem(newsItem);
       });
-
    }
 }
 

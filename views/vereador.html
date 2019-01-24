@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="row">
+     {{#Vereador_vereador}}
+        {{#VereadorResumo_resumo.length}}
+        <div id="resumoMaterias" class="white-popup-resumo-vereador mfp-hide">
+           <table class="table table-striped">
+             <caption class="comissaoTitle">
+                <h3>Resumo de matérias &#8211; {{Vereador_vereadorDescricao}}</h3>
+             </caption>
+             <thead>
+
+                <tr>
+                   <th>Tipo de Matéria</th>
+                   <th>Quantidade</th>
+                </tr>
+
+             </thead>
+             <tbody>
+                {{#VereadorResumo_resumo}}
+                <tr>
+                   <td>{{VereadorResumo_descricao}}</td>
+                   <td>{{VereadorResumo_quantidade}}</td>
+                </tr>
+                {{/VereadorResumo_resumo}}
+                <tr>
+                   <td><b>Total</b></td>
+                   <td><b>{{VereadorResumo_resumoTotal}}</b></td>
+                </tr>
+                <tr>
+                   <td colspan="2">Observação: neste Site estão cadastrados projetos a partir de 2009 e demais matérias a partir de 2012.</td>
+                </tr>
+             </tbody>
+           </table>
+        </div>
+        {{/VereadorResumo_resumo.length}}
+        <div class="page-header">
+           <h1>{{Vereador_vereadorDescricao}}</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <li><a href="/vereadores.html">Vereadores</a></li>
+             <li><a href="#">Vereador</a></li>
+           </ol>
+        </div>
+
+        <div class="row">
+           <div class="col-sm-16">
+             <div class="text-danger sub-info-bordered">
+                {{#Vereador_vereadorSigla}}
+                <div class="time" title="Partido do vereador">
+                   <span class="ion-ios7-information icon"></span>
+                   Partido: {{Vereador_vereadorSigla}}
+                </div>
+                {{/Vereador_vereadorSigla}}
+                {{#Vereador_vereadorGabineteDescricao}}
+                <div class="time" title="Gabinete do Vereador">
+                   <span class="ion-ios7-information icon"></span>
+                   {{Vereador_vereadorGabineteDescricao}}
+                </div>
+                {{/Vereador_vereadorGabineteDescricao}}
+                {{#Vereador_vereadorTelefone}}
+                <div class="time" title="Telefone do Gabinete">
+                   <span class="ion-ios7-telephone icon"></span>
+                   Telefone do Gabinete: {{Vereador_vereadorTelefone}}
+                </div>
+                {{/Vereador_vereadorTelefone}}
+                {{#Vereador_vereadorEmail}}
+                <div class="time" title="E-mail do Vereador">
+                   <span class="ion-ios7-email icon"></span>
+                   E-mail: <a href="mailto:{{.}}">{{.}}</a>
+                </div>
+                {{/Vereador_vereadorEmail}}
+                {{#Vereador_vereadorFacebook}}
+                <div class="time" title="Facebook do Vereador">
+                   <span class="ion-social-facebook icon"></span>
+                   Facebook: <a href="{{.}}" target="_black">{{.}}</a>
+                </div>
+                {{/Vereador_vereadorFacebook}}
+                {{#Vereador_vereadorInstagram}}
+                <div class="time"  title="Instagram do Vereador">
+                   <span class="ion-social-instagram icon"></span>
+                   Instagram: <a href="{{.}}" target="_black">{{.}}</a>
+                </div>
+                {{/Vereador_vereadorInstagram}}
+                {{#Vereador_vereadorSite}}
+                <div class="time"  title="Site do Vereador">
+                   <span class="ion-android-earth icon"></span>
+                   Site: <a href="{{.}}" target="_black">{{.}}</a>
+                </div>
+                {{/Vereador_vereadorSite}}
+                {{#Vereador_vereadorBlog}}
+                <div class="time"  title="Blog do Vereador">
+                   <span class="ion-social-google icon"></span>
+                   Blog: <a href="{{.}}" target="_black">{{.}}</a>
+                </div>
+                {{/Vereador_vereadorBlog}}
+             </div>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-sm-16">
+             <img width="300" alt="" src="{{vereadorImageUrl}}{{Vereador_vereadorId}}" class="img-thumbnail">
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-sm-16">
+              <div class="text-danger sub-info-bordered">
+                 <div class="time"  title="Resumo de matérias">
+                   <span class="ion-ios7-information icon"></span>
+                   <a href="#resumoMaterias" class="open-popup-div">Resumo de matérias</a>
+                 </div>
+                 <div class="time"  title="Pesquisa de matérias deste vereador">
+                   <span class="ion-android-search icon"></span>
+                   <a href="/materias.html?autorId={{Vereador_vereadorId}}" target="_self">Pesquisa de matérias</a>
+                 </div>
+              </div>
+           </div>
+        </div>
+        {{#Vereador_vereadorHistorico}}
+        <div class="row">
+             <div class="col-sm-16">
+                <span class="vereadoresItemText">
+                   {{Vereador_vereadorHistorico}}
+                </span>
+             </div>
+        </div>
+        {{/Vereador_vereadorHistorico}}
+     {{/Vereador_vereador}}
+  </div>
+</div>

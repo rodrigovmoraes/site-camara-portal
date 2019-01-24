@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+
+     {{#legislativeProposition}}
+        <div class="page-header">
+           <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}} - Texto Anexo</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <li><a href="/proposituras.html">Legislação</a></li>
+             <li><a href="/propositura.html?id={{legislativePropositionId}}">Propositura</a></li>
+             <li><a href="#">Texto Anexo</a></li>
+           </ol>
+        </div>
+
+        <span class="legislativePropositionHeadline">
+           <p>{{legislativePropositionDescription}}</p>
+        </span>
+
+        <div class="text-danger sub-info-bordered" style="font-size: 16px">
+           <div class="time"><span class="ion-android-data icon"></span>Publicação: {{legislativePropositionDate}}</div>
+           <div class="time"><span class="ion-ios7-information icon"></span>Tipo: {{legislativePropositionTypeDescription}}</div>
+           <div class="time">
+             <a title="Clique aqui para abrir a redação da propositura" href="/propositura.html?id={{legislativePropositionId}}">
+                <span class="ion-ios7-paper-outline icon"></span>Texto
+             </a>
+          </div>
+          {{#legislativePropositionTextAttachment}}
+          <div class="time">
+             <a title="Clique aqui para abrir os arquivos anexos" href="/propositura_arquivos_anexos.html?id={{legislativePropositionId}}">
+                <span class="ion-ios7-download icon"></span>Arquivos Anexos
+             </a>
+          </div>
+          {{/legislativePropositionTextAttachment}}
+        </div>
+
+        {{#legislativePropositionTextAttachment}}
+        <span class="legislativePropositionItem">
+           {{{legislativePropositionTextAttachment}}}
+        </span>
+        {{/legislativePropositionTextAttachment}}
+
+        {{^legislativePropositionTextAttachment}}
+        <div class="col-md-11 col-sm-11">
+             <div class="row">
+                  <div class="sec-topic col-sm-16">
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <div class="sec-info">
+                          <div class="text-danger sub-info-bordered">
+                             <div class="time">Esta propositura não possui texto anexo.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+             </div>
+        </div>
+        {{/legislativePropositionTextAttachment}}
+
+     {{/legislativeProposition}}
+
+  </div>
+</div>

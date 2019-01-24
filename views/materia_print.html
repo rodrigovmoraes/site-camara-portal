@@ -1,0 +1,155 @@
+<div class="container" id="divContainer">
+  <div class="row">
+
+     {{#materia}}
+        <div class="page-header">
+           <h1>{{Materia_tipoDocumento}} nº {{materiaLegislativaNumberDescription}}</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <li><a href="/materias.html">Matérias Legislativas</a></li>
+             <li><a href="#">Matéria Legislativa</a></li>
+           </ol>
+        </div>
+
+        <span class="legislativePropositionHeadline">
+           <p>{{Materia_ementa}}</p>
+        </span>
+
+        <div class="text-danger sub-info-bordered" style="font-size: 16px">
+           {{#Materia_textoIntegral}}
+           <div class="time">
+             <span class="ion-archive icon"></span>
+             <a href="{{materiaTextoOriginalUrlDownload}}{{Materia_id}}" target="_blank">Texto Original</a>
+             <span class="ion-android-printer" style="margin-left: 7px"></span>
+             <a href="javascript:printElem('divContainer');" style="margin-left: 7px">Versão de Impressão</a>
+           </div>
+           {{/Materia_textoIntegral}}
+           {{#Materia_textoIntegralFinal}}
+           <div class="time">
+             <span class="ion-archive icon"></span>
+             <a href="{{materiaTextoFinalUrlDownload}}{{Materia_id}}" target="_blank">Documento na Íntegra</a>
+           </div>
+           {{/Materia_textoIntegralFinal}}
+           {{#Materia_numeroLei}}
+           <div class="time">
+            <span class="ion-android-book icon"></span>
+            <a href="/propositura.html?numeroLei={{Materia_numeroLei}}&tipoLei={{Materia_tipoLei}}" target="_blank">Lei criada</a>
+           </div>
+           {{/Materia_numeroLei}}
+        </div>
+
+        <div class="text-danger sub-info-bordered" style="font-size: 16px">
+           <div class="time"><span class="ion-android-calendar icon"></span>Apresentação: {{Materia_data_apresentacao}}</div>
+           <div class="time"><span class="ion-ios7-information icon"></span>Tipo: {{Materia_tipoDocumento}}</div>
+           <div class="time">
+             <span class="ion-ios7-person icon"></span>
+             Autor: {{Materia_autor}}
+           </div>
+           <div class="time">
+             <span class="ion-ios7-filing icon"></span>
+             Localização: {{Materia_localizacaoAtual}}
+           </div>
+           <div class="time"><span class="ion-ios7-information icon"></span>Situação: {{Materia_situacaoAtual}}</div>
+           {{#Materia_classificacoes}}
+              <div class="time"><span class="ion-ios7-information icon"></span>Classificações: {{Materia_classificacoes}}</div>
+           {{/Materia_classificacoes}}
+           {{#Materia_coatores}}
+             <div class="time"><span class="ion-ios7-person icon"></span>Co-autores: {{Materia_coatores}}</div>
+           {{/Materia_coatores}}
+           {{#Materia_dataFimPrazoExecutivo}}
+             <div class="time"><span class="ion-android-calendar icon"></span>Prazo do Executivo: {{Materia_dataFimPrazoExecutivo}}</div>
+           {{/Materia_dataFimPrazoExecutivo}}
+           {{#Materia_dataFimPrazoProcesso}}
+             <div class="time"><span class="ion-android-calendar icon"></span>Prazo do processo: {{Materia_dataFimPrazoProcesso}}</div>
+           {{/Materia_dataFimPrazoProcesso}}
+        </div>
+
+        {{#tramitacoes.length}}
+        <div class="col-md-11 col-sm-11">
+            <div class="row">
+                 <div class="col-sm-16">
+                   <hr>
+                   <h3>Tramitações</h3>
+                   <hr>
+                 </div>
+
+                 {{#tramitacoes}}
+                 <div class="sec-topic col-sm-16">
+                   <div class="row">
+                     <div class="col-sm-9">
+                       <div class="sec-info">
+                         <div class="text-danger sub-info-bordered">
+                            {{#Tramitacao_documentoAcessorio}}
+                            <div class="time">
+                              <span class="ion-archive icon"></span>
+                              <a href="{{documentoAcessorioUrlDownload}}{{Tramitacao_documentoAcessorio}}" target="_blank">Documento</a>
+                            </div>
+                            {{/Tramitacao_documentoAcessorio}}
+                            <div class="time" title="data da tramitação">
+                               <span class="ion-android-calendar icon"></span>{{Tramitacao_dataTramitacao}}
+                            </div>
+                            <div class="time">
+                               <span class="ion-ios7-information icon"></span>Situação: {{Tramitacao_situacao}}
+                            </div>
+                            {{#Tramitacao_textoDaAcao}}
+                               <div class="time">
+                                  <span class="ion-ios7-information icon"></span>Ação: {{Tramitacao_textoDaAcao}}
+                               </div>
+                            {{/Tramitacao_textoDaAcao}}
+                            <div class="time">
+                              <span class="ion-ios7-filing icon"></span>
+                              Localização: {{Tramitacao_localizacao}}
+                            </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 {{/tramitacoes}}
+
+            </div>
+        </div>
+        {{/tramitacoes.length}}
+
+        {{#documentosAcessorios.length}}
+        <div class="col-md-11 col-sm-11">
+            <div class="row">
+                 <div class="col-sm-16">
+                   <hr>
+                   <h3>Documentos acessórios</h3>
+                   <hr>
+                 </div>
+
+                 {{#documentosAcessorios}}
+                 <div class="sec-topic col-sm-16">
+                   <div class="row">
+                     <div class="col-sm-9">
+                       <div class="sec-info">
+                         <div class="text-danger sub-info-bordered">
+                            {{#DocumentoAcessorio_texto_integral}}
+                            <div class="time">
+                              <span class="ion-archive icon"></span>
+                              <a href="{{documentoAcessorioUrlDownload}}{{DocumentoAcessorio_id}}" target="_blank">Documento</a>
+                            </div>
+                            {{/DocumentoAcessorio_texto_integral}}
+                            <div class="time" title="data"><span class="ion-android-calendar icon"></span>{{DocumentoAcessorio_data}}</div>
+                            <div class="time" title="data"><span class="ion-ios7-information icon"></span>Descrição: {{DocumentoAcessorio_descricao}}</div>
+                            <div class="time"><span class="ion-ios7-information icon"></span>Tipo: {{DocumentoAcessorio_tipoDocumento}}</div>
+                            <div class="time">
+                              <span class="ion-ios7-person icon"></span>
+                              Autor: {{DocumentoAcessorio_autor}}
+                            </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 {{/documentosAcessorios}}
+
+            </div>
+        </div>
+        {{/documentosAcessorios.length}}
+
+     {{/materia}}
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="container">
+
+    <!-- BEGIN: title start -->
+    <div class="page-header">
+      <h1>Pautas das Sessões</h1>
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Pautas das Sessões</a></li>
+      </ol>
+    </div>
+    <!-- END: title start -->
+
+    <!-- BEGIN: title start -->
+    <section>
+       <div class="container ordensDoDiaFilter">
+          <div class="row ">
+            <div class="col-md-16 col-sm-16">
+
+               <form target="" method="GET" class="form-inline" role="form">
+                     <div class="form-group" style="padding-right: 7px">
+                       <select class="form-control" id="anoInput" name="ano" placeholder="Ano da sessão"  title="Ano da sessão">
+                         {{#ano}}
+                           <option disabled>Ano</option>
+                         {{/ano}}
+                         {{^ano}}
+                           <option disabled selected>Ano</option>
+                         {{/ano}}
+                         <option value="">Qualquer</option>
+                         {{#anos}}
+                           {{#anoSelect}}
+                              <option value="{{anoValue}}" selected>{{anoValue}}</option>
+                           {{/anoSelect}}
+                           {{^anoSelect}}
+                              <option value="{{anoValue}}">{{anoValue}}</option>
+                           {{/anoSelect}}
+                         {{/anos}}
+                       </select>
+                     </div>
+                     <div class="form-group" style="padding-right: 7px">
+                       <select class="form-control" id="mesInput" name="mes" placeholder="Mês da sessão"  title="Mês da sessão">
+                         {{#mes}}
+                           <option disabled>Mês</option>
+                         {{/mes}}
+                         {{^mes}}
+                           <option disabled selected>Mês</option>
+                         {{/mes}}
+                         <option value="">Qualquer</option>
+                         {{#meses}}
+                           {{#mesSelect}}
+                              <option value="{{mesValue}}" selected>{{mesValue}}</option>
+                           {{/mesSelect}}
+                           {{^mesSelect}}
+                              <option value="{{mesValue}}">{{mesValue}}</option>
+                           {{/mesSelect}}
+                         {{/meses}}
+                       </select>
+                     </div>
+                     <div class="form-group" style="padding-right: 7px">
+                       <select class="form-control" id="diaInput" name="dia" placeholder="Dia da sessão"  title="Dia da sessão">
+                         {{#dia}}
+                           <option disabled>Dia</option>
+                         {{/dia}}
+                         {{^dia}}
+                           <option disabled selected>Dia</option>
+                         {{/dia}}
+                         <option value="">Qualquer</option>
+                         {{#dias}}
+                           {{#diaSelect}}
+                              <option value="{{diaValue}}" selected>{{diaValue}}</option>
+                           {{/diaSelect}}
+                           {{^diaSelect}}
+                              <option value="{{diaValue}}">{{diaValue}}</option>
+                           {{/diaSelect}}
+                         {{/dias}}
+                       </select>
+                     </div>
+                     <div class="form-group">
+                       <div class="input-group">
+                          <button class="btn btn-default" id="btnSearchOrdensDoDia" type="submit" title="Pesquisar sessões" style="height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
+                             <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                       </div>
+                     </div>
+               </form>
+
+
+            </div>
+         </div>
+       </div>
+    </section>
+    <!-- END: title start -->
+
+    <!-- BEGIN: ordensDoDia body -->
+    {{#pageCount}}
+    <section>
+       <div class="container ">
+         <div class="row ">
+
+           <div class="col-md-16 col-sm-16">
+             <div class="row ordensDoDia">
+               {{#ordensDoDia}}
+                  <div class="sec-topic col-sm-16 col-md-16 wow fadeInDown animated  animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                       <a href="{{OrdemDoDia_urlTextoCompleto}}" target="_blank">
+                          <div class="sec-info">
+                            <h3 class="ordemDoDiaTitle">{{OrdemDoDia_descricao}} {{OrdemDoDia_numero}}/{{OrdemDoDia_ano}}</h3>
+                            <div class="text-danger sub-info-bordered">
+                               <div id="ordemDoDiaTextoResumido_{{OrdemDoDia_id}}" class="white-popup-ordem-do-dia mfp-hide">
+                                 {{{OrdemDoDia_textoResumido}}}
+                               </div>
+                               <div class="time">
+                                 <span class="ion-archive icon"></span>
+                                 <a href="{{OrdemDoDia_urlTextoCompleto}}" target="_blank">Texto Completo</a>
+                               </div>
+                               {{#OrdemDoDia_urlPrimeiroExpediente}}
+                               <div class="time">
+                                 <span class="ion-archive icon"></span>
+                                 <a href="{{OrdemDoDia_urlPrimeiroExpediente}}" target="_blank">Texto 1° Expediente</a>
+                               </div>
+                               {{/OrdemDoDia_urlPrimeiroExpediente}}
+                               <div class="time">
+                                 <span class="ion-archive icon"></span>
+                                 <a href="#ordemDoDiaTextoResumido_{{OrdemDoDia_id}}" class="open-popup-div">Texto Resumido</a>
+                               </div>
+                            </div>
+                            <div class="text-danger sub-info-bordered">
+                               <div class="time" title="Data da ordem do dia"><span class="ion-android-calendar icon"></span>Data: {{ OrdemDoDia_data }}</div>
+                               <div class="time">
+                                  <span class="ion-ios7-information icon"></span>
+                                  Tipo: {{OrdemDoDia_descricao}}
+                               </div>
+                               <div class="time" title="Data da postagem da ordem do dia"><span class="ion-android-data icon"></span>Postagem: {{ OrdemDoDia_dataPostagem }}</div>
+                            </div>
+                          </div>
+                       </a>
+                  </div>
+               {{/ordensDoDia}}
+
+               {{#showPagination}}
+               <div class="col-sm-16">
+                    <hr>
+                    <ul class="pagination">
+                      <li><a href="/ordens_do_dia.html?page=1&ano={{ano}}&mes={{mes}}&dia={{dia}}" title="Primeira página">«</a></li>
+                      {{#pages}}
+                        {{#active}}
+                           <li class="active"><a href="/ordens_do_dia.html?page={{page}}&ano={{ano}}&mes={{mes}}&dia={{dia}}">{{page}}</a></li>
+                        {{/active}}
+                        {{^active}}
+                           <li><a href="/ordens_do_dia.html?page={{page}}&ano={{ano}}&mes={{mes}}&dia={{dia}}">{{page}}</a></li>
+                        {{/active}}
+                      {{/pages}}
+                      <li><a href="/ordens_do_dia.html?page={{pageCount}}&ano={{ano}}&mes={{mes}}&dia={{dia}}" title="Última página">»</a></li>
+                    </ul>
+               </div>
+               {{/showPagination}}
+             </div>
+           </div>
+
+         </div>
+       </div>
+    </section>
+    {{/pageCount}}
+    {{^pageCount}}
+         <div class="alert alert-warning" role="alert">Nenhuma sessão encontrada.</div>
+    {{/pageCount}}
+    <!-- END: ordensDoDia body -->
+  </div>                                                                                                                                                                                                                                                                                                                                      

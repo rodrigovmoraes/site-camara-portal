@@ -18,7 +18,9 @@ var config = require('config');
 /*****************************************************************************/
 var defaultViewMiddleware = require('./middlewares/default-view.js')('./views');
 var FlickrService = require('./services/FlickrService.js');
+var YoutubeService = require('./services/YoutubeService.js');
 var CamaraApiConfigService = require('./services/camara/CamaraApiConfigService.js');
+var SyslegisApiConfigService = require('./services/camara/SyslegisApiConfigService.js');
 
 //-----------------------------------------------------------------------------
 var app = express();
@@ -83,8 +85,18 @@ FlickrService.setFlickrApiBaseUrl(FlickServiceConfig.baseUrl);
 FlickrService.setFlickrApiKey(FlickServiceConfig.apiKey);
 FlickrService.setFlickrApiGetPhotosMethod(FlickServiceConfig.getPhotosMethod);
 FlickrService.setFlickrApiGetPhotosetInfoMethod(FlickServiceConfig.getPhotosetInfoMethod);
+FlickrService.setFlickrApiGetPhotoInfoMethod(FlickServiceConfig.getPhotoInfoMethod);
 FlickrService.setUnexpectedFlickrDataFormatErrorMessage(FlickServiceConfig.unexpectedFlickrDataFormatErrorMessage);
 FlickrService.setFlickrPhotoUrlPattern(FlickServiceConfig.photoUrlPattern);
+FlickrService.setFlickrPhotoPageUrlPattern(FlickServiceConfig.photoPageUrlPattern);
+FlickrService.setFlickrApiGetPhotosetsMethod(FlickServiceConfig.getPhotosetsMethod);
+FlickrService.setFlickrApiUserId(FlickServiceConfig.userId);
+
+var YoutubeServiceConfig = config.get('Services.YoutubeService');
+YoutubeService.setYoutubeApiBaseUrl(YoutubeServiceConfig.urlBase);
+YoutubeService.setYoutubeApiKey(YoutubeServiceConfig.apiKey);
+YoutubeService.setYoutubeApiSearchVideosMethod(YoutubeServiceConfig.urlsMethods.search);
+YoutubeService.setYoutubeChannelId(YoutubeServiceConfig.channelId);
 
 var camaraApiConfig = config.get('Services.CamaraApi');
 CamaraApiConfigService.setBaseUrl(camaraApiConfig.baseUrl);
@@ -97,6 +109,41 @@ CamaraApiConfigService.setBannersMethodPath(camaraApiConfig.bannersMethodPath);
 CamaraApiConfigService.setHotNewsMethodPath(camaraApiConfig.hotNewsMethodPath);
 CamaraApiConfigService.setBreakingNewsMethodPath(camaraApiConfig.breakingNewsMethodPath);
 CamaraApiConfigService.setFBreakingNewsMethodPath(camaraApiConfig.fbreakingNewsMethodPath);
+CamaraApiConfigService.setEventsCalendarMethodPath(camaraApiConfig.eventsCalendarMethodPath);
+CamaraApiConfigService.setEventCalendarMethodPath(camaraApiConfig.eventCalendarMethodPath);
+CamaraApiConfigService.setEventsCalendarUTCOffset(camaraApiConfig.eventsCalendarUTCOffset);
+CamaraApiConfigService.setLastLicitacoesEventsMethodPath(camaraApiConfig.lastLicitacoesEventsMethodPath);
+CamaraApiConfigService.setLicitacaoDownloadEventFilePath(camaraApiConfig.licitacaoDownloadEventFilePath);
+CamaraApiConfigService.setLicitacoesMethodPath(camaraApiConfig.licitacoesMethodPath);
+CamaraApiConfigService.setLicitacoesCategoriesMethodPath(camaraApiConfig.licitacoesCategoriesMethodPath);
+CamaraApiConfigService.setLicitacaoMethodPath(camaraApiConfig.licitacaoMethodPath);
+CamaraApiConfigService.setLegislativePropositionsMethodPath(camaraApiConfig.legislativePropositionsMethodPath);
+CamaraApiConfigService.setLegislativePropositionTypesMethodPath(camaraApiConfig.legislativePropositionTypesMethodPath);
+CamaraApiConfigService.setLegislativePropositionMethodPath(camaraApiConfig.legislativePropositionMethodPath);
+CamaraApiConfigService.setLegislativePropositionDownloadFileAttachmentPath(camaraApiConfig.legislativePropositionDownloadFileAttachmentPath);
+/*****************************************************************************/
+var syslegisApiConfig = config.get('Services.SyslegisApi');
+SyslegisApiConfigService.setBaseUrl(syslegisApiConfig.baseUrl);
+SyslegisApiConfigService.setPesquisaMateriasMethodPath(syslegisApiConfig.pesquisaMateriasMethodPath);
+SyslegisApiConfigService.setTiposDeMateriaMethodPath(syslegisApiConfig.tiposDeMateriaMethodPath);
+SyslegisApiConfigService.setAutoresMethodPath(syslegisApiConfig.autoresMethodPath);
+SyslegisApiConfigService.setUnidadesDeTramitacaoMethodPath(syslegisApiConfig.unidadesDeTramitacaoMethodPath);
+SyslegisApiConfigService.setListaDeStatusDeTramitacaoMethodPath(syslegisApiConfig.listaDeStatusDeTramitacaoMethodPath);
+SyslegisApiConfigService.setClassificacoesMethodPath(syslegisApiConfig.classificacoesMethodPath);
+SyslegisApiConfigService.setMateriaLegislativaMethodPath(syslegisApiConfig.materiaLegislativaMethodPath);
+SyslegisApiConfigService.setMateriaTextoOriginalUrlDownload(syslegisApiConfig.materiaTextoOriginalUrlDownload);
+SyslegisApiConfigService.setMateriaTextoFinalUrlDownload(syslegisApiConfig.materiaTextoFinalUrlDownload);
+SyslegisApiConfigService.setDocumentoAcessorioUrlDownload(syslegisApiConfig.documentoAcessorioUrlDownload);
+SyslegisApiConfigService.setOrdensDoDiaMethodPath(syslegisApiConfig.ordensDoDiaMethodPath);
+SyslegisApiConfigService.setOrdemDoDiaListaDeAnosMethodPath(syslegisApiConfig.ordemDoDiaListaDeAnosMethodPath);
+SyslegisApiConfigService.setComissoesMethodPath(syslegisApiConfig.comissoesMethodPath);
+SyslegisApiConfigService.setLegislaturasMethodPath(syslegisApiConfig.legislaturasMethodPath);
+SyslegisApiConfigService.setSessoesLegislativasMethodPath(syslegisApiConfig.sessoesLegislativasMethodPath);
+SyslegisApiConfigService.setMesaDiretoraMethodPath(syslegisApiConfig.mesaDiretoraMethodPath);
+SyslegisApiConfigService.setVereadoresMethodPath(syslegisApiConfig.vereadoresMethodPath);
+SyslegisApiConfigService.setVereadorMethodPath(syslegisApiConfig.vereadorMethodPath);
+SyslegisApiConfigService.setVereadorResumoMateriasMethodPath(syslegisApiConfig.vereadorResumoMateriasMethodPath);
+SyslegisApiConfigService.setVereadorImageUrl(syslegisApiConfig.vereadorImageUrl);
 
 /*****************************************************************************
 ************************** ERROR HANDLING SECTION ****************************
