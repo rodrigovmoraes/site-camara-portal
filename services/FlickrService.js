@@ -101,27 +101,6 @@ var _checkPhotosetsCache = function(photosetsCache) {
 **************************  Module functions *********************************
 /*****************************************************************************/
 
-/**
- * getPhotoThumbnailUrlsFromSet: Get urls of photo thumbnails from a set
- * @param {string} photoSetId - the id of the set (album, collection, exposition, ...)
- * @param {string} imageType - code of the desired version of the
- * images, this code is a character used by Flickr Api. The following codes
- * are supported (30/05/2017): s	small square 75x75; t	thumbnail,
- * 100 on longest side; q	large square 150x150; m	small, 240 on longest side;
- * n	small, 320 on longest side; -	medium, 500 on longest side;
- * z	medium 640, 640 on longest side; c	medium 800, 800 on longest side;
- * b	large, 1024 on longest side; o	original image, either a jpg, gif or png,
- * depending on source format
- * @return {object} A promisse that returns a JSON object containing the
- * urls of the photos on success:
- * { photos: [ {  url: "http://...",
-                  url: "http://...",
-                 url: "http://..."
-              }
-            ]
- * }
- **/
-
  module.exports.getPhotoInfo = function(photoId, imageType) {
     return _requestService({
       url: _flickrApiBaseUrl,
@@ -155,6 +134,26 @@ var _checkPhotosetsCache = function(photosetsCache) {
    });
  }
 
+ /**
+  * getPhotoThumbnailUrlsFromSet: Get urls of photo thumbnails from a set
+  * @param {string} photoSetId - the id of the set (album, collection, exposition, ...)
+  * @param {string} imageType - code of the desired version of the
+  * images, this code is a character used by Flickr Api. The following codes
+  * are supported (30/05/2017): s	small square 75x75; t	thumbnail,
+  * 100 on longest side; q	large square 150x150; m	small, 240 on longest side;
+  * n	small, 320 on longest side; -	medium, 500 on longest side;
+  * z	medium 640, 640 on longest side; c	medium 800, 800 on longest side;
+  * b	large, 1024 on longest side; o	original image, either a jpg, gif or png,
+  * depending on source format
+  * @return {object} A promisse that returns a JSON object containing the
+  * urls of the photos on success:
+  * { photos: [ {  url: "http://...",
+                   url: "http://...",
+                  url: "http://..."
+               }
+             ]
+  * }
+  **/
 module.exports.getPhotoThumbnailUrlsFromSet = function(photoSetId, imageType) {
    // assume large square 150x150 thumbnail format if imageType
    // is not defined by the caller
@@ -210,7 +209,6 @@ module.exports.getPhotoThumbnailUrlsFromSet = function(photoSetId, imageType) {
                 'photos': lPhotos
              }
    });
-
 }
 
 module.exports.getPagePhotosFromSet = function(photoSetId, imageType, ppage, ppageSize) {

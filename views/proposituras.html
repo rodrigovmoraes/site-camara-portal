@@ -8,29 +8,57 @@
 
           $('#inputPublicationDate2').datepicker();
           $('#inputPublicationDate2').datepicker("option", "dateFormat", "dd/mm/yy");
+          {{#print}}
+          window.print();
+          {{/print}}
      });
+
+     function submitPesquisaProposituras(page) {
+        $('#pageInput').val(page);
+        $('#printVersion').val(null);
+        $('#formPesquisaProposituras').attr("target", "_self");
+        $('#formPesquisaProposituras').submit();
+     }
+
+     function submitPesquisaPropositurasPrint() {
+        $('#pageInput').val(null);
+        $('#formPesquisaProposituras').attr("target", "_blank");
+        $('#printVersion').val(1);
+        $('#formPesquisaProposituras').submit();
+     }
    </script>
 {{/yield-scripts}}
 
 <div class="container">
-
     <!-- BEGIN: title start -->
     <div class="page-header">
       <h1>Pesquisa de Legislação</h1>
+      {{^print}}
       <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
         <li><a href="#">Legislação</a></li>
       </ol>
+      {{/print}}
     </div>
     <!-- END: title start -->
-
+    {{#print}}
+       {{#overPrint}}
+       <div class="alert alert-warning" role="alert">
+         Esta pesquisa retornou muitos elementos ({{printTotalCount}} elementos) e está sendo exibido apenas os {{printLimit}} primeiros elementos do resultado.
+         Para gerar uma versão de impressão de uma pesquisa, é recomendado realizar uma pesquisa com um filtro mais específico para retornar menos de {{printLimit}} elementos.
+       </div>
+       {{/overPrint}}
+    {{/print}}
+    {{^print}}
     <!-- BEGIN: title start -->
     <section>
        <div class="container legislativePropositionFilter">
           <div class="row ">
             <div class="col-md-16 col-sm-16">
 
-               <form target="" method="GET" role="form">
+               <form target="_self" id="formPesquisaProposituras" method="GET" role="form">
+                     <input type="hidden" name="page" id="pageInput" value="1">
+                     <input type="hidden" name="print" id="printVersion" value="">
                      <div class="form-inline">
                         <div class="form-group" style="padding-right: 7px">
                             <div class="input-group input-icon">
@@ -83,8 +111,11 @@
                         </div>
                         <div class="form-group">
                           <div class="input-group">
-                             <button class="btn btn-default" id="btnSearchLegislativePropositions" type="submit" title="Pesquisar proposituras" style="height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
+                             <button class="btn btn-default" id="btnSearchLegislativePropositions" onclick="submitPesquisaProposituras(1);" type="button" title="Pesquisar proposituras" style="height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="glyphicon glyphicon-search"></span>
+                             </button>
+                             <button class="btn btn-default" id="btnSearchLegislativePropositionsPrint" onclick="submitPesquisaPropositurasPrint();" type="button" title="Versão de Impressão" style="margin-left: 7px; height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-print"></span>
                              </button>
                           </div>
                         </div>
@@ -97,6 +128,7 @@
        </div>
     </section>
     <!-- END: title start -->
+    {{/print}}
 
     <!-- BEGIN: proposituras body -->
     {{#pageCount}}
@@ -107,7 +139,12 @@
            <div class="col-md-16 col-sm-16">
              <div class="row legislativePropositions">
                {{#legislativePropositions}}
-                  <div class="sec-topic col-sm-16 col-md-5 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                  {{#print}}
+                  <div class="sec-topic col-sm-16 col-md-8" style="visibility: visible;">
+                  {{/print}}
+                  {{^print}}
+                  <div class="sec-topic col-sm-16 col-md-8 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                  {{/print}}
                        <a href="/propositura.html?id={{legislativePropositionId}}">
                           <div class="sec-info">
                             <h3 class="legislativePropositionTitle">{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</h3>

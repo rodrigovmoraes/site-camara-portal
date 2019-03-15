@@ -63,6 +63,7 @@ router.get('/comissoes.html', portalControllers.comissoesController);
 router.get('/mesa_diretora.html', portalControllers.mesaDiretoraController);
 router.get('/vereadores.html', portalControllers.vereadoresController);
 router.get('/vereador.html', portalControllers.vereadorController);
+router.get('/contas_publicas.html', portalControllers.contasPublicas);
 
 //popup-renders
 router.get('/popup-render-flickr-set-carousel.html', popupRendersControllers.flickrSetPopupRenderControllerCarousel);

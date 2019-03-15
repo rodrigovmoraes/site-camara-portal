@@ -1,3 +1,15 @@
+{{#yield-scripts}}
+   <script type="text/javascript">
+      $(document).ready(function() {
+          "use strict";
+
+          {{#print}}
+          window.print();
+          {{/print}}
+      });
+   </script>
+{{/yield-scripts}}
+
 <div class="container" id="divContainer">
   <div class="row">
 

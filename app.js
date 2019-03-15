@@ -121,6 +121,10 @@ CamaraApiConfigService.setLegislativePropositionsMethodPath(camaraApiConfig.legi
 CamaraApiConfigService.setLegislativePropositionTypesMethodPath(camaraApiConfig.legislativePropositionTypesMethodPath);
 CamaraApiConfigService.setLegislativePropositionMethodPath(camaraApiConfig.legislativePropositionMethodPath);
 CamaraApiConfigService.setLegislativePropositionDownloadFileAttachmentPath(camaraApiConfig.legislativePropositionDownloadFileAttachmentPath);
+CamaraApiConfigService.setPublicFinancesFolderContentsMethodPath(camaraApiConfig.publicFinancesFolderContentsMethodPath);
+CamaraApiConfigService.setPublicFinancesFolderPathMethodPath(camaraApiConfig.publicFinancesFolderPathMethodPath);
+CamaraApiConfigService.setDownloadFilePathMethodPath(camaraApiConfig.publicFinancesDownloadFile);
+
 /*****************************************************************************/
 var syslegisApiConfig = config.get('Services.SyslegisApi');
 SyslegisApiConfigService.setBaseUrl(syslegisApiConfig.baseUrl);

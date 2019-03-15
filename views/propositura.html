@@ -1,14 +1,28 @@
+{{#yield-scripts}}
+   <script type="text/javascript">
+      $(document).ready(function() {
+          "use strict";
+
+          {{#print}}
+          window.print();
+          {{/print}}
+      });
+   </script>
+{{/yield-scripts}}
+
 <div class="container">
   <div class="row">
 
      {{#legislativeProposition}}
         <div class="page-header">
            <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</h1>
+           {{^print}}
            <ol class="breadcrumb">
              <li><a href="/">Home</a></li>
              <li><a href="/proposituras.html">Legislação</a></li>
              <li><a href="#">Propositura</a></li>
            </ol>
+           {{/print}}
         </div>
 
         <span class="legislativePropositionHeadline">
@@ -18,20 +32,30 @@
         <div class="text-danger sub-info-bordered" style="font-size: 16px">
            <div class="time"><span class="ion-android-calendar icon"></span>Publicação: {{legislativePropositionDate}}</div>
            <div class="time"><span class="ion-ios7-information icon"></span>Tipo: {{legislativePropositionTypeDescription}}</div>
-           {{#legislativePropositionTextAttachment}}
-           <div class="time">
-             <a title="Clique aqui para abrir o texto anexo" href="/propositura_texto_anexo.html?id={{legislativePropositionId}}">
-                <span class="ion-ios7-paper icon"></span>Texto Anexo
-             </a>
-          </div>
-          {{/legislativePropositionTextAttachment}}
-          {{#legislativePropositionFileAttachments.length}}
-          <div class="time">
-             <a title="Clique aqui para abrir os arquivos anexos" href="/propositura_arquivos_anexos.html?id={{legislativePropositionId}}">
-                <span class="ion-ios7-download icon"></span>Arquivos Anexos
-             </a>
-          </div>
-          {{/legislativePropositionFileAttachments.length}}
+           {{^print}}
+              {{#legislativePropositionTextAttachment}}
+              <div class="time">
+                <a title="Clique aqui para abrir o texto anexo" href="/propositura_texto_anexo.html?id={{legislativePropositionId}}">
+                   <span class="ion-ios7-paper icon"></span>Texto Anexo
+                </a>
+             </div>
+             {{/legislativePropositionTextAttachment}}
+          {{/print}}
+
+          {{^print}}
+             {{#legislativePropositionFileAttachments.length}}
+             <div class="time">
+                <a title="Clique aqui para abrir os arquivos anexos" href="/propositura_arquivos_anexos.html?id={{legislativePropositionId}}">
+                   <span class="ion-ios7-download icon"></span>Arquivos Anexos
+                </a>
+             </div>
+             {{/legislativePropositionFileAttachments.length}}
+          {{/print}}
+          
+          {{^print}}
+             <span class="ion-android-printer"></span>
+             <a href="?id={{legislativePropositionId}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>
+          {{/print}}
         </div>
 
         <span class="legislativePropositionItem">

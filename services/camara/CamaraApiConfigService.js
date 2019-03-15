@@ -30,6 +30,9 @@ var _legislativePropositionsMethodPath; //Ex, "legislativePropositions"
 var _legislativePropositionTypesMethodPath; //Ex, "legislativePropositionTypes"
 var _legislativePropositionMethodPath; //Ex, "legislativeProposition"
 var _legislativePropositionDownloadFileAttachmentPath; //Ex, "legislativeProposition/attachment/download"
+var _publicFinancesFolderContentsMethodPath; //Ex, "publicFinances/folder"
+var _publicFinancesFolderPathMethodPath; //Ex, "publicFinances/folderPath"
+var _downloadFilePathMethodPath; //Ex, "publicFinances/file"
 
 /*****************************************************************************
 *************************** Private Methods **********************************
@@ -212,4 +215,28 @@ module.exports.setLegislativePropositionDownloadFileAttachmentPath = function(le
 
 module.exports.getLegislativePropositionDownloadFileAttachmentPath = function() {
    return _legislativePropositionDownloadFileAttachmentPath;
+}
+
+module.exports.setPublicFinancesFolderContentsMethodPath = function(publicFinancesFolderContentsMethodPath) {
+   _publicFinancesFolderContentsMethodPath = publicFinancesFolderContentsMethodPath;
+}
+
+module.exports.getPublicFinancesFolderContentsMethodPath = function() {
+   return _publicFinancesFolderContentsMethodPath;
+}
+
+module.exports.setPublicFinancesFolderPathMethodPath = function(publicFinancesFolderPathMethodPath) {
+   _publicFinancesFolderPathMethodPath = publicFinancesFolderPathMethodPath;
+}
+
+module.exports.getPublicFinancesFolderPathMethodPath = function() {
+   return _publicFinancesFolderPathMethodPath;
+}
+
+module.exports.setDownloadFilePathMethodPath = function(downloadFilePathMethodPath) {
+   _downloadFilePathMethodPath = downloadFilePathMethodPath;
+}
+
+module.exports.getDownloadFilePathMethodPath = function() {
+   return _downloadFilePathMethodPath;
 }

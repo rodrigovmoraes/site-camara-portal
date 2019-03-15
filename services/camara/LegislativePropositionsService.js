@@ -125,8 +125,7 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
    var legislativePropositionFileAttachments = [];
    var i;
    if(legislativeProposition.consolidatedFileAttachments &&
-         legislativeProposition.consolidatedFileAttachments.length > 0)
-   {
+         legislativeProposition.consolidatedFileAttachments.length > 0) {
       for(i = 0; i < legislativeProposition.consolidatedFileAttachments.length; i++) {
          var legislativePropositionFileAttachment = legislativeProposition.consolidatedFileAttachments[i];
          legislativePropositionFileAttachments.push({
@@ -136,8 +135,7 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
          });
       }
    } else if(legislativeProposition.fileAttachments &&
-             legislativeProposition.fileAttachments.length > 0)
-   {
+             legislativeProposition.fileAttachments.length > 0) {
       for(i = 0; i < legislativeProposition.fileAttachments.length; i++) {
          var legislativePropositionFileAttachment = legislativeProposition.fileAttachments[i];
          legislativePropositionFileAttachments.push({

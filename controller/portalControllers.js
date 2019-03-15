@@ -15,6 +15,7 @@ var camaraEventsCalendarService = require('../services/camara/EventsCalendarServ
 var camaraLicitacoesService = require('../services/camara/LicitacoesService');
 var camaraLegislativePropositionsService = require('../services/camara/LegislativePropositionsService');
 var camaraSyslegisService = require('../services/camara/SyslegisService');
+var camaraPublicFinancesService = require('../services/camara/PublicFinancesService');
 var FlickrService = require('../services/FlickrService');
 var YoutubeService = require('../services/YoutubeService');
 var SyslegisApiConfigService = require('../services/camara/SyslegisApiConfigService');
@@ -552,10 +553,13 @@ module.exports.licitacaoController = function(req, res, next) {
 module.exports.propositurasController = function(req, res, next) {
    //set the page and pageSize
    var page = 1;
-   var pageSize = 9;
+   var pageSize = 10;
    var paginationSize = 11;
    var filter = {}; //keywords + publication date begin + publication date end
    var types;
+   var printLimit = 50;
+
+   var printMode = req.query.print;
 
    //page
    if(req.query.page) {
@@ -593,6 +597,13 @@ module.exports.propositurasController = function(req, res, next) {
    //year
    if(req.query.year) {
       filter['year'] = req.query.year;
+   }
+
+   //if it is print mode, set limit to 1000 and without pagination
+   if (printMode) {
+      page = 1;
+      //limit and offset
+      pageSize = printLimit;
    }
 
    camaraLegislativePropositionsService
@@ -633,15 +644,19 @@ module.exports.propositurasController = function(req, res, next) {
          res.render('proposituras', {
              'legislativePropositions': legislativePropositionsItems,
              'legislativePropositionTypes': types,
-             'pages': pages,
-             'showPagination': pageCount > 1,
-             'pageCount': pageCount,
+             'pages': printMode ? [] : pages,
+             'showPagination': pageCount > 1 && !printMode,
+             'pageCount': printMode ? 1 : pageCount,
              'publicationDate1': req.query.publicationDate1 ? req.query.publicationDate1 : null,
              'publicationDate2': req.query.publicationDate2 ? req.query.publicationDate2 : null,
              'type': req.query.type ? req.query.type : null,
              'keywords': req.query.keywords ? req.query.keywords : null,
              'number': req.query.number ? req.query.number : null,
-             'year': req.query.year ? req.query.year : null
+             'year': req.query.year ? req.query.year : null,
+             'print': printMode,
+             'overPrint': printMode ? result.totalLength > printLimit : false,
+             'printLimit': printMode ? printLimit : null,
+             'printTotalCount': printMode ? result.totalLength : null
          });
       }).catch(function(err) {
          //render the error page
@@ -655,10 +670,15 @@ module.exports.proposituraController = function(req, res, next) {
       camaraLegislativePropositionsService
       .getLegislativeProposition(req.query.id)
       .then(function(legislativeProposition) {
+         var result = {};
+         result.legislativeProposition = legislativeProposition;
+         if(req.query.print) {
+            result.print = true;
+         } else {
+            result.print = false;
+         }
          //render the page
-         res.render('propositura', {
-             'legislativeProposition': legislativeProposition
-         });
+         res.render('propositura', result);
       }).catch(function(err) {
          //render the error page
          Utils.next(err.statusCode, err, next);
@@ -674,10 +694,15 @@ module.exports.proposituraTextoAnexoController = function(req, res, next) {
       camaraLegislativePropositionsService
       .getLegislativeProposition(req.query.id)
       .then(function(legislativeProposition) {
+         var result = {};
+         result.legislativeProposition = legislativeProposition;
+         if(req.query.print) {
+            result.print = true;
+         } else {
+            result.print = false;
+         }
          //render the page
-         res.render('propositura_texto_anexo', {
-             'legislativeProposition': legislativeProposition
-         });
+         res.render('propositura_texto_anexo', result);
       }).catch(function(err) {
          //render the error page
          Utils.next(err.statusCode, err, next);
@@ -710,7 +735,7 @@ module.exports.proposituraArquivosAnexosController = function(req, res, next) {
 module.exports.materiasLegislativasController = function(req, res, next) {
    //set the page and pageSize
    var page = 1;
-   var pageSize = 9;
+   var pageSize = 10;
    var paginationSize = 11;
    var filter = {};
    var types;
@@ -1378,6 +1403,31 @@ module.exports.vereadorController = function(req, res, next) {
       Utils.next(400, { message: "O id do vereador precisa ser definido" }, next);
    }
 }
+
+/* GET '/contas_publicas.html' page */
+module.exports.contasPublicas = function(req, res, next) {
+   var folderId = null;
+   var folderPath = null;
+
+   if (req.query.id) {
+      folderId = req.query.id
+   };
+
+   return camaraPublicFinancesService
+   .getFolderPath(req.query.id)
+   .then(function(pfolderPath) {
+      folderPath = pfolderPath;
+      return camaraPublicFinancesService.getFolderContents(folderId);
+   }).then(function(objects) {
+      res.render('contas_publicas', {
+         'ContasPublicas_objects': objects,
+         'ContasPublicas_folderPath': folderPath
+      });
+   }).catch(function(err) {
+      //render the error page
+      Utils.next(err.statusCode, err, next);
+   });
+};
 
 //transform menuItems to show in the portal page
 var _transformMenuItemDFS = function(menuItem) {
