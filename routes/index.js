@@ -31,7 +31,8 @@ router.use(function(req, res, next) {
       next();
    }).catch(function(err) {
       res.locals.menuItems = [];
-      Utils.next(err.statusCode, err.error || err, next);
+      //Utils.next(err.statusCode, err.error || err, next); //don't crash portal screen
+      next();
       winston.error("Error while getting items of the portal, err = [%s]", err);
    });
 });
@@ -63,7 +64,8 @@ router.get('/comissoes.html', portalControllers.comissoesController);
 router.get('/mesa_diretora.html', portalControllers.mesaDiretoraController);
 router.get('/vereadores.html', portalControllers.vereadoresController);
 router.get('/vereador.html', portalControllers.vereadorController);
-router.get('/contas_publicas.html', portalControllers.contasPublicas);
+router.get('/arquivos_publicos.html', portalControllers.arquivosPublicos);
+router.get('/busca.html', portalControllers.busca);
 
 //popup-renders
 router.get('/popup-render-flickr-set-carousel.html', popupRendersControllers.flickrSetPopupRenderControllerCarousel);

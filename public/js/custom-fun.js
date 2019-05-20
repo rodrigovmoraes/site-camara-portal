@@ -7,10 +7,10 @@ $(document).ready(function() {
    $(window).load(function() {
        $('#status').delay(300).fadeOut();
        $('#preloader').delay(300).fadeOut('slow');
-     })
-     /* -------------------------------------------------------------------------*
-      * ADD ANIMATION TO SPECIFIC ELEMENTS
-      * -------------------------------------------------------------------------*/
+   });
+   /* -------------------------------------------------------------------------*
+   * ADD ANIMATION TO SPECIFIC ELEMENTS
+   * -------------------------------------------------------------------------*/
    $('.tags li').hover(function() {
      $(this).find('a').toggleClass("wow flipInY animated");
    });
@@ -294,6 +294,7 @@ $(document).ready(function() {
  /* -------------------------------------------------------------------------*
  * WEATHER
  * -------------------------------------------------------------------------*/
+ /*
 $.simpleWeather({
    location: '',
    woeid: '455913',
@@ -308,3 +309,4 @@ $.simpleWeather({
      $("#weather").html('<p>' + error + '</p>');
    }
 });
+*/

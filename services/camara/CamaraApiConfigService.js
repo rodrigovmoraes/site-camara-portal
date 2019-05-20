@@ -30,9 +30,9 @@ var _legislativePropositionsMethodPath; //Ex, "legislativePropositions"
 var _legislativePropositionTypesMethodPath; //Ex, "legislativePropositionTypes"
 var _legislativePropositionMethodPath; //Ex, "legislativeProposition"
 var _legislativePropositionDownloadFileAttachmentPath; //Ex, "legislativeProposition/attachment/download"
-var _publicFinancesFolderContentsMethodPath; //Ex, "publicFinances/folder"
-var _publicFinancesFolderPathMethodPath; //Ex, "publicFinances/folderPath"
-var _downloadFilePathMethodPath; //Ex, "publicFinances/file"
+var _publicFilesFolderContentsMethodPath; //Ex, "publicFiles/folder"
+var _publicFilesFolderPathMethodPath; //Ex, "publicFiles/folderPath"
+var _downloadFilePathMethodPath; //Ex, "publicFiles/file"
 
 /*****************************************************************************
 *************************** Private Methods **********************************
@@ -217,20 +217,20 @@ module.exports.getLegislativePropositionDownloadFileAttachmentPath = function() 
    return _legislativePropositionDownloadFileAttachmentPath;
 }
 
-module.exports.setPublicFinancesFolderContentsMethodPath = function(publicFinancesFolderContentsMethodPath) {
-   _publicFinancesFolderContentsMethodPath = publicFinancesFolderContentsMethodPath;
+module.exports.setPublicFilesFolderContentsMethodPath = function(publicFilesFolderContentsMethodPath) {
+   _publicFilesFolderContentsMethodPath = publicFilesFolderContentsMethodPath;
 }
 
-module.exports.getPublicFinancesFolderContentsMethodPath = function() {
-   return _publicFinancesFolderContentsMethodPath;
+module.exports.getPublicFilesFolderContentsMethodPath = function() {
+   return _publicFilesFolderContentsMethodPath;
 }
 
-module.exports.setPublicFinancesFolderPathMethodPath = function(publicFinancesFolderPathMethodPath) {
-   _publicFinancesFolderPathMethodPath = publicFinancesFolderPathMethodPath;
+module.exports.setPublicFilesFolderPathMethodPath = function(publicFilesFolderPathMethodPath) {
+   _publicFilesFolderPathMethodPath = publicFilesFolderPathMethodPath;
 }
 
-module.exports.getPublicFinancesFolderPathMethodPath = function() {
-   return _publicFinancesFolderPathMethodPath;
+module.exports.getPublicFilesFolderPathMethodPath = function() {
+   return _publicFilesFolderPathMethodPath;
 }
 
 module.exports.setDownloadFilePathMethodPath = function(downloadFilePathMethodPath) {

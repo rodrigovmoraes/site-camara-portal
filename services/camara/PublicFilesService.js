@@ -5,12 +5,12 @@
 var winston = require('winston');
 var _requestService = require('request-promise');
 var _ = require('lodash');
-var Utils = require('./Utils.js');
 
 /*****************************************************************************
 *************************** DEPENDENCIES SECTION *****************************
 ******************************* (OTHERS MODULES) *******************************
 /*****************************************************************************/
+var Utils = require('./Utils.js');
 var _camaraApiConfigService = require('./CamaraApiConfigService.js');
 
 /*****************************************************************************
@@ -18,18 +18,18 @@ var _camaraApiConfigService = require('./CamaraApiConfigService.js');
 /*****************************************************************************/
 
 var _getFolderContentsMethodURL = function () {
-   return _camaraApiConfigService.getBaseUrl() + _camaraApiConfigService.getPublicFinancesFolderContentsMethodPath();
+   return _camaraApiConfigService.getBaseUrl() + _camaraApiConfigService.getPublicFilesFolderContentsMethodPath();
 }
 
 var _getFolderPathMethodURL = function () {
-   return _camaraApiConfigService.getBaseUrl() + _camaraApiConfigService.getPublicFinancesFolderPathMethodPath();
+   return _camaraApiConfigService.getBaseUrl() + _camaraApiConfigService.getPublicFilesFolderPathMethodPath();
 }
 
 var _getDownloadFilePathMethodURL = function (fileId) {
    return _camaraApiConfigService.getBaseUrl() + _camaraApiConfigService.getDownloadFilePathMethodPath() + "/" + fileId;
 }
 
-var _transformPublicFinancesCollectionDeeply = function(prefix, collectionOrObj) {
+var _transformPublicFilesCollectionDeeply = function(prefix, collectionOrObj) {
    if(collectionOrObj) {
       if(!Array.isArray(collectionOrObj)) {
          //base case
@@ -43,13 +43,13 @@ var _transformPublicFinancesCollectionDeeply = function(prefix, collectionOrObj)
             delete collectionOrObj[props[j]];
             if (collectionOrObj[prefix + props[j]] &&
                   Array.isArray(collectionOrObj[prefix + props[j]])) {
-               _transformPublicFinancesCollectionDeeply(prefix, collectionOrObj[prefix + props[j]]);
+               _transformPublicFilesCollectionDeeply(prefix, collectionOrObj[prefix + props[j]]);
             }
          }
       } else {
          var i;
          for(i = 0; i < collectionOrObj.length; i++) {
-            _transformPublicFinancesCollectionDeeply(prefix, collectionOrObj[i]);
+            _transformPublicFilesCollectionDeeply(prefix, collectionOrObj[i]);
          }
       }
    }
@@ -73,11 +73,11 @@ module.exports.getFolderContents = function(folderId) {
       body: {}
    }).then(function(result) {
       result.objects;
-      _transformPublicFinancesCollectionDeeply('ContasPublicas_', result.objects);
+      _transformPublicFilesCollectionDeeply('ArquivosPublicos_', result.objects);
       var k;
       if(result.objects) {
          for (k = 0; k < result.objects.length; k++) {
-            result.objects[k]['ContasPublicas_downloadFileURL'] = _getDownloadFilePathMethodURL(result.objects[k]['ContasPublicas__id']);
+            result.objects[k]['ArquivosPublicos_downloadFileURL'] = _getDownloadFilePathMethodURL(result.objects[k]['ArquivosPublicos__id']);
          }
       }
       return result.objects;
@@ -93,7 +93,7 @@ module.exports.getFolderPath = function(folderId) {
          body: {}
       }).then(function(result) {
          result.objects;
-         _transformPublicFinancesCollectionDeeply('ContasPublicasPath_', result.path);
+         _transformPublicFilesCollectionDeeply('ArquivosPublicosPath_', result.path);
          return result.path;
       });
    } else {

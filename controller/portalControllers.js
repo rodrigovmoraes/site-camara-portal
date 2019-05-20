@@ -4,6 +4,7 @@
 /*****************************************************************************/
 var winston = require('winston');
 var config = require('config');
+var elasticsearch = require('elasticsearch');
 var NewsService = require('../services/camara/NewsService.js');
 var PagesService = require('../services/camara/PagesService.js');
 var AccessService = require('../services/camara/AccessService.js');
@@ -15,10 +16,12 @@ var camaraEventsCalendarService = require('../services/camara/EventsCalendarServ
 var camaraLicitacoesService = require('../services/camara/LicitacoesService');
 var camaraLegislativePropositionsService = require('../services/camara/LegislativePropositionsService');
 var camaraSyslegisService = require('../services/camara/SyslegisService');
-var camaraPublicFinancesService = require('../services/camara/PublicFinancesService');
+var camaraPublicFilesService = require('../services/camara/PublicFilesService');
+var SearchService = require('../services/camara/SearchService');
 var FlickrService = require('../services/FlickrService');
 var YoutubeService = require('../services/YoutubeService');
 var SyslegisApiConfigService = require('../services/camara/SyslegisApiConfigService');
+var SearchConfigService = require('../services/camara/SearchConfigService');
 var Utils = require('../services/camara/Utils.js');
 var _ = require('lodash');
 
@@ -164,39 +167,109 @@ module.exports.homePageController = function(req, res, next) {
    var lastVideos = null;
    return camaraSyslegisService
      .getLastProjetosDeLei(8)
-     .then(function(getLastProjetosDeLeiResult) {
+     .catch(function(error) {
+        winston.error("Error while getting last 'projetos de leis', err = [%s]", error);
+        return {
+           "lastProjetosDeLeiUpdate": null,
+           "lastProjetosDeLei": []
+        }
+     }).then(function(getLastProjetosDeLeiResult) {
          lastProjetosDeLei = getLastProjetosDeLeiResult.lastProjetosDeLei;
          lastProjetosDeLeiUpdate = getLastProjetosDeLeiResult.lastProjetosDeLeiUpdate;
-         return YoutubeService.getLastVideos(7);
+         return YoutubeService
+                  .getLastVideos(7)
+                  .catch(function(error) {
+                     winston.error("Error while getting last youtube videos, err = [%s]", error);
+                     return [];
+                  });
    }).then(function(plastVideos){
       lastVideos = plastVideos;
-      return FlickrService.getLastPhotosets(7);
+      return FlickrService
+                  .getLastPhotosets(7)
+                  .catch(function(error) {
+                     winston.error("Error while getting last flickr photosets, err = [%s]", error);
+                     return {
+                        'photosets': [],
+                        'page': 1,
+                        'pageCount': 0,
+                        'totalLength': 0,
+                        'pageSize':1
+                     };
+                  });
    }).then(function(plastPhotosets) {
       lastPhotosets = plastPhotosets;
-      return NewsService.getLastNews(9);
+      return NewsService
+               .getLastNews(9)
+               .catch(function(error) {
+                  winston.error("Error while getting last news, err = [%s]", error);
+                  return {
+                     'news': []
+                  };
+               });
    }).then(function(data) {
       newsItems = data.news;
       lastNewsUpdate = data.lastNewsUpdate;
-      return camaraLegislativePropositionsService.getLastLegislativePropositions(8)
+      return camaraLegislativePropositionsService
+             .getLastLegislativePropositions(8)
+             .catch(function(error) {
+                winston.error("Error while getting last legislative proposition, err = [%s]", error);
+                return {
+                      'legislativePropositions': [],
+                      'lastLegislativePropositionsUpdate' : null
+                };
+             });
    }).then(function(getLastLegislativePropositionsResult){
       lastLegislativePropositionsUpdate = getLastLegislativePropositionsResult.lastLegislativePropositionsUpdate;
       legislativePropositions = getLastLegislativePropositionsResult.legislativePropositions;
-      return camaraHotNewsService.getHotNewsItems();
+      return camaraHotNewsService
+               .getHotNewsItems()
+               .catch(function(error) {
+                  winston.error("Error while getting hot news items, err = [%s]", error);
+                  return [];
+               });
    }).then(function(photNewsItems) {
       hotNewsItems = _transformHotNewsItems(photNewsItems);
-      return camaraBreakingNewsService.getBreakingNewsItems();
+      return camaraBreakingNewsService
+               .getBreakingNewsItems()
+               .catch(function(error) {
+                  winston.error("Error while getting breaking news items, err = [%s]", error);
+                  return [];
+               });
    }).then(function(pbreakingNewsItems) {
       breakingNewsItems = _transformBreakingNewsItems(pbreakingNewsItems);
-      return camaraEventsCalendarService.getTodayEvents();
+      return camaraEventsCalendarService
+               .getTodayEvents()
+               .catch(function(error) {
+                  winston.error("Error while getting today events, err = [%s]", error);
+                  return [];
+               });
    }).then(function(ptodayEventsCalendar) {
       todayEventsCalendar = _transformTodayEventsCalendar(ptodayEventsCalendar);
-      return camaraEventsCalendarService.getNextEvents();
+      return camaraEventsCalendarService
+               .getNextEvents()
+               .catch(function(error) {
+                  winston.error("Error while getting next events, err = [%s]", error);
+                  return [];
+               });
    }).then(function(pnextEventsCalendar) {
       nextEventsCalendar = _transformNextEventsCalendar(pnextEventsCalendar);
-      return camaraFBreakingNewsService.getFBreakingNewsItems();
+      return camaraFBreakingNewsService
+               .getFBreakingNewsItems()
+               .catch(function(error) {
+                  winston.error("Error while getting fixed breaking news, err = [%s]", error);
+                  return [];
+               });
    }).then(function(pfbreakingNewsItems) {
       fbreakingNewsItems = _transformFBreakingNewsItems(pfbreakingNewsItems);
-      return camaraLicitacoesService.getLastLicitacoesEvents(5);
+      return camaraLicitacoesService
+               .getLastLicitacoesEvents(5)
+               .catch(function(error) {
+                  winston.error("Error while getting last licitacao events, err = [%s]", error);
+                  return {
+                     'lastUpdate': null,
+                     'events': []
+                  }
+               });
    }).then(function(plastLicitacoesEvents) {
       lastLicitacoesEvents = plastLicitacoesEvents.events;
       lastLicitacoesEventsUpdate = plastLicitacoesEvents.lastUpdate;
@@ -1404,8 +1477,8 @@ module.exports.vereadorController = function(req, res, next) {
    }
 }
 
-/* GET '/contas_publicas.html' page */
-module.exports.contasPublicas = function(req, res, next) {
+/* GET '/arquivos_publicos.html' page */
+module.exports.arquivosPublicos = function(req, res, next) {
    var folderId = null;
    var folderPath = null;
 
@@ -1413,21 +1486,103 @@ module.exports.contasPublicas = function(req, res, next) {
       folderId = req.query.id
    };
 
-   return camaraPublicFinancesService
+   return camaraPublicFilesService
    .getFolderPath(req.query.id)
    .then(function(pfolderPath) {
       folderPath = pfolderPath;
-      return camaraPublicFinancesService.getFolderContents(folderId);
+      return camaraPublicFilesService.getFolderContents(folderId);
    }).then(function(objects) {
-      res.render('contas_publicas', {
-         'ContasPublicas_objects': objects,
-         'ContasPublicas_folderPath': folderPath
+      res.render('arquivos_publicos', {
+         'ArquivosPublicos_objects': objects,
+         'ArquivosPublicos_folderPath': folderPath
       });
    }).catch(function(err) {
       //render the error page
       Utils.next(err.statusCode, err, next);
    });
 };
+
+module.exports.busca = function(req, res, next) {
+   var page = 1;
+   var pageSize = 10;
+   var paginationSize = 11;
+   var filter = {};
+   var resultSizeLimitReached = false;
+
+   //page
+   if(req.query.page) {
+      page = parseInt(req.query.page);
+   }
+   //document type tag
+   if (req.query.documentTypeTag) {
+      filter['documentTypeTag'] = req.query.documentTypeTag;
+   } else {
+      filter['documentTypeTag'] = null;
+   }
+
+   //limit and offset
+   filter['limit'] = pageSize;
+   filter['offset'] = (page - 1) * pageSize;
+
+   if (req.query.keywords) {
+      var keywords = req.query.keywords;
+      filter['keywords'] = keywords;
+
+      return SearchService
+               .search(filter)
+               .then(function(result) {
+                  var resultItems = result.resultItems;
+                  //it has reached the result size limit
+                  if (result.total > SearchConfigService.getMaxResultSize()) {
+                     result.total = SearchConfigService.getMaxResultSize();
+                     resultSizeLimitReached = true;
+                  }
+                  var pageCount = Math.ceil(result.total / pageSize);
+                  var returnedPage = page > pageCount ? pageCount : page;
+
+                  var paginationLowerBound = Math.max(1, returnedPage - Math.floor(paginationSize / 2));
+                  var paginationUpperBound = Math.min(pageCount, paginationLowerBound + paginationSize - 1);
+                  //last pagination adjustment
+                  paginationLowerBound = Math.max(1, paginationUpperBound - paginationSize + 1);
+
+                  var pages = [];
+                  var i;
+                  for (i = paginationLowerBound; i <= paginationUpperBound; i++) {
+                     pages.push({
+                        'page': i,
+                        'active': i === returnedPage
+                     });
+                  }
+                  //set document types
+                  var documentTypes = SearchConfigService.getDocumentTypes() ? SearchConfigService.getDocumentTypes() : [];
+                  for (i = 0; i < documentTypes.length; i++) {
+                     if ( filter['documentTypeTag'] &&
+                          documentTypes[i].typeTag === filter['documentTypeTag'] ) {
+                            documentTypes[i]['documentTypeSelect'] = true;
+                     } else {
+                            documentTypes[i]['documentTypeSelect'] = false;
+                     }
+                  }
+
+                  res.render('busca', {
+                     'keywords': filter.keywords ? filter.keywords : '',
+                     'resultItems': resultItems,
+                     'pages': pages,
+                     'showPagination': pageCount > 1,
+                     'pageCount': pageCount,
+                     'documentTypes': documentTypes,
+                     'documentTypeTag': filter['documentTypeTag'],
+                     'resultSizeLimitReached': resultSizeLimitReached,
+                     'resultSizeLimit': SearchConfigService.getMaxResultSize()
+                  });
+               }).catch(function(err) {
+                  //render the error page
+                  Utils.next(err.statusCode, err, next);
+               });
+   } else {
+      res.render('busca', { });
+   }
+}
 
 //transform menuItems to show in the portal page
 var _transformMenuItemDFS = function(menuItem) {

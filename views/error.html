@@ -4,6 +4,9 @@
         <div class="text-center">
           <h1>Ocorreu um erro com sua requisição</h1>
           <p>{{message}}</p>
+          {{#error}}
+             <p>{{{error}}}</p>
+          {{/error}}
         </div>
         <div class="text-center"><span class="ion-sad wrong-icon "></span></div>
         <div class="text-center"><a class="btn btn-danger" href="index.html">Ir para a tela principal</a></div>

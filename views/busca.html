@@ -1,0 +1,142 @@
+<div class="container">
+    <!-- BEGIN: title start -->
+    <div class="page-header">
+      <h1>Pesquisa</h1>
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Pesquisa</a></li>
+      </ol>
+    </div>
+    <!-- END: title start -->
+    <!-- BEGIN: pesquisa form start -->
+    <section>
+       <div class="container pesquisaFilter">
+          <div class="row ">
+            <div class="col-md-16 col-sm-16">
+
+               <form id="formPesquisaMaterias" target="" method="GET" role="form">
+                     <input type="hidden" name="page" id="pageInput" value="1">
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" name="keywords" value="{{keywords}}" size="50" class="form-control" id="palavrasChaveInput" title="Palavras-chaves para a busca" placeholder="Palavras-chave">
+                             </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="documentTypeInput" name="documentTypeTag" placeholder="Tipo de documento"  title="Tipo de documento">
+                            {{#documentTypeTag}}
+                              <option disabled>Tipo de documento</option>
+                            {{/documentTypeTag}}
+                            {{^documentTypeTag}}
+                              <option disabled selected>Tipo de documento</option>
+                            {{/documentTypeTag}}
+                            <option value="">Qualquer</option>
+                            {{#documentTypes}}
+                              {{#documentTypeSelect}}
+                                 <option value="{{typeTag}}" selected>{{typeDescription}}</option>
+                              {{/documentTypeSelect}}
+                              {{^documentTypeSelect}}
+                                 <option value="{{typeTag}}">{{typeDescription}}</option>
+                              {{/documentTypeSelect}}
+                            {{/documentTypes}}
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                             <button class="btn btn-default" type="submit" id="btnSearch" title="Pesquisar" style="height: 38px" type="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-search"></span>
+                             </button>
+                          </div>
+                        </div>
+                     </div>
+               </form>
+            </div>
+         </div>
+       </div>
+    </section>
+    <!-- END: pesquisa form start -->
+
+    {{#resultSizeLimitReached}}
+    <div class="alert alert-warning" role="alert">
+      Esta busca retornou mais de {{resultSizeLimit}} elementos. Por motivos técnicos estamos exibindo apenas {{resultSizeLimit}} elementos da busca.
+      Refine sua pesquisa para retornar menos elementos.
+    </div>
+    {{/resultSizeLimitReached}}
+
+    <!-- BEGIN: pesquisa body -->
+    {{#pageCount}}
+    <section>
+       <div class="container ">
+         <div class="row ">
+
+           <div class="col-md-16 col-sm-16">
+             <div class="row pesquisa">
+                  {{#resultItems}}
+                  <div class="sec-topic col-sm-16 col-md-16 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                       <a href="{{buscaItemUrl}}" target="{{buscaItemTarget}}">
+                          <div class="sec-info">
+                            <h3 class="pesquisaItemTitle">{{{buscaItemTitulo}}}</h3>
+                            <div class="text-danger sub-info-bordered">
+                               <div class="text-danger sub-info pesquisaItemInfo">
+                                 <div class="time"  title="Data">
+                                    <span class="ion-android-calendar icon"></span>
+                                    {{buscaItemData}}
+                                 </div>
+                                 <div class="time">
+                                    <span class="ion-ios7-information icon"></span>
+                                    Tipo: {{buscaItemTipoDescricao}}
+                                 </div>
+                                 {{#buscaItemSubtipoDescricao}}
+                                 <div class="time">
+                                    <span class="ion-ios7-information icon"></span>
+                                    Subtipo: {{buscaItemSubtipoDescricao}}
+                                 </div>
+                                 {{/buscaItemSubtipoDescricao}}
+                            </div>
+                          </div>
+                         </div>
+                      </a>
+                      {{#buscaItemDescricao}}
+                      <p class="headlineDescription"><b>{{{buscaItemDescricao}}}</b></p>
+                      {{/buscaItemDescricao}}
+                      {{#buscaItemTexto}}
+                      <p class="headlineText"><i>{{{buscaItemTexto}}}</i></p>
+                      {{/buscaItemTexto}}
+                  </div>
+                  {{/resultItems}}
+
+                  {{#showPagination}}
+                  <div class="col-sm-16">
+                       <hr>
+                       <ul class="pagination">
+                         <li><a href="?page=1&keywords={{keywords}}&documentTypeTag={{documentTypeTag}}" title="Primeira página">«</a></li>
+                         {{#pages}}
+                           {{#active}}
+                              <li class="active"><a href="?page={{page}}&keywords={{keywords}}&documentTypeTag={{documentTypeTag}}">{{page}}</a></li>
+                           {{/active}}
+                           {{^active}}
+                              <li><a href="?page={{page}}&keywords={{keywords}}&documentTypeTag={{documentTypeTag}}">{{page}}</a></li>
+                           {{/active}}
+                         {{/pages}}
+                         <li><a href="?page={{pageCount}}&keywords={{keywords}}&documentTypeTag={{documentTypeTag}}" title="Última página">»</a></li>
+                       </ul>
+                  </div>
+                  {{/showPagination}}
+             </div>
+           </div>
+
+         </div>
+       </div>
+    </section>
+    {{/pageCount}}
+    <!-- END: pesquisa body -->
+    {{^pageCount}}
+       {{#keywords}}
+       <div class="alert alert-warning" role="alert">Nenhum resultado encontrado.</div>
+       {{/keywords}}
+       {{^keywords}}
+       <div class="alert alert-warning" role="alert">Digite as palavras-chaves para realizar a busca.</div>
+       {{/keywords}}
+    {{/pageCount}}
+</div>

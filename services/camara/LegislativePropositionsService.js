@@ -5,12 +5,12 @@
 var winston = require('winston');
 var _requestService = require('request-promise');
 var _ = require('lodash');
-var Utils = require('./Utils.js');
 
 /*****************************************************************************
 *************************** DEPENDENCIES SECTION *****************************
 ******************************* (OTHERS MODULES) *******************************
 /*****************************************************************************/
+var Utils = require('./Utils.js');
 var _camaraApiConfigService = require('./CamaraApiConfigService.js');
 
 /*****************************************************************************

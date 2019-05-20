@@ -21,6 +21,7 @@ var FlickrService = require('./services/FlickrService.js');
 var YoutubeService = require('./services/YoutubeService.js');
 var CamaraApiConfigService = require('./services/camara/CamaraApiConfigService.js');
 var SyslegisApiConfigService = require('./services/camara/SyslegisApiConfigService.js');
+var SearchConfigService = require('./services/camara/SearchConfigService.js');
 
 //-----------------------------------------------------------------------------
 var app = express();
@@ -121,9 +122,9 @@ CamaraApiConfigService.setLegislativePropositionsMethodPath(camaraApiConfig.legi
 CamaraApiConfigService.setLegislativePropositionTypesMethodPath(camaraApiConfig.legislativePropositionTypesMethodPath);
 CamaraApiConfigService.setLegislativePropositionMethodPath(camaraApiConfig.legislativePropositionMethodPath);
 CamaraApiConfigService.setLegislativePropositionDownloadFileAttachmentPath(camaraApiConfig.legislativePropositionDownloadFileAttachmentPath);
-CamaraApiConfigService.setPublicFinancesFolderContentsMethodPath(camaraApiConfig.publicFinancesFolderContentsMethodPath);
-CamaraApiConfigService.setPublicFinancesFolderPathMethodPath(camaraApiConfig.publicFinancesFolderPathMethodPath);
-CamaraApiConfigService.setDownloadFilePathMethodPath(camaraApiConfig.publicFinancesDownloadFile);
+CamaraApiConfigService.setPublicFilesFolderContentsMethodPath(camaraApiConfig.publicFilesFolderContentsMethodPath);
+CamaraApiConfigService.setPublicFilesFolderPathMethodPath(camaraApiConfig.publicFilesFolderPathMethodPath);
+CamaraApiConfigService.setDownloadFilePathMethodPath(camaraApiConfig.publicFilesDownloadFile);
 
 /*****************************************************************************/
 var syslegisApiConfig = config.get('Services.SyslegisApi');
@@ -148,6 +149,12 @@ SyslegisApiConfigService.setVereadoresMethodPath(syslegisApiConfig.vereadoresMet
 SyslegisApiConfigService.setVereadorMethodPath(syslegisApiConfig.vereadorMethodPath);
 SyslegisApiConfigService.setVereadorResumoMateriasMethodPath(syslegisApiConfig.vereadorResumoMateriasMethodPath);
 SyslegisApiConfigService.setVereadorImageUrl(syslegisApiConfig.vereadorImageUrl);
+
+var searchConfigService = config.get('Services.SearchService');
+SearchConfigService.setElasticSearchConnectionConfig(searchConfigService.elasticSearchConnectionConfig);
+SearchConfigService.setSearchResultUrlMappings(searchConfigService.searchResultUrlMappings);
+SearchConfigService.setDocumentTypes(searchConfigService.documentTypes);
+SearchConfigService.setMaxResultSize(searchConfigService.maxResultSize);
 
 /*****************************************************************************
 ************************** ERROR HANDLING SECTION ****************************
