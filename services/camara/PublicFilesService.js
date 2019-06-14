@@ -69,8 +69,7 @@ module.exports.getFolderContents = function(folderId) {
    return _requestService({
       url: _getFolderContentsMethodURL() + ( folderId ? "/" + folderId : "" ),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(result) {
       result.objects;
       _transformPublicFilesCollectionDeeply('ArquivosPublicos_', result.objects);
@@ -89,8 +88,7 @@ module.exports.getFolderPath = function(folderId) {
       return _requestService({
          url: _getFolderPathMethodURL() + "/" + folderId,
          method: "GET",
-         json: true,
-         body: {}
+         json: true
       }).then(function(result) {
          result.objects;
          _transformPublicFilesCollectionDeeply('ArquivosPublicosPath_', result.path);

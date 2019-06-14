@@ -2774,6 +2774,17 @@ footer  .list-unstyled li a:hover h4 {
 	font-style: italic;
 }
 
+.otherLegislativePropositionHeadline {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: italic;
+}
+
+.otherLegislativePropositionLink {
+   font-weight: bold;
+   text-decoration: underline;
+}
+
 .legislativePropositionFilter {
 	padding-bottom: 15px;
 	margin-bottom: 10px;
@@ -2917,6 +2928,11 @@ ol#arquivosPublicosBreadcrumb {
    background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
 }
 
+/*highlighter geral de pesquisa*/
+.generalSearchHighlight {
+   background-color: #fff2ac;
+   background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
+}
 
 .box:hover .carousel-caption {
 	background-color: transparent;

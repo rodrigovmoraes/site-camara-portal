@@ -21,6 +21,67 @@
           $('#dataPrazoProcessoFinalInput').datepicker();
           $('#dataPrazoProcessoFinalInput').datepicker("option", "dateFormat", "dd/mm/yy");
 
+          $('#numeroMateriaInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+          $('#anoInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+          $('#palavrasChaveInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+          $('#dataApresentacaoInicialInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+          $('#dataApresentacaoFinalInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+          $('#dataPrazoExecutivoInicialInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+          $('#dataPrazoExecutivoFinalInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+          $('#dataPrazoProcessoInicialInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+          $('#dataPrazoProcessoFinalInput').keydown(function (event) {
+             var keypressed = event.keyCode || event.which;
+             if (keypressed == 13) {
+                 $('#formPesquisaMaterias').submit();
+             }
+          });
+
+          {{#palavrasChave}}
+             {{^print}}
+                CamaraUtils.highlight($('p#materiaLegislativaEmentaHeadline'), '{{palavrasChave}}');
+             {{/print}}
+          {{/palavrasChave}}
+
           {{#print}}
           window.print();
           {{/print}}
@@ -344,7 +405,7 @@
                       {{#print}}
                       </div>
                       {{/print}}
-                      <p class="headline">{{materiaLegislativaEmenta}}</p>
+                      <p class="headline" id="materiaLegislativaEmentaHeadline">{{materiaLegislativaEmenta}}</p>
                   </div>
                {{/materiasLegislativas}}
 

@@ -44,7 +44,6 @@ module.exports.getTodayEvents = function() {
       url: _getEventsCalendarMethodURL(),
       method: "GET",
       json: true,
-      body: {},
       qs: {
          'minDate' : minDate,
          'maxDate' : maxDate
@@ -63,7 +62,6 @@ module.exports.getNextEvents = function() {
       url: _getEventsCalendarMethodURL(),
       method: "GET",
       json: true,
-      body: {},
       qs: {
          'minDate' : minDate,
          'unlimitedMaxDate' : true
@@ -83,7 +81,6 @@ module.exports.getEvent = function(eventId) {
       url: _getEventCalendarMethodURL(),
       method: "GET",
       json: true,
-      body: {},
       qs: {
          'id' : eventId
       }

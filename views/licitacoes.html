@@ -8,6 +8,12 @@
 
           $('#inputPublicationDate2').datepicker();
           $('#inputPublicationDate2').datepicker("option", "dateFormat", "dd/mm/yy");
+
+          {{#keywords}}
+             {{^print}}
+                CamaraUtils.highlight($('p#licitacaoHeadline'), '{{keywords}}');
+             {{/print}}
+          {{/keywords}}
      });
    </script>
 {{/yield-scripts}}
@@ -126,7 +132,7 @@
                             </div>
                           </div>
                        </a>
-                       <p class="headline">{{description}}</p>
+                       <p class="headline" id="licitacaoHeadline">{{description}}</p>
                   </div>
                {{/licitacoes}}
 

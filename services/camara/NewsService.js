@@ -102,8 +102,7 @@ module.exports.getLastNews = function(amountOfNewsItems) {
          page: 1,
          pageSize: amountOfNewsItems,
          publication: "PUBLISHED"
-      },
-      body: {}
+      }
    }).then(function(data) {
       //last update info
       if(data.news && data.news.length > 0) {
@@ -155,8 +154,7 @@ module.exports.getItem = function(newsItemId) {
    return _requestService({
       url: _getNewsItemMethodURL() + "/" + newsItemId,
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(result) {
       _transformNewsItem(result.newsItem);
       return result.newsItem;
@@ -167,7 +165,6 @@ module.exports.incrementViews = function(newsItemId) {
    return _requestService({
       url: _getIncrementNewsViewsMethodURL() + "/" + newsItemId,
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    });
 }

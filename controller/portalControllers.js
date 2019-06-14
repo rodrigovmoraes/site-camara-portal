@@ -630,7 +630,17 @@ module.exports.propositurasController = function(req, res, next) {
    var paginationSize = 11;
    var filter = {}; //keywords + publication date begin + publication date end
    var types;
+   var tags;
    var printLimit = 50;
+   var legislativePropositionTags = [];
+
+   var _getLegislativePropositionTags = function(legislativePropositionTypeId) {
+      if (legislativePropositionTypeId) {
+         return camaraLegislativePropositionsService.getLegislativePropositionTags(legislativePropositionTypeId);
+      } else {
+         return Promise.resolve([]);
+      }
+   }
 
    var printMode = req.query.print;
 
@@ -660,6 +670,15 @@ module.exports.propositurasController = function(req, res, next) {
    //category
    if(req.query.type) {
       filter['type'] = req.query.type;
+   } else {
+      filter['type'] = null;
+   }
+
+   //tag
+   if(req.query.tag) {
+      filter['tag'] = req.query.tag;
+   } else {
+      filter['tag'] = null;
    }
 
    //number
@@ -679,9 +698,23 @@ module.exports.propositurasController = function(req, res, next) {
       pageSize = printLimit;
    }
 
-   camaraLegislativePropositionsService
-      .getLegislativePropositionTypes()
-      .then(function(typesResult) {
+      _getLegislativePropositionTags(filter['type'])
+      .then(function(tagsResult) {
+         tags = tagsResult;
+         var i;
+         if (tags) {
+            for(i = 0; i < tags.length; i++) {
+               if( filter.tag &&
+                   filter.tag === tags[i].legislativePropositionTagId) {
+                  tags[i]['legislativePropositionsTagSelect'] = true;
+               } else {
+                  tags[i]['legislativePropositionsTagSelect'] = false;
+               }
+            }
+         }
+         return camaraLegislativePropositionsService
+                        .getLegislativePropositionTypes();
+      }).then(function(typesResult) {
          types = typesResult;
          var i;
          if(types) {
@@ -716,12 +749,14 @@ module.exports.propositurasController = function(req, res, next) {
          //render the page
          res.render('proposituras', {
              'legislativePropositions': legislativePropositionsItems,
+             'legislativePropositionsTags': tags,
              'legislativePropositionTypes': types,
              'pages': printMode ? [] : pages,
              'showPagination': pageCount > 1 && !printMode,
              'pageCount': printMode ? 1 : pageCount,
              'publicationDate1': req.query.publicationDate1 ? req.query.publicationDate1 : null,
              'publicationDate2': req.query.publicationDate2 ? req.query.publicationDate2 : null,
+             'tag': req.query.tag ? req.query.tag : null,
              'type': req.query.type ? req.query.type : null,
              'keywords': req.query.keywords ? req.query.keywords : null,
              'number': req.query.number ? req.query.number : null,
@@ -756,7 +791,25 @@ module.exports.proposituraController = function(req, res, next) {
          //render the error page
          Utils.next(err.statusCode, err, next);
       });
-   } else {
+   } else if(req.query.numeroLei && req.query.tipoLei) {
+      camaraLegislativePropositionsService
+      .getLegislativePropositionByNumber(req.query.numeroLei, req.query.tipoLei)
+      .then(function(legislativeProposition) {
+         var result = {};
+         result.legislativeProposition = legislativeProposition;
+         if(req.query.print) {
+            result.print = true;
+         } else {
+            result.print = false;
+         }
+         //render the page
+         res.render('propositura', result);
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   }
+   else {
       Utils.next(400, { message: "O id da propositura precisa ser definido" }, next);
    }
 }
@@ -785,6 +838,30 @@ module.exports.proposituraTextoAnexoController = function(req, res, next) {
    }
 };
 
+/* GET '/propositura_texto_original.html' page */
+module.exports.proposituraTextoOriginalController = function(req, res, next) {
+   if (req.query.id) {
+      camaraLegislativePropositionsService
+      .getLegislativeProposition(req.query.id)
+      .then(function(legislativeProposition) {
+         var result = {};
+         result.legislativeProposition = legislativeProposition;
+         if(req.query.print) {
+            result.print = true;
+         } else {
+            result.print = false;
+         }
+         //render the page
+         res.render('propositura_texto_original', result);
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } else {
+      Utils.next(400, { message: "O id da propositura precisa ser definido" }, next);
+   }
+};
+
 /* GET '/propositura_arquivos_anexos.html' page */
 module.exports.proposituraArquivosAnexosController = function(req, res, next) {
    if (req.query.id) {
@@ -795,6 +872,30 @@ module.exports.proposituraArquivosAnexosController = function(req, res, next) {
          res.render('propositura_arquivos_anexos', {
              'legislativeProposition': legislativeProposition
          });
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } else {
+      Utils.next(400, { message: "O id da propositura precisa ser definido" }, next);
+   }
+};
+
+/* GET '/propositura_arquivos_anexos.html' page */
+module.exports.proposituraAlteracoesController = function(req, res, next) {
+   if (req.query.id) {
+      camaraLegislativePropositionsService
+      .getLegislativeProposition(req.query.id)
+      .then(function(legislativeProposition) {
+         var result = {};
+         result.legislativeProposition = legislativeProposition;
+         if(req.query.print) {
+            result.print = true;
+         } else {
+            result.print = false;
+         }
+         //render the page
+         res.render('propositura_alteracoes', result);
       }).catch(function(err) {
          //render the error page
          Utils.next(err.statusCode, err, next);

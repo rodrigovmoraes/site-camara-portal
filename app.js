@@ -120,6 +120,7 @@ CamaraApiConfigService.setLicitacoesCategoriesMethodPath(camaraApiConfig.licitac
 CamaraApiConfigService.setLicitacaoMethodPath(camaraApiConfig.licitacaoMethodPath);
 CamaraApiConfigService.setLegislativePropositionsMethodPath(camaraApiConfig.legislativePropositionsMethodPath);
 CamaraApiConfigService.setLegislativePropositionTypesMethodPath(camaraApiConfig.legislativePropositionTypesMethodPath);
+CamaraApiConfigService.setLegislativePropositionTagsMethodPath(camaraApiConfig.legislativePropositionTagsMethodPath);
 CamaraApiConfigService.setLegislativePropositionMethodPath(camaraApiConfig.legislativePropositionMethodPath);
 CamaraApiConfigService.setLegislativePropositionDownloadFileAttachmentPath(camaraApiConfig.legislativePropositionDownloadFileAttachmentPath);
 CamaraApiConfigService.setPublicFilesFolderContentsMethodPath(camaraApiConfig.publicFilesFolderContentsMethodPath);
@@ -166,7 +167,7 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err.toString(),
+            error: err.toString()
         });
     });
 }

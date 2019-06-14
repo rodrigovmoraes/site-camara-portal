@@ -130,8 +130,7 @@ module.exports.getLicitacoesCategories = function() {
    return _requestService({
       url: _getLastLicitacoesCategoriesMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       return _transformLicitacoesCategories(data.categories);
    });
@@ -144,8 +143,7 @@ module.exports.getLastLicitacoesEvents = function(amountOfLicitacoesEvents) {
       json: true,
       qs: {
          size: amountOfLicitacoesEvents
-      },
-      body: {}
+      }
    }).then(function(licitacoesEvents) {
       //last update info
       var lastUpdateDescription;
@@ -247,8 +245,7 @@ module.exports.getLicitacao = function(licitacaoId) {
    return _requestService({
       url: _getLicitacaoMethodURL() + "/" + licitacaoId,
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(result) {
       return _transformGetLicitacaoResult(result.licitacao);
    });

@@ -31,6 +31,25 @@
              </a>
            </div>
            {{/legislativePropositionTextAttachment}}
+
+           {{#legislativePropositionRelationships.length}}
+           <div class="time">
+              <a title="Clique aqui para ver outras proposituras vínculadas a esta" href="/propositura_alteracoes.html?id={{legislativePropositionId}}">
+                 <span class="ion-android-share icon"></span>Vínculos
+              </a>
+           </div>
+           {{/legislativePropositionRelationships.length}}
+
+           {{^print}}
+             {{#legislativePropositionProcess}}
+             <div class="time">
+                <a title="Clique aqui para ver a matéria legislativa que criou esta propositura" href="/materia.html?id={{legislativePropositionProcess}}">
+                   <span class="ion-android-book icon"></span>Matéria Legislativa
+                </a>
+             </div>
+             {{/legislativePropositionProcess}}
+           {{/print}}
+
         </div>
 
         {{#legislativePropositionFileAttachments.length}}

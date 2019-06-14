@@ -58,8 +58,7 @@ module.exports.getMenuPortal = function() {
    return _requestService({
       url: _getMenuPortalMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       var menuPortalTree = data.menuPortalTree;
       _processMenu(menuPortalTree);

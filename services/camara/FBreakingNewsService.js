@@ -35,8 +35,7 @@ module.exports.getFBreakingNewsItems = function() {
    return _requestService({
       url: _getFBreakingNewsMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(result) {
       return result.fbreakingNewsItems;
    });

@@ -35,8 +35,7 @@ module.exports.getPage = function(pageId) {
    return _requestService({
       url: _getPageMethodURL() + "/" + pageId,
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(result) {
       return result.page;
    });

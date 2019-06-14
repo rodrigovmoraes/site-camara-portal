@@ -35,8 +35,7 @@ module.exports.getBanners = function() {
    return _requestService({
       url: _getBannersMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(result) {
       return result.banners;
    });

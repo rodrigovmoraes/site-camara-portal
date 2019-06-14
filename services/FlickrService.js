@@ -106,7 +106,6 @@ var _checkPhotosetsCache = function(photosetsCache) {
       url: _flickrApiBaseUrl,
       method: "GET",
       json: true,
-      body: {},
       qs: {
          method: _flickrApiGetPhotoInfoMethod,
          api_key: _flickrApiKey,
@@ -165,7 +164,6 @@ module.exports.getPhotoThumbnailUrlsFromSet = function(photoSetId, imageType) {
       url: _flickrApiBaseUrl,
       method: "GET",
       json: true,
-      body: {},
       qs: {
          method: _flickrApiGetPhotosMethod,
          api_key: _flickrApiKey,
@@ -252,7 +250,6 @@ module.exports.getPhotosetInfo = function(photoSetId, userId) {
       url: _flickrApiBaseUrl,
       method: "GET",
       json: true,
-      body: {},
       qs: {
          method: _flickrApiGetPhotosetInfoMethod,
          api_key: _flickrApiKey,
@@ -276,7 +273,6 @@ module.exports.getPhotosets = function() {
         url: _flickrApiBaseUrl,
         method: "GET",
         json: true,
-        body: {},
         qs: {
            method: _flickrApiGetPhotosetsMethod,
            api_key: _flickrApiKey,

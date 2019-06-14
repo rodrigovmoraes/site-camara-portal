@@ -28,6 +28,7 @@ var _licitacoesCategoriesMethodPath; //Ex, "licitacoesCategories"
 var _licitacaoMethodPath; //Ex, "licitacao"
 var _legislativePropositionsMethodPath; //Ex, "legislativePropositions"
 var _legislativePropositionTypesMethodPath; //Ex, "legislativePropositionTypes"
+var _legislativePropositionTagsMethodPath; //Ex, "legislativePropositionTags"
 var _legislativePropositionMethodPath; //Ex, "legislativeProposition"
 var _legislativePropositionDownloadFileAttachmentPath; //Ex, "legislativeProposition/attachment/download"
 var _publicFilesFolderContentsMethodPath; //Ex, "publicFiles/folder"
@@ -199,6 +200,14 @@ module.exports.setLegislativePropositionTypesMethodPath = function(legislativePr
 
 module.exports.getLegislativePropositionTypesMethodPath = function() {
    return _legislativePropositionTypesMethodPath;
+}
+
+module.exports.setLegislativePropositionTagsMethodPath = function(legislativePropositionTagsMethodPath) {
+   _legislativePropositionTagsMethodPath = legislativePropositionTagsMethodPath;
+}
+
+module.exports.getLegislativePropositionTagsMethodPath = function() {
+   return _legislativePropositionTagsMethodPath;
 }
 
 module.exports.setLegislativePropositionMethodPath = function(legislativePropositionMethodPath) {

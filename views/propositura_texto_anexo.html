@@ -52,6 +52,26 @@
            {{/print}}
 
            {{^print}}
+              {{#legislativePropositionRelationships.length}}
+              <div class="time">
+                 <a title="Clique aqui para ver outras proposituras vínculadas a esta" href="/propositura_alteracoes.html?id={{legislativePropositionId}}">
+                    <span class="ion-android-share icon"></span>Vínculos
+                 </a>
+              </div>
+              {{/legislativePropositionRelationships.length}}
+           {{/print}}
+
+           {{^print}}
+             {{#legislativePropositionProcess}}
+             <div class="time">
+                <a title="Clique aqui para ver a matéria legislativa que criou esta propositura" href="/materia.html?id={{legislativePropositionProcess}}">
+                   <span class="ion-android-book icon"></span>Matéria Legislativa
+                </a>
+             </div>
+             {{/legislativePropositionProcess}}
+           {{/print}}
+
+           {{^print}}
              <span class="ion-android-printer"></span>
              <a href="?id={{legislativePropositionId}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>
            {{/print}}

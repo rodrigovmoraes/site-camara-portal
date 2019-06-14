@@ -35,8 +35,7 @@ module.exports.getHotNewsItems = function() {
    return _requestService({
       url: _getHotNewsMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(result) {
       return result.hotNewsItems;
    });

@@ -676,8 +676,7 @@ module.exports.getMateriaLegislativa = function(idMateria) {
    return _requestService({
       url: _getMateriaLegislativaMethodURL() + "/" + idMateria,
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       var i;
       _transformMateriaObject("Materia_", data.materia);
@@ -714,8 +713,7 @@ module.exports.getTiposDeMateria = function() {
    return _requestService({
       url: _getTiposDeMateriaMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       return _transformTiposDeMateria(data.tiposDeMateria);
    });
@@ -725,8 +723,7 @@ module.exports.getAutores = function() {
    return _requestService({
       url: _getAutoresMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       return _transformAutores(data.autores);
    });
@@ -736,8 +733,7 @@ module.exports.getUnidadesDeTramitacao = function() {
    return _requestService({
       url: _getUnidadesDeTramitacaoMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       return _transformUnidades(data.unidades);
    });
@@ -747,8 +743,7 @@ module.exports.getListaDeStatusDeTramitacao = function() {
    return _requestService({
       url: _getListaDeStatusDeTramitacaoMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       return _transformListaDeStatusDeTramitacao(data.listaDeStatus);
    });
@@ -758,8 +753,7 @@ module.exports.getClassificacoes = function() {
    return _requestService({
       url: _getClassificacoesMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       return _transformClassificacoes(data.classificacoes);
    });
@@ -801,8 +795,7 @@ module.exports.getOrdemDoDiaListaDeAnos = function() {
    return _requestService({
       url: _getOrdemDoDiaListaDeAnosMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       return _transformOrdensDoDiaAnos(data.anos);
    });
@@ -901,8 +894,7 @@ module.exports.getVereador = function(idVereador) {
    return _requestService({
       url: _getVereadorMethodURL() + "/" + idVereador,
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       _transformVereadorObjDeeply("Vereador_", data.vereador);
       return data.vereador;
@@ -913,8 +905,7 @@ module.exports.getVereadorResumoMaterias = function(idVereador) {
    return _requestService({
       url: _getVereadorResumoMateriasMethodURL() + "/" + idVereador,
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       var total = _transformVereadorResumoMateriasCollection("VereadorResumo_", data.resumo);
       data.total = total;

@@ -31,6 +31,11 @@ var _getLegislativePropositionTypesMethodURL = function () {
                _camaraApiConfigService.getLegislativePropositionTypesMethodPath();
 }
 
+var _getLegislativePropositionTagsMethodURL = function () {
+   return _camaraApiConfigService.getBaseUrl() +
+               _camaraApiConfigService.getLegislativePropositionTagsMethodPath();
+}
+
 var _getLegislativePropositionDownloadFileAttachmentURL = function (fileAttachmentId) {
    return _camaraApiConfigService.getBaseUrl() +
                _camaraApiConfigService.getLegislativePropositionDownloadFileAttachmentPath() + "/" + fileAttachmentId;
@@ -75,6 +80,21 @@ var _transformLegislativePropositionTypes = function(legislativePropositionTypes
       }
    }
    return transformedLegislativePropositionTypes;
+}
+
+var _transformLegislativePropositionTags = function(legislativePropositionTags) {
+   var transformedLegislativePropositionTags = [];
+   if(legislativePropositionTags) {
+      var i;
+      for(i = 0; i < legislativePropositionTags.length; i++) {
+         var legislativePropositionTag = legislativePropositionTags[i];
+         transformedLegislativePropositionTags.push({
+            'legislativePropositionTagId': legislativePropositionTag._id,
+            'legislativePropositionTagDescription': legislativePropositionTag.description
+         })
+      }
+   }
+   return transformedLegislativePropositionTags;
 }
 
 var _transformLastLegislativePropositionsItem = function(legislativeProposition) {
@@ -123,6 +143,7 @@ var _transformLegislativePropositionsItems = function(legislativePropositions) {
 var _transformGetLegislativePropositionResult = function(legislativeProposition) {
    //build file attachments
    var legislativePropositionFileAttachments = [];
+   var legislativePropositionRelationships = [];
    var i;
    if(legislativeProposition.consolidatedFileAttachments &&
          legislativeProposition.consolidatedFileAttachments.length > 0) {
@@ -145,15 +166,35 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
          });
       }
    }
+   //relationships
+   if (legislativeProposition.relationships &&
+             legislativeProposition.relationships.length > 0) {
+      for (i = 0; i < legislativeProposition.relationships.length; i++) {
+         var legislativePropositionRelationship = legislativeProposition.relationships[i];
+         legislativePropositionRelationships.push({
+            'otherLegislativePropositionId': legislativePropositionRelationship.otherLegislativeProposition._id,
+            'legislativePropositionRelationshipTypeDescription': legislativePropositionRelationship.type.description,
+            'otherLegislativePropositionDate': _formatLegislativePropositionDate(legislativePropositionRelationship.otherLegislativeProposition.date),
+            'otherLegislativePropositionDateObj': new Date(legislativePropositionRelationship.otherLegislativeProposition.date),
+            'otherLegislativePropositionNumber': _.padStart(legislativePropositionRelationship.otherLegislativeProposition.number, 2, "0") + "/" + legislativePropositionRelationship.otherLegislativeProposition.year,
+            'otherLegislativePropositionDescription': legislativePropositionRelationship.otherLegislativeProposition.description
+         });
+      }
+      //sort by date in descending order
+      legislativePropositionRelationships = _.sortBy(legislativePropositionRelationships, [function(o) { return -1 * o.otherLegislativePropositionDateObj.getTime(); }]);
+   }
    return {
       'legislativePropositionId': legislativeProposition._id,
       'legislativePropositionNumber': _.padStart(legislativeProposition.number, 2, "0") + "/" + legislativeProposition.year,
       'legislativePropositionDate': _formatLegislativePropositionDate(legislativeProposition.date),
       'legislativePropositionTypeDescription': legislativeProposition.type ? legislativeProposition.type.description : '',
+      'legislativePropositionProcess': legislativeProposition.legislativeProcessId ? legislativeProposition.legislativeProcessId : null,
       'legislativePropositionDescription': legislativeProposition.description,
       'legislativePropositionText': legislativeProposition.consolidatedText ? legislativeProposition.consolidatedText : legislativeProposition.text,
+      'legislativePropositionOriginalText': legislativeProposition.consolidatedText ? legislativeProposition.text : "", 
       'legislativePropositionTextAttachment': legislativeProposition.consolidatedTextAttachment ? legislativeProposition.consolidatedTextAttachment : legislativeProposition.textAttachment,
-      'legislativePropositionFileAttachments': legislativePropositionFileAttachments
+      'legislativePropositionFileAttachments': legislativePropositionFileAttachments,
+      'legislativePropositionRelationships': legislativePropositionRelationships
    }
 }
 
@@ -171,10 +212,19 @@ module.exports.getLegislativePropositionTypes = function() {
    return _requestService({
       url: _getLegislativePropositionTypesMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data) {
       return _transformLegislativePropositionTypes(data.legislativePropositionTypes);
+   });
+}
+
+module.exports.getLegislativePropositionTags = function(legislativePropositionType) {
+   return _requestService({
+      url: _getLegislativePropositionTagsMethodURL() + "/" + legislativePropositionType,
+      method: "GET",
+      json: true
+   }).then(function(data) {
+      return _transformLegislativePropositionTags(data.legislativePropositionTags);
    });
 }
 
@@ -202,8 +252,14 @@ module.exports.getLegislativePropositions = function(filter, page, pageSize) {
    }
 
    //category
+
    if(filter.type) {
       qs['type'] = filter.type;
+   }
+
+   //tag
+   if(filter.tag) {
+      qs['tag'] = filter.tag;
    }
 
    //number
@@ -232,8 +288,21 @@ module.exports.getLegislativeProposition = function(legislativePropositionId) {
    return _requestService({
       url: _getLegislativePropositionMethodURL() + "/" + legislativePropositionId,
       method: "GET",
+      json: true
+   }).then(function(result) {
+      return _transformGetLegislativePropositionResult(result.legislativeProposition);
+   });
+}
+
+module.exports.getLegislativePropositionByNumber = function(number, typeCode) {
+   return _requestService({
+      url: _getLegislativePropositionMethodURL(),
+      method: "GET",
       json: true,
-      body: {}
+      qs: {
+         'number': number,
+         'typeCode': typeCode
+      }
    }).then(function(result) {
       return _transformGetLegislativePropositionResult(result.legislativeProposition);
    });
@@ -244,8 +313,7 @@ module.exports.getLastLegislativePropositions = function(amountOfLegislativeProp
    return _requestService({
       url: _getLegislativePropositionTypesMethodURL(),
       method: "GET",
-      json: true,
-      body: {}
+      json: true
    }).then(function(data){
       legislativePropositionTypes = data.legislativePropositionTypes;
       return _requestService({
@@ -259,8 +327,7 @@ module.exports.getLastLegislativePropositions = function(amountOfLegislativeProp
             sortDirection: -1,
             //get only propositions of the type "Lei Ordinária" Code=1
             type: _getLegislativePropositionTypeId(legislativePropositionTypes, 1)
-         },
-         body: {}
+         }
       })
    }).then(function(data) {
       //last update info
