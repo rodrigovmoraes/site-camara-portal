@@ -1,6 +1,6 @@
 {
    CamaraApi : {
-      baseUrlSiteCamaraApi : "http://localhost:3002/",
+      baseUrlSiteCamaraApi : "http://187.51.16.130:3002/",
       eventsCalendarMethodPath : "eventsCalendar"
    }
 }

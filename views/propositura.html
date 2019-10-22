@@ -1,3 +1,14 @@
+{{#yield-head}}
+   <!-- Facebook Open Graph: used for sharing purposes -->
+   {{#legislativeProposition}}
+   <meta property="og:url"           content="{{facebookLegislativePropositionUrl}}{{legislativePropositionId}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}" />
+   <meta property="og:image"         content="{{facebookCamaraUrlBase}}/images/camara_logo_sharing.jpg" />
+   <meta property="og:description"   content="{{legislativePropositionDescription}}" />
+   {{/legislativeProposition}}
+{{/yield-head}}
+
 {{#yield-scripts}}
    <script type="text/javascript">
       $(document).ready(function() {
@@ -8,6 +19,8 @@
           {{/print}}
       });
    </script>
+   <!--facebook sharing function(s) js-->
+   <script src="js/facebook-sharing.js"></script>
 {{/yield-scripts}}
 
 <div class="container">
@@ -83,8 +96,18 @@
           {{/print}}
 
           {{^print}}
-             <span class="ion-android-printer"></span>
-             <a href="?id={{legislativePropositionId}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>
+             <!-- Facebook share button code -->
+             <div class="time">
+                <span class="ion-social-facebook"></span>
+                <a href="#" onclick="fbs_click()">Compartilhar no Facebook</a>
+             </div>
+          {{/print}}
+
+          {{^print}}
+             <div class="time">
+                <span class="ion-android-printer"></span>
+                <a href="?id={{legislativePropositionId}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>
+             </div>
           {{/print}}
         </div>
 

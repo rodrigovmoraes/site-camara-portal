@@ -1,19 +1,37 @@
+{{#yield-head}}
+   <!-- Facebook Open Graph: used for sharing purposes -->
+   {{#page}}
+   <meta property="og:url"           content="{{facebookPageUrl}}{{_id}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{title}}" />
+   <meta property="og:image"         content="{{facebookCamaraUrlBase}}/images/camara_logo_sharing.jpg" />
+   {{/page}}
+{{/yield-head}}
+
+{{#yield-posBody}}
+   <!-- Load Facebook SDK for JavaScript -->
+   <div id="fb-root"></div>
+   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.0"></script>
+{{/yield-posBody}}
+
 <div class="container">
   <div class="row">
-
      {{#page}}
         <div class="page-header">
            <h1>{{title}}</h1>
-           <ol class="breadcrumb">
-             <li><a href="/">Home</a></li>
-             <!--TODO: get from menu service if there
-             is a menu item linked to this page//-->
-             <li><a href="#">Página</a></li>
-           </ol>
         </div>
-
+        {{#enableFacebookShareButton}}
+        <div class="text-danger sub-info-nobordered">
+          <img id="facebook-sharer-icon" src="images/faceicon.png" alt="Facebook" title="Facebook" width="20px" height="20px"></img>
+          <div class="fb-like" data-href="{{facebookPageUrl}}{{_id}}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        </div>
+        {{/enableFacebookShareButton}}
         <span class="newsitem">
            {{{body}}}
+           {{#enableFacebookComments}}
+              <div class="facebook-comments-divider"></div>
+              <div class="fb-comments" data-href="{{facebookPageUrl}}{{_id}}" data-width="" data-numposts="5"></div>
+           {{/enableFacebookComments}}
         </span>
      {{/page}}
 

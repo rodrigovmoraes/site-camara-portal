@@ -6,6 +6,7 @@ var winston = require('winston');
 var express = require('express');
 var router = express.Router();
 var Utils = require('../services/camara/Utils.js');
+var GoogleAnalyticsConfig = require('../services/camara/GoogleAnalyticsConfig.js');
 
 /*****************************************************************************
 ********************* REQUIRE CONTROLLERS MODULES ****************************
@@ -28,6 +29,13 @@ router.use(function(req, res, next) {
       return camaraBannersService.getBanners();
    }).then(function(banners) {
       res.locals.banners = portalControllers.transformBanners(banners);
+      res.locals.googleAnalyticsTrackingID = GoogleAnalyticsConfig.getTrackingID();
+      //set if there is just one banner
+      if (banners && banners.length && banners.length === 1) {
+         res.locals.banners.isSingle = true;
+      } else {
+         res.locals.banners.isSingle = false;
+      }
       next();
    }).catch(function(err) {
       res.locals.menuItems = [];

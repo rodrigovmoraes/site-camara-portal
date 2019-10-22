@@ -803,7 +803,7 @@ module.exports.getOrdemDoDiaListaDeAnos = function() {
 
 module.exports.getComissoes = function(filter) {
    var qs = {};
-   if(filter.sessaoAtual) {
+   if (filter.sessaoAtual) {
       qs.sessaoAtual = filter.sessaoAtual;
    } else if (filter.sessaoId) {
       qs.sessaoId = filter.sessaoId;

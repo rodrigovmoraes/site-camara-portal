@@ -1,3 +1,14 @@
+{{#yield-head}}
+   <!-- Facebook Open Graph: used for sharing purposes -->
+   {{#materia}}
+   <meta property="og:url"           content="{{facebookMateriaUrl}}{{Materia_id}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{Materia_tipoDocumento}} nº {{materiaLegislativaNumberDescription}}" />
+   <meta property="og:image"         content="{{facebookCamaraUrlBase}}/images/camara_logo_sharing.jpg" />
+   <meta property="og:description"   content="{{Materia_ementa}}" />
+   {{/materia}}
+{{/yield-head}}
+
 {{#yield-scripts}}
    <script type="text/javascript">
       $(document).ready(function() {
@@ -8,6 +19,8 @@
           {{/print}}
       });
    </script>
+   <!--facebook sharing function(s) js-->
+   <script src="js/facebook-sharing.js"></script>
 {{/yield-scripts}}
 
 <div class="container" id="divContainer">
@@ -34,6 +47,11 @@
            <div class="time">
              <span class="ion-archive icon"></span>
              <a href="{{materiaTextoOriginalUrlDownload}}{{Materia_id}}" target="_blank">Texto Original</a>
+             {{^print}}
+               <!-- Facebook share button code -->
+               <span class="ion-social-facebook" style="margin-left: 7px"></span>
+               <a href="#" onclick="fbs_click()">Compartilhar no Facebook</a>
+             {{/print}}
              {{^print}}
                 <span class="ion-android-printer" style="margin-left: 7px"></span>
                 <a href="?id={{Materia_id}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>

@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <!--BEGIN: Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id={{googleAnalyticsTrackingID}}"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', '{{googleAnalyticsTrackingID}}');
+   </script>
+   <!--END: Global site tag (gtag.js) - Google Analytics -->
+
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>Câmara Municipal de Sorocaba</title>
-   <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-   <link href="images/favicon.ico" rel="icon" type="image/x-icon">
+   {{{yield-head}}}
+   <link href="images/favicon2.ico" rel="shortcut icon" type="image/x-icon">
+   <link href="images/favicon2.ico" rel="icon" type="image/x-icon">
    <!-- bootstrap styles-->
    <link href="css/bootstrap.min.css" rel="stylesheet">
    <!-- Jquery UI -->
@@ -44,10 +56,16 @@
    <!-- END specific pages tyles//-->
 </head>
 <body>
+   {{{yield-posBody}}}
+   
 <!-- preloader start -->
+<!--
+10/04/2019: Disabled for performance purposes (Rodrigo).
+
 <div id="preloader">
   <div id="status"></div>
 </div>
+//-->
 <!-- preloader end -->
 
 <!-- wrapper start -->
@@ -63,7 +81,7 @@
 
               <ul id="inline-popups" class="list-inline">
                  <a href="/">
-                    <img src="images/ads/logo2.png" width="154" height="57" alt=""/>
+                    <img src="images/ads/logo4.jpg" width="172" height="58" alt="Logotipo da Câmara"/>
                  </a>
               </ul>
 
@@ -195,11 +213,11 @@
             <div class="row">
               <div class="col-sm-10 col-xs-16 f-nav wow fadeInDown animated" data-wow-delay="0.5s" data-wow-offset="10">
                 <ul class="list-inline ">
-                  <li> <a href="#">Home</a></li>
-                  <li> <a href="#">Fale Conosco</a></li>
-                  <li> <a href="#">História</a></li>
-                  <li> <a href="#">Como Chegar</a></li>
-                  <li> <a href="#">Vereadores</a></li>
+                  <li> <a href="/">Home</a></li>
+                  <li> <a href="/page.html?tag=faleconosco">Fale Conosco</a></li>
+                  <li> <a href="http://www.memorialsorocaba.com.br/historia-da-camara-de-sorocaba/" target="_blank">História</a></li>
+                  <li> <a href="/page.html?tag=comochegar">Como Chegar</a></li>
+                  <li> <a href="/vereadores.html">Vereadores</a></li>
                 </ul>
               </div>
             </div>
@@ -257,6 +275,12 @@
 <script src="js/camara-utils/utils.js"></script>
 <!--custom js-->
 <script src="js/custom-fun.js"></script>
+
+<!--BEGIN: if there is just one banner stop owl carousel -->
+{{#banners.isSingle}}
+<script src="js/stop-banners.js"></script>
+{{/banners.isSingle}}
+<!-- END: if there is just one banner stop owl carousel -->
 
 <!-- BEGIN specific page scripts //-->
 {{{yield-scripts}}}

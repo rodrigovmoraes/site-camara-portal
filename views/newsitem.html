@@ -1,3 +1,20 @@
+{{#yield-head}}
+   <!-- Facebook Open Graph: used for sharing purposes -->
+   {{#newsItem}}
+   <meta property="og:url"           content="{{facebookNewsItemUrl}}{{_id}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{title}}" />
+   <meta property="og:description"   content="{{headline}}" />
+   <meta property="og:image"         content="{{thumbnailUrl}}" />
+   {{/newsItem}}
+{{/yield-head}}
+
+{{#yield-posBody}}
+   <!-- Load Facebook SDK for JavaScript -->
+   <div id="fb-root"></div>
+   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.0"></script>
+{{/yield-posBody}}
+
 <div class="container">
   <div class="row">
 
@@ -16,12 +33,21 @@
             <div class="time"><span class="ion-android-data icon"></span>atualizado em: {{ changedDate }}</div>
          {{/changedDate}}
          {{#views}}
+            <!--
+            25/09/2019: disabled for technical issues:
             <div class="comments">
                <span class="ion-ios7-eye icon"></span>
                {{views}}
             </div>
+            //-->
          {{/views}}
         </div>
+        {{#enableFacebookShareButton}}
+        <div class="text-danger sub-info-nobordered">
+           <img id="facebook-sharer-icon" src="images/faceicon.png" alt="Facebook" title="Facebook" width="20px" height="20px"></img>
+           <div class="fb-like" data-href="{{facebookNewsItemUrl}}{{_id}}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        </div>
+        {{/enableFacebookShareButton}}
         {{#headline}}
         <span class="newsitemHeadline">
            <p>{{headline}}</p>
@@ -29,6 +55,10 @@
         {{/headline}}
         <span class="newsitem">
            {{{body}}}
+           {{#enableFacebookComments}}
+              <div class="facebook-comments-divider"></div>
+              <div class="fb-comments" data-href="{{facebookNewsItemUrl}}{{_id}}" data-width="" data-numposts="5"></div>
+           {{/enableFacebookComments}}
         </span>
      {{/newsItem}}
 

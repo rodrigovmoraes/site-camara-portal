@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+
+        <div class="page-header">
+           <h1>Rádio</h1>
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <!--TODO: get from menu service if there
+             is a menu item linked to this page//-->
+             <li><a href="#">Rádio</a></li>
+           </ol>
+        </div>
+
+        <span class="newsitem">
+           <table border="0" cellspacing="0" cellpadding="0" height="150" align="center">
+              <tbody>
+              <tr>
+                 <td background="images/radio/player-bg.jpg">&nbsp;&nbsp;<img src="images/radio/player-logo4.jpg" border="0"></td>
+              </tr>
+              <tr>
+                 <td background="images/radio/player-bg.jpg">
+                    <script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+                    <script type="text/javascript" >
+                         MRP.insert({
+                            'url':'http://suaradio1.dyndns.ws:13124/stream',
+                            'lang':'pt',
+                            'codec':'aac',
+                            'volume':65,
+                            'autoplay':true,
+                            'forceHTML5':true,
+                            'jsevents':false,
+                            'buffering':1,
+                            'title':'Rádio Câmara Sorocaba',
+                            'welcome':'Seja Bem Vindo(a)',
+                            'wmode':'transparent',
+                            'skin':'compact',
+                            'width':191,
+                            'height':48
+                         });
+                    </script></td>
+              </tr>
+              <tr>
+                 <td>
+                    <a href="http://suaradio1.dyndns.ws:13124/stream.m3u">&nbsp;&nbsp;<img src="images/radio/player-ios.jpg" border="0"></a>
+                 </td>
+              </tr>
+              </tbody>
+           </table>
+        </span>
+
+  </div>
+</div>

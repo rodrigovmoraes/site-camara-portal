@@ -22,6 +22,8 @@ var YoutubeService = require('./services/YoutubeService.js');
 var CamaraApiConfigService = require('./services/camara/CamaraApiConfigService.js');
 var SyslegisApiConfigService = require('./services/camara/SyslegisApiConfigService.js');
 var SearchConfigService = require('./services/camara/SearchConfigService.js');
+var FacebookSharingConfig = require('./services/camara/FacebookSharingConfig.js');
+var GoogleAnalyticsConfig = require('./services/camara/GoogleAnalyticsConfig.js');
 
 //-----------------------------------------------------------------------------
 var app = express();
@@ -156,6 +158,17 @@ SearchConfigService.setElasticSearchConnectionConfig(searchConfigService.elastic
 SearchConfigService.setSearchResultUrlMappings(searchConfigService.searchResultUrlMappings);
 SearchConfigService.setDocumentTypes(searchConfigService.documentTypes);
 SearchConfigService.setMaxResultSize(searchConfigService.maxResultSize);
+
+var facebookSharingConfig = config.get("FacebookSharing");
+FacebookSharingConfig.setCamaraPortalUrlBase(facebookSharingConfig.camaraPortalUrlBase);
+FacebookSharingConfig.setNewsItemUrl(facebookSharingConfig.newsItemUrl);
+FacebookSharingConfig.setPageUrl(facebookSharingConfig.pageUrl);
+FacebookSharingConfig.setLegislativePropositionUrl(facebookSharingConfig.legislativePropositionUrl);
+FacebookSharingConfig.setMateriaUrl(facebookSharingConfig.materiaUrl);
+FacebookSharingConfig.setLicitacaoUrl(facebookSharingConfig.licitacaoUrl);
+
+var googleAnalyticsConfig = config.get("GoogleAnalytics");
+GoogleAnalyticsConfig.setTrackingID(googleAnalyticsConfig.trackingID);
 
 /*****************************************************************************
 ************************** ERROR HANDLING SECTION ****************************

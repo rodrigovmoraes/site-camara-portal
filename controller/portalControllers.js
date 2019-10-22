@@ -22,6 +22,7 @@ var FlickrService = require('../services/FlickrService');
 var YoutubeService = require('../services/YoutubeService');
 var SyslegisApiConfigService = require('../services/camara/SyslegisApiConfigService');
 var SearchConfigService = require('../services/camara/SearchConfigService');
+var FacebookSharingConfig = require('../services/camara/FacebookSharingConfig.js');
 var Utils = require('../services/camara/Utils.js');
 var _ = require('lodash');
 
@@ -325,12 +326,13 @@ module.exports.homePageController = function(req, res, next) {
 
 /* GET '/newsitem.html' page */
 module.exports.newsItemController = function(req, res, next) {
-   if(req.query.id) {
+   if (req.query.id) {
       NewsService.getItem(req.query.id).then(function(newsItem) {
          NewsService.incrementViews(req.query.id);
          //render the page
          res.render('newsitem', {
-             'newsItem': newsItem
+             'newsItem': newsItem,
+             'facebookNewsItemUrl': FacebookSharingConfig.getNewsItemUrl()
          });
       }).catch(function(err) {
          //render the error page
@@ -457,20 +459,34 @@ module.exports.fotosController = function(req, res, next) {
 
 /* GET '/page.html' page */
 module.exports.pageController = function(req, res, next) {
-   if(req.query.id) {
+   if (req.query.id) {
       PagesService.getPage(req.query.id).then(function(page) {
          //render the page
          res.render('page', {
-             'page': page
+             'page': page,
+             'facebookPageUrl': FacebookSharingConfig.getPageUrl(),
+             'facebookCamaraUrlBase': FacebookSharingConfig.getCamaraPortalUrlBase()
+         });
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } else if (req.query.tag) {
+      PagesService.getPageByTag(req.query.tag).then(function(page) {
+         //render the page
+         res.render('page', {
+             'page': page,
+             'facebookPageUrl': FacebookSharingConfig.getPageUrl(),
+             'facebookCamaraUrlBase': FacebookSharingConfig.getCamaraPortalUrlBase()
          });
       }).catch(function(err) {
          //render the error page
          Utils.next(err.statusCode, err, next);
       });
    } else {
-      Utils.next(400, { message: "O id da página precisa ser definido" }, next);
+      Utils.next(400, { message: "A tag ou o id da página precisa ser definido" }, next);
    }
-};
+}
 
 /* GET '/calendar.html' page */
 module.exports.calendarController = function(req, res, next) {
@@ -611,7 +627,9 @@ module.exports.licitacaoController = function(req, res, next) {
       camaraLicitacoesService.getLicitacao(req.query.id).then(function(licitacao) {
          //render the page
          res.render('licitacao', {
-             'licitacao': licitacao
+             'licitacao': licitacao,
+             'facebookCamaraUrlBase': FacebookSharingConfig.getCamaraPortalUrlBase(),
+             'facebookLicitacaoUrl': FacebookSharingConfig.getLicitacaoUrl()
          });
       }).catch(function(err) {
          //render the error page
@@ -786,6 +804,8 @@ module.exports.proposituraController = function(req, res, next) {
             result.print = false;
          }
          //render the page
+         result.facebookCamaraUrlBase = FacebookSharingConfig.getCamaraPortalUrlBase();
+         result.facebookLegislativePropositionUrl = FacebookSharingConfig.getLegislativePropositionUrl();
          res.render('propositura', result);
       }).catch(function(err) {
          //render the error page
@@ -802,6 +822,8 @@ module.exports.proposituraController = function(req, res, next) {
          } else {
             result.print = false;
          }
+         result.facebookCamaraUrlBase = FacebookSharingConfig.getCamaraPortalUrlBase();
+         result.facebookLegislativePropositionUrl = FacebookSharingConfig.getLegislativePropositionUrl();
          //render the page
          res.render('propositura', result);
       }).catch(function(err) {
@@ -1132,6 +1154,9 @@ module.exports.materiaLegislativaController = function(req, res, next) {
          } else {
             result.print = false;
          }
+         //render the page
+         result.facebookCamaraUrlBase = FacebookSharingConfig.getCamaraPortalUrlBase();
+         result.facebookMateriaUrl = FacebookSharingConfig.getMateriaUrl();
          res.render('materia', result);
       }).catch(function(err) {
          //render the error page

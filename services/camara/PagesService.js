@@ -40,3 +40,13 @@ module.exports.getPage = function(pageId) {
       return result.page;
    });
 }
+
+module.exports.getPageByTag = function(tag) {
+   return _requestService({
+      url: _getPageMethodURL() + "/tag/" + tag,
+      method: "GET",
+      json: true
+   }).then(function(result) {
+      return result.page;
+   });
+}

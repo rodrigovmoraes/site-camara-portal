@@ -181,6 +181,7 @@ $(document).ready(function() {
    rotativeHeadlines.owlCarousel({
      autoPlay: true,
      singleItem: true,
+     stopOnHover : true,
      slideSpeed: 5000,
      navigation: true,
      pagination: false,

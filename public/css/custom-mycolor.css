@@ -155,8 +155,8 @@ Author : Webyzona.com
 	border: 1px soild #ededed;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-	background: #e74c3c;
-	border: 1px solid #e74c3c !important;
+	background: #3d566e;
+	border: 1px solid #3d566e !important;
 }
 .pagination > li > a, .pagination > li > span {
 	color: #3d566e;
@@ -187,6 +187,7 @@ Author : Webyzona.com
 	border-bottom: 1px solid #ededed;
 	padding: 8px 0;
 	margin-bottom: 10px;
+	margin-top: 10px;
 }
 .sub-info-bordered div {
 	display: inline-block;
@@ -200,6 +201,26 @@ Author : Webyzona.com
 .sub-info-bordered a:hover {
 	text-decoration: underline;
 }
+/*sub-info nobodered*/
+.sub-info-nobordered {
+	font-size: 24;
+	padding: 8px 0;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.sub-info-nobordered div {
+	display: inline-block;
+}
+.sub-info-nobordered .stars {
+	float: right;
+}
+.sub-info-nobordered a {
+	color: #3d566e;
+}
+.sub-info-nobordered a:hover {
+	text-decoration: underline;
+}
+
 .last-update {
 	font-size: 12px;
 	line-height: 36px;
@@ -371,7 +392,7 @@ blockquote p {
 	padding: 5px 5px 0 5px;
 }
 .sec-topic {
-	margin-bottom: 20px;
+	margin-bottom: 0;
 	padding-right: 15px;
 }
 .right-sec .main-title {
@@ -2584,7 +2605,8 @@ footer  .list-unstyled li a:hover h4 {
 }
 
 .licitacoes .licitacaoTitle {
-	max-height: 150px;
+   height: 23px;
+	max-height: 23px;
 	overflow: hidden;
 }
 
@@ -2980,4 +3002,17 @@ div.mfp-wrap::-webkit-scrollbar-track {
 div.mfp-wrap::-webkit-scrollbar-thumb {
     background: rgb(193, 193, 193);
     border-radius: 10px;
+}
+
+/*used to format the horizontal bar that divides the facebook comments region*/
+.facebook-comments-divider {
+   list-style: none;
+   background-color: #f5f5f5;
+   width: 100%;
+   border-bottom: 1px solid #ededed;
+   margin-bottom: 50px
+}
+
+#facebook-sharer-icon {
+   margin-bottom: 2px
 }
