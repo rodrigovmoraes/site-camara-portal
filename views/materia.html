@@ -42,20 +42,17 @@
            <p>{{Materia_ementa}}</p>
         </span>
 
+        {{^print}}
         <div class="text-danger sub-info-bordered" style="font-size: 16px">
            {{#Materia_textoIntegral}}
            <div class="time">
              <span class="ion-archive icon"></span>
              <a href="{{materiaTextoOriginalUrlDownload}}{{Materia_id}}" target="_blank">Texto Original</a>
-             {{^print}}
-               <!-- Facebook share button code -->
-               <span class="ion-social-facebook" style="margin-left: 7px"></span>
-               <a href="#" onclick="fbs_click()">Compartilhar no Facebook</a>
-             {{/print}}
-             {{^print}}
-                <span class="ion-android-printer" style="margin-left: 7px"></span>
-                <a href="?id={{Materia_id}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>
-             {{/print}}
+             <!-- Facebook share button code -->
+             <span class="ion-social-facebook" style="margin-left: 7px"></span>
+             <a href="#" onclick="fbs_click()">Compartilhar no Facebook</a>
+             <span class="ion-android-printer" style="margin-left: 7px"></span>
+             <a href="?id={{Materia_id}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>
            </div>
            {{/Materia_textoIntegral}}
            {{#Materia_textoIntegralFinal}}
@@ -71,6 +68,7 @@
            </div>
            {{/Materia_numeroLei}}
         </div>
+        {{/print}}
 
         <div class="text-danger sub-info-bordered" style="font-size: 16px">
            <div class="time"><span class="ion-android-calendar icon"></span>Apresentação: {{Materia_data_apresentacao}}</div>
