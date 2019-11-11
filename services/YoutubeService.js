@@ -12,7 +12,10 @@ var Utils = require('./camara/Utils.js');
 var _youtubeApiBaseUrl; //Ex, "https://www.googleapis.com/youtube/v3"
 var _youtubeApiKey; //
 var _youtubeApiSearchVideosMethod; //Ex, ""search"
+var _playlistItemsMethod;//Ex, "playlistItems"
 var _youtubeChannelId; //Ex, "UCWQR_GgpIhrfoG1vikt94bA"
+var _youtubePlaylistId;//Ex, "UUWQR_GgpIhrfoG1vikt94bA"
+
 /*****************************************************************************
 *************************** Module Setters ***********************************
 /*****************************************************************************/
@@ -28,26 +31,31 @@ module.exports.setYoutubeApiSearchVideosMethod = function(youtubeApiSearchVideos
    _youtubeApiSearchVideosMethod = youtubeApiSearchVideosMethod;
 }
 
+module.exports.setPlaylistItemsMethod = function(playlistItemsMethod) {
+   _playlistItemsMethod = playlistItemsMethod;
+}
+
 module.exports.setYoutubeChannelId = function(youtubeChannelId) {
    _youtubeChannelId = youtubeChannelId;
 }
 
+module.exports.setYoutubePlaylistId = function(youtubePlaylistId) {
+   _youtubePlaylistId = youtubePlaylistId;
+}
 
 /*****************************************************************************
 **************************  Module functions *********************************
 /*****************************************************************************/
 module.exports.getLastVideos = function(amountOfVideos) {
     return _requestService({
-      url: _youtubeApiBaseUrl + "/" + _youtubeApiSearchVideosMethod,
+      url: _youtubeApiBaseUrl + "/" + _playlistItemsMethod,
       method: "GET",
       json: true,
       qs: {
          'part' : "snippet",
          'maxResults' : amountOfVideos,
-         'order': "date",
-         'type': "video",
          'key' : _youtubeApiKey,
-         'channelId' : _youtubeChannelId
+         'playlistId' : _youtubePlaylistId
       }
    }).then(function(data) {
       var i;
@@ -56,8 +64,8 @@ module.exports.getLastVideos = function(amountOfVideos) {
          for(i = 0; i < data.items.length; i++) {
             var resultItem = data.items[i];
             videosResult.push({
-               youtubeVideoId: resultItem.id && resultItem.id.videoId
-                                    ? resultItem.id.videoId : '',
+               youtubeVideoId: resultItem.snippet && resultItem.snippet.resourceId && resultItem.snippet.resourceId.videoId
+                                    ? resultItem.snippet.resourceId.videoId : '',
                youtubeVideoTitle: resultItem.snippet && resultItem.snippet.title
                                     ? resultItem.snippet.title : '',
                youtubeVideoThumbnailURL: resultItem.snippet && resultItem.snippet.thumbnails && resultItem.snippet.thumbnails.default && resultItem.snippet.thumbnails.default.url
@@ -73,7 +81,7 @@ module.exports.getLastVideos = function(amountOfVideos) {
    });
 }
 
-module.exports.getVideosPage = function(filter, pageToken, pageSize) {
+module.exports.getVideosPage = function(pageToken, pageSize) {
    var videosResult = [];
    var totalResults = 0;
    var nextPageToken = null;
@@ -82,29 +90,15 @@ module.exports.getVideosPage = function(filter, pageToken, pageSize) {
    var qsParams = {
       'part' : "snippet",
       'maxResults' : pageSize,
-      'order': "date",
-      'type': "video",
       'key' : _youtubeApiKey,
-      'channelId' : _youtubeChannelId
+      'playlistId' : _youtubePlaylistId
    };
-   //keywords filter
-   if(filter.q) {
-      qsParams['q'] = filter.q;
-   }
-   //date begin filter
-   if(filter.publishedAfter) {
-      qsParams['publishedAfter'] = filter.publishedAfter;
-   }
-   //date end filter
-   if(filter.publishedAfter) {
-      qsParams['publishedBefore'] = filter.publishedBefore;
-   }
    //set page token
    if(pageToken) {
       qsParams['pageToken'] = pageToken;
    }
    return _requestService({
-      url: _youtubeApiBaseUrl + "/" + _youtubeApiSearchVideosMethod,
+      url: _youtubeApiBaseUrl + "/" +  _playlistItemsMethod,
       method: "GET",
       json: true,
       qs: qsParams
@@ -115,8 +109,8 @@ module.exports.getVideosPage = function(filter, pageToken, pageSize) {
          for(i = 0; i < data.items.length; i++) {
             var resultItem = data.items[i];
             videosResult.push({
-               youtubeVideoId: resultItem.id && resultItem.id.videoId
-                                    ? resultItem.id.videoId : '',
+               youtubeVideoId: resultItem.snippet && resultItem.snippet.resourceId && resultItem.snippet.resourceId.videoId
+                                    ? resultItem.snippet.resourceId.videoId : '',
                youtubeVideoTitle: resultItem.snippet && resultItem.snippet.title
                                     ? resultItem.snippet.title : '',
                youtubeVideoThumbnailURL: resultItem.snippet && resultItem.snippet.thumbnails && resultItem.snippet.thumbnails.high && resultItem.snippet.thumbnails.high.url
@@ -131,38 +125,8 @@ module.exports.getVideosPage = function(filter, pageToken, pageSize) {
       totalResults = data.pageInfo && data.pageInfo.totalResults
                            ? (videosResult.length > 0 ? data.pageInfo.totalResults : 0)
                            : 0;
-      nextPageToken = data.nextPageToken ? data.nextPageToken : null,
-      prevPageToken = data.prevPageToken ? data.prevPageToken : null
-      //check next page,
-      //if the next page is empty set that the next doesn't exist
-      if(nextPageToken) {
-         qsParams['pageToken'] = data.nextPageToken ? data.nextPageToken : null;
-         return _requestService({
-            url: _youtubeApiBaseUrl + "/" + _youtubeApiSearchVideosMethod,
-            method: "GET",
-            json: true,
-            qs: qsParams
-         });
-      } else {
-         return null;
-      }
-   }).then(function(data) {
-      nextPageToken = data && data.items && data.items.length > 0 ? nextPageToken : null;
-      //check prev page
-      //if the next page is empty set that the previous page doesn't exist
-      if(prevPageToken) {
-         qsParams['pageToken'] = data.prevPageToken ? data.prevPageToken : null;
-         return _requestService({
-            url: _youtubeApiBaseUrl + "/" + _youtubeApiSearchVideosMethod,
-            method: "GET",
-            json: true,
-            qs: qsParams
-         });
-      } else {
-         return null;
-      }
-   }).then(function(data) {
-      prevPageToken = data && data.items && data.items.length > 0 ? prevPageToken : null;
+      nextPageToken = data.nextPageToken ? data.nextPageToken : null;
+      prevPageToken = data.prevPageToken ? data.prevPageToken : null;
       return {
             'videos': videosResult,
             'totalResults': totalResults,

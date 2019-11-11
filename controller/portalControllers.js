@@ -1241,34 +1241,14 @@ module.exports.videosController = function(req, res, next) {
    //set the page and pageSize
    var pageToken = null;
    var pageSize = 9;
-   var filter = {}; //keywords + date begin + date end
 
    //page
    if(req.query.pageToken) {
       pageToken = req.query.pageToken;
    }
 
-   //keywords
-   if(req.query.keywords) {
-      filter['q'] = req.query.keywords;
-   }
-   // date begin
-   if(req.query.begin) {
-      var date1 = Utils.toDateFromDDMMYYYY(req.query.begin);
-      filter['publishedAfter'] = date1;
-   }
-   //date end
-   if(req.query.end) {
-      var date2 = Utils.toDateFromDDMMYYYY(req.query.end);
-      date2.setHours(23);
-      date2.setMinutes(59);
-      date2.setSeconds(59);
-      date2.setMilliseconds(999);
-      filter['publishedBefore'] = date2;
-   }
-
    YoutubeService
-      .getVideosPage(filter, pageToken, pageSize)
+      .getVideosPage(pageToken, pageSize)
       .then(function(result) {
          //render the page
          res.render('videos', {
@@ -1276,10 +1256,7 @@ module.exports.videosController = function(req, res, next) {
              'nextPageToken': result.nextPageToken,
              'prevPageToken': result.prevPageToken,
              'totalResults': result.totalResults,
-             'showPagination': result.nextPageToken || result.prevPageToken,
-             'begin': req.query.begin ? req.query.begin : null,
-             'end': req.query.end ? req.query.end : null,
-             'keywords': req.query.keywords ? req.query.keywords : null
+             'showPagination': result.nextPageToken || result.prevPageToken
          });
       }).catch(function(err) {
          //render the error page

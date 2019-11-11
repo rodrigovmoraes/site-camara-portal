@@ -99,7 +99,9 @@ var YoutubeServiceConfig = config.get('Services.YoutubeService');
 YoutubeService.setYoutubeApiBaseUrl(YoutubeServiceConfig.urlBase);
 YoutubeService.setYoutubeApiKey(YoutubeServiceConfig.apiKey);
 YoutubeService.setYoutubeApiSearchVideosMethod(YoutubeServiceConfig.urlsMethods.search);
+YoutubeService.setPlaylistItemsMethod(YoutubeServiceConfig.urlsMethods.playlistItems);
 YoutubeService.setYoutubeChannelId(YoutubeServiceConfig.channelId);
+YoutubeService.setYoutubePlaylistId(YoutubeServiceConfig.playlistId);
 
 var camaraApiConfig = config.get('Services.CamaraApi');
 CamaraApiConfigService.setBaseUrl(camaraApiConfig.baseUrl);
