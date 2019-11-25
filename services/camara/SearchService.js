@@ -104,6 +104,7 @@ var _transformSearchHitsItem = function(prefix, hitItem) {
    transformedItem[prefix + 'Descricao'] = _extractDescription(hitItem);
    transformedItem[prefix + 'Texto'] = _extractText(hitItem);
    transformedItem[prefix + 'Data'] = _formatHitItemDate(hitItem['_source']['date']);
+   transformedItem[prefix + 'DataDescricao'] = _formatHitItemDate(hitItem['_source']['dateDescription']);
    urlResult = _buildUrl(hitItem);
    transformedItem[prefix + 'Url'] = urlResult.url;
    transformedItem[prefix + 'Target'] = urlResult.target;
