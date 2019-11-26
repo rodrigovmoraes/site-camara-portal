@@ -241,7 +241,7 @@ module.exports.search = function(filter) {
                'from': filter.offset,
                'body': {
                          "_source": [ "type", "typeDescription", "subtypeDescription",
-                                       "datasourceId", "date", "title", "description" ],
+                                       "datasourceId", "dateDescription", "date", "title", "description" ],
                          "query": filter['documentTypeTag'] ? _queryWithDocumentTypeFilter(filter)
                                                             : _queryWithoutDocumentTypeFilter(filter),
                          "highlight" : {
