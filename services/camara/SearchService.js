@@ -47,6 +47,15 @@ var _formatHitItemDate = function(strDate) {
    }
 }
 
+var _formatHitItemDay = function(strDate) {
+   if(strDate) {
+      var hitItemDate = new Date(strDate);
+      return Utils.toDDMMYYYY(hitItemDate);
+   } else {
+      return null;
+   }
+}
+
 var _extractTitle = function(hitItem) {
    if (hitItem.highlight) {
       //try title field
@@ -104,7 +113,7 @@ var _transformSearchHitsItem = function(prefix, hitItem) {
    transformedItem[prefix + 'Descricao'] = _extractDescription(hitItem);
    transformedItem[prefix + 'Texto'] = _extractText(hitItem);
    transformedItem[prefix + 'Data'] = _formatHitItemDate(hitItem['_source']['date']);
-   transformedItem[prefix + 'DataDescricao'] = _formatHitItemDate(hitItem['_source']['dateDescription']);
+   transformedItem[prefix + 'DataDescricao'] = _formatHitItemDay(hitItem['_source']['dateDescription']);
    urlResult = _buildUrl(hitItem);
    transformedItem[prefix + 'Url'] = urlResult.url;
    transformedItem[prefix + 'Target'] = urlResult.target;
