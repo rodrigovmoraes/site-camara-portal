@@ -99,6 +99,23 @@
 {{/fbreakingNewsItemTypeYoutube}}
 
 {{#fbreakingNewsItemTypeYoutube_live}}
+<video
+    id="my-video"
+    class="video-js vjs-default-skin"
+    controls
+    controls
+    autoplay
+    width="349"
+    height="212"
+    data-setup='{}'>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+    <source src="chrome_japan.mp4" type="video/mp4" />
+  </video>
+<!--
 <a class="popup-youtube-live-channel" href="https://www.youtube.com/embed/live_stream?channel={{channelId}}">
    <div class="box">
       <div class="carousel-caption">{{title}}</div>
@@ -121,6 +138,7 @@
       </div>
    </div>
 </a>
+//-->
 {{/fbreakingNewsItemTypeYoutube_live}}
 
 {{#fbreakingNewsItemTypeFlickr}}
