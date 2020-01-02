@@ -1,21 +1,22 @@
-<body>
-<head>
-   {{#newsItem}}
-   <meta property="og:url"           content="{{facebookNewsItemUrl}}{{_id}}" />
-   <meta property="og:type"          content="website" />
-   <meta property="og:title"         content="{{title}}" />
-   <meta property="og:description"   content="{{headline}}" />
-   <meta property="og:image"         content="http://novo.camarasorocaba.sp.gov.br/images/camara_logo_sharing.jpg" />
-   <meta property="og:image:width"   content="600" />
-   <meta property="og:image:height"  content="600" />
-   <title>Câmara Municipal de Sorocaba - {{title}}</title>
-   {{/newsItem}}
-<head>
-<body>
-   {{#newsItem}}
-   <h1>{{title}}</h1>
-   <p>{{headline}}</p>
-   <p>Saiba mais em <a href="{{portalCamaraNewsItemUrl}}{{_id}}" target="_blank">{{portalCamaraNewsItemUrl}}{{_id}}</a></p>
-   <img src="http://novo.camarasorocaba.sp.gov.br/images/camara_logo_sharing.jpg">
-   {{/newsItem}}
-</body>
+<html>
+   <head>
+      {{#newsItem}}
+      <meta property="og:url"           content="{{facebookNewsItemUrl}}{{_id}}" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="{{title}}" />
+      <meta property="og:description"   content="{{headline}}" />
+      <meta property="og:image"         content="http://novo.camarasorocaba.sp.gov.br/images/camara_logo_sharing.jpg" />
+      <meta property="og:image:width"   content="600" />
+      <meta property="og:image:height"  content="600" />
+      <title>Câmara Municipal de Sorocaba - {{title}}</title>
+      {{/newsItem}}
+   <head>
+   <body>
+      {{#newsItem}}
+      <h1>{{title}}</h1>
+      <p>{{headline}}</p>
+      <p>Saiba mais em <a href="{{portalCamaraNewsItemUrl}}{{_id}}" target="_blank">{{portalCamaraNewsItemUrl}}{{_id}}</a></p>
+      <img src="http://novo.camarasorocaba.sp.gov.br/images/camara_logo_sharing.jpg">
+      {{/newsItem}}
+   </body>
+</html>
