@@ -162,8 +162,7 @@ module.exports.homePageController = function(req, res, next) {
    var fbreakingNewsItems = null;
    var todayEventsCalendar = null;
    var nextEventsCalendar = null;
-   var lastLicitacoesEvents = null;
-   var lastLicitacoesEventsUpdate = null;
+   var lastOrdensDoDia = null;
    var lastPhotosets = null;
    var lastVideos = null;
    return camaraSyslegisService
@@ -262,18 +261,16 @@ module.exports.homePageController = function(req, res, next) {
                });
    }).then(function(pfbreakingNewsItems) {
       fbreakingNewsItems = _transformFBreakingNewsItems(pfbreakingNewsItems);
-      return camaraLicitacoesService
-               .getLastLicitacoesEvents(5)
+      return camaraSyslegisService
+               .getLastOrdensDoDia(5)
                .catch(function(error) {
-                  winston.error("Error while getting last licitacao events, err = [%s]", error);
+                  winston.error("Error while getting last ordens do dia, err = [%s]", error);
                   return {
-                     'lastUpdate': null,
-                     'events': []
+                     'lastUpdate': null
                   }
                });
    }).then(function(plastLicitacoesEvents) {
-      lastLicitacoesEvents = plastLicitacoesEvents.events;
-      lastLicitacoesEventsUpdate = plastLicitacoesEvents.lastUpdate;
+      lastOrdensDoDia = plastLicitacoesEvents.lastOrdensDoDia;
       var fbreakingNewsItem1 = camaraFBreakingNewsService.getFBreakingNewsItemByOrder(fbreakingNewsItems, 1);
       var fbreakingNewsItem2 = camaraFBreakingNewsService.getFBreakingNewsItemByOrder(fbreakingNewsItems, 2);
       var fbreakingNewsItem3 = camaraFBreakingNewsService.getFBreakingNewsItemByOrder(fbreakingNewsItems, 3);
@@ -295,8 +292,7 @@ module.exports.homePageController = function(req, res, next) {
           'fbreakingNewsItem1' : fbreakingNewsItem1,
           'fbreakingNewsItem2' : fbreakingNewsItem2,
           'fbreakingNewsItem3' : fbreakingNewsItem3,
-          'lastLicitacoesEvents' : lastLicitacoesEvents,
-          'lastLicitacoesEventsUpdate' : lastLicitacoesEventsUpdate,
+          'lastOrdensDoDia' : lastOrdensDoDia,
           'legislativeProposition1': legislativePropositions && 0 < legislativePropositions.length ? legislativePropositions[0] : null,
           'legislativeProposition2': legislativePropositions && 1 < legislativePropositions.length ? legislativePropositions[1] : null,
           'legislativeProposition3': legislativePropositions && 2 < legislativePropositions.length ? legislativePropositions[2] : null,

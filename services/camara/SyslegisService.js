@@ -759,6 +759,35 @@ module.exports.getClassificacoes = function() {
    });
 }
 
+module.exports.getLastOrdensDoDia = function(qtdOrdensDoDia) {
+   return _requestService({
+      url: _getOrdensDoDiaMethodURL(),
+      method: "GET",
+      json: true,
+      qs: {
+         'limit': qtdOrdensDoDia,
+         'offset': 0
+      }
+   }).then(function(data) {
+      var i;
+      _transformMateriaCollection("LastOrdemDoDia_", data.ordensDoDia);
+      if(data.ordensDoDia) {
+         for(i = 0; i < data.ordensDoDia.length; i++) {
+            var ordemDoDia = data.ordensDoDia[i];
+            ordemDoDia['LastOrdemDoDia_ano'] = ordemDoDia['LastOrdemDoDia_data'] ? _extractOrdemDoDiaAno(ordemDoDia['LastOrdemDoDia_data']) : "";
+            //set data
+            ordemDoDia['LastOrdemDoDia_data'] = ordemDoDia['LastOrdemDoDia_data'] ? _formatOrdemDoDiaData(ordemDoDia['LastOrdemDoDia_data']) : "";
+            //set data de postagem
+            ordemDoDia['LastOrdemDoDia_dataPostagem'] = ordemDoDia['LastOrdemDoDia_dataPostagem'] ? _formatOrdemDoDiaDataPostagem(ordemDoDia['LastOrdemDoDia_dataPostagem']) : "";
+         }
+      }
+      return {
+         lastOrdensDoDia: data.ordensDoDia,
+         total: data.total
+      }
+   });
+}
+
 module.exports.getOrdensDoDia = function(filter) {
    return _requestService({
       url: _getOrdensDoDiaMethodURL(),

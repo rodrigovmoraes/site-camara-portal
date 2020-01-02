@@ -872,8 +872,8 @@
                      </li>
                      {{/lastProjetosDeLei5}}
 
-                      <!--Projeto de Lei #6//-->
-                      {{#lastProjetosDeLei6}}
+                     <!--Projeto de Lei #6//-->
+                     {{#lastProjetosDeLei6}}
                      <li>
                         <a href="/materia.html?id={{lastProjetoDeLeiId}}">
                           <div class="row">
@@ -1442,45 +1442,50 @@
           </div>
           <!-- agenda end -->
 
-          <!-- licitacoes start -->
+          <!-- Ordens do Dia start -->
           <div class="col-sm-16 business  wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="50" style="margin-right: 5px">
-            <div class="main-title-outer pull-left">
-              <a href="/licitacoes.html"><div class="main-title">Licitações</div><a/>
-              <div class="span-outer"><span class="pull-right text-danger last-update">
-                 {{#lastLicitacoesEventsUpdate}}
-                     <span class="ion-android-data icon"></span>Última atualização: {{lastLicitacoesEventsUpdate}}</span>
-                 {{/lastLicitacoesEventsUpdate}}
-                 {{^lastLicitacoesEventsUpdate}}
-                     <span class="ion-android-data icon">&nbsp;</span>
-                 {{/lastLicitacoesEventsUpdate}}
-              </div>
+            <div class="main-title-outer pull-left"  style="margin-bottom: 10px">
+              <a href="/ordens_do_dia.html"><div class="main-title">Pautas das Sessões</div><a/>
             </div>
             <div class="row">
               <div class="col-md-16 col-sm-16">
                <div class="row">
                   <div class="col-md-16 col-sm-16 col-xs-16">
                     <ul class="list-unstyled">
-                         {{#lastLicitacoesEvents}}
+                         {{#lastOrdensDoDia}}
                          <li>
                            <div class="row">
                                <div class="col-sm-16 col-md-16 col-lg-16  list-item-without-img">
-                                  <a href="/licitacao.html?id={{lastLicitacaoEventLicitacaoId}}">
-                                     <h4 style="margin-right: 5px">Edital {{lastLicitacaoEventNumber}}: {{lastLicitacaoEventLicitacaoDescription}}</h4>
-                                     <p title="{{lastLicitacaoEventDescription}}" style="margin-right: 5px">{{lastLicitacaoEventDescription}}</p>
-                                     <div class="text-danger sub-info" style="margin-right: 5px">
-                                          <div class="time"  title="data do evento da licitação"><span class="ion-android-calendar icon"></span>{{lastLicitacaoEventTimeDescription}}</div>
-                                          <div class="time"><span class="ion-ios7-information icon"></span>{{lastLicitacaoEventCategory}}</div>
-                                          <div class="time"><span class="ion-archive icon"></span><a href="{{lastLicitacaoEventFileDownloadUrl}}" target="_blank">arquivo</a></div>
+                                  <a href="#LastOrdemDoDiaTextoResumido_{{LastOrdemDoDia_id}}" class="open-popup-div">
+                                     <h4 style="margin-right: 5px">{{LastOrdemDoDia_descricao}} {{LastOrdemDoDia_numero}}/{{LastOrdemDoDia_ano}}</h4>
+                                     <div class="text-danger sub-info-bordered">
+                                        <div id="LastOrdemDoDiaTextoResumido_{{LastOrdemDoDia_id}}" class="white-popup-ordem-do-dia mfp-hide">
+                                          {{{LastOrdemDoDia_textoResumido}}}
+                                        </div>
+                                        <div class="time">
+                                          <span class="ion-archive icon"></span>
+                                          <a href="{{LastOrdemDoDia_urlTextoCompleto}}" target="_blank">Texto Completo</a>
+                                        </div>
+                                        {{#LastOrdemDoDia_urlPrimeiroExpediente}}
+                                        <div class="time">
+                                          <span class="ion-archive icon"></span>
+                                          <a href="{{LastOrdemDoDia_urlPrimeiroExpediente}}" target="_blank">Texto 1° Expediente</a>
+                                        </div>
+                                        {{/LastOrdemDoDia_urlPrimeiroExpediente}}
+                                     </div>
+                                     <div class="text-danger sub-info-bordered">
+                                        <div class="time" title="Data da ordem do dia"><span class="ion-android-calendar icon"></span>Data: {{ LastOrdemDoDia_data }}</div>
+                                        <div class="time" title="Data da postagem da ordem do dia"><span class="ion-android-data icon"></span>Postagem: {{ LastOrdemDoDia_dataPostagem }}</div>
                                      </div>
                                   </a>
                                </div>
                            </div>
                          </li>
-                         {{/lastLicitacoesEvents}}
+                         {{/lastOrdensDoDia}}
                       <li>
                         <div class="more_items">
                           <a href="/licitacoes.html">
-                              <div><span class="ion-ios7-browsers icon"></span>outros certames ...</div>
+                              <div><span class="ion-ios7-browsers icon"></span>outras pautas ...</div>
                           </a>
                         </div>
                       </li>
@@ -1491,7 +1496,7 @@
             </div>
             <hr>
           </div>
-          <!-- licitacoes de leis end -->
+          <!-- Ordens do Dia end -->
 
         </div>
       </div>
