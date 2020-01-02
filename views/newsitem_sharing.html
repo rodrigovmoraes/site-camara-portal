@@ -1,0 +1,18 @@
+<body>
+<head>
+   {{#newsItem}}
+   <meta property="og:url"           content="{{facebookNewsItemUrl}}{{_id}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{title}}" />
+   <meta property="og:description"   content="{{headline}}" />
+   <meta property="og:image"         content="{{thumbnailUrl}}" />
+   <title>Câmara Municipal de Sorocaba - {{title}}</title>
+   {{/newsItem}}
+<head>
+<body>
+   {{#newsItem}}
+   <h1>{{title}}</h1>
+   <p>{{headline}}</p>
+   <p>Saiba mais em <a href="{{portalCamaraNewsItemUrl}}{{_id}}" target="_blank">{{portalCamaraNewsItemUrl}}{{_id}}</a></p>
+   {{/newsItem}}
+</body>

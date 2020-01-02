@@ -51,6 +51,7 @@ router.use(function(req, res, next) {
 router.get('/', portalControllers.homePageController);
 router.get('/index.html', portalControllers.homePageController);
 router.get('/newsitem.html', portalControllers.newsItemController);
+router.get('/newsitem_sharing.html', portalControllers.newsItemSharingController);
 router.get('/news.html', portalControllers.newsController);
 router.get('/page.html', portalControllers.pageController);
 router.get('/calendar.html', portalControllers.calendarController);

@@ -10,7 +10,8 @@
 ****************************** Flickr API Config  ****************************
 /*****************************************************************************/
 var _camaraPortalUrlBase;//Ex: "http://www.camarasorocaba.sp.gov.br"
-var _newsItemUrl;//Ex: "http://www.camarasorocaba.sp.gov.br/newsitem.html?id="
+var _newsItemUrl;//Ex: "http://www.camarasorocaba.sp.gov.br/newsitem_sharing.html?id="
+var _openNewsItemUrl;//Ex: "http://www.camarasorocaba.sp.gov.br/newsitem.html?id="
 var _pageUrl;//Ex: "http://www.camarasorocaba.sp.gov.br/page.html?id="
 var _legislativePropositionUrl;//Ex: "http://www.camarasorocaba.sp.gov.br/propositura.html?id="
 var _materiaUrl;//Ex: "http://www.camarasorocaba.sp.gov.br/materia.html?id="
@@ -37,6 +38,14 @@ module.exports.setNewsItemUrl = function(newsItemUrl) {
 
 module.exports.getNewsItemUrl = function() {
    return _newsItemUrl;
+}
+
+module.exports.setOpenNewsItemUrl = function(openNewsItemUrl) {
+   _openNewsItemUrl = openNewsItemUrl;
+}
+
+module.exports.getOpenNewsItemUrl = function() {
+   return _openNewsItemUrl;
 }
 
 module.exports.setPageUrl = function(pageUrl) {

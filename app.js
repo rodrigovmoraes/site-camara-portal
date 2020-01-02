@@ -164,6 +164,7 @@ SearchConfigService.setMaxResultSize(searchConfigService.maxResultSize);
 var facebookSharingConfig = config.get("FacebookSharing");
 FacebookSharingConfig.setCamaraPortalUrlBase(facebookSharingConfig.camaraPortalUrlBase);
 FacebookSharingConfig.setNewsItemUrl(facebookSharingConfig.newsItemUrl);
+FacebookSharingConfig.setOpenNewsItemUrl(facebookSharingConfig.openNewsItemUrl);
 FacebookSharingConfig.setPageUrl(facebookSharingConfig.pageUrl);
 FacebookSharingConfig.setLegislativePropositionUrl(facebookSharingConfig.legislativePropositionUrl);
 FacebookSharingConfig.setMateriaUrl(facebookSharingConfig.materiaUrl);

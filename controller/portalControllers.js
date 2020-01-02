@@ -339,6 +339,27 @@ module.exports.newsItemController = function(req, res, next) {
    }
 };
 
+/* GET '/newsitem_sharing.html' page */
+module.exports.newsItemSharingController = function(req, res, next) {
+   if (req.query.id) {
+      NewsService.getItem(req.query.id).then(function(newsItem) {
+         NewsService.incrementViews(req.query.id);
+         //render the page
+         res.render('newsitem_sharing', {
+             'newsItem': newsItem,
+             'facebookNewsItemUrl': FacebookSharingConfig.getNewsItemUrl(),
+             'portalCamaraNewsItemUrl': FacebookSharingConfig.getOpenNewsItemUrl(), 
+             'layout': false
+         });
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } else {
+      Utils.next(400, { message: "O id da notícia precisa ser definido" }, next);
+   }
+};
+
 /* GET '/news.html' page */
 module.exports.newsController = function(req, res, next) {
    //set the page and pageSize
