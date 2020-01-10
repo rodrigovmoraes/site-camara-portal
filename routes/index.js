@@ -54,12 +54,15 @@ router.get('/newsitem.html', portalControllers.newsItemController);
 router.get('/newsitem_sharing.html', portalControllers.newsItemSharingController);
 router.get('/news.html', portalControllers.newsController);
 router.get('/page.html', portalControllers.pageController);
+router.get('/page_sharing.html', portalControllers.pageSharingController);
 router.get('/calendar.html', portalControllers.calendarController);
 router.get('/event.html', portalControllers.showEventCalendarController);
 router.get('/licitacoes.html', portalControllers.licitacoesController);
 router.get('/licitacao.html', portalControllers.licitacaoController);
+router.get('/licitacao_sharing.html', portalControllers.licitacaoSharingController);
 router.get('/proposituras.html', portalControllers.propositurasController);
 router.get('/propositura.html', portalControllers.proposituraController);
+router.get('/propositura_sharing.html', portalControllers.proposituraSharingController);
 router.get('/propositura_texto_anexo.html', portalControllers.proposituraTextoAnexoController);
 router.get('/propositura_texto_original.html', portalControllers.proposituraTextoOriginalController);
 router.get('/propositura_arquivos_anexos.html', portalControllers.proposituraArquivosAnexosController);
@@ -70,6 +73,7 @@ router.get('/videos.html', portalControllers.videosController);
 router.get('/materias.html', portalControllers.materiasLegislativasController);
 router.post('/materias.html', portalControllers.materiasLegislativasController);
 router.get('/materia.html', portalControllers.materiaLegislativaController);
+router.get('/materia_sharing.html', portalControllers.materiaLegislativaSharingController);
 router.get('/ordens_do_dia.html', portalControllers.ordensDoDiaController);
 router.get('/comissoes.html', portalControllers.comissoesController);
 router.get('/mesa_diretora.html', portalControllers.mesaDiretoraController);
@@ -84,3 +88,4 @@ router.get('/popup-render-flickr-set-big-single-image.html', popupRendersControl
 router.get('/flickr-photo-big-single-image.html', popupRendersControllers.flickrPhotoPopupRenderControllerOpenSingleImage);
 
 module.exports = router;
+

@@ -145,3 +145,9 @@ module.exports.next = function(httpStatus, err, next) {
       next(err);
    }
 }
+
+module.exports.isValidDate = function(dt) {
+   return dt && dt instanceof Date && !isNaN(dt.getTime());
+}
+
+

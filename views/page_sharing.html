@@ -1,0 +1,25 @@
+<html>
+   <head>
+   {{#page}}
+   <meta property="og:url"           content="{{facebookPageUrl}}{{_id}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{title}}" />
+   <meta property="og:description"   content="{{title}}" />
+   <meta property="og:image"         content="{{facebookCamaraUrlBase}}/images/camara_logo_sharing2.jpg" />
+   <meta property="og:image:type"    content="image/jpeg">
+   <meta property="og:image:width"   content="600" />
+   <meta property="og:image:height"  content="314" />
+   <title>{{title}}</title>
+   {{/page}}
+   <head>
+   <body>
+      {{#page}}
+      <h1>{{title}}</h1>    
+      <p>Saiba mais em <a href="{{portalCamaraPageUrl}}{{_id}}" target="_blank">{{portalCamaraPageUrl}}{{_id}}</a></p>
+      <script type="text/javascript">
+         window.location.replace("{{portalCamaraPageUrl}}{{_id}}");
+      </script>
+      {{/page}}
+   </body>
+</html>
+

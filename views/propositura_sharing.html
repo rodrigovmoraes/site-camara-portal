@@ -1,0 +1,26 @@
+<html>
+   <head>
+   {{#legislativeProposition}}
+   <meta property="og:url"           content="{{facebookLegislativePropositionUrl}}{{legislativePropositionId}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}" />
+   <meta property="og:description"   content="{{legislativePropositionDescription}}" />
+   <meta property="og:image"         content="{{facebookCamaraUrlBase}}/images/camara_logo_sharing2.jpg" />
+   <meta property="og:image:type"    content="image/jpeg">
+   <meta property="og:image:width"   content="600" />
+   <meta property="og:image:height"  content="314" />
+   <title>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</title>
+   {{/legislativeProposition}}
+   <head>
+   <body>
+      {{#legislativeProposition}}
+      <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</h1>
+      <p>{{legislativePropositionDescription}}</p>
+      <p>Saiba mais em <a href="{{portalCamaraLegislativePropositionUrl}}{{legislativePropositionId}}" target="_blank">{{portalCamaraLegislativePropositionUrl}}{{legislativePropositionId}}</a></p>
+      <script type="text/javascript">
+         window.location.replace("{{portalCamaraLegislativePropositionUrl}}{{legislativePropositionId}}");
+      </script>
+      {{/legislativeProposition}}
+   </body>
+</html>
+

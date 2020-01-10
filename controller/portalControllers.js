@@ -347,6 +347,7 @@ module.exports.newsItemSharingController = function(req, res, next) {
          //render the page
          res.render('newsitem_sharing', {
              'newsItem': newsItem,
+             'facebookCamaraUrlBase': FacebookSharingConfig.getCamaraPortalUrlBase(),
              'facebookNewsItemUrl': FacebookSharingConfig.getNewsItemUrl(),
              'portalCamaraNewsItemUrl': FacebookSharingConfig.getOpenNewsItemUrl(), 
              'layout': false
@@ -379,17 +380,21 @@ module.exports.newsController = function(req, res, next) {
    }
    //publication date begin
    if(req.query.begin) {
-      var date1 = Utils.toDateFromDDMMYYYY(req.query.begin);
-      filter['date1'] = date1;
+      var date1 = Utils.toDateFromDDMMYYYY(req.query.begin);      
+      filter['date1'] = Utils.isValidDate(date1) ? date1 : null;
    }
    //publication date end
    if(req.query.end) {
       var date2 = Utils.toDateFromDDMMYYYY(req.query.end);
-      date2.setHours(23);
-      date2.setMinutes(59);
-      date2.setSeconds(59);
-      date2.setMilliseconds(999);
-      filter['date2'] = date2;
+      if (Utils.isValidDate(date2)) {
+         date2.setHours(23);
+         date2.setMinutes(59);
+         date2.setSeconds(59);
+         date2.setMilliseconds(999);
+         filter['date2'] = date2;
+      } else {
+         filter['date2'] = null;
+      }
    }
 
    NewsService.getNews(filter, page, pageSize).then(function(result) {
@@ -505,6 +510,25 @@ module.exports.pageController = function(req, res, next) {
    }
 }
 
+/* GET '/page_sharing.html' page */
+module.exports.pageSharingController = function(req, res, next) {
+   if (req.query.id) {
+      PagesService.getPage(req.query.id).then(function(page) {
+         //render the page
+         res.render('page_sharing', {
+             'page': page,
+             'facebookPageUrl': FacebookSharingConfig.getPageUrl(),
+             'facebookCamaraUrlBase': FacebookSharingConfig.getCamaraPortalUrlBase(),
+             'portalCamaraPageUrl': FacebookSharingConfig.getOpenPageUrl(),
+             'layout': false
+         });
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } 
+};
+
 /* GET '/calendar.html' page */
 module.exports.calendarController = function(req, res, next) {
    res.render('calendar');
@@ -530,6 +554,7 @@ module.exports.showEventCalendarController = function(req, res, next) {
    }
 };
 
+
 /* GET '/licitacoes.html' page */
 module.exports.licitacoesController = function(req, res, next) {
    //set the page and pageSize
@@ -551,16 +576,20 @@ module.exports.licitacoesController = function(req, res, next) {
    //publication date begin
    if(req.query.publicationDate1) {
       var publicationDate1 = Utils.toDateFromDDMMYYYY(req.query.publicationDate1);
-      filter['publicationDate1'] = publicationDate1;
+      filter['publicationDate1'] = Utils.isValidDate(publicationDate1) ? publicationDate1 : null;
    }
    //publication date end
    if(req.query.publicationDate2) {
       var publicationDate2 = Utils.toDateFromDDMMYYYY(req.query.publicationDate2);
-      publicationDate2.setHours(23);
-      publicationDate2.setMinutes(59);
-      publicationDate2.setSeconds(59);
-      publicationDate2.setMilliseconds(999);
-      filter['publicationDate2'] = publicationDate2;
+      if(Utils.isValidDate(publicationDate2)) {     
+         publicationDate2.setHours(23);
+         publicationDate2.setMinutes(59);
+         publicationDate2.setSeconds(59);
+         publicationDate2.setMilliseconds(999);
+         filter['publicationDate2'] = publicationDate2;
+      } else {
+         filter['publicationDate2'] = null;
+      }
    }
    //category
    if(req.query.category) {
@@ -657,6 +686,27 @@ module.exports.licitacaoController = function(req, res, next) {
    }
 };
 
+/* GET '/licitacao_sharing.html' page */
+module.exports.licitacaoSharingController = function(req, res, next) {
+   if(req.query.id) {
+      camaraLicitacoesService.getLicitacao(req.query.id).then(function(licitacao) {
+         //render the page
+         res.render('licitacao_sharing', {
+             'licitacao': licitacao,
+             'facebookCamaraUrlBase': FacebookSharingConfig.getCamaraPortalUrlBase(),
+             'facebookLicitacaoUrl': FacebookSharingConfig.getLicitacaoUrl(),
+             'portalCamaraLicitacaoUrl': FacebookSharingConfig.getOpenLicitacaoUrl(),
+             'layout': false
+         });
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } else {
+      Utils.next(400, { message: "O id da licitação precisa ser definido" }, next);
+   }
+};
+
 /* GET '/proposituras.html' page */
 module.exports.propositurasController = function(req, res, next) {
    //set the page and pageSize
@@ -690,17 +740,21 @@ module.exports.propositurasController = function(req, res, next) {
    }
    //publication date begin
    if(req.query.publicationDate1) {
-      var publicationDate1 = Utils.toDateFromDDMMYYYY(req.query.publicationDate1);
-      filter['date1'] = publicationDate1;
+        var publicationDate1 = Utils.toDateFromDDMMYYYY(req.query.publicationDate1);
+        filter['date1'] = Utils.isValidDate(publicationDate1) ? publicationDate1 : null;
    }
    //publication date end
    if(req.query.publicationDate2) {
       var publicationDate2 = Utils.toDateFromDDMMYYYY(req.query.publicationDate2);
-      publicationDate2.setHours(23);
-      publicationDate2.setMinutes(59);
-      publicationDate2.setSeconds(59);
-      publicationDate2.setMilliseconds(999);
-      filter['date2'] = publicationDate2;
+      if (Utils.isValidDate(publicationDate2)) {
+         publicationDate2.setHours(23);
+         publicationDate2.setMinutes(59);
+         publicationDate2.setSeconds(59);
+         publicationDate2.setMilliseconds(999);
+         filter['date2'] = publicationDate2;
+      } else {
+         filter['date2'] = null;
+      }     
    }
    //category
    if(req.query.type) {
@@ -810,7 +864,7 @@ module.exports.propositurasController = function(req, res, next) {
 /* GET '/propositura.html' page */
 module.exports.proposituraController = function(req, res, next) {
    if (req.query.id) {
-      camaraLegislativePropositionsService
+      return camaraLegislativePropositionsService
       .getLegislativeProposition(req.query.id)
       .then(function(legislativeProposition) {
          var result = {};
@@ -829,7 +883,7 @@ module.exports.proposituraController = function(req, res, next) {
          Utils.next(err.statusCode, err, next);
       });
    } else if(req.query.numeroLei && req.query.tipoLei) {
-      camaraLegislativePropositionsService
+      return camaraLegislativePropositionsService
       .getLegislativePropositionByNumber(req.query.numeroLei, req.query.tipoLei)
       .then(function(legislativeProposition) {
          var result = {};
@@ -852,6 +906,30 @@ module.exports.proposituraController = function(req, res, next) {
       Utils.next(400, { message: "O id da propositura precisa ser definido" }, next);
    }
 }
+
+/* GET '/propositura_sharing.html' page */
+module.exports.proposituraSharingController = function(req, res, next) {
+   if (req.query.id) {
+      return camaraLegislativePropositionsService
+      .getLegislativeProposition(req.query.id)
+      .then(function(legislativeProposition) {
+         var result = {};
+         result.legislativeProposition = legislativeProposition;
+         //render the page
+         result.facebookCamaraUrlBase = FacebookSharingConfig.getCamaraPortalUrlBase();
+         result.facebookLegislativePropositionUrl = FacebookSharingConfig.getLegislativePropositionUrl();
+         result.portalCamaraLegislativePropositionUrl = FacebookSharingConfig.getOpenLegislativePropositionUrl();
+         result.layout = false;
+         res.render('propositura_sharing', result);
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } else {
+      Utils.next(400, { message: "O id da propositura precisa ser definido" }, next);
+   }
+};
+
 
 /* GET '/propositura_texto_anexo.html' page */
 module.exports.proposituraTextoAnexoController = function(req, res, next) {
@@ -959,6 +1037,14 @@ module.exports.materiasLegislativasController = function(req, res, next) {
    var listaDeStatusDeTramitacao = null;
    var classificacoes = null;
    var printLimit = 50;
+   var dataApresentacaoInicial = null;
+   var dataApresentacaoFinal = null;
+   var dataPublicacaoInicial = null
+   var dataPublicacaoFinal = null
+   var dataPrazoExecutivoInicial = null;
+   var dataPrazoExecutivoFinal = null;
+   var dataPrazoProcessoInicial = null;
+   var dataPrazoProcessoFinal = null;
 
    if(req.method === 'GET') {
       body = req.query;
@@ -1003,36 +1089,44 @@ module.exports.materiasLegislativasController = function(req, res, next) {
    }
    //data da apresentacao inicial
    if(body.dataApresentacaoInicial) {
-      filter['dataApresentacaoInicial'] = Utils.toDateFromDDMMYYYY(body.dataApresentacaoInicial);
-   }
+      dataApresentacaoInicial = Utils.toDateFromDDMMYYYY(body.dataApresentacaoInicial);
+      filter['dataApresentacaoInicial'] = Utils.isValidDate(dataApresentacaoInicial) ? dataApresentacaoInicial : null;
+   }    
    //data da apresentacao final
    if(body.dataApresentacaoFinal) {
-      filter['dataApresentacaoFinal'] = Utils.toDateFromDDMMYYYY(body.dataApresentacaoFinal);
+      dataApresentacaoFinal = Utils.toDateFromDDMMYYYY(body.dataApresentacaoFinal)
+      filter['dataApresentacaoFinal'] = Utils.isValidDate(dataApresentacaoFinal) ? dataApresentacaoFinal : null;
    }
    //data da publicacao inicial
    if(body.dataPublicacaoInicial) {
-      filter['dataPublicacaoInicial'] = Utils.toDateFromDDMMYYYY(body.dataPublicacaoInicial);
-   }
+      dataPublicacaoInicial = Utils.toDateFromDDMMYYYY(body.dataPublicacaoInicial);
+      filter['dataPublicacaoInicial'] = Utils.isValidDate(dataPublicacaoInicial) ? dataPublicacaoInicial : null;
+   }  
    //data da publicacao final
    if(body.dataPublicacaoFinal) {
-      filter['dataPublicacaoFinal'] = Utils.toDateFromDDMMYYYY(body.dataPublicacaoFinal);
-   }
+      dataPublicacaoFinal = Utils.toDateFromDDMMYYYY(body.dataPublicacaoFinal);
+      filter['dataPublicacaoFinal'] = Utils.isValidDate(dataPublicacaoFinal) ? dataPublicacaoFinal : null;
+   }   
    //data fim de prazo executivo inicial
    if(body.dataPrazoExecutivoInicial) {
-      filter['dataPrazoExecutivoInicial'] = Utils.toDateFromDDMMYYYY(body.dataPrazoExecutivoInicial);
+      dataPrazoExecutivoInicial =  Utils.toDateFromDDMMYYYY(body.dataPrazoExecutivoInicial);
+      filter['dataPrazoExecutivoInicial'] = Utils.isValidDate(dataPrazoExecutivoInicial) ? dataPrazoExecutivoInicial : null;
    }
    //data fim de prazo executivo final
    if(body.dataPrazoExecutivoFinal) {
-      filter['dataPrazoExecutivoFinal'] = Utils.toDateFromDDMMYYYY(body.dataPrazoExecutivoFinal);
-   }
+      dataPrazoExecutivoFinal = Utils.toDateFromDDMMYYYY(body.dataPrazoExecutivoFinal);
+      filter['dataPrazoExecutivoFinal'] = Utils.isValidDate(dataPrazoExecutivoFinal) ? dataPrazoExecutivoFinal : null;
+   }  
    //data fim de prazo do processo (data inicial para o filtro da pesquisa)
    if(body.dataPrazoProcessoInicial) {
-      filter['dataPrazoProcessoInicial'] = Utils.toDateFromDDMMYYYY(body.dataPrazoProcessoInicial);
-   }
+      dataPrazoProcessoInicial = Utils.toDateFromDDMMYYYY(body.dataPrazoProcessoInicial);
+      filter['dataPrazoProcessoInicial'] = Utils.isValidDate(dataPrazoProcessoInicial) ? dataPrazoProcessoInicial : null;
+   }  
    //data fim de prazo do processo (data final para o filtro da pesquisa)
    if(body.dataPrazoProcessoFinal) {
-      filter['dataPrazoProcessoFinal'] = Utils.toDateFromDDMMYYYY(body.dataPrazoProcessoFinal);
-   }
+      dataPrazoProcessoFinal = Utils.toDateFromDDMMYYYY(body.dataPrazoProcessoFinal);
+      filter['dataPrazoProcessoFinal'] = Utils.isValidDate(dataPrazoProcessoFinal) ? dataPrazoProcessoFinal : null;
+   }  
    //localizacao
    if(body.localizacaoId) {
       filter['localizacaoId'] = parseInt(body.localizacaoId);
@@ -1183,6 +1277,36 @@ module.exports.materiaLegislativaController = function(req, res, next) {
       Utils.next(400, { message: "O id da materia precisa ser definido" }, next);
    }
 }
+
+/* GET '/materia_sharing.html' page */
+module.exports.materiaLegislativaSharingController = function(req, res, next) {
+   if (req.query.id) {
+      return camaraSyslegisService
+      .getMateriaLegislativa(req.query.id)
+      .then(function(result) {
+         //render the page
+         result.materiaTextoOriginalUrlDownload = SyslegisApiConfigService.getMateriaTextoOriginalUrlDownload();
+         result.materiaTextoFinalUrlDownload = SyslegisApiConfigService.getMateriaTextoFinalUrlDownload();
+         result.documentoAcessorioUrlDownload = SyslegisApiConfigService.getDocumentoAcessorioUrlDownload();
+         if (req.query.print) {
+            result.print = true;
+         } else {
+            result.print = false;
+         }
+         //render the page
+         result.facebookCamaraUrlBase = FacebookSharingConfig.getCamaraPortalUrlBase();
+         result.facebookMateriaUrl = FacebookSharingConfig.getMateriaUrl();
+         result.portalCamaraMateriaUrl = FacebookSharingConfig.getOpenMateriaUrl();
+         result.layout = false;
+         res.render('materia_sharing', result);
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } else {
+      Utils.next(400, { message: "O id da materia precisa ser definido" }, next);
+   }
+};
 
 /* GET '/albuns.html' page */
 module.exports.albunsController = function(req, res, next) {

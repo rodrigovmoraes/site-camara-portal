@@ -1,0 +1,25 @@
+<html>
+   <head>
+   {{#materia}}
+   <meta property="og:url"           content="{{facebookMateriaUrl}}{{Materia_id}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{Materia_tipoDocumento}} nº {{materiaLegislativaNumberDescription}}" />
+   <meta property="og:description"   content="{{Materia_ementa}}" />
+   <meta property="og:image"         content="{{facebookCamaraUrlBase}}/images/camara_logo_sharing2.jpg" />
+   <meta property="og:image:type"    content="image/jpeg">
+   <meta property="og:image:width"   content="600" />
+   <meta property="og:image:height"  content="314" />
+   {{/materia}}
+   <head>
+   <body>
+      {{#materia}}
+      <h1>{{Materia_tipoDocumento}} nº {{materiaLegislativaNumberDescription}}</h1>
+      <p>{{Materia_ementa}}</p>
+      <p>Saiba mais em <a href="{{portalCamaraMateriaUrl}}{{Materia_id}}" target="_blank">{{portalCamaraMateriaUrl}}{{Materia_id}}</a></p>
+      <script type="text/javascript">
+         window.location.replace("{{portalCamaraMateriaUrl}}{{Materia_id}}");
+      </script>
+      {{/materia}}
+   </body>
+</html>
+

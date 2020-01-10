@@ -166,9 +166,13 @@ FacebookSharingConfig.setCamaraPortalUrlBase(facebookSharingConfig.camaraPortalU
 FacebookSharingConfig.setNewsItemUrl(facebookSharingConfig.newsItemUrl);
 FacebookSharingConfig.setOpenNewsItemUrl(facebookSharingConfig.openNewsItemUrl);
 FacebookSharingConfig.setPageUrl(facebookSharingConfig.pageUrl);
+FacebookSharingConfig.setOpenPageUrl(facebookSharingConfig.openPageUrl);
 FacebookSharingConfig.setLegislativePropositionUrl(facebookSharingConfig.legislativePropositionUrl);
+FacebookSharingConfig.setOpenLegislativePropositionUrl(facebookSharingConfig.openLegislativePropositionUrl);
 FacebookSharingConfig.setMateriaUrl(facebookSharingConfig.materiaUrl);
+FacebookSharingConfig.setOpenMateriaUrl(facebookSharingConfig.openMateriaUrl);
 FacebookSharingConfig.setLicitacaoUrl(facebookSharingConfig.licitacaoUrl);
+FacebookSharingConfig.setOpenLicitacaoUrl(facebookSharingConfig.openLicitacaoUrl);
 
 var googleAnalyticsConfig = config.get("GoogleAnalytics");
 GoogleAnalyticsConfig.setTrackingID(googleAnalyticsConfig.trackingID);
