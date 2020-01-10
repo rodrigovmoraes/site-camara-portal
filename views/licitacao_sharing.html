@@ -1,0 +1,26 @@
+<html>
+   <head>
+   {{#licitacao}}
+   <meta property="og:url"           content="{{facebookLicitacaoUrl}}{{licitacaoId}}" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="{{categoryDescription}} nº {{licitacaoNumber}}" />
+   <meta property="og:description"   content="{{description}}" />
+   <meta property="og:image"         content="{{facebookCamaraUrlBase}}/images/camara_logo_sharing2.jpg" />
+   <meta property="og:image:type"    content="image/jpeg">
+   <meta property="og:image:width"   content="600" />
+   <meta property="og:image:height"  content="314" />
+   <title>{{categoryDescription}} nº {{licitacaoNumber}}</title>
+   {{/licitacao}}
+   <head>
+   <body>
+      {{#licitacao}}
+      <h1>{{categoryDescription}} nº {{licitacaoNumber}}</h1>
+      <p>{{description}}</p>
+      <p>Saiba mais em <a href="{{portalCamaraLicitacaoUrl}}{{licitacaoId}}" target="_blank">{{portalCamaraLicitacaoUrl}}{{licitacaoId}}</a></p>
+      <script type="text/javascript">
+         window.location.replace("{{portalCamaraLicitacaoUrl}}{{licitacaoId}}");
+      </script>
+      {{/licitacao}}
+   </body>
+</html>
+

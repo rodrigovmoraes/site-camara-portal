@@ -1,0 +1,143 @@
+﻿{
+   "Services" : {
+      "FlickrService" : {
+            "baseUrl": "https://api.flickr.com/services/rest/",
+            "apiKey": "0f90801c8a3de3619be8252f7e6d9d71",
+	    "userId": "41309384@N07",
+            "getPhotosMethod": "flickr.photosets.getPhotos",
+            "getPhotosetInfoMethod": "flickr.photosets.getInfo",
+            "getPhotoInfoMethod": "flickr.photos.getInfo",
+	    "getPhotosetsMethod" : "flickr.photosets.getList",
+            "unexpectedFlickrDataFormatErrorMessage":  "The Flickr service has returned an unexpected data format.",
+            "photoUrlPattern": "https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_{image_type}.jpg",
+            "photoPageUrlPattern": "https://www.flickr.com/photos/{owner}/{photoId}/"
+       },
+       "YoutubeService" : {
+              "urlBase": "https://www.googleapis.com/youtube/v3",
+              "apiKey": "AIzaSyAqT6S1PsalUgcbf_j9zr-_MCQ5bs7w3Ug",
+	      "channelId": "UCWQR_GgpIhrfoG1vikt94bA",
+              "playlistId": "UUWQR_GgpIhrfoG1vikt94bA",
+              "urlsMethods" : {
+                 "search" : "search",
+                 "videos" : "videos",
+                 "playlistItems" : "playlistItems"
+              }
+       },
+       "CamaraApi" : {
+          "baseUrl" : "http://187.51.16.132:8082/",
+          "portalMenuMethodPath" : "menuPortalTree",
+          "newsMethodPath" : "newsItems",
+          "newsItemMethodPath" : "newsItem",
+          "incrementNewsViewsMethodPath" : "incrementNewsViews",
+          "pageMethodPath" : "page",
+          "bannersMethodPath" : "banners",
+          "hotNewsMethodPath" : "hotnews",
+          "breakingNewsMethodPath" : "breakingNews",
+          "fbreakingNewsMethodPath" : "fbreakingNews",
+          "eventsCalendarMethodPath" : "eventsCalendar",
+          "eventCalendarMethodPath" : "eventCalendar",
+          "eventsCalendarUTCOffset" : -3,
+      	  "licitacaoDownloadEventFilePath" : "licitacao/event/download",
+          "lastLicitacoesEventsMethodPath" : "licitacao/events/last",
+          "licitacoesMethodPath" : "licitacoes",
+          "licitacoesCategoriesMethodPath" : "licitacoesCategories",
+          "licitacaoMethodPath" : "licitacao",
+          "legislativePropositionsMethodPath" : "legislativePropositions",
+          "legislativePropositionTypesMethodPath" : "legislativePropositionTypes",
+          "legislativePropositionTagsMethodPath" : "legislativePropositionTags",
+          "legislativePropositionMethodPath" : "legislativeProposition",
+          "legislativePropositionDownloadFileAttachmentPath" : "legislativeProposition/attachment/download",
+          "publicFilesFolderContentsMethodPath" : "publicFiles/folder",
+	  "publicFilesFolderPathMethodPath" : "publicFiles/folderPath",
+	  "publicFilesDownloadFile" : "publicFiles/file"
+       },
+       "SyslegisApi" : {
+          "baseUrl" : "http://localhost:3103/",
+	  "materiaTextoOriginalUrlDownload" : "http://187.51.16.131:8383/syslegis/materiaLegislativa/imprimirTextoIntegral?idMateria=",
+	  "materiaTextoFinalUrlDownload" : "http://187.51.16.131:8383/syslegis/materiaLegislativa/imprimirTextoIntegralFinal?idMateria=",
+	  "documentoAcessorioUrlDownload" : "http://187.51.16.131:8383/syslegis/documentoAcessorio/imprimirTextoIntegral?idDocumentoAcessorio=",
+	  "vereadorImageUrl" : "http://187.51.16.131:8383/syslegis/vereador/getConteudo/",
+          "pesquisaMateriasMethodPath" : "materiasLegislativas",
+          "tiposDeMateriaMethodPath" : "tiposDeMateria",
+	  "autoresMethodPath": "autores",
+	  "unidadesDeTramitacaoMethodPath": "unidadesDeTramitacao",
+	  "listaDeStatusDeTramitacaoMethodPath" : "listaDeStatusDeTramitacao",
+	  "classificacoesMethodPath": "classificacoes",
+	  "materiaLegislativaMethodPath" : "materiaLegislativa",
+	  "ordensDoDiaMethodPath": "ordensDoDia",
+	  "ordemDoDiaListaDeAnosMethodPath" : "ordensDoDia/anos",
+	  "comissoesMethodPath": "comissoes",
+	  "legislaturasMethodPath": "legislaturas",
+	  "sessoesLegislativasMethodPath": "sessoesLegislativas",
+	  "mesaDiretoraMethodPath": "mesaDiretora",
+	  "vereadoresMethodPath": "vereadores",
+	  "vereadorMethodPath": "vereador",
+	  "vereadorResumoMateriasMethodPath": "vereador/resumoMaterias"
+       },
+       "SearchService" : {
+          "elasticSearchConnectionConfig" : {
+             "host" : "https://localhost:9200",
+             "httpAuth": "admin:admin",
+             "apiVersion": "6.6",
+             "requestTimeout": 110000
+          },
+          "maxResultSize": 10000,
+          "documentTypes": [
+             { "typeTag": "materia_legislativa", "typeDescription": "Matéria Legislativa" },
+             { "typeTag": "page", "typeDescription": "Página" },
+             { "typeTag": "legislative_proposition", "typeDescription": "Propositura" },
+             { "typeTag": "licitacao", "typeDescription": "Licitação" },
+             { "typeTag": "news", "typeDescription": "Notícia" },
+             { "typeTag": "publicFile", "typeDescription": "Arquivo Público" }
+          ],
+          "searchResultUrlMappings": {
+             "materia_legislativa": { "urlPattern": "/materia.html?id=<%= id %>", "target": "_self" },
+             "page": { "urlPattern": "/page.html?id=<%= id %>", "target": "_self" },
+             "legislative_proposition": { "urlPattern": "/propositura.html?id=<%= id %>", "target": "_self" },
+             "licitacao": { "urlPattern": "http://187.51.16.132:8082/licitacao/event/download/<%= id %>", "target": "_blank" },
+             "news": { "urlPattern": "/newsitem.html?id=<%= id %>", "target": "_self" },
+             "publicFile": { "urlPattern": "http://187.51.16.132:8082/publicFiles/file/<%= id %>", "target": "_blank" }
+          }
+       }
+   },
+   "Log" : {
+      "level": "debug",
+      "levels": {
+            "error": 0,
+            "warn": 1,
+            "info": 2,
+            "verbose": 3,
+            "debug": 4
+      },
+      "levelsColors": {
+            "error": "red",
+            "warn": "magenta",
+            "info": "blue",
+            "verbose": "green",
+            "debug": "yellow"
+      }
+   },
+   "FBreakingNews" : {
+      "imagesDimensions" : {
+         "1" : { "width": 205, "height": 434},
+         "2" : { "width": 349, "height": 212},
+         "3" : { "width": 349, "height": 212}
+      }
+   },
+   "FacebookSharing" : {
+      "camaraPortalUrlBase": "http://novo.camarasorocaba.sp.gov.br",
+      "newsItemUrl" : "http://novo.camarasorocaba.sp.gov.br/newsitem_sharing.html?id=",
+      "openNewsItemUrl" : "http://novo.camarasorocaba.sp.gov.br/newsitem.html?id=",
+      "pageUrl" : "http://novo.camarasorocaba.sp.gov.br/page_sharing.html?id=",
+      "openPageUrl" : "http://novo.camarasorocaba.sp.gov.br/page.html?id=",
+      "legislativePropositionUrl" : "http://novo.camarasorocaba.sp.gov.br/propositura_sharing.html?id=",
+      "openLegislativePropositionUrl" : "http://novo.camarasorocaba.sp.gov.br/propositura.html?id=",
+      "materiaUrl" : "http://novo.camarasorocaba.sp.gov.br/materia_sharing.html?id=",
+      "openMateriaUrl" : "http://novo.camarasorocaba.sp.gov.br/materia.html?id=",
+      "licitacaoUrl" : "http://novo.camarasorocaba.sp.gov.br/licitacao_sharing.html?id=",
+      "openLicitacaoUrl" : "http://novo.camarasorocaba.sp.gov.br/licitacao.html?id="
+   },
+   "GoogleAnalytics" : {
+	"trackingID" : "UA-149397802-2"
+   }
+}

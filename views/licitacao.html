@@ -1,14 +1,3 @@
-{{#yield-head}}
-   <!-- Facebook Open Graph: used for sharing purposes -->
-   {{#licitacao}}
-   <meta property="og:url"           content="{{facebookLicitacaoUrl}}{{licitacaoId}}" />
-   <meta property="og:type"          content="website" />
-   <meta property="og:title"         content="{{categoryDescription}} nº {{licitacaoNumber}}" />
-   <meta property="og:image"         content="{{facebookCamaraUrlBase}}/images/camara_logo_sharing.jpg" />
-   <meta property="og:description"   content="{{description}}" />
-   {{/licitacao}}
-{{/yield-head}}
-
 {{#yield-scripts}}
    <!--facebook sharing function(s) js-->
    <script src="js/facebook-sharing.js"></script>
@@ -37,7 +26,7 @@
            <!-- Facebook share button code -->
            <div class="time">
               <span class="ion-social-facebook"></span>
-              <a href="#" onclick="fbs_click()">Compartilhar no Facebook</a>
+              <a href="#" onclick="fbs_click('{{facebookLicitacaoUrl}}{{licitacaoId}}')">Compartilhar no Facebook</a>
            </div>
         </div>
 

@@ -1,14 +1,3 @@
-{{#yield-head}}
-   <!-- Facebook Open Graph: used for sharing purposes -->
-   {{#newsItem}}
-   <meta property="og:url"           content="{{facebookNewsItemUrl}}{{_id}}" />
-   <meta property="og:type"          content="website" />
-   <meta property="og:title"         content="{{title}}" />
-   <meta property="og:description"   content="{{headline}}" />
-   <meta property="og:image"         content="{{thumbnailUrl}}" />
-   {{/newsItem}}
-{{/yield-head}}
-
 {{#yield-posBody}}
    <!-- Load Facebook SDK for JavaScript -->
    <div id="fb-root"></div>
