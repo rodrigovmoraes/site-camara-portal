@@ -2033,7 +2033,7 @@ table-bordered th, .table-bordered td {
 
 footer {
 	border-top: 3px solid rgb(114, 146, 177);
-	margin: 0 0 10px 0;
+	margin: 10px 0 10px 0;
 	background-color: #3d566e;
 }
 footer .top-sec {
