@@ -651,7 +651,7 @@ module.exports.licitacaoSharingController = function(req, res, next) {
 module.exports.propositurasController = function(req, res, next) {
    //set the page and pageSize
    var page = 1;
-   var pageSize = 10;
+   var pageSize = 6;
    var paginationSize = 11;
    var filter = {}; //keywords + publication date begin + publication date end
    var types;
@@ -966,7 +966,7 @@ module.exports.proposituraAlteracoesController = function(req, res, next) {
 module.exports.materiasLegislativasController = function(req, res, next) {
    //set the page and pageSize
    var page = 1;
-   var pageSize = 10;
+   var pageSize = 6;
    var paginationSize = 11;
    var filter = {};
    var types;

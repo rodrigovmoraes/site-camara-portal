@@ -103,24 +103,12 @@
                      <input type="hidden" name="print" id="printVersion" value="">
                      <div class="form-inline">
                         <div class="form-group" style="padding-right: 7px">
-                            <div class="input-group input-icon">
-                                <i class="fa fa-search"></i>
-                                <input type="number" name="number" style="width: 120px" class="form-control" id="numberInput" placeholder="número" value="{{number}}">
-                             </div>
-                        </div>
-                        <div class="form-group" style="padding-right: 7px">
-                            <div class="input-group input-icon">
-                                <i class="fa fa-search"></i>
-                                <input type="number" name="year" style="width: 120px" class="form-control" id="yearInput" placeholder="ano"  value="{{year}}">
-                             </div>
-                        </div>
-                        <div class="form-group" style="padding-right: 7px">
                           <select class="form-control" id="inputType" name="type" placeholder="Tipo de propositura">
                             {{#type}}
-                              <option disabled>Tipo de propositura</option>
+                              <option disabled>Tipo de norma</option>
                             {{/type}}
                             {{^type}}
-                              <option disabled selected>Tipo de propositura</option>
+                              <option disabled selected>Tipo de norma</option>
                             {{/type}}
                             <option value="">Qualquer</option>
                             {{#legislativePropositionTypes}}
@@ -132,6 +120,26 @@
                               {{/legislativePropositionTypeSelect}}
                             {{/legislativePropositionTypes}}
                           </select>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="number" name="number" style="width: 120px" class="form-control" id="numberInput" placeholder="número" value="{{number}}">
+                             </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="number" name="year" style="width: 120px" class="form-control" id="yearInput" placeholder="ano"  value="{{year}}">
+                             </div>
+                        </div>
+                     </div>
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" name="keywords" value="{{keywords}}" size="30" class="form-control" id="keywordsInput" title="Palavras-chaves para o filtro" placeholder="Palavras-chave">
+                             </div>
                         </div>
                         {{#legislativePropositionsTags.length}}
                         <div class="form-group" style="padding-right: 7px">
@@ -154,15 +162,8 @@
                           </select>
                         </div>
                         {{/legislativePropositionsTags.length}}
-
                      </div>
                      <div class="form-inline"  style="margin-top: 7px">
-                        <div class="form-group" style="padding-right: 7px">
-                            <div class="input-group input-icon">
-                                <i class="fa fa-search"></i>
-                                <input type="text" name="keywords" value="{{keywords}}" size="30" class="form-control" id="keywordsInput" title="Palavras-chaves para o filtro" placeholder="Palavras-chave">
-                             </div>
-                        </div>
                         <div class="form-group" style="padding-right: 7px">
                            <div class="input-group">
                              <input type="text" class="form-control"  value="{{publicationDate1}}" name="publicationDate1" id="inputPublicationDate1" title="Data da publicação inicial para o filtro" placeholder="Publicação: inicial"/>
@@ -204,10 +205,10 @@
              <div class="row legislativePropositions">
                {{#legislativePropositions}}
                   {{#print}}
-                  <div class="sec-topic col-sm-16 col-md-8" style="visibility: visible;">
+                  <div class="sec-topic col-sm-16 col-md-16" style="visibility: visible;">
                   {{/print}}
                   {{^print}}
-                  <div class="sec-topic col-sm-16 col-md-8 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                  <div class="sec-topic col-sm-16 col-md-16 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
                   {{/print}}
                        <a href="/propositura.html?id={{legislativePropositionId}}">
                           <div class="sec-info">

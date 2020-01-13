@@ -135,18 +135,6 @@
                      <input type="hidden" name="print" id="printVersion" value="">
                      <div class="form-inline">
                         <div class="form-group" style="padding-right: 7px">
-                            <div class="input-group input-icon">
-                                <i class="fa fa-search"></i>
-                                <input type="number" name="numeroMateria" style="width: 120px" class="form-control" id="numeroMateriaInput" placeholder="número" value="{{numeroMateria}}" title="Número da matéria">
-                             </div>
-                        </div>
-                        <div class="form-group" style="padding-right: 7px">
-                            <div class="input-group input-icon">
-                                <i class="fa fa-search"></i>
-                                <input type="number" name="anoMateria" style="width: 120px" class="form-control" id="anoInput" placeholder="ano"  value="{{anoMateria}}"  title="Ano da matéria">
-                             </div>
-                        </div>
-                        <div class="form-group" style="padding-right: 7px">
                           <select class="form-control" id="tipoMateriaInput" name="tipoMateriaId" placeholder="Tipo de matéria"  title="Tipo de matéria legislativa">
                             {{#tipoMateriaId}}
                               <option disabled>Tipo de matéria</option>
@@ -165,7 +153,41 @@
                             {{/tiposDeMateria}}
                           </select>
                         </div>
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="number" name="numeroMateria" style="width: 120px" class="form-control" id="numeroMateriaInput" placeholder="número" value="{{numeroMateria}}" title="Número da matéria">
+                             </div>
+                        </div>
+                        <div class="form-group" style="padding-right: 7px">
+                            <div class="input-group input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="number" name="anoMateria" style="width: 120px" class="form-control" id="anoInput" placeholder="ano"  value="{{anoMateria}}"  title="Ano da matéria">
+                             </div>
+                        </div>
                      </div>
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="autorIdInput" name="autorId" placeholder="Autor da matéria" title="Autor da matéria">
+                            {{#autorId}}
+                              <option disabled>Autor</option>
+                            {{/autorId}}
+                            {{^autorId}}
+                              <option disabled selected>Autor</option>
+                            {{/autorId}}
+                            <option value="">Qualquer</option>
+                            {{#materiaAutores}}
+                              {{#materiaAutoreSelect}}
+                                 <option value="{{materiaAutorId}}" selected>{{materiaAutorDescricao}}</option>
+                              {{/materiaAutoreSelect}}
+                              {{^materiaAutoreSelect}}
+                                 <option value="{{materiaAutorId}}">{{materiaAutorDescricao}}</option>
+                              {{/materiaAutoreSelect}}
+                            {{/materiaAutores}}
+                          </select>
+                        </div>
+                     </div>
+
                      <div class="form-inline"  style="margin-top: 7px">
                         <div class="form-group" style="padding-right: 7px">
                             <div class="input-group input-icon">
@@ -173,6 +195,70 @@
                                 <input type="text" name="palavrasChave" value="{{palavrasChave}}" size="30" class="form-control" id="palavrasChaveInput" title="Palavras-chaves para o filtro" placeholder="Palavras-chave">
                              </div>
                         </div>
+                        <div class="form-group">
+                          <select class="form-control" id="classificacaoInput" name="classificacaoId" placeholder="Classificação" title="Classificação">
+                            {{#classificacaoId}}
+                              <option disabled>Classificação</option>
+                            {{/classificacaoId}}
+                            {{^classificacaoId}}
+                              <option disabled selected>Classificação</option>
+                            {{/classificacaoId}}
+                            <option value="">Qualquer</option>
+                            {{#classificacoes}}
+                              {{#classificacaoSelect}}
+                                 <option value="{{classificacaoId}}" selected>{{classificacaoDescricao}}</option>
+                              {{/classificacaoSelect}}
+                              {{^classificacaoSelect}}
+                                 <option value="{{classificacaoId}}">{{classificacaoDescricao}}</option>
+                              {{/classificacaoSelect}}
+                            {{/classificacoes}}
+                          </select>
+                        </div>
+                     </div>
+
+                     <div class="form-inline"  style="margin-top: 7px">
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="statusTramitacaoInput" name="statusTramitacaoId" placeholder="Situação atual" title="Situação da matéria">
+                            {{#statusTramitacaoId}}
+                              <option disabled>Situação da máteria</option>
+                            {{/statusTramitacaoId}}
+                            {{^statusTramitacaoId}}
+                              <option disabled selected>Situação da máteria</option>
+                            {{/statusTramitacaoId}}
+                            <option value="">Qualquer</option>
+                            {{#listaDeStatusDeTramitacao}}
+                              {{#statusDeTramitacaoSelect}}
+                                 <option value="{{statusDeTramitacaoId}}" selected>{{statusDeTramitacaoDescricao}}</option>
+                              {{/statusDeTramitacaoSelect}}
+                              {{^statusDeTramitacaoSelect}}
+                                 <option value="{{statusDeTramitacaoId}}">{{statusDeTramitacaoDescricao}}</option>
+                              {{/statusDeTramitacaoSelect}}
+                            {{/listaDeStatusDeTramitacao}}
+                          </select>
+                        </div>
+
+                        <div class="form-group" style="padding-right: 7px">
+                          <select class="form-control" id="localizacaoInput" name="localizacaoId" placeholder="Localização atual" title="Localização atual">
+                            {{#localizacaoId}}
+                              <option disabled>Localização atual</option>
+                            {{/localizacaoId}}
+                            {{^localizacaoId}}
+                              <option disabled selected>Localização atual</option>
+                            {{/localizacaoId}}
+                            <option value="">Qualquer</option>
+                            {{#unidadesDeTramitacao}}
+                              {{#unidadeDeTramitacaoSelect}}
+                                 <option value="{{materiaUnidadeTramitacaoId}}" selected>{{materiaUnidadeTramitacaoDescricao}}</option>
+                              {{/unidadeDeTramitacaoSelect}}
+                              {{^unidadeDeTramitacaoSelect}}
+                                 <option value="{{materiaUnidadeTramitacaoId}}">{{materiaUnidadeTramitacaoDescricao}}</option>
+                              {{/unidadeDeTramitacaoSelect}}
+                            {{/unidadesDeTramitacao}}
+                          </select>
+                        </div>
+                     </div>
+
+                     <div class="form-inline"  style="margin-top: 7px">
                         <div class="form-group" style="padding-right: 7px">
                            <div class="input-group">
                              <input type="text" class="form-control"  value="{{dataApresentacaoInicial}}" name="dataApresentacaoInicial" id="dataApresentacaoInicialInput" title="Data da apresentação inicial para o filtro" placeholder="Apresentação: inicial"/>
@@ -183,6 +269,7 @@
                              <input type="text" class="form-control"  value="{{dataApresentacaoFinal}}"  name="dataApresentacaoFinal" id="dataApresentacaoFinalInput" title="Data da apresentação final para o filtro" placeholder="Apresentação: final"/>
                           </div>
                         </div>
+
                         <div class="form-group" style="padding-right: 7px" title="Filtro somente matérias em tramitação ou somente matérias fora de tramitação">
                            Em tramitação:
                            {{#emTramitacaoSim}}
@@ -229,90 +316,6 @@
                              <input type="text" class="form-control" style="width: 200px" value="{{dataPrazoProcessoFinal}}"  name="dataPrazoProcessoFinal" id="dataPrazoProcessoFinalInput" title="Fim de prazo do processo, data final do filtro" placeholder="Prazo do processo: final"/>
                           </div>
                         </div>
-                     </div>
-
-                     <div class="form-inline"  style="margin-top: 7px">
-                        <div class="form-group" style="padding-right: 7px">
-                          <select class="form-control" id="autorIdInput" name="autorId" placeholder="Autor da matéria" title="Autor da matéria">
-                            {{#autorId}}
-                              <option disabled>Autor</option>
-                            {{/autorId}}
-                            {{^autorId}}
-                              <option disabled selected>Autor</option>
-                            {{/autorId}}
-                            <option value="">Qualquer</option>
-                            {{#materiaAutores}}
-                              {{#materiaAutoreSelect}}
-                                 <option value="{{materiaAutorId}}" selected>{{materiaAutorDescricao}}</option>
-                              {{/materiaAutoreSelect}}
-                              {{^materiaAutoreSelect}}
-                                 <option value="{{materiaAutorId}}">{{materiaAutorDescricao}}</option>
-                              {{/materiaAutoreSelect}}
-                            {{/materiaAutores}}
-                          </select>
-                        </div>
-
-                        <div class="form-group" style="padding-right: 7px">
-                          <select class="form-control" id="localizacaoInput" name="localizacaoId" placeholder="Localização atual" title="Localização atual">
-                            {{#localizacaoId}}
-                              <option disabled>Localização atual</option>
-                            {{/localizacaoId}}
-                            {{^localizacaoId}}
-                              <option disabled selected>Localização atual</option>
-                            {{/localizacaoId}}
-                            <option value="">Qualquer</option>
-                            {{#unidadesDeTramitacao}}
-                              {{#unidadeDeTramitacaoSelect}}
-                                 <option value="{{materiaUnidadeTramitacaoId}}" selected>{{materiaUnidadeTramitacaoDescricao}}</option>
-                              {{/unidadeDeTramitacaoSelect}}
-                              {{^unidadeDeTramitacaoSelect}}
-                                 <option value="{{materiaUnidadeTramitacaoId}}">{{materiaUnidadeTramitacaoDescricao}}</option>
-                              {{/unidadeDeTramitacaoSelect}}
-                            {{/unidadesDeTramitacao}}
-                          </select>
-                        </div>
-                     </div>
-
-                     <div class="form-inline"  style="margin-top: 7px">
-                        <div class="form-group" style="padding-right: 7px">
-                          <select class="form-control" id="statusTramitacaoInput" name="statusTramitacaoId" placeholder="Situação atual" title="Situação da matéria">
-                            {{#statusTramitacaoId}}
-                              <option disabled>Situação da máteria</option>
-                            {{/statusTramitacaoId}}
-                            {{^statusTramitacaoId}}
-                              <option disabled selected>Situação da máteria</option>
-                            {{/statusTramitacaoId}}
-                            <option value="">Qualquer</option>
-                            {{#listaDeStatusDeTramitacao}}
-                              {{#statusDeTramitacaoSelect}}
-                                 <option value="{{statusDeTramitacaoId}}" selected>{{statusDeTramitacaoDescricao}}</option>
-                              {{/statusDeTramitacaoSelect}}
-                              {{^statusDeTramitacaoSelect}}
-                                 <option value="{{statusDeTramitacaoId}}">{{statusDeTramitacaoDescricao}}</option>
-                              {{/statusDeTramitacaoSelect}}
-                            {{/listaDeStatusDeTramitacao}}
-                          </select>
-                        </div>
-
-                        <div class="form-group" style="padding-right: 7px">
-                          <select class="form-control" id="classificacaoInput" name="classificacaoId" placeholder="Classificação" title="Classificação">
-                            {{#classificacaoId}}
-                              <option disabled>Classificação</option>
-                            {{/classificacaoId}}
-                            {{^classificacaoId}}
-                              <option disabled selected>Classificação</option>
-                            {{/classificacaoId}}
-                            <option value="">Qualquer</option>
-                            {{#classificacoes}}
-                              {{#classificacaoSelect}}
-                                 <option value="{{classificacaoId}}" selected>{{classificacaoDescricao}}</option>
-                              {{/classificacaoSelect}}
-                              {{^classificacaoSelect}}
-                                 <option value="{{classificacaoId}}">{{classificacaoDescricao}}</option>
-                              {{/classificacaoSelect}}
-                            {{/classificacoes}}
-                          </select>
-                        </div>
 
                         <div class="form-group">
                           <div class="input-group">
@@ -343,10 +346,10 @@
              <div class="row materiaLegislativas">
                {{#materiasLegislativas}}
                   {{#print}}
-                  <div class="sec-topic col-sm-16 col-md-8" style="visibility: visible;">
+                  <div class="sec-topic col-sm-16 col-md-16" style="visibility: visible;">
                   {{/print}}
                   {{^print}}
-                  <div class="sec-topic col-sm-16 col-md-8 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                  <div class="sec-topic col-sm-16 col-md-16 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
                   {{/print}}
                        {{^print}}
                        <a href="/materia.html?id={{materiaLegislativaId}}">

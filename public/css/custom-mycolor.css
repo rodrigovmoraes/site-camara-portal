@@ -2699,22 +2699,29 @@ footer  .list-unstyled li a:hover h4 {
 }
 
 .materiaLegislativas .materiaLegislativaTitle {
-	max-height: 40px;
-   height: 40px;
+	max-height: 22px;
+	height: 22px;
 	overflow: hidden;
 }
 
 .materiaLegislativas .materiaLegislativaInfo {
 	max-height: 33px;
-   height: 33px;
-	overflow: hidden;
+	/* height: 15px; */
+	/* overflow: hidden; */
 }
 
 .materiaLegislativas .headline {
-	height: 58px;
-	max-height: 58px;
-	overflow: hidden;
+	/* height: 40px; */
+	max-height: 200px;
+	/* overflow: hidden; */
 }
+
+@media (max-width:348px) {
+   .materiaLegislativas .sec-topic .sub-info-bordered {
+   	height: 100px;
+   }
+}
+
 
 /* ordens do dia styling */
 .ordensDoDiaFilter {
@@ -2730,7 +2737,7 @@ footer  .list-unstyled li a:hover h4 {
 }
 
 .ordensDoDia .ordemDoDiaTitle {
-	height:20px;
+	/* height:20px; */
 	max-height: 20px;
 	overflow: hidden;
 }
@@ -2763,6 +2770,12 @@ footer  .list-unstyled li a:hover h4 {
 	 margin-top: 5px;
 	 margin-left: 0px;
 	 margin-bottom: 5px;
+}
+
+@media (max-width:348px) {
+   .ordensDoDia .sec-topic .sub-info-bordered {
+   	height: 80px;
+   }
 }
 
 /*comissoes styling*/
@@ -2868,13 +2881,13 @@ footer  .list-unstyled li a:hover h4 {
 
 .legislativePropositions .legislativePropositionTitle {
 	max-height: 150px;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .legislativePropositions .headline {
-	height: 98px;
-	max-height: 98px;
-	overflow: hidden;
+	/* height: 98px; */
+	max-height: 220px;
+	/* overflow: hidden; */
 }
 
 /* vereadores styling */
