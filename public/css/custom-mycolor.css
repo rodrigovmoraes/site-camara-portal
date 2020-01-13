@@ -2033,7 +2033,7 @@ table-bordered th, .table-bordered td {
 
 footer {
 	border-top: 3px solid rgb(114, 146, 177);
-	margin: 20px 0 10px 0;
+	margin: 0 0 10px 0;
 	background-color: #3d566e;
 }
 footer .top-sec {
@@ -2481,6 +2481,57 @@ footer .stars {
 	background-color: #3d566e;
 }
 
+@media (max-width:390px) {
+   #agenda .pickmeup .pmu-instance .pmu-day-of-week *, .pickmeup .pmu-instance .pmu-days * {
+   	width: 38px;
+   }
+
+   #agenda {
+      width: 280px;
+   }
+}
+
+@media (min-width:391px) and (max-width:768px) {
+   #agenda .pickmeup .pmu-instance .pmu-day-of-week *, .pickmeup .pmu-instance .pmu-days * {
+      width: 52px;
+   }
+
+   #agenda {
+      width: 380px;
+   }
+}
+
+@media (min-width:769px) and (max-width:990px) {
+   #agenda .pickmeup .pmu-instance .pmu-day-of-week *, .pickmeup .pmu-instance .pmu-days * {
+   	width: 32px;
+   }
+
+   #agenda {
+      width: 240px;
+   }
+}
+
+
+@media (min-width: 991px) and (max-width: 1120px) {
+   #agenda .pickmeup .pmu-instance .pmu-day-of-week *, .pickmeup .pmu-instance .pmu-days * {
+   	width: 41px;
+   }
+
+   #agenda {
+      width: 305px;
+   }
+}
+
+@media (min-width: 1121px) {
+   #agenda .pickmeup .pmu-instance .pmu-day-of-week *, .pickmeup .pmu-instance .pmu-days * {
+   	width: 52px;
+   }
+
+   #agenda {
+      width: 380px;
+   }
+}
+
 .place {
 	padding-right: 10px;
 	display: inline-block;
@@ -2529,7 +2580,7 @@ footer  .list-unstyled li a:hover h4 {
 
 #banner img {
 	width: 100%;
-	min-height: 136px;
+	/*min-height: 136px;*/
 	height: auto;
 }
 

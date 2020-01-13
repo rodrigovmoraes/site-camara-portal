@@ -152,40 +152,22 @@ var _transformEventCalendar = function(eventCalendar) {
 /* GET '/index.html' page */
 module.exports.homePageController = function(req, res, next) {
    var newsItems = null;
-   var lastNewsUpdate  = null;
-   var legislativePropositions  = null;
-   var lastLegislativePropositionsUpdate = null;
-   var lastProjetosDeLei = null;
-   var lastProjetosDeLeiUpdate = null;
    var hotNewsItems = null;
    var breakingNewsItems = null;
    var fbreakingNewsItems = null;
    var todayEventsCalendar = null;
    var nextEventsCalendar = null;
-   var lastOrdensDoDia = null;
    var lastPhotosets = null;
    var lastVideos = null;
-   return camaraSyslegisService
-     .getLastProjetosDeLei(8)
-     .catch(function(error) {
-        winston.error("Error while getting last 'projetos de leis', err = [%s]", error);
-        return {
-           "lastProjetosDeLeiUpdate": null,
-           "lastProjetosDeLei": []
-        }
-     }).then(function(getLastProjetosDeLeiResult) {
-         lastProjetosDeLei = getLastProjetosDeLeiResult.lastProjetosDeLei;
-         lastProjetosDeLeiUpdate = getLastProjetosDeLeiResult.lastProjetosDeLeiUpdate;
-         return YoutubeService
-                  .getLastVideos(7)
-                  .catch(function(error) {
-                     winston.error("Error while getting last youtube videos, err = [%s]", error);
-                     return [];
-                  });
+   return YoutubeService
+   .getLastVideos(5)
+   .catch(function(error) {
+            winston.error("Error while getting last youtube videos, err = [%s]", error);
+            return [];
    }).then(function(plastVideos){
       lastVideos = plastVideos;
       return FlickrService
-                  .getLastPhotosets(7)
+                  .getLastPhotosets(5)
                   .catch(function(error) {
                      winston.error("Error while getting last flickr photosets, err = [%s]", error);
                      return {
@@ -208,19 +190,6 @@ module.exports.homePageController = function(req, res, next) {
                });
    }).then(function(data) {
       newsItems = data.news;
-      lastNewsUpdate = data.lastNewsUpdate;
-      return camaraLegislativePropositionsService
-             .getLastLegislativePropositions(8)
-             .catch(function(error) {
-                winston.error("Error while getting last legislative proposition, err = [%s]", error);
-                return {
-                      'legislativePropositions': [],
-                      'lastLegislativePropositionsUpdate' : null
-                };
-             });
-   }).then(function(getLastLegislativePropositionsResult){
-      lastLegislativePropositionsUpdate = getLastLegislativePropositionsResult.lastLegislativePropositionsUpdate;
-      legislativePropositions = getLastLegislativePropositionsResult.legislativePropositions;
       return camaraHotNewsService
                .getHotNewsItems()
                .catch(function(error) {
@@ -261,16 +230,7 @@ module.exports.homePageController = function(req, res, next) {
                });
    }).then(function(pfbreakingNewsItems) {
       fbreakingNewsItems = _transformFBreakingNewsItems(pfbreakingNewsItems);
-      return camaraSyslegisService
-               .getLastOrdensDoDia(5)
-               .catch(function(error) {
-                  winston.error("Error while getting last ordens do dia, err = [%s]", error);
-                  return {
-                     'lastUpdate': null
-                  }
-               });
-   }).then(function(plastLicitacoesEvents) {
-      lastOrdensDoDia = plastLicitacoesEvents.lastOrdensDoDia;
+
       var fbreakingNewsItem1 = camaraFBreakingNewsService.getFBreakingNewsItemByOrder(fbreakingNewsItems, 1);
       var fbreakingNewsItem2 = camaraFBreakingNewsService.getFBreakingNewsItemByOrder(fbreakingNewsItems, 2);
       var fbreakingNewsItem3 = camaraFBreakingNewsService.getFBreakingNewsItemByOrder(fbreakingNewsItems, 3);
@@ -284,7 +244,6 @@ module.exports.homePageController = function(req, res, next) {
           'news6': newsItems && 6 < newsItems.length ? newsItems[6] : null,
           'news7': newsItems && 7 < newsItems.length ? newsItems[7] : null,
           'news8': newsItems && 8 < newsItems.length ? newsItems[8] : null,
-          'lastNewsUpdate': lastNewsUpdate,
           'hotNewsItems' : hotNewsItems,
           'breakingNewsItems' : breakingNewsItems,
           'todayEventsCalendar' : todayEventsCalendar,
@@ -292,25 +251,6 @@ module.exports.homePageController = function(req, res, next) {
           'fbreakingNewsItem1' : fbreakingNewsItem1,
           'fbreakingNewsItem2' : fbreakingNewsItem2,
           'fbreakingNewsItem3' : fbreakingNewsItem3,
-          'lastOrdensDoDia' : lastOrdensDoDia,
-          'legislativeProposition1': legislativePropositions && 0 < legislativePropositions.length ? legislativePropositions[0] : null,
-          'legislativeProposition2': legislativePropositions && 1 < legislativePropositions.length ? legislativePropositions[1] : null,
-          'legislativeProposition3': legislativePropositions && 2 < legislativePropositions.length ? legislativePropositions[2] : null,
-          'legislativeProposition4': legislativePropositions && 3 < legislativePropositions.length ? legislativePropositions[3] : null,
-          'legislativeProposition5': legislativePropositions && 4 < legislativePropositions.length ? legislativePropositions[4] : null,
-          'legislativeProposition6': legislativePropositions && 5 < legislativePropositions.length ? legislativePropositions[5] : null,
-          'legislativeProposition7': legislativePropositions && 6 < legislativePropositions.length ? legislativePropositions[6] : null,
-          'legislativeProposition8': legislativePropositions && 7 < legislativePropositions.length ? legislativePropositions[7] : null,
-          'lastProjetosDeLei1': lastProjetosDeLei && 0 < lastProjetosDeLei.length ? lastProjetosDeLei[0] : null,
-          'lastProjetosDeLei2': lastProjetosDeLei && 1 < lastProjetosDeLei.length ? lastProjetosDeLei[1] : null,
-          'lastProjetosDeLei3': lastProjetosDeLei && 2 < lastProjetosDeLei.length ? lastProjetosDeLei[2] : null,
-          'lastProjetosDeLei4': lastProjetosDeLei && 3 < lastProjetosDeLei.length ? lastProjetosDeLei[3] : null,
-          'lastProjetosDeLei5': lastProjetosDeLei && 4 < lastProjetosDeLei.length ? lastProjetosDeLei[4] : null,
-          'lastProjetosDeLei6': lastProjetosDeLei && 5 < lastProjetosDeLei.length ? lastProjetosDeLei[5] : null,
-          'lastProjetosDeLei7': lastProjetosDeLei && 6 < lastProjetosDeLei.length ? lastProjetosDeLei[6] : null,
-          'lastProjetosDeLei8': lastProjetosDeLei && 7 < lastProjetosDeLei.length ? lastProjetosDeLei[7] : null,
-          'lastLegislativePropositionsUpdate': lastLegislativePropositionsUpdate,
-          'lastProjetosDeLeiUpdate': lastProjetosDeLeiUpdate,
           'lastFlickrPhotosets': lastPhotosets,
           'lastYoutubeVideos': lastVideos
       });
@@ -349,7 +289,7 @@ module.exports.newsItemSharingController = function(req, res, next) {
              'newsItem': newsItem,
              'facebookCamaraUrlBase': FacebookSharingConfig.getCamaraPortalUrlBase(),
              'facebookNewsItemUrl': FacebookSharingConfig.getNewsItemUrl(),
-             'portalCamaraNewsItemUrl': FacebookSharingConfig.getOpenNewsItemUrl(), 
+             'portalCamaraNewsItemUrl': FacebookSharingConfig.getOpenNewsItemUrl(),
              'layout': false
          });
       }).catch(function(err) {
@@ -380,7 +320,7 @@ module.exports.newsController = function(req, res, next) {
    }
    //publication date begin
    if(req.query.begin) {
-      var date1 = Utils.toDateFromDDMMYYYY(req.query.begin);      
+      var date1 = Utils.toDateFromDDMMYYYY(req.query.begin);
       filter['date1'] = Utils.isValidDate(date1) ? date1 : null;
    }
    //publication date end
@@ -526,7 +466,7 @@ module.exports.pageSharingController = function(req, res, next) {
          //render the error page
          Utils.next(err.statusCode, err, next);
       });
-   } 
+   }
 };
 
 /* GET '/calendar.html' page */
@@ -581,7 +521,7 @@ module.exports.licitacoesController = function(req, res, next) {
    //publication date end
    if(req.query.publicationDate2) {
       var publicationDate2 = Utils.toDateFromDDMMYYYY(req.query.publicationDate2);
-      if(Utils.isValidDate(publicationDate2)) {     
+      if(Utils.isValidDate(publicationDate2)) {
          publicationDate2.setHours(23);
          publicationDate2.setMinutes(59);
          publicationDate2.setSeconds(59);
@@ -754,7 +694,7 @@ module.exports.propositurasController = function(req, res, next) {
          filter['date2'] = publicationDate2;
       } else {
          filter['date2'] = null;
-      }     
+      }
    }
    //category
    if(req.query.type) {
@@ -1091,7 +1031,7 @@ module.exports.materiasLegislativasController = function(req, res, next) {
    if(body.dataApresentacaoInicial) {
       dataApresentacaoInicial = Utils.toDateFromDDMMYYYY(body.dataApresentacaoInicial);
       filter['dataApresentacaoInicial'] = Utils.isValidDate(dataApresentacaoInicial) ? dataApresentacaoInicial : null;
-   }    
+   }
    //data da apresentacao final
    if(body.dataApresentacaoFinal) {
       dataApresentacaoFinal = Utils.toDateFromDDMMYYYY(body.dataApresentacaoFinal)
@@ -1101,12 +1041,12 @@ module.exports.materiasLegislativasController = function(req, res, next) {
    if(body.dataPublicacaoInicial) {
       dataPublicacaoInicial = Utils.toDateFromDDMMYYYY(body.dataPublicacaoInicial);
       filter['dataPublicacaoInicial'] = Utils.isValidDate(dataPublicacaoInicial) ? dataPublicacaoInicial : null;
-   }  
+   }
    //data da publicacao final
    if(body.dataPublicacaoFinal) {
       dataPublicacaoFinal = Utils.toDateFromDDMMYYYY(body.dataPublicacaoFinal);
       filter['dataPublicacaoFinal'] = Utils.isValidDate(dataPublicacaoFinal) ? dataPublicacaoFinal : null;
-   }   
+   }
    //data fim de prazo executivo inicial
    if(body.dataPrazoExecutivoInicial) {
       dataPrazoExecutivoInicial =  Utils.toDateFromDDMMYYYY(body.dataPrazoExecutivoInicial);
@@ -1116,17 +1056,17 @@ module.exports.materiasLegislativasController = function(req, res, next) {
    if(body.dataPrazoExecutivoFinal) {
       dataPrazoExecutivoFinal = Utils.toDateFromDDMMYYYY(body.dataPrazoExecutivoFinal);
       filter['dataPrazoExecutivoFinal'] = Utils.isValidDate(dataPrazoExecutivoFinal) ? dataPrazoExecutivoFinal : null;
-   }  
+   }
    //data fim de prazo do processo (data inicial para o filtro da pesquisa)
    if(body.dataPrazoProcessoInicial) {
       dataPrazoProcessoInicial = Utils.toDateFromDDMMYYYY(body.dataPrazoProcessoInicial);
       filter['dataPrazoProcessoInicial'] = Utils.isValidDate(dataPrazoProcessoInicial) ? dataPrazoProcessoInicial : null;
-   }  
+   }
    //data fim de prazo do processo (data final para o filtro da pesquisa)
    if(body.dataPrazoProcessoFinal) {
       dataPrazoProcessoFinal = Utils.toDateFromDDMMYYYY(body.dataPrazoProcessoFinal);
       filter['dataPrazoProcessoFinal'] = Utils.isValidDate(dataPrazoProcessoFinal) ? dataPrazoProcessoFinal : null;
-   }  
+   }
    //localizacao
    if(body.localizacaoId) {
       filter['localizacaoId'] = parseInt(body.localizacaoId);

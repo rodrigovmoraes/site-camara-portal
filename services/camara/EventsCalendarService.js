@@ -56,7 +56,7 @@ module.exports.getTodayEvents = function() {
 module.exports.getNextEvents = function() {
    var todayRange = Utils.getTodayRange();
    var minDate = todayRange.minDate;
-   var maxResult = 7;
+   var maxResult = 5;
 
    return _requestService({
       url: _getEventsCalendarMethodURL(),

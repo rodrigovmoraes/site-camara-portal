@@ -41,12 +41,13 @@ $(document).ready(function() {
          flat: true,
          locale:
           { // Object, that contains localized days of week names and months
-             days: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
-             daysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
-             daysMin: ["Do", "Se", "Te", "Qu", "Qu", "Se", "Sa", "Do"],
+             days: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+             daysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+             daysMin: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
              months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
              monthsShort: arrMonthsShort
           },
+          first_day: 1,
           formatted: true,
           mode: 'single',
           date:  now,

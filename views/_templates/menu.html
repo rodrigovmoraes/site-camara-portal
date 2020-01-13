@@ -1,14 +1,14 @@
 <div class="collapse navbar-collapse" id="navbar-collapse">
-   <ul class="nav navbar-nav text-uppercase main-nav multi-level">
+   <ul class="nav navbar-nav main-nav multi-level">
        {{#menuItems}}
 
             {{#hasMenuItems}}
                <li class="dropdown">
-                  <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                  <a href="javascript:void(0)" class="dropdown-toggle text-uppercase" data-toggle="dropdown">
                      {{ title }}
                      <span class="ion-ios7-arrow-down nav-icn"></span>
                   </a>
-                  <ul class="dropdown-menu text-capitalize multi-level" role="menu">
+                  <ul class="dropdown-menu multi-level" role="menu">
                      {{#menuItems}}
 
                            {{#hasMenuItems}}

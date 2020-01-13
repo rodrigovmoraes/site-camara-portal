@@ -301,61 +301,24 @@
 <!-- top sec end -->
 
 <!-- last news -->
-<div class="container ">
+<div class="container">
   <div class="row ">
     <!-- left sec start -->
     <div class="col-md-11 col-sm-11">
       <div class="row">
 
         <!-- last news -->
-        <div class="col-sm-16 business  wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="50">
+        <div class="col-sm-8 business wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="50">
           <div class="main-title-outer pull-left">
             <a href="/news.html"><div class="main-title">Últimas notícias</div><a/>
-            {{#lastNewsUpdate}}
-            <div class="span-outer">
-               <span class="pull-right text-danger last-update"><span class="ion-android-data icon"></span>Última atualização: {{lastNewsUpdate}}</span>
-            </div>
-            {{/lastNewsUpdate}}
           </div>
           <div class="row">
             <div class="col-md-16 col-sm-16">
              <div class="row">
-                <div class="col-md-8 col-sm-9 col-xs-16">
-                     <!--Headline//-->
-                     {{#news0}}
-                     <div class="topic">
-                        <a href="newsitem.html?id={{id}}">
-                           <img class="img-thumbnail" src="{{ thumbnailUrl }}"  alt=""/>
-                              <h3>{{ title }}</h3>
-                              <div class="text-danger sub-info-bordered">
-                                 <div class="time"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                 {{#views}}
-                                    <!--
-                                    25/09/2019: disabled for technical issues:
-
-                                    <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                    //-->
-                                 {{/views}}
-                              </div>
-                        </a>
-                        <p>{{ headline }}</p>
-                     </div>
-                     {{/news0}}
-                     {{^news0}}
-                     <div class="topic">
-                        <a href="#">
-                           <img class="img-thumbnail" src="/images/news/fake_news_thumbnail.jpg"  alt="notícia não carregada"/>
-                           <h3>NOTÍCIA NÃO CARREGADA</h3>
-                        </a>
-                        <p>{{ headline }}</p>
-                     </div>
-                     {{/news0}}
-
-                     <!--End Headline//-->
-
+                <div class="col-md-16 col-sm-16 col-xs-16">
                   <ul class="list-unstyled">
-                    <!--News #6//-->
-                    {{#news6}}
+                    <!--News #0//-->
+                    {{#news0}}
                       <li>
                          <a href="newsitem.html?id={{id}}">
                            <div class="row">
@@ -363,21 +326,14 @@
                               <div class="col-sm-12 col-md-16 col-lg-12">
                                  <h4>{{ title }}</h4>
                                  <div class="text-danger sub-info">
-                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                       {{#views}}
-                                          <!--
-                                          25/09/2019: disabled for technical issues:
-
-                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                          //-->
-                                       {{/views}}
+                                    <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
                                  </div>
                               </div>
                            </div>
                          </a>
                       </li>
-                    {{/news6}}
-                    {{^news6}}
+                    {{/news0}}
+                    {{^news0}}
                     <li>
                        <a href="#">
                          <div class="row">
@@ -388,46 +344,7 @@
                          </div>
                        </a>
                     </li>
-                    {{/news6}}
-                    <!--News #8//-->
-                    {{#news8}}
-                      <li>
-                         <a href="newsitem.html?id={{id}}">
-                           <div class="row">
-                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
-                              <div class="col-sm-12 col-md-16 col-lg-12">
-                                 <h4>{{ title }}</h4>
-                                 <div class="text-danger sub-info">
-                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                       {{#views}}
-                                          <!--
-                                          25/09/2019: disabled for technical issues:
-
-                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                          //-->
-                                       {{/views}}
-                                 </div>
-                              </div>
-                           </div>
-                         </a>
-                      </li>
-                    {{/news8}}
-                    {{^news8}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
-                            <div class="col-sm-12 col-md-16 col-lg-12">
-                               <h4>NOTÍCIA NÃO CARREGADA</h4>
-                            </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/news8}}
-                  </ul>
-                </div>
-                <div class="col-md-8 col-sm-7 col-xs-16">
-                  <ul class="list-unstyled">
+                    {{/news0}}
                     <!--News #1//-->
                     {{#news1}}
                       <li>
@@ -437,14 +354,7 @@
                               <div class="col-sm-12 col-md-16 col-lg-12">
                                  <h4>{{ title }}</h4>
                                  <div class="text-danger sub-info">
-                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                       {{#views}}
-                                          <!--
-                                          25/09/2019: disabled for technical issues:
-
-                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                          //-->
-                                       {{/views}}
+                                    <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
                                  </div>
                               </div>
                            </div>
@@ -472,14 +382,7 @@
                               <div class="col-sm-12 col-md-16 col-lg-12">
                                  <h4>{{ title }}</h4>
                                  <div class="text-danger sub-info">
-                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                       {{#views}}
-                                          <!--
-                                          25/09/2019: disabled for technical issues:
-
-                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                          //-->
-                                       {{/views}}
+                                    <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
                                  </div>
                               </div>
                            </div>
@@ -507,14 +410,7 @@
                               <div class="col-sm-12 col-md-16 col-lg-12">
                                  <h4>{{ title }}</h4>
                                  <div class="text-danger sub-info">
-                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                       {{#views}}
-                                          <!--
-                                          25/09/2019: disabled for technical issues:
-
-                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                          //-->
-                                       {{/views}}
+                                    <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
                                  </div>
                               </div>
                            </div>
@@ -542,14 +438,7 @@
                               <div class="col-sm-12 col-md-16 col-lg-12">
                                  <h4>{{ title }}</h4>
                                  <div class="text-danger sub-info">
-                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                       {{#views}}
-                                          <!--
-                                          25/09/2019: disabled for technical issues:
-
-                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                          //-->
-                                       {{/views}}
+                                    <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
                                  </div>
                               </div>
                            </div>
@@ -568,76 +457,6 @@
                        </a>
                     </li>
                     {{/news4}}
-                    <!--News #5//-->
-                    {{#news5}}
-                      <li>
-                         <a href="newsitem.html?id={{id}}">
-                           <div class="row">
-                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
-                              <div class="col-sm-12 col-md-16 col-lg-12">
-                                 <h4>{{ title }}</h4>
-                                 <div class="text-danger sub-info">
-                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                       {{#views}}
-                                          <!--
-                                          25/09/2019: disabled for technical issues:
-
-                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                          //-->
-                                       {{/views}}
-                                 </div>
-                              </div>
-                           </div>
-                         </a>
-                      </li>
-                    {{/news5}}
-                    {{^news5}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
-                            <div class="col-sm-12 col-md-16 col-lg-12">
-                               <h4>NOTÍCIA NÃO CARREGADA</h4>
-                            </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/news5}}
-                    <!--News #7//-->
-                    {{#news7}}
-                      <li>
-                         <a href="newsitem.html?id={{id}}">
-                           <div class="row">
-                              <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="{{ thumbnailUrl }}" width="150" height="150" alt=""/> </div>
-                              <div class="col-sm-12 col-md-16 col-lg-12">
-                                 <h4>{{ title }}</h4>
-                                 <div class="text-danger sub-info">
-                                       <div class="time" title="data da publicação"><span class="ion-android-data icon"></span>{{ publicationDate }}</div>
-                                       {{#views}}
-                                          <!--
-                                          25/09/2019: disabled for technical issues:
-
-                                          <div class="comments" title="quantidade de visualizações"><span class="ion-ios7-eye icon"></span>{{views}}</div>
-                                          //-->
-                                       {{/views}}
-                                 </div>
-                              </div>
-                           </div>
-                         </a>
-                      </li>
-                    {{/news7}}
-                    {{^news7}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                            <div class="col-sm-4 hidden-sm hidden-md"><img class="img-thumbnail pull-left" src="/images/news/fake_news_thumbnail.jpg" width="150" height="150" alt=""/> </div>
-                            <div class="col-sm-12 col-md-16 col-lg-12">
-                               <h4>NOTÍCIA NÃO CARREGADA</h4>
-                            </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/news7}}
                     <li>
                        <div class="more_items">
                           <a href="/news.html">
@@ -654,674 +473,65 @@
         </div>
         <!-- last news end -->
 
-        <!-- projetos de leis start -->
-        <div class="col-sm-16 business  wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="50">
-          <div class="main-title-outer pull-left">
-            <a href="/materias.html"><div class="main-title">Projetos de Lei</div><a/>
-            {{#lastProjetosDeLeiUpdate}}
-               <div class="span-outer"><span class="pull-right text-danger last-update"><span class="ion-android-data icon"></span>Última atualização: {{lastProjetosDeLeiUpdate}}</span> </div>
-            {{/lastProjetosDeLeiUpdate}}
-          </div>
-          <div class="row">
-            <div class="col-md-16 col-sm-16">
-             <div class="row">
-                <div class="col-md-8 col-sm-9 col-xs-16">
-                  <ul class="list-unstyled">
-                    <!--Projeto de Lei #1//-->
-                    {{#lastProjetosDeLei1}}
-                    <li>
-                       <a href="/materia.html?id={{lastProjetoDeLeiId}}">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>{{lastProjetoDeLeiDescription}}</h4>
-                                <p title="{{lastProjetoDeLeiEmenta}}">{{lastProjetoDeLeiEmentaTruncated}}</p>
-                                <div class="text-danger sub-info">
-                                     <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>{{lastProjetoDeLeiDataApresentacao}}</div>
-                                     {{#lastProjetoDeLeiAutor}}
-                                       <div class="time"><span class="ion-ios7-person icon"></span>Autor: {{lastProjetoDeLeiAutor}}</div>
-                                     {{/lastProjetoDeLeiAutor}}
-                                     {{#lastProjetoDeLeiUltimaTramitacao}}
-                                       <div class="time"><span class="ion-ios7-information icon"></span>Estado: {{lastProjetoDeLeiUltimaTramitacao}}</div>
-                                     {{/lastProjetoDeLeiUltimaTramitacao}}
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/lastProjetosDeLei1}}
-                    {{^lastProjetosDeLei1}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>NÃO CARREGADA</h4>
-                                <p title="NÃO CARREGADA">NÃO CARREGADA</p>
-                                <div class="text-danger sub-info">
-                                     <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>NÃO CARREGADA</div>
-                                     <div class="time"><span class="ion-ios7-person icon"></span>Autor: NÃO CARREGADA</div>
-                                     <div class="time"><span class="ion-ios7-information icon"></span>Estado: NÃO CARREGADA</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/lastProjetosDeLei1}}
+        <!-- agenda start -->
+        <div class="col-sm-8 business bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="50">
 
-                    <!--Projeto de Lei #2//-->
-                    {{#lastProjetosDeLei2}}
-                    <li>
-                       <a href="/materia.html?id={{lastProjetoDeLeiId}}">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>{{lastProjetoDeLeiDescription}}</h4>
-                                <p title="{{lastProjetoDeLeiEmenta}}">{{lastProjetoDeLeiEmentaTruncated}}</p>
-                                <div class="text-danger sub-info">
-                                     <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>{{lastProjetoDeLeiDataApresentacao}}</div>
-                                     {{#lastProjetoDeLeiAutor}}
-                                       <div class="time"><span class="ion-ios7-person icon"></span>Autor: {{lastProjetoDeLeiAutor}}</div>
-                                     {{/lastProjetoDeLeiAutor}}
-                                     {{#lastProjetoDeLeiUltimaTramitacao}}
-                                       <div class="time"><span class="ion-ios7-information icon"></span>Estado: {{lastProjetoDeLeiUltimaTramitacao}}</div>
-                                     {{/lastProjetoDeLeiUltimaTramitacao}}
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/lastProjetosDeLei2}}
-                    {{^lastProjetosDeLei2}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>NÃO CARREGADA</h4>
-                                <p title="NÃO CARREGADA">NÃO CARREGADA</p>
-                                <div class="text-danger sub-info">
-                                     <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>NÃO CARREGADA</div>
-                                     <div class="time"><span class="ion-ios7-person icon"></span>Autor: NÃO CARREGADA</div>
-                                     <div class="time"><span class="ion-ios7-information icon"></span>Estado: NÃO CARREGADA</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/lastProjetosDeLei2}}
-
-                    <!--Projeto de Lei #3//-->
-                    {{#lastProjetosDeLei3}}
-                    <li>
-                       <a href="/materia.html?id={{lastProjetoDeLeiId}}">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>{{lastProjetoDeLeiDescription}}</h4>
-                                <p title="{{lastProjetoDeLeiEmenta}}">{{lastProjetoDeLeiEmentaTruncated}}</p>
-                                <div class="text-danger sub-info">
-                                     <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>{{lastProjetoDeLeiDataApresentacao}}</div>
-                                     {{#lastProjetoDeLeiAutor}}
-                                       <div class="time"><span class="ion-ios7-person icon"></span>Autor: {{lastProjetoDeLeiAutor}}</div>
-                                     {{/lastProjetoDeLeiAutor}}
-                                     {{#lastProjetoDeLeiUltimaTramitacao}}
-                                       <div class="time"><span class="ion-ios7-information icon"></span>Estado: {{lastProjetoDeLeiUltimaTramitacao}}</div>
-                                     {{/lastProjetoDeLeiUltimaTramitacao}}
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/lastProjetosDeLei3}}
-                    {{^lastProjetosDeLei3}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>NÃO CARREGADA</h4>
-                                <p title="NÃO CARREGADA">NÃO CARREGADA</p>
-                                <div class="text-danger sub-info">
-                                     <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>NÃO CARREGADA</div>
-                                     <div class="time"><span class="ion-ios7-person icon"></span>Autor: NÃO CARREGADA</div>
-                                     <div class="time"><span class="ion-ios7-information icon"></span>Estado: NÃO CARREGADA</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/lastProjetosDeLei3}}
-
-                    <!--Projeto de Lei #4//-->
-                    {{#lastProjetosDeLei4}}
-                    <li>
-                       <a href="/materia.html?id={{lastProjetoDeLeiId}}">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>{{lastProjetoDeLeiDescription}}</h4>
-                                <p title="{{lastProjetoDeLeiEmenta}}">{{lastProjetoDeLeiEmentaTruncated}}</p>
-                                <div class="text-danger sub-info">
-                                     <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>{{lastProjetoDeLeiDataApresentacao}}</div>
-                                     {{#lastProjetoDeLeiAutor}}
-                                       <div class="time"><span class="ion-ios7-person icon"></span>Autor: {{lastProjetoDeLeiAutor}}</div>
-                                     {{/lastProjetoDeLeiAutor}}
-                                     {{#lastProjetoDeLeiUltimaTramitacao}}
-                                       <div class="time"><span class="ion-ios7-information icon"></span>Estado: {{lastProjetoDeLeiUltimaTramitacao}}</div>
-                                     {{/lastProjetoDeLeiUltimaTramitacao}}
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/lastProjetosDeLei4}}
-                    {{^lastProjetosDeLei4}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>NÃO CARREGADA</h4>
-                                <p title="NÃO CARREGADA">NÃO CARREGADA</p>
-                                <div class="text-danger sub-info">
-                                     <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>NÃO CARREGADA</div>
-                                     <div class="time"><span class="ion-ios7-person icon"></span>Autor: NÃO CARREGADA</div>
-                                     <div class="time"><span class="ion-ios7-information icon"></span>Estado: NÃO CARREGADA</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/lastProjetosDeLei4}}
-
-                  </ul>
+                <div class="main-title-outer pull-left">
+                   <a href="/calendar.html">
+                      {{#todayEventsCalendar.todayEvents.length}}
+                        <div class="main-title" id="agenda-title">Eventos de hoje ({{todayEventsCalendar.todayDescription}})</div>
+                      {{/todayEventsCalendar.todayEvents.length}}
+                      {{^todayEventsCalendar.todayEvents.length}}
+                        <div class="main-title" id="agenda-title">AGENDA</div>
+                      {{/todayEventsCalendar.todayEvents.length}}
+                   </a>
                 </div>
 
-                <div class="col-md-8 col-sm-7 col-xs-16">
-                  <ul class="list-unstyled">
-                      <!--Projeto de Lei #5//-->
-                      {{#lastProjetosDeLei5}}
-                     <li>
-                        <a href="/materia.html?id={{lastProjetoDeLeiId}}">
-                          <div class="row">
-                              <div class="col-sm-16 col-md-16 col-lg-16">
-                                 <h4>{{lastProjetoDeLeiDescription}}</h4>
-                                 <p title="{{lastProjetoDeLeiEmenta}}">{{lastProjetoDeLeiEmentaTruncated}}</p>
+                <ul class="list-unstyled" id="day_events">
+                     {{#todayEventsCalendar.todayEvents}}
+                       <li>
+                           <div class="row">
+                              <div class="col-sm-16  col-md-16 list-item-without-img">
+                                 <h4><a href="javascript:CamaraUtils.openEventCalendar('{{todayEventsCalendarId}}');">{{todayEventsCalendarDescription}}</a></h4>
                                  <div class="text-danger sub-info">
-                                      <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>{{lastProjetoDeLeiDataApresentacao}}</div>
-                                      {{#lastProjetoDeLeiAutor}}
-                                        <div class="time"><span class="ion-ios7-person icon"></span>Autor: {{lastProjetoDeLeiAutor}}</div>
-                                      {{/lastProjetoDeLeiAutor}}
-                                      {{#lastProjetoDeLeiUltimaTramitacao}}
-                                        <div class="time"><span class="ion-ios7-information icon"></span>Estado: {{lastProjetoDeLeiUltimaTramitacao}}</div>
-                                      {{/lastProjetoDeLeiUltimaTramitacao}}
+                                    <div class="time"><span class="ion-android-data icon"></span>Início: {{todayEventsCalendarDateDescription}}</div>
+                                    {{#todayEventsCalendarPlace}}
+                                        <div class="place"><span class="ion-location icon"></span>Local: {{todayEventsCalendarPlace}}</div>
+                                    {{/todayEventsCalendarPlace}}
                                  </div>
                               </div>
-                          </div>
-                        </a>
-                     </li>
-                     {{/lastProjetosDeLei5}}
-                     {{^lastProjetosDeLei5}}
-                     <li>
-                        <a href="#">
-                          <div class="row">
-                              <div class="col-sm-16 col-md-16 col-lg-16">
-                                 <h4>NÃO CARREGADA</h4>
-                                 <p title="NÃO CARREGADA">NÃO CARREGADA</p>
-                                 <div class="text-danger sub-info">
-                                      <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>NÃO CARREGADA</div>
-                                      <div class="time"><span class="ion-ios7-person icon"></span>Autor: NÃO CARREGADA</div>
-                                      <div class="time"><span class="ion-ios7-information icon"></span>Estado: NÃO CARREGADA</div>
-                                 </div>
-                              </div>
-                          </div>
-                        </a>
-                     </li>
-                     {{/lastProjetosDeLei5}}
+                           </div>
+                        </li>
+                     {{/todayEventsCalendar.todayEvents}}
+                </ul>
 
-                     <!--Projeto de Lei #6//-->
-                     {{#lastProjetosDeLei6}}
-                     <li>
-                        <a href="/materia.html?id={{lastProjetoDeLeiId}}">
-                          <div class="row">
-                              <div class="col-sm-16 col-md-16 col-lg-16">
-                                 <h4>{{lastProjetoDeLeiDescription}}</h4>
-                                 <p title="{{lastProjetoDeLeiEmenta}}">{{lastProjetoDeLeiEmentaTruncated}}</p>
-                                 <div class="text-danger sub-info">
-                                      <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>{{lastProjetoDeLeiDataApresentacao}}</div>
-                                      {{#lastProjetoDeLeiAutor}}
-                                        <div class="time"><span class="ion-ios7-person icon"></span>Autor: {{lastProjetoDeLeiAutor}}</div>
-                                      {{/lastProjetoDeLeiAutor}}
-                                      {{#lastProjetoDeLeiUltimaTramitacao}}
-                                        <div class="time"><span class="ion-ios7-information icon"></span>Estado: {{lastProjetoDeLeiUltimaTramitacao}}</div>
-                                      {{/lastProjetoDeLeiUltimaTramitacao}}
-                                 </div>
-                              </div>
-                          </div>
-                        </a>
-                     </li>
-                     {{/lastProjetosDeLei6}}
-                     {{^lastProjetosDeLei6}}
-                     <li>
-                        <a href="#">
-                          <div class="row">
-                              <div class="col-sm-16 col-md-16 col-lg-16">
-                                 <h4>NÃO CARREGADA</h4>
-                                 <p title="NÃO CARREGADA">NÃO CARREGADA</p>
-                                 <div class="text-danger sub-info">
-                                      <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>NÃO CARREGADA</div>
-                                      <div class="time"><span class="ion-ios7-person icon"></span>Autor: NÃO CARREGADA</div>
-                                      <div class="time"><span class="ion-ios7-information icon"></span>Estado: NÃO CARREGADA</div>
-                                 </div>
-                              </div>
-                          </div>
-                        </a>
-                     </li>
-                     {{/lastProjetosDeLei6}}
-
-                      <!--Projeto de Lei #7//-->
-                      {{#lastProjetosDeLei7}}
-                     <li>
-                        <a href="/materia.html?id={{lastProjetoDeLeiId}}">
-                          <div class="row">
-                              <div class="col-sm-16 col-md-16 col-lg-16">
-                                 <h4>{{lastProjetoDeLeiDescription}}</h4>
-                                 <p title="{{lastProjetoDeLeiEmenta}}">{{lastProjetoDeLeiEmentaTruncated}}</p>
-                                 <div class="text-danger sub-info">
-                                      <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>{{lastProjetoDeLeiDataApresentacao}}</div>
-                                      {{#lastProjetoDeLeiAutor}}
-                                        <div class="time"><span class="ion-ios7-person icon"></span>Autor: {{lastProjetoDeLeiAutor}}</div>
-                                      {{/lastProjetoDeLeiAutor}}
-                                      {{#lastProjetoDeLeiUltimaTramitacao}}
-                                        <div class="time"><span class="ion-ios7-information icon"></span>Estado: {{lastProjetoDeLeiUltimaTramitacao}}</div>
-                                      {{/lastProjetoDeLeiUltimaTramitacao}}
-                                 </div>
-                              </div>
-                          </div>
-                        </a>
-                     </li>
-                     {{/lastProjetosDeLei7}}
-                     {{^lastProjetosDeLei7}}
-                     <li>
-                        <a href="#">
-                          <div class="row">
-                              <div class="col-sm-16 col-md-16 col-lg-16">
-                                 <h4>NÃO CARREGADA</h4>
-                                 <p title="NÃO CARREGADA">NÃO CARREGADA</p>
-                                 <div class="text-danger sub-info">
-                                      <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>NÃO CARREGADA</div>
-                                      <div class="time"><span class="ion-ios7-person icon"></span>Autor: NÃO CARREGADA</div>
-                                      <div class="time"><span class="ion-ios7-information icon"></span>Estado: NÃO CARREGADA</div>
-                                 </div>
-                              </div>
-                          </div>
-                        </a>
-                     </li>
-                     {{/lastProjetosDeLei7}}
-
-                      <!--Projeto de Lei #8//-->
-                     {{#lastProjetosDeLei8}}
-                     <li>
-                        <a href="/materia.html?id={{lastProjetoDeLeiId}}">
-                          <div class="row">
-                              <div class="col-sm-16 col-md-16 col-lg-16">
-                                 <h4>{{lastProjetoDeLeiDescription}}</h4>
-                                 <p title="{{lastProjetoDeLeiEmenta}}">{{lastProjetoDeLeiEmentaTruncated}}</p>
-                                 <div class="text-danger sub-info">
-                                      <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>{{lastProjetoDeLeiDataApresentacao}}</div>
-                                      {{#lastProjetoDeLeiAutor}}
-                                        <div class="time"><span class="ion-ios7-person icon"></span>Autor: {{lastProjetoDeLeiAutor}}</div>
-                                      {{/lastProjetoDeLeiAutor}}
-                                      {{#lastProjetoDeLeiUltimaTramitacao}}
-                                        <div class="time"><span class="ion-ios7-information icon"></span>Estado: {{lastProjetoDeLeiUltimaTramitacao}}</div>
-                                      {{/lastProjetoDeLeiUltimaTramitacao}}
-                                 </div>
-                              </div>
-                          </div>
-                        </a>
-                     </li>
-                     {{/lastProjetosDeLei8}}
-                     {{^lastProjetosDeLei8}}
-                     <li>
-                        <a href="#">
-                          <div class="row">
-                              <div class="col-sm-16 col-md-16 col-lg-16">
-                                 <h4>NÃO CARREGADA</h4>
-                                 <p title="NÃO CARREGADA">NÃO CARREGADA</p>
-                                 <div class="text-danger sub-info">
-                                      <div class="time" title="data de apresentação do projeto de lei"><span class="ion-android-calendar icon"></span>NÃO CARREGADA</div>
-                                      <div class="time"><span class="ion-ios7-person icon"></span>Autor: NÃO CARREGADA</div>
-                                      <div class="time"><span class="ion-ios7-information icon"></span>Estado: NÃO CARREGADA</div>
-                                 </div>
-                              </div>
-                          </div>
-                        </a>
-                     </li>
-                     {{/lastProjetosDeLei8}}
-
-                      <!--Demais-->
-                      <li>
-                        <div class="more_items">
-                           <a href="/materias.html">
-                              <div><span class="ion-ios7-browsers icon"></span>demais matérias legislativas ...</div>
-                           </a>
-                        </div>
-                     </li>
-                  </ul>
-                </div>
-             </div>
-            </div>
-          </div>
-          <hr>
+             <div id="agenda" class="single pull-left"></div>
         </div>
-
-        <!-- Legislação start -->
-        <div class="col-sm-16 business  wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="50">
-
-          <div class="main-title-outer pull-left">
-            <a href="/proposituras.html">
-               <div class="main-title">Leis Ordinárias</div>
-            <a/>
-            {{#lastLegislativePropositionsUpdate}}
-               <div class="span-outer">
-                  <span class="pull-right text-danger last-update">
-                     <span class="ion-android-data icon"></span>Última atualização: {{lastLegislativePropositionsUpdate}}
-                  </span>
-               </div>
-            {{/lastLegislativePropositionsUpdate}}
-          </div>
-
-          <div class="row">
-            <div class="col-md-16 col-sm-16">
-             <div class="row">
-                <div class="col-md-8 col-sm-9 col-xs-16">
-                  <ul class="list-unstyled">
-                    <!--Lei #1//-->
-                    {{#legislativeProposition1}}
-                    <li>
-                       <a href="/propositura.html?id={{legislativePropositionId}}">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>{{legislativePropositionTypeDescription}} {{legislativePropositionNumber}}</h4>
-                                <p title="{{legislativePropositionDescription}}">{{legislativePropositionDescription}}</p>
-                                <div class="text-danger sub-info">
-                                   <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/legislativeProposition1}}
-                    {{^legislativeProposition1}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>NÃO CARREGADA</h4>
-                                <p title="Não carregada">Não carregada ...</p>
-                                <div class="text-danger sub-info">
-                                   <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>00/00/0000</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/legislativeProposition1}}
-                    <!--Lei #2//-->
-                    {{#legislativeProposition2}}
-                    <li>
-                       <a href="/propositura.html?id={{legislativePropositionId}}">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>{{legislativePropositionTypeDescription}} {{legislativePropositionNumber}}</h4>
-                                <p title="{{legislativePropositionDescription}}">{{legislativePropositionDescription}}</p>
-                                <div class="text-danger sub-info">
-                                   <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/legislativeProposition2}}
-                    {{^legislativeProposition2}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>NÃO CARREGADA</h4>
-                                <p title="Não carregada">Não carregada ...</p>
-                                <div class="text-danger sub-info">
-                                   <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>00/00/0000</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/legislativeProposition2}}
-                    <!--Lei #3//-->
-                    {{#legislativeProposition3}}
-                    <li>
-                       <a href="/propositura.html?id={{legislativePropositionId}}">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>{{legislativePropositionTypeDescription}} {{legislativePropositionNumber}}</h4>
-                                <p title="{{legislativePropositionDescription}}">{{legislativePropositionDescription}}</p>
-                                <div class="text-danger sub-info">
-                                   <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/legislativeProposition3}}
-                    {{^legislativeProposition3}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>NÃO CARREGADA</h4>
-                                <p title="Não carregada">Não carregada ...</p>
-                                <div class="text-danger sub-info">
-                                   <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>00/00/0000</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/legislativeProposition3}}
-                    <!--Lei #4//-->
-                    {{#legislativeProposition4}}
-                    <li>
-                       <a href="/propositura.html?id={{legislativePropositionId}}">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>{{legislativePropositionTypeDescription}} {{legislativePropositionNumber}}</h4>
-                                <p title="{{legislativePropositionDescription}}">{{legislativePropositionDescription}}</p>
-                                <div class="text-danger sub-info">
-                                   <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/legislativeProposition4}}
-                    {{^legislativeProposition4}}
-                    <li>
-                       <a href="#">
-                         <div class="row">
-                             <div class="col-sm-16 col-md-16 col-lg-16">
-                                <h4>NÃO CARREGADA</h4>
-                                <p title="Não carregada">Não carregada ...</p>
-                                <div class="text-danger sub-info">
-                                   <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>00/00/0000</div>
-                                </div>
-                             </div>
-                         </div>
-                       </a>
-                    </li>
-                    {{/legislativeProposition4}}
-                  </ul>
-                </div>
-
-                <div class="col-md-8 col-sm-7 col-xs-16">
-                  <ul class="list-unstyled">
-                      <!--Lei #5//-->
-                      {{#legislativeProposition5}}
-                      <li>
-                          <a href="/propositura.html?id={{legislativePropositionId}}">
-                           <div class="row">
-                                <div class="col-sm-16 col-md-16 col-lg-16">
-                                   <h4>{{legislativePropositionTypeDescription}} {{legislativePropositionNumber}}</h4>
-                                   <p title="{{legislativePropositionDescription}}">{{legislativePropositionDescription}}</p>
-                                   <div class="text-danger sub-info">
-                                      <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
-                                   </div>
-                                </div>
-                           </div>
-                          </a>
-                      </li>
-                      {{/legislativeProposition5}}
-                      {{^legislativeProposition5}}
-                      <li>
-                         <a href="#">
-                           <div class="row">
-                               <div class="col-sm-16 col-md-16 col-lg-16">
-                                  <h4>NÃO CARREGADA</h4>
-                                  <p title="Não carregada">Não carregada ...</p>
-                                  <div class="text-danger sub-info">
-                                     <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>00/00/0000</div>
-                                  </div>
-                               </div>
-                           </div>
-                         </a>
-                      </li>
-                      {{/legislativeProposition5}}
-                      <!--Lei #6//-->
-                      {{#legislativeProposition6}}
-                      <li>
-                          <a href="/propositura.html?id={{legislativePropositionId}}">
-                           <div class="row">
-                                <div class="col-sm-16 col-md-16 col-lg-16">
-                                   <h4>{{legislativePropositionTypeDescription}} {{legislativePropositionNumber}}</h4>
-                                   <p title="{{legislativePropositionDescription}}">{{legislativePropositionDescription}}</p>
-                                   <div class="text-danger sub-info">
-                                      <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
-                                   </div>
-                                </div>
-                           </div>
-                          </a>
-                      </li>
-                      {{/legislativeProposition6}}
-                      {{^legislativeProposition6}}
-                      <li>
-                         <a href="#">
-                           <div class="row">
-                               <div class="col-sm-16 col-md-16 col-lg-16">
-                                  <h4>NÃO CARREGADA</h4>
-                                  <p title="Não carregada">Não carregada ...</p>
-                                  <div class="text-danger sub-info">
-                                     <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>00/00/0000</div>
-                                  </div>
-                               </div>
-                           </div>
-                         </a>
-                      </li>
-                     {{/legislativeProposition6}}
-                      <!--Projeto de Lei #7//-->
-                      {{#legislativeProposition7}}
-                      <li>
-                          <a href="/propositura.html?id={{legislativePropositionId}}">
-                           <div class="row">
-                                <div class="col-sm-16 col-md-16 col-lg-16">
-                                   <h4>{{legislativePropositionTypeDescription}} {{legislativePropositionNumber}}</h4>
-                                   <p title="{{legislativePropositionDescription}}">{{legislativePropositionDescription}}</p>
-                                   <div class="text-danger sub-info">
-                                      <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
-                                   </div>
-                                </div>
-                           </div>
-                          </a>
-                      </li>
-                      {{/legislativeProposition7}}
-                      {{^legislativeProposition7}}
-                      <li>
-                         <a href="#">
-                           <div class="row">
-                               <div class="col-sm-16 col-md-16 col-lg-16">
-                                  <h4>NÃO CARREGADA</h4>
-                                  <p title="Não carregada">Não carregada ...</p>
-                                  <div class="text-danger sub-info">
-                                     <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>00/00/0000</div>
-                                  </div>
-                               </div>
-                           </div>
-                         </a>
-                      </li>
-                      {{/legislativeProposition7}}
-                      <!--Projeto de Lei #8//-->
-                      {{#legislativeProposition8}}
-                      <li>
-                           <a href="/propositura.html?id={{legislativePropositionId}}">
-                             <div class="row">
-                                 <div class="col-sm-16 col-md-16 col-lg-16">
-                                     <h4>{{legislativePropositionTypeDescription}} {{legislativePropositionNumber}}</h4>
-                                     <p title="{{legislativePropositionDescription}}">{{legislativePropositionDescription}}</p>
-                                     <div class="text-danger sub-info">
-                                        <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
-                                     </div>
-                                 </div>
-                             </div>
-                           </a>
-                      </li>
-                      {{/legislativeProposition8}}
-                      {{^legislativeProposition8}}
-                      <li>
-                         <a href="#">
-                           <div class="row">
-                               <div class="col-sm-16 col-md-16 col-lg-16">
-                                  <h4>NÃO CARREGADA</h4>
-                                  <p title="Não carregada">Não carregada ...</p>
-                                  <div class="text-danger sub-info">
-                                     <div class="time"  title="data da publicação da lei"><span class="ion-android-calendar icon"></span>00/00/0000</div>
-                                  </div>
-                               </div>
-                           </div>
-                         </a>
-                      </li>
-                      {{/legislativeProposition8}}
-                      <!--Demais-->
-                      <li>
-                        <div class="more_items">
-                           <a href="/proposituras.html">
-                              <div><span class="ion-ios7-browsers icon"></span>demais proposituras ...</div>
-                           </a>
-                        </div>
-                      </li>
-                  </ul>
-                </div>
-             </div>
-            </div>
-          </div>
-          <hr>
-        </div>
+        <!-- agenda end -->
 
       </div>
     </div>
     <!-- left sec end -->
     <!-- right sec start -->
-    <div class="col-sm-5 hidden-xs right-sec">
-      <div class="bordered top-margin">
-        <div class="row ">
-          <!-- activities start -->
+    <div class="col-sm-5 business hidden-xs right-sec">
+        <div class="row">
+           <!-- activities start -->
           <div class="col-sm-16 bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="130">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs nav-justified " role="tablist">
-             <li><a href="#fotos" role="tab" data-toggle="tab">Fotos</a></li>
-             <li  class="active"><a href="#videos" role="tab" data-toggle="tab">Vídeos</a></li>
-             <li><a href="#eventos" role="tab" data-toggle="tab">P. Eventos</a></li>
+               <li><a href="#fotos" role="tab" data-toggle="tab">Fotos</a></li>
+               <li  class="active"><a href="#videos" role="tab" data-toggle="tab">Vídeos</a></li>
+               <li><a href="#eventos" role="tab" data-toggle="tab">P. Eventos</a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-             <div class="tab-pane" id="fotos">
-                <ul class="list-unstyled">
+            <div class="tab-pane" id="fotos">
+               <ul class="list-unstyled">
                   {{#lastFlickrPhotosets}}
                   <li>
                      <a href="/fotos.html?setId={{flickrPhotosetId}}">
-                          <div class="row">
+                         <div class="row">
                                <div class="col-sm-5 col-md-4">
                                   <img class="img-thumbnail pull-left" src="{{flickrPhotosetThumbnailUrl}}" width="88" height="60" alt="{{flickrPhotosetTitle}}"/>
                                </div>
@@ -1338,18 +548,18 @@
                   <li>
                      <div class="more_items">
                        <a href="/albuns.html">
-                           <div><span class="ion-ios7-browsers icon"></span>mais fotos ...</div>
+                          <div><span class="ion-ios7-browsers icon"></span>mais fotos ...</div>
                        </a>
                      </div>
                   </li>
-                </ul>
-             </div>
-             <div class="tab-pane active" id="videos">
-                <ul class="list-unstyled">
+               </ul>
+            </div>
+            <div class="tab-pane active" id="videos">
+               <ul class="list-unstyled">
                   {{#lastYoutubeVideos}}
                   <li>
                      <a class="popup-youtube" href="https://www.youtube.com/watch?v={{youtubeVideoId}}">
-                          <div class="row">
+                         <div class="row">
                              <div class="col-sm-5  col-md-4 ">
                                 <img class="img-thumbnail pull-left" src="{{youtubeVideoThumbnailURL}}" width="88" height="60"  alt=""/>
                              </div>
@@ -1359,22 +569,22 @@
                                   <div class="time"><span class="ion-android-data icon"></span>{{youtubeVideoDateDescription}}</div>
                                </div>
                              </div>
-                          </div>
+                         </div>
                      </a>
                   </li>
                   {{/lastYoutubeVideos}}
                   <li>
                      <div class="more_items">
                        <a href="/videos.html">
-                           <div><span class="ion-ios7-browsers icon"></span>mais vídeos ...</div>
+                          <div><span class="ion-ios7-browsers icon"></span>mais vídeos ...</div>
                        </a>
                      </div>
                   </li>
-                </ul>
-             </div>
+               </ul>
+            </div>
 
-             <div class="tab-pane" id="eventos">
-                <ul class="list-unstyled">
+            <div class="tab-pane" id="eventos">
+               <ul class="list-unstyled">
                   {{#nextEventsCalendar}}
                      <li>
                         <a href="#">
@@ -1395,113 +605,20 @@
                   <li>
                      <div class="more_items">
                        <a href="/calendar.html">
-                           <div><span class="ion-ios7-browsers icon"></span>outros eventos ...</div>
+                          <div><span class="ion-ios7-browsers icon"></span>outros eventos ...</div>
                        </a>
                      </div>
                   </li>
-                </ul>
-             </div>
+               </ul>
+            </div>
 
             </div>
           </div>
           <!-- activities end -->
 
-          <!-- agenda start -->
-          <div class="col-sm-16 bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="50">
-
-                  <div class="main-title-outer pull-left">
-                     <a href="/calendar.html">
-                        {{#todayEventsCalendar.todayEvents.length}}
-                           <div class="main-title" id="agenda-title">Eventos de hoje ({{todayEventsCalendar.todayDescription}})</div>
-                        {{/todayEventsCalendar.todayEvents.length}}
-                        {{^todayEventsCalendar.todayEvents.length}}
-                           <div class="main-title" id="agenda-title">AGENDA</div>
-                        {{/todayEventsCalendar.todayEvents.length}}
-                     </a>
-                  </div>
-
-                  <ul class="list-unstyled" id="day_events">
-                       {{#todayEventsCalendar.todayEvents}}
-                          <li>
-                              <div class="row">
-                                 <div class="col-sm-16  col-md-16 list-item-without-img">
-                                   <h4><a href="javascript:CamaraUtils.openEventCalendar('{{todayEventsCalendarId}}');">{{todayEventsCalendarDescription}}</a></h4>
-                                   <div class="text-danger sub-info">
-                                      <div class="time"><span class="ion-android-data icon"></span>Início: {{todayEventsCalendarDateDescription}}</div>
-                                      {{#todayEventsCalendarPlace}}
-                                          <div class="place"><span class="ion-location icon"></span>Local: {{todayEventsCalendarPlace}}</div>
-                                      {{/todayEventsCalendarPlace}}
-                                   </div>
-                                 </div>
-                              </div>
-                           </li>
-                       {{/todayEventsCalendar.todayEvents}}
-                  </ul>
-
-               <div id="agenda" class="single pull-left"></div>
-          </div>
-          <!-- agenda end -->
-
-          <!-- Ordens do Dia start -->
-          <div class="col-sm-16 business  wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="50" style="margin-right: 5px">
-            <div class="main-title-outer pull-left"  style="margin-bottom: 10px">
-              <a href="/ordens_do_dia.html"><div class="main-title">Pautas das Sessões</div><a/>
-            </div>
-            <div class="row">
-              <div class="col-md-16 col-sm-16">
-               <div class="row">
-                  <div class="col-md-16 col-sm-16 col-xs-16">
-                    <ul class="list-unstyled">
-                         {{#lastOrdensDoDia}}
-                         <li>
-                           <div class="row">
-                               <div class="col-sm-16 col-md-16 col-lg-16  list-item-without-img">
-                                  <a href="#LastOrdemDoDiaTextoResumido_{{LastOrdemDoDia_id}}" class="open-popup-div">
-                                     <h4 style="margin-right: 5px">{{LastOrdemDoDia_descricao}} {{LastOrdemDoDia_numero}}/{{LastOrdemDoDia_ano}}</h4>
-                                     <div class="text-danger sub-info-bordered">
-                                        <div id="LastOrdemDoDiaTextoResumido_{{LastOrdemDoDia_id}}" class="white-popup-ordem-do-dia mfp-hide">
-                                          {{{LastOrdemDoDia_textoResumido}}}
-                                        </div>
-                                        <div class="time">
-                                          <span class="ion-archive icon"></span>
-                                          <a href="{{LastOrdemDoDia_urlTextoCompleto}}" target="_blank">Texto Completo</a>
-                                        </div>
-                                        {{#LastOrdemDoDia_urlPrimeiroExpediente}}
-                                        <div class="time">
-                                          <span class="ion-archive icon"></span>
-                                          <a href="{{LastOrdemDoDia_urlPrimeiroExpediente}}" target="_blank">Texto 1° Expediente</a>
-                                        </div>
-                                        {{/LastOrdemDoDia_urlPrimeiroExpediente}}
-                                     </div>
-                                     <div class="text-danger sub-info-bordered">
-                                        <div class="time" title="Data da ordem do dia"><span class="ion-android-calendar icon"></span>Data: {{ LastOrdemDoDia_data }}</div>
-                                        <div class="time" title="Data da postagem da ordem do dia"><span class="ion-android-data icon"></span>Postagem: {{ LastOrdemDoDia_dataPostagem }}</div>
-                                     </div>
-                                  </a>
-                               </div>
-                           </div>
-                         </li>
-                         {{/lastOrdensDoDia}}
-                      <li>
-                        <div class="more_items">
-                          <a href="/ordens_do_dia.html">
-                              <div><span class="ion-ios7-browsers icon"></span>outras pautas ...</div>
-                          </a>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-               </div>
-              </div>
-            </div>
-            <hr>
-          </div>
-          <!-- Ordens do Dia end -->
-
         </div>
-      </div>
     </div>
     <!-- right sec end -->
   </div>
 </div>
-<!-- data end -->  
+<!-- data end -->
