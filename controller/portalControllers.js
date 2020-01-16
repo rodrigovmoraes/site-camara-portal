@@ -1783,9 +1783,18 @@ var _transformMenuItemDFS = function(menuItem) {
 module.exports.transformMenuItems = function(menuItems) {
    if(menuItems) {
       var i;
+      var j;
       for(i = 0; i < menuItems.length; i++) {
          var menuItem = menuItems[i];
          _transformMenuItemDFS(menuItem);
+         //leafs menu items used to display a hierarchy with maximum depth of two
+         //this is util for devices that not support multi level menu
+         //process access property of leaf menu items
+         if(menuItems[i].leafMenuItems && menuItems[i].leafMenuItems.length > 0) {
+            for(j = 0; j < menuItems[i].leafMenuItems.length; j++) {
+               AccessService.transformAccess('menuItem', menuItems[i].leafMenuItems[j]);
+            }
+         }
       }
    }
    return menuItems;

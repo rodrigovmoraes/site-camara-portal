@@ -13,7 +13,7 @@
 }
 
 .dropdown-submenu:hover>.dropdown-menu {
-    display: block;
+       display: block;
 }
 
 .dropdown-submenu>a:after {
@@ -31,8 +31,9 @@
 }
 
 .dropdown-submenu:hover>a:after {
-    border-left-color: #fff;
+   border-left-color: #fff;
 }
+
 
 .dropdown-submenu.pull-left {
     float: none;
@@ -44,4 +45,16 @@
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
+}
+
+@media (max-width:767px) {
+   .menuItemNotMobile {
+      display: none
+   }
+}
+
+@media (min-width:768px) {
+   .menuItemMobile {
+      display: none
+   }
 }

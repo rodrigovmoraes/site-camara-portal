@@ -1,4 +1,4 @@
-<li class="dropdown-submenu">
+<li class="dropdown-submenu menuItemNotMobile">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{title}}</a>
       <ul class="dropdown-menu multi-level">
          {{#menuItems}}
@@ -8,11 +8,11 @@
             {{/hasMenuItems}}
 
             {{^hasMenuItems}}
-               <li>
+               <li class="menuItemNotMobile">
                   {{>menu_access}}
                </li>
             {{/hasMenuItems}}
-            
+
          {{/menuItems}}
       </ul>
 </li>

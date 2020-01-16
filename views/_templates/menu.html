@@ -16,12 +16,18 @@
                            {{/hasMenuItems}}
 
                            {{^hasMenuItems}}
-                              <li>
+                              <li class="menuItemNotMobile">
                                  {{>menu_access}}
                               </li>
                            {{/hasMenuItems}}
 
                      {{/menuItems}}
+
+                     {{#leafMenuItems}}
+                        <li  class="menuItemMobile">
+                           {{>menu_access}}
+                        </li>
+                     {{/leafMenuItems}}
                   </ul>
                </li>
             {{/hasMenuItems}}
@@ -31,6 +37,8 @@
                   {{>menu_access}}
                </li>
             {{/hasMenuItems}}
+
+
 
        {{/menuItems}}
    </ul>
