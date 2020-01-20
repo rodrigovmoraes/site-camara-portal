@@ -344,7 +344,7 @@ a:hover h3, a:hover h2 {
 }
 /*2-3 MISC */
 * {
-	border-radius: 0 !important;
+	border-radius: 0 !important; 
 }
 *:focus {
 	outline: none;
