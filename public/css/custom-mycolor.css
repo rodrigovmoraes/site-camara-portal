@@ -3083,7 +3083,6 @@ div.mfp-wrap::-webkit-scrollbar-thumb {
    margin-bottom: 2px
 }
 
-
 .embed-container {
    position: relative;
    padding-bottom: 56.25%;
@@ -3098,26 +3097,8 @@ div.mfp-wrap::-webkit-scrollbar-thumb {
   height: 100%;
 }
 
-/*For responsive embedded videos*/
-div.fr-view span.fr-video>*
+.fr-view .embed-container .fr-video
 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-sizing: content-box;
-    max-width: 100%;
-    border: 0;
-}
-
-div.fr-view span.fr-video.fr-dvi
-{
-   display: block;
-   text-align: center;
-   position: relative;
-   padding-bottom: 56.25%;
-   height: 0;
-   overflow: hidden;
-   max-width: 100%;
+  text-align: center;
+  position: unset;
 }
