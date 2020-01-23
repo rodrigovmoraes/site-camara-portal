@@ -499,7 +499,7 @@ module.exports.showEventCalendarController = function(req, res, next) {
 module.exports.licitacoesController = function(req, res, next) {
    //set the page and pageSize
    var page = 1;
-   var pageSize = 9;
+   var pageSize = 6;
    var paginationSize = 11;
    var filter = {}; //keywords + publication date begin + publication date end
    var categories;

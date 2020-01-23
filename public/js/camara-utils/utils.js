@@ -174,7 +174,11 @@ var CamaraUtils = (function() {
             }
           }
        }
+    }
 
+   //make iframe embed videos in froala-view elements responsive
+    var _makeFroalaVideosResponsive = function() {
+      $('div.fr-view .fr-video.responsiveFroalaVideo').wrap('<div class="embed-container"></div>')
     }
 
     var camUtils = {};
@@ -182,5 +186,6 @@ var CamaraUtils = (function() {
     camUtils.camaraConfig = _camaraConfig;
     camUtils.openEventCalendar = _openEventCalendar;
     camUtils.highlight = _highlight;
+    camUtils.makeFroalaVideosResponsive = _makeFroalaVideosResponsive;
     return camUtils;
 })();

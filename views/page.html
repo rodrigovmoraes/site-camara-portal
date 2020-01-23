@@ -1,3 +1,13 @@
+{{#yield-scripts}}
+<script type="text/javascript">
+   $(document).ready(function() {
+       "use strict";
+       //make videos in froala-view responsive
+       CamaraUtils.makeFroalaVideosResponsive();
+   });
+</script>
+{{/yield-scripts}}
+
 {{#yield-posBody}}
    <!-- Load Facebook SDK for JavaScript -->
    <div id="fb-root"></div>

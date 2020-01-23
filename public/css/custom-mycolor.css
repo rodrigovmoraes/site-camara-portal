@@ -2652,7 +2652,7 @@ footer  .list-unstyled li a:hover h4 {
 }
 
 .licitacoes .headline {
-	height: 160px;
+	/* height: 160px; */
 	max-height: 160px;
 	overflow: hidden;
 }
@@ -3092,12 +3092,15 @@ div.mfp-wrap::-webkit-scrollbar-thumb {
 
 /*For responsive embedded videos*/
 .embed-container iframe, .embed-container object, .embed-container embed
-{ position: absolute; top: 0;
-  left: 0; width: 100%;
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
 }
 
-.fr-view .embed-container .fr-video
+.fr-view .embed-container .fr-video 
 {
   text-align: center;
   position: unset;
