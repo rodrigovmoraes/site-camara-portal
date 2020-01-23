@@ -2655,6 +2655,7 @@ footer  .list-unstyled li a:hover h4 {
 	/* height: 160px; */
 	max-height: 160px;
 	overflow: hidden;
+   margin-bottom: 50px;
 }
 
 .licitacoes .licitacaoTitle {
@@ -3100,7 +3101,7 @@ div.mfp-wrap::-webkit-scrollbar-thumb {
   height: 100%;
 }
 
-.fr-view .embed-container .fr-video 
+.fr-view .embed-container .fr-video
 {
   text-align: center;
   position: unset;
