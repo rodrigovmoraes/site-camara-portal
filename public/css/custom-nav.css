@@ -58,3 +58,7 @@
       display: none
    }
 }
+
+.newsitem div.fr-view {
+  font-size: 18px;
+}
