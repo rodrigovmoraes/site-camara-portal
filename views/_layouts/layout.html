@@ -1,64 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-   <!--BEGIN: Global site tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id={{googleAnalyticsTrackingID}}"></script>
-   <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
+ <!--BEGIN: Global site tag (gtag.js) - Google Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id={{googleAnalyticsTrackingID}}"></script>
+ <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
 
-     gtag('config', '{{googleAnalyticsTrackingID}}');
-   </script>
-   <!--END: Global site tag (gtag.js) - Google Analytics -->
+   gtag('config', '{{googleAnalyticsTrackingID}}');
+ </script>
+ <!--END: Global site tag (gtag.js) - Google Analytics -->
 
-   <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Câmara Municipal de Sorocaba</title>
-   {{{yield-head}}}
-   <link href="images/favicon2.ico" rel="shortcut icon" type="image/x-icon">
-   <link href="images/favicon2.ico" rel="icon" type="image/x-icon">
-   <!-- bootstrap styles-->
-   <link href="css/bootstrap.min.css" rel="stylesheet">
-   <!-- Jquery UI -->
-   <link href="css/jquery-ui.min.css" rel="stylesheet">
-   <!-- google font -->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
-   <!-- ionicons font -->
-   <link href="css/ionicons.min.css" rel="stylesheet">
-   <!-- animation styles -->
-   <link href="css/animate.css" rel="stylesheet"/>
-   <!-- calendar-->
-   <link href="css/pickmeup.css" rel="stylesheet">
-   <!-- full calendar-->
-   <link href="css/fullcalendar.min.css" rel="stylesheet">
-   <!-- custom styles -->
-   <link href="css/custom-nav.css" rel="stylesheet">
-   <link href="css/custom-mycolor.css" rel="stylesheet">
-   <!-- owl carousel styles-->
-   <link href="css/owl.carousel.css" rel="stylesheet">
-   <link href="css/owl.transitions.css" rel="stylesheet">
-   <link href="css/owl.theme.css" rel="stylesheet">
-   <!-- magnific popup styles -->
-   <link href="css/magnific-popup.css" rel="stylesheet">
-   <!-- froala styles -->
-   <link href="css/froala_style.min.css" rel="stylesheet">
-   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Câmara Municipal de Sorocaba</title>
+ {{{yield-head}}}
+ <link href="images/favicon2.ico" rel="shortcut icon" type="image/x-icon">
+ <link href="images/favicon2.ico" rel="icon" type="image/x-icon">
+ <!-- bootstrap styles-->
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+ <!-- Jquery UI -->
+ <link href="css/jquery-ui.min.css" rel="stylesheet">
+ <!-- google font -->
+ <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+ <!-- ionicons font -->
+ <link href="css/ionicons.min.css" rel="stylesheet">
+ <!-- animation styles -->
+ <link href="css/animate.css" rel="stylesheet"/>
+ <!-- calendar-->
+ <link href="css/pickmeup.css" rel="stylesheet">
+ <!-- full calendar-->
+ <link href="css/fullcalendar.min.css" rel="stylesheet">
+ <!-- custom styles -->
+ <link href="css/custom-nav.css" rel="stylesheet">
+ <link href="css/custom-mycolor.css" rel="stylesheet">
+ <!-- owl carousel styles-->
+ <link href="css/owl.carousel.css" rel="stylesheet">
+ <link href="css/owl.transitions.css" rel="stylesheet">
+ <link href="css/owl.theme.css" rel="stylesheet">
+ <!-- magnific popup styles -->
+ <link href="css/magnific-popup.css" rel="stylesheet">
+ <!-- froala styles -->
+ <link href="css/froala_style.min.css" rel="stylesheet">
+ <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+ <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
    <!--[if lt IE 9]>
          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-   <![endif]-->
+         <![endif]-->
 
-   <!-- BEGIN specific page styles //-->
-   {{{yield-styles}}}
-   <!-- END specific pages tyles//-->
-</head>
-<body>
-   {{{yield-posBody}}}
+         <!-- BEGIN specific page styles //-->
+         {{{yield-styles}}}
+         <!-- END specific pages tyles//-->
+       </head>
+       <body>
 
-<!-- preloader start -->
+         {{{yield-posBody}}}
+
+         <!-- preloader start -->
 <!--
 10/04/2019: Disabled for performance purposes (Rodrigo).
 
@@ -106,127 +107,127 @@
   {{^print}}
   <div id="banner" class="sticky-header owl-carousel owl-theme">
 
-       {{#banners}}
-          <div class="box item">
-             {{#bannerTypeLink}}
-                <a href="{{url}}" target="{{target}}">
-                   <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
-                </a>
-             {{/bannerTypeLink}}
+   {{#banners}}
+   <div class="box item">
+     {{#bannerTypeLink}}
+     <a href="{{url}}" target="{{target}}">
+       <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
+     </a>
+     {{/bannerTypeLink}}
 
-             {{#bannerTypeNews}}
-                <a href="/newsitem.html?id={{accessId}}" target="_self">
-                   <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
-                </a>
-             {{/bannerTypeNews}}
+     {{#bannerTypeNews}}
+     <a href="/newsitem.html?id={{accessId}}" target="_self">
+       <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
+     </a>
+     {{/bannerTypeNews}}
 
-             {{#bannerTypePage}}
-                <a href="/page.html?id={{accessId}}">
-                   <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
-                </a>
-             {{/bannerTypePage}}
+     {{#bannerTypePage}}
+     <a href="/page.html?id={{accessId}}">
+       <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
+     </a>
+     {{/bannerTypePage}}
 
-             {{#bannerTypeYoutube}}
-                <a class="popup-youtube" href="https://www.youtube.com/watch?v={{videoId}}">
-                   <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
-                </a>
-             {{/bannerTypeYoutube}}
+     {{#bannerTypeYoutube}}
+     <a class="popup-youtube" href="https://www.youtube.com/watch?v={{videoId}}">
+       <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
+     </a>
+     {{/bannerTypeYoutube}}
 
-             {{#bannerTypeYoutube_live}}
-                <a class="popup-youtube-live-channel" href="https://www.youtube.com/embed/live_stream?channel={{channelId}}">
-                   <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
-                </a>
-             {{/bannerTypeYoutube_live}}
+     {{#bannerTypeYoutube_live}}
+     <a class="popup-youtube-live-channel" href="https://www.youtube.com/embed/live_stream?channel={{channelId}}">
+       <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
+     </a>
+     {{/bannerTypeYoutube_live}}
 
-             {{#bannerTypeFlickr}}
+     {{#bannerTypeFlickr}}
 
-                {{#onePerLineShowMode}}
-                    <a  class="popup-flickr-gallery" href="/popup-render-flickr-set-big-single-image.html?setId={{accessId}}">
-                       <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
-                    </a>
-                {{/onePerLineShowMode}}
+     {{#onePerLineShowMode}}
+     <a  class="popup-flickr-gallery" href="/popup-render-flickr-set-big-single-image.html?setId={{accessId}}">
+       <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
+     </a>
+     {{/onePerLineShowMode}}
 
-                {{#threePerLineShowMode}}
-                   <a  class="popup-flickr-gallery" href="/popup-render-flickr-set-carousel.html?setId={{accessId}}">
-                      <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
-                   </a>
-                {{/threePerLineShowMode}}
-             {{/bannerTypeFlickr}}
-          </div>
-       {{/banners}}
+     {{#threePerLineShowMode}}
+     <a  class="popup-flickr-gallery" href="/popup-render-flickr-set-carousel.html?setId={{accessId}}">
+      <img class="img-responsive" width="2039" height="376" src="{{imageFileURL}}" alt=""/>
+    </a>
+    {{/threePerLineShowMode}}
+    {{/bannerTypeFlickr}}
   </div>
-  {{/print}}
-  <!-- header end -->
+  {{/banners}}
+</div>
+{{/print}}
+<!-- header end -->
 
-  <!-- nav and search start -->
-  {{^print}}
-  <div class="nav-search-outer">
-     <!-- nav start -->
-     <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container">
+<!-- nav and search start -->
+{{^print}}
+<div class="nav-search-outer">
+ <!-- nav start -->
+ <nav class="navbar navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-16">
+       <a href="javascript:;" class="toggle-search pull-right">
+        <span class="ion-ios7-search"></span>
+      </a>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+     </div>
+
+     {{>menu}}
+   </div>
+ </div>
+</div>
+<!-- nav end -->
+<!-- search start -->
+<div class="search-container ">
+  <div class="container">
+    <form action="/busca.html" method="GET" role="search">
+      <input id="search-bar" name="keywords" placeholder="Digite e pressione Enter..." autocomplete="off">
+    </form>
+  </div>
+</div>
+<!-- search end -->
+</nav>
+<!--nav end-->
+</div>
+{{/print}}
+<!-- nav and search end-->
+
+<!-- sticky header end -->
+
+{{{yield}}}
+
+<!-- Footer start -->
+{{^print}}
+<footer>
+  <div class="btm-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-16">
           <div class="row">
-            <div class="col-sm-16">
-               <a href="javascript:;" class="toggle-search pull-right">
-                  <span class="ion-ios7-search"></span>
-               </a>
-               <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                     <span class="sr-only">Toggle navigation</span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                  </button>
-               </div>
-
-              {{>menu}}
-            </div>
-          </div>
-        </div>
-        <!-- nav end -->
-        <!-- search start -->
-        <div class="search-container ">
-          <div class="container">
-            <form action="/busca.html" method="GET" role="search">
-              <input id="search-bar" name="keywords" placeholder="Digite e pressione Enter..." autocomplete="off">
-            </form>
-          </div>
-        </div>
-        <!-- search end -->
-      </nav>
-     <!--nav end-->
-  </div>
-  {{/print}}
-  <!-- nav and search end-->
-
-  <!-- sticky header end -->
-
-  {{{yield}}}
-
-  <!-- Footer start -->
-  {{^print}}
-  <footer>
-    <div class="btm-sec">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-16">
-            <div class="row">
-              <div class="col-sm-10 col-xs-16 f-nav wow fadeInDown animated" data-wow-delay="0.5s" data-wow-offset="10">
-                <ul class="list-inline ">
-                  <li> <a href="/">Home</a></li>
-                  <li> <a href="/page.html?tag=faleconosco">Fale Conosco</a></li>
-                  <li> <a href="/page.html?tag=historia">História</a></li>
-                  <li> <a href="/page.html?tag=comochegar">Como Chegar</a></li>
-                  <li> <a href="/vereadores.html">Vereadores</a></li>
-                </ul>
-              </div>
+            <div class="col-sm-10 col-xs-16 f-nav wow fadeInDown animated" data-wow-delay="0.5s" data-wow-offset="10">
+              <ul class="list-inline ">
+                <li> <a href="/">Home</a></li>
+                <li> <a href="/page.html?tag=faleconosco">Fale Conosco</a></li>
+                <li> <a href="/page.html?tag=historia">História</a></li>
+                <li> <a href="/page.html?tag=comochegar">Como Chegar</a></li>
+                <li> <a href="/vereadores.html">Vereadores</a></li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </footer>
-  {{/print}}
-  <!-- Footer end -->
+  </div>
+</footer>
+{{/print}}
+<!-- Footer end -->
 </div>
 <!-- wrapper end -->
 
@@ -275,6 +276,20 @@
 <!--custom js-->
 <script src="js/custom-fun.js"></script>
 
+<!-- Accessibility Code for "localhost" --> <script> (function(doc, head, body){ window.interdeal = { sitekey : "0df36ba63dfa78b4802051ffd6bb50bb", Position : "Left", Menulang : "PT" }; var coreCall = doc.createElement('script'); coreCall.src = 'https://cdn.equalweb.com/core/2.0.2/accessibility.js'; coreCall.defer = true; coreCall.integrity = 'sha512-qoSw5f0i8HNkxw/CGLQyisq1wMNj695s0JAcWXaJ9bhO5l6UBCXQ7BXpfHUxl5cyJsBouPcvht3fh32LZKQbyQ=='; coreCall.crossOrigin = 'anonymous'; coreCall.setAttribute('data-cfasync', true ); body? body.appendChild(coreCall) : head.appendChild(coreCall); })(document, document.head, document.body); </script>
+
+<!-- VLibras-->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-left-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
 <!--BEGIN: if there is just one banner stop owl carousel -->
 {{#banners.isSingle}}
 <script src="js/stop-banners.js"></script>
@@ -284,6 +299,8 @@
 <!-- BEGIN specific page scripts //-->
 {{{yield-scripts}}}
 <!-- END specific page scripts //-->
+
+
 
 </body>
 </html>
