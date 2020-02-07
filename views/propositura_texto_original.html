@@ -18,7 +18,12 @@
 
      {{#legislativeProposition}}
         <div class="page-header">
-           <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</h1>
+           {{#legislativePropositionShowNumber}}
+              <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</h1>
+           {{/legislativePropositionShowNumber}}
+           {{^legislativePropositionShowNumber}}
+              <h1>{{legislativePropositionDescription}}</h1>
+           {{/legislativePropositionShowNumber}}
            {{^print}}
            <ol class="breadcrumb">
              <li><a href="/">Home</a></li>
@@ -27,11 +32,11 @@
            </ol>
            {{/print}}
         </div>
-
+        {{#legislativePropositionShowNumber}}
         <span class="legislativePropositionHeadline">
            <p>{{legislativePropositionDescription}}</p>
         </span>
-
+        {{/legislativePropositionShowNumber}}
         <div class="text-danger sub-info-bordered" style="font-size: 16px">
            <div class="time"><span class="ion-android-calendar icon"></span>Publicação: {{legislativePropositionDate}}</div>
            <div class="time"><span class="ion-ios7-information icon"></span>Tipo: {{legislativePropositionTypeDescription}}</div>
