@@ -15,13 +15,13 @@
 
      {{#legislativeProposition}}
         <div class="page-header">
-           <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}} - Vínculos</h1>
+           <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}} - Alterações</h1>
            {{^print}}
            <ol class="breadcrumb">
              <li><a href="/">Home</a></li>
              <li><a href="/proposituras.html">Legislação</a></li>
              <li><a href="/propositura.html?id={{legislativePropositionId}}">Propositura</a></li>
-             <li><a href="#">Vínculos</a></li>
+             <li><a href="#">Alterações</a></li>
            </ol>
            {{/print}}
         </div>
@@ -77,28 +77,29 @@
         {{#legislativePropositionRelationships.length}}
         <div class="col-md-16 col-sm-16">
             <div class="row">
-                 <div class="col-sm-16">
-                   <hr>
-                   <h3>Vínculos</h3>
-                   <hr>
-                 </div>
-
                  {{#legislativePropositionRelationships}}
-                 <div class="sec-topic col-sm-16">
-                   <div class="row">
-                     <div class="col-sm-16">
-                       <div class="sec-info">
-                         <div class="text-danger sub-info-bordered" style="font-size: 16px">
-                            <div class="time"><span class="ion-android-data icon"></span>Data: {{otherLegislativePropositionDate}}</div>
-                            <div class="time"><span class="ion-ios7-information icon"></span>{{legislativePropositionRelationshipTypeDescription}}&nbsp;<a class="otherLegislativePropositionLink" href="/propositura.html?id={{otherLegislativePropositionId}}">{{otherLegislativePropositionNumber}}</a></div>
-                            <span class="otherLegislativePropositionHeadline">
-                             <p>{{otherLegislativePropositionDescription}}</p>
-                            </span>
+                    <div class="col-sm-16">
+                      <hr>
+                      <h3>{{legislativePropositionRelationshipType.legislativePropositionRelationshipTypeDescription}}</h3>
+                      <hr>
+                    </div>
+                    {{#otherLegislativePropositionRelationships}}
+                       <div class="sec-topic col-sm-16">
+                         <div class="row">
+                           <div class="col-sm-16">
+                             <div class="sec-info">
+                               <div class="text-danger sub-info-bordered" style="font-size: 16px">
+                                  <div class="time"><span class="ion-android-data icon"></span>Data: {{otherLegislativePropositionDate}}</div>
+                                  <div class="time"><span class="ion-ios7-information icon"></span>Lei:&nbsp;<a class="otherLegislativePropositionLink" href="/propositura.html?id={{otherLegislativePropositionId}}">{{otherLegislativePropositionNumber}}</a></div>
+                                  <span class="otherLegislativePropositionHeadline">
+                                   <p>{{otherLegislativePropositionDescription}}</p>
+                                  </span>
+                               </div>
+                             </div>
+                           </div>
                          </div>
                        </div>
-                     </div>
-                   </div>
-                 </div>
+                    {{/otherLegislativePropositionRelationships}}
                  {{/legislativePropositionRelationships}}
 
             </div>
@@ -113,7 +114,7 @@
                      <div class="col-sm-9">
                        <div class="sec-info">
                          <div class="text-danger sub-info-bordered">
-                            <div class="time">Esta propositura não possui vínculos com outras proposituras.</div>
+                            <div class="time">Esta propositura não é alterada e não altera outras proposituras.</div>
                          </div>
                        </div>
                      </div>

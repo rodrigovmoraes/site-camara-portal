@@ -20,7 +20,12 @@
 
      {{#legislativeProposition}}
         <div class="page-header">
-           <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</h1>
+           {{#legislativePropositionShowNumber}}
+              <h1>{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</h1>
+           {{/legislativePropositionShowNumber}}
+           {{^legislativePropositionShowNumber}}
+              <h1>{{legislativePropositionDescription}}</h1>
+           {{/legislativePropositionShowNumber}}
            {{^print}}
            <ol class="breadcrumb">
              <li><a href="/">Home</a></li>
@@ -29,10 +34,11 @@
            </ol>
            {{/print}}
         </div>
-
+        {{#legislativePropositionShowNumber}}
         <span class="legislativePropositionHeadline">
            <p>{{legislativePropositionDescription}}</p>
         </span>
+        {{/legislativePropositionShowNumber}}
 
         <div class="text-danger sub-info-bordered" style="font-size: 16px">
            <div class="time"><span class="ion-android-calendar icon"></span>Publicação: {{legislativePropositionDate}}</div>
@@ -71,7 +77,7 @@
              {{#legislativePropositionRelationships.length}}
              <div class="time">
                 <a title="Clique aqui para ver outras proposituras vínculadas a esta" href="/propositura_alteracoes.html?id={{legislativePropositionId}}">
-                   <span class="ion-android-share icon"></span>Vínculos
+                   <span class="ion-android-share icon"></span>Alterações
                 </a>
              </div>
              {{/legislativePropositionRelationships.length}}

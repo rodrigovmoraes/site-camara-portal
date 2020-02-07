@@ -144,6 +144,8 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
    //build file attachments
    var legislativePropositionFileAttachments = [];
    var legislativePropositionRelationships = [];
+   var legislativePropositionRelationshipsByType = [];
+   var legislativePropositionRelationshipType = null;
    var i;
    if(legislativeProposition.consolidatedFileAttachments &&
          legislativeProposition.consolidatedFileAttachments.length > 0) {
@@ -173,6 +175,7 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
          var legislativePropositionRelationship = legislativeProposition.relationships[i];
          legislativePropositionRelationships.push({
             'otherLegislativePropositionId': legislativePropositionRelationship.otherLegislativeProposition._id,
+            'legislativePropositionRelationshipTypeId': legislativePropositionRelationship.type._id,
             'legislativePropositionRelationshipTypeDescription': legislativePropositionRelationship.type.description,
             'otherLegislativePropositionDate': _formatLegislativePropositionDate(legislativePropositionRelationship.otherLegislativeProposition.date),
             'otherLegislativePropositionDateObj': new Date(legislativePropositionRelationship.otherLegislativeProposition.date),
@@ -182,6 +185,33 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
       }
       //sort by date in descending order
       legislativePropositionRelationships = _.sortBy(legislativePropositionRelationships, [function(o) { return -1 * o.otherLegislativePropositionDateObj.getTime(); }]);
+      //group by relationship type
+      legislativePropositionRelationshipsByType = _.groupBy(legislativePropositionRelationships, function(o) {
+         return o.legislativePropositionRelationshipTypeId ? o.legislativePropositionRelationshipTypeId : null;
+      });
+      legislativePropositionRelationships = [];
+      var legislativePropositionRelationshipTypeKeys = Object.keys(legislativePropositionRelationshipsByType);
+      if (legislativePropositionRelationshipTypeKeys) {
+         for (i = 0; i < legislativePropositionRelationshipTypeKeys.length; i++) {
+            if ( legislativePropositionRelationshipTypeKeys[i] &&
+                 legislativePropositionRelationshipsByType[legislativePropositionRelationshipTypeKeys[i]] &&
+                 legislativePropositionRelationshipsByType[legislativePropositionRelationshipTypeKeys[i]].length > 0 ) {
+               legislativePropositionRelationships.push({
+                  legislativePropositionRelationshipType: {
+                     legislativePropositionRelationshipTypeId: legislativePropositionRelationshipsByType[legislativePropositionRelationshipTypeKeys[i]][0].legislativePropositionRelationshipTypeId,
+                     legislativePropositionRelationshipTypeDescription: legislativePropositionRelationshipsByType[legislativePropositionRelationshipTypeKeys[i]][0].legislativePropositionRelationshipTypeDescription
+                  },
+                  otherLegislativePropositionRelationships: legislativePropositionRelationshipsByType[legislativePropositionRelationshipTypeKeys[i]]
+               });
+            }
+         }
+      }
+      //sort by the description of relationship type
+      legislativePropositionRelationships = _.sortBy(legislativePropositionRelationships, [function(o) {
+         return o.legislativePropositionRelationshipType &&
+                o.legislativePropositionRelationshipType.legislativePropositionRelationshipTypeDescription
+                  ? o.legislativePropositionRelationshipType.legislativePropositionRelationshipTypeDescription : "";
+      }]);
    }
    return {
       'legislativePropositionId': legislativeProposition._id,
@@ -191,10 +221,11 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
       'legislativePropositionProcess': legislativeProposition.legislativeProcessId ? legislativeProposition.legislativeProcessId : null,
       'legislativePropositionDescription': legislativeProposition.description,
       'legislativePropositionText': legislativeProposition.consolidatedText ? legislativeProposition.consolidatedText : legislativeProposition.text,
-      'legislativePropositionOriginalText': legislativeProposition.consolidatedText ? legislativeProposition.text : "", 
+      'legislativePropositionOriginalText': legislativeProposition.consolidatedText ? legislativeProposition.text : "",
       'legislativePropositionTextAttachment': legislativeProposition.consolidatedTextAttachment ? legislativeProposition.consolidatedTextAttachment : legislativeProposition.textAttachment,
       'legislativePropositionFileAttachments': legislativePropositionFileAttachments,
-      'legislativePropositionRelationships': legislativePropositionRelationships
+      'legislativePropositionRelationships': legislativePropositionRelationships,
+      'legislativePropositionShowNumber': legislativeProposition.type &&  (legislativeProposition.type.code !== 5 && legislativeProposition.type.code !== 6)
    }
 }
 

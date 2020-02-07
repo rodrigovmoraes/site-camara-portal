@@ -938,7 +938,7 @@ module.exports.proposituraArquivosAnexosController = function(req, res, next) {
    }
 };
 
-/* GET '/propositura_arquivos_anexos.html' page */
+/* GET '/propositura_alteracoes.html' page */
 module.exports.proposituraAlteracoesController = function(req, res, next) {
    if (req.query.id) {
       camaraLegislativePropositionsService
