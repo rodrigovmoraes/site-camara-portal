@@ -1,6 +1,6 @@
 {
    CamaraApi : {
-      baseUrlSiteCamaraApi : "http://187.51.16.132:8082/",
+      baseUrlSiteCamaraApi : "http://www.camarasorocaba.sp.gov.br:8082/",
       eventsCalendarMethodPath : "eventsCalendar"
    }
 }
