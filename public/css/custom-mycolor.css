@@ -2230,6 +2230,11 @@ footer .stars {
 }
 
 @media (max-width:767px) {
+
+.sec-topic {
+	margin-top: 30px;
+}
+
 .navbar-header {
 	float: none;
 }
@@ -2772,9 +2777,17 @@ footer  .list-unstyled li a:hover h4 {
 	 margin-bottom: 5px;
 }
 
-@media (max-width:348px) {
+@media (max-width:768px) {
    .ordensDoDia .sec-topic .sub-info-bordered {
-   	height: 80px;
+   	height: auto;
+   }
+
+   .ordensDoDia .sec-topic {
+      margin-top: 30px;
+   }
+
+   .ordensDoDia .sec-topic .sub-info-bordered {
+   	height: auto;
    }
 }
 
@@ -2978,8 +2991,6 @@ ol#arquivosPublicosBreadcrumb {
 }
 
 .pesquisa .pesquisaItemTitle {
-	max-height: 23px;
-   height: 23px;
 	overflow: hidden;
 }
 

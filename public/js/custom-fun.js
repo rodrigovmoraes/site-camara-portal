@@ -107,27 +107,6 @@ $(document).ready(function() {
    });
 
    /* -------------------------------------------------------------------------*
-    * SCROLL BAR
-    * -------------------------------------------------------------------------*/
-   var seq = 0;
-   $("html").niceScroll({
-     styler: "fb",
-     cursorcolor: "#e74c3c"
-   });
-   $(window).load(function() {
-     setTimeout(function() {
-       $("#gmbox div").animate({
-         'top': 60
-       }, 1500, "easeOutElastic");
-     }, 1500);
-   });
-
-   /* -------------------------------------------------------------------------*
-    * WOW ANIMATION
-    * -------------------------------------------------------------------------*/
-   //new WOW().init();
-
-   /* -------------------------------------------------------------------------*
     * SETTING DATE AND TIME
     * -------------------------------------------------------------------------*/
    var datetime = null,
@@ -202,30 +181,6 @@ $(document).ready(function() {
    });
 
    /* -------------------------------------------------------------------------*
-    * STICKY NAVIGATION
-    * -------------------------------------------------------------------------*/
-    /*
-    Date: 22/05/2017
-    author: Rodrigo Vieira de Moraes
-
-    commented by Rodrigo Moraes to enhance the user experience on mobile
-    devices
-
-   $(window).scroll(function() {
-     if ($(window).scrollTop() >= 99) {
-       $('.nav-search-outer').addClass('navbar-fixed-top');
-     }
-
-
-     if ($(window).scrollTop() >= 100) {
-       $('.nav-search-outer').addClass('show');
-     } else {
-       $('.nav-search-outer').removeClass('show navbar-fixed-top');
-     }
-   });
-   */
-
-   /* -------------------------------------------------------------------------*
    * MINES
    * -------------------------------------------------------------------------*/
    $.extend(true, $.magnificPopup.defaults, {
@@ -293,23 +248,4 @@ $(document).ready(function() {
    });
 
  });
-
- /* -------------------------------------------------------------------------*
- * WEATHER
- * -------------------------------------------------------------------------*/
- /*
-$.simpleWeather({
-   location: '',
-   woeid: '455913',
-   unit: 'c',
-   success: function(weather) {
-     html = '<i class="icon-' + weather.code + '"></i> ' + weather.city +
-      ', ' + weather.region + ' ' + weather.temp + '&deg;' +
-      weather.units.temp + ' ';
-     $("#weather").html(html);
-   },
-   error: function(error) {
-     $("#weather").html('<p>' + error + '</p>');
-   }
-});
-*/
+ 

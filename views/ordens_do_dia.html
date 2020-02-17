@@ -107,19 +107,19 @@
                <div id="ordemDoDiaTextoResumido_{{OrdemDoDia_id}}" class="white-popup-ordem-do-dia mfp-hide">
                  {{{OrdemDoDia_textoResumido}}}
                </div>
-               <div class="time">
-                 <span class="ion-archive icon"></span>
-                 <a href="{{OrdemDoDia_urlTextoCompleto}}" target="_blank">Texto Completo</a>
-               </div>
                {{#OrdemDoDia_urlPrimeiroExpediente}}
                <div class="time">
                  <span class="ion-archive icon"></span>
-                 <a href="{{OrdemDoDia_urlPrimeiroExpediente}}" target="_blank">Texto 1° Expediente</a>
+                 <a href="{{OrdemDoDia_urlPrimeiroExpediente}}" target="_blank">1° Expediente</a>
                </div>
                {{/OrdemDoDia_urlPrimeiroExpediente}}
                <div class="time">
                  <span class="ion-archive icon"></span>
-                 <a href="#ordemDoDiaTextoResumido_{{OrdemDoDia_id}}" class="open-popup-div">Texto Resumido</a>
+                 <a href="#ordemDoDiaTextoResumido_{{OrdemDoDia_id}}" class="open-popup-div">Ordem do Dia Resumida</a>
+               </div>
+               <div class="time">
+                 <span class="ion-archive icon"></span>
+                 <a href="{{OrdemDoDia_urlTextoCompleto}}" target="_blank">Ordem do Dia Completa</a>
                </div>
              </div>
              <div class="text-danger sub-info-bordered">
@@ -128,7 +128,7 @@
                 <span class="ion-ios7-information icon"></span>
                 Tipo: {{OrdemDoDia_descricao}}
               </div>
-              <div class="time" title="Data da postagem da ordem do dia"><span class="ion-android-data icon"></span>Postagem: {{ OrdemDoDia_dataPostagem }}</div>
+              <div class="time" title="Data da publicação da ordem do dia"><span class="ion-android-data icon"></span>Publicada em {{ OrdemDoDia_dataPostagem }}</div>
             </div>
           </div>
         </a>
