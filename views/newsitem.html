@@ -3,7 +3,7 @@
    $(document).ready(function() {
        "use strict";
        //make videos in froala-view responsive
-       CamaraUtils.makeFroalaVideosResponsive();
+       CamaraUtils.makeFroalaVideosResponsive();       
    });
 </script>
 {{/yield-scripts}}
@@ -32,15 +32,6 @@
          {{#changedDate}}
             <div class="time"><span class="ion-android-data icon"></span>atualizado em: {{ changedDate }}</div>
          {{/changedDate}}
-         {{#views}}
-            <!--
-            25/09/2019: disabled for technical issues:
-            <div class="comments">
-               <span class="ion-ios7-eye icon"></span>
-               {{views}}
-            </div>
-            //-->
-         {{/views}}
         </div>
         {{#enableFacebookShareButton}}
         <div class="text-danger sub-info-nobordered">
@@ -49,12 +40,12 @@
         </div>
         {{/enableFacebookShareButton}}
         {{#headline}}
-        <span class="newsitemHeadline">
+        <span class="newsitemHeadline" id="newsitemHeadline">
            <p>{{headline}}</p>
         </span>
         {{/headline}}
         <span class="newsitem">
-           <div class="fr-view ">
+           <div class="fr-view" id="newsitemBody">
            {{{body}}}
            </div>
            {{#enableFacebookComments}}

@@ -163,14 +163,24 @@ var CamaraUtils = (function() {
     var _highlight = function(containers, keywords) {
        var k, w;
        var words = [];
-
+       var beetwenQuotesRegex = new RegExp("^\&quot;.*\&quot;$", 'i');
        if (containers) {
           for (w = 0; w < containers.length; w++) {
              if (keywords) {
-                words = _.words(keywords);
-                for (k = 0; k < words.length; k++) {
-                   _instantSearch.highlight(containers[w], words[k]);
-                }
+               keywords = keywords.trim();
+               if (beetwenQuotesRegex.test(keywords)) {
+                  //6 is the size of substring &quot;
+                  //strip quotes from beginning and end
+                  keywords = keywords.substring(6, keywords.length - 6);
+                  _instantSearch.highlight(containers[w], keywords);
+               } else {
+                  words = _.words(keywords);
+                  for (k = 0; k < words.length; k++) {
+                    if (words[k] && words[k].length > 3) {
+                      _instantSearch.highlight(containers[w], words[k]);
+                    }
+                  }
+               }
             }
           }
        }

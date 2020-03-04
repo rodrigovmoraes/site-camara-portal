@@ -263,7 +263,6 @@ module.exports.getLegislativePropositions = function(filter, page, pageSize) {
    var qs = {
       'page': page,
       'pageSize': pageSize,
-      'sort': 'date',
       'sortDirection': -1
    };
 

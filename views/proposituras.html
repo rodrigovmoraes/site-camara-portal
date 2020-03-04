@@ -136,9 +136,10 @@
                      </div>
                      <div class="form-inline"  style="margin-top: 7px">
                         <div class="form-group" style="padding-right: 7px">
-                            <div class="input-group input-icon">
+                            <div class="input-group input-icon search_tooltip">
                                 <i class="fa fa-search"></i>
-                                <input type="text" name="keywords" value="{{keywords}}" size="30" class="form-control" id="keywordsInput" title="Palavras-chaves para o filtro" placeholder="Palavras-chave">
+                                <input type="text" name="keywords" value="{{keywords}}" size="30" class="form-control" id="keywordsInput" title="Palavras-chaves para o filtro" placeholder="Palavras-chaves">
+                                <span class="search_tooltiptext">Para pesquisar termos exatos, utilize as palavras-chaves entre aspas, <br> p. ex. "Rua Luiz Ricardo Maffei".</span>
                              </div>
                         </div>
                         {{#legislativePropositionsTags.length}}
@@ -166,12 +167,12 @@
                      <div class="form-inline"  style="margin-top: 7px">
                         <div class="form-group" style="padding-right: 7px">
                            <div class="input-group">
-                             <input type="text" class="form-control"  value="{{publicationDate1}}" name="publicationDate1" id="inputPublicationDate1" title="Data da publicação inicial para o filtro" placeholder="Publicação: inicial"/>
+                             <input type="text" class="form-control"  value="{{publicationDate1}}" name="publicationDate1" id="inputPublicationDate1" title="Data da promulgação inicial para o filtro" placeholder="Data: inicial"/>
                           </div>
                         </div>
                         <div class="form-group" style="padding-right: 7px">
                            <div class="input-group">
-                             <input type="text" class="form-control"  value="{{publicationDate2}}"  name="publicationDate2" id="inputPublicationDate2" title="Data da publicação final para o filtro" placeholder="Publicação: final"/>
+                             <input type="text" class="form-control"  value="{{publicationDate2}}"  name="publicationDate2" id="inputPublicationDate2" title="Data da promulgação final para o filtro" placeholder="Data: final"/>
                           </div>
                         </div>
                         <div class="form-group">
@@ -215,7 +216,7 @@
                             <h3 class="legislativePropositionTitle">{{legislativePropositionTypeDescription}} nº {{legislativePropositionNumber}}</h3>
                             <div class="text-danger sub-info-bordered">
                                <div class="text-danger sub-info">
-                                 <div class="time" title="data de publicação da propositura"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
+                                 <div class="time" title="data de promulgação da propositura"><span class="ion-android-calendar icon"></span>{{legislativePropositionDate}}</div>
                                  <div class="time"><span class="ion-ios7-information icon"></span>{{legislativePropositionTypeDescription}}</div>
                                </div>
                             </div>
