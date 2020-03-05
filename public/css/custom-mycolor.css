@@ -3119,49 +3119,57 @@ div.mfp-wrap::-webkit-scrollbar-thumb {
 
 /*Tooltip for news and legislative proposition search*/
 /* Tooltip container */
-.search_tooltip {
-  position: relative;
-  display: inline-block;
+@media (min-width:348px) {
+   .search_tooltip {
+     position: relative;
+     display: inline-block;
+   }
+
+   /* Tooltip text */
+   .search_tooltip .search_tooltiptext {
+     visibility: hidden;
+     width: 280px;
+     background-color: #555;
+     color: #fff;
+     text-align: center;
+     padding: 5px 0;
+     border-radius: 6px;
+
+     /* Position the tooltip text */
+     position: absolute;
+     z-index: 10;
+     bottom: 125%;
+     left: 50%;
+     margin-left: -60px;
+
+     /* Fade in tooltip */
+     opacity: 0;
+     transition: opacity 0.3s;
+   }
+
+   /* Tooltip arrow */
+   .search_tooltip .search_tooltiptext::after {
+     content: "";
+     position: absolute;
+     top: 100%;
+     left: 50%;
+     margin-left: -5px;
+     border-width: 5px;
+     border-style: solid;
+     border-color: #555 transparent transparent transparent;
+   }
+
+   /* Show the tooltip text when you mouse over the tooltip container */
+   .search_tooltip:hover .search_tooltiptext {
+     visibility: visible;
+     opacity: 1;
+   }
 }
 
-/* Tooltip text */
-.search_tooltip .search_tooltiptext {
-  visibility: hidden;
-  width: 280px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Position the tooltip text */
-  position: absolute;
-  z-index: 10;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-
-  /* Fade in tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-/* Tooltip arrow */
-.search_tooltip .search_tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.search_tooltip:hover .search_tooltiptext {
-  visibility: visible;
-  opacity: 1;
+@media (max-width:347px) {
+   .search_tooltiptext {
+     display: none;
+   }
 }
 
 /*hidden link content of the print version*/
