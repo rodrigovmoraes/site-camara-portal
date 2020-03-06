@@ -86,7 +86,7 @@
         </div>
 
         {{#tramitacoes.length}}
-        <div class="col-md-11 col-sm-11">
+        <div class="col-md-16 col-sm-16">
             <div class="row">
                  <div class="col-sm-16">
                    <hr>
@@ -97,15 +97,9 @@
                  {{#tramitacoes}}
                  <div class="sec-topic col-sm-16">
                    <div class="row">
-                     <div class="col-sm-9">
+                     <div class="col-sm-16">
                        <div class="sec-info">
                          <div class="text-danger sub-info-bordered">
-                            {{#Tramitacao_documentoAcessorio}}
-                            <div class="time">
-                              <span class="ion-archive icon"></span>
-                              <a href="{{documentoAcessorioUrlDownload}}{{Tramitacao_documentoAcessorio}}" target="_blank">Documento</a>
-                            </div>
-                            {{/Tramitacao_documentoAcessorio}}
                             <div class="time" title="data da tramitação">
                                <span class="ion-android-calendar icon"></span>{{Tramitacao_dataTramitacao}}
                             </div>
@@ -121,6 +115,14 @@
                               <span class="ion-ios7-filing icon"></span>
                               Localização: {{Tramitacao_localizacao}}
                             </div>
+                            {{#Tramitacao_tramitacaoDocumentos.length}}
+                            <div class="time tramitacaoDocumentos">
+                               <span class="ion-archive icon"></span>Documentos:
+                              {{#Tramitacao_tramitacaoDocumentos}}
+                                 <a href="{{documentoAcessorioUrlDownload}}{{documentoTramitacaoId}}" target="_blank"><span class="ion-paperclip icon"></span>{{documentoTramitacaoDescricao}}</a>
+                              {{/Tramitacao_tramitacaoDocumentos}}
+                            </div>
+                            {{/Tramitacao_tramitacaoDocumentos.length}}
                          </div>
                        </div>
                      </div>
@@ -133,7 +135,7 @@
         {{/tramitacoes.length}}
 
         {{#documentosAcessorios.length}}
-        <div class="col-md-11 col-sm-11">
+        <div class="col-md-16 col-sm-16">
             <div class="row">
                  <div class="col-sm-16">
                    <hr>
@@ -144,7 +146,7 @@
                  {{#documentosAcessorios}}
                  <div class="sec-topic col-sm-16">
                    <div class="row">
-                     <div class="col-sm-9">
+                     <div class="col-sm-16">
                        <div class="sec-info">
                          <div class="text-danger sub-info-bordered">
                             {{#DocumentoAcessorio_texto_integral}}

@@ -2704,8 +2704,8 @@ footer  .list-unstyled li a:hover h4 {
 }
 
 .materiaLegislativas .materiaLegislativaTitle {
-	max-height: 22px;
-	height: 22px;
+	max-height: 23px;
+	height: 23px;
 	overflow: hidden;
 }
 
@@ -3189,4 +3189,26 @@ div.mfp-wrap::-webkit-scrollbar-thumb {
 /*button used to unhide marks that highlights terms of a search*/
 #divShowMarks {
    display: none
+}
+
+div.time.tramitacaoDocumentos {
+   display: block
+}
+
+.tramitacaoDocumentos span.ion-paperclip.icon {
+   font-size: 18px
+}
+
+.tramitacaoDocumentos a {
+   white-space: nowrap;
+   padding-left: 5px
+}
+
+/*fix icons size*/
+span.ion-ios7-information.icon {
+   font-size: 15px
+}
+
+span.ion-ios7-filing.icon {
+  font-size: 16px
 }
