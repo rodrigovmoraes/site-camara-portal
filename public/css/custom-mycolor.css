@@ -3185,3 +3185,8 @@ div.mfp-wrap::-webkit-scrollbar-thumb {
     display: none !important;
   }
 }
+
+/*button used to unhide marks that highlights terms of a search*/
+#divShowMarks {
+   display: none
+}

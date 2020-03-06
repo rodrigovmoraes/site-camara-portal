@@ -3,8 +3,29 @@
    $(document).ready(function() {
        "use strict";
        //make videos in froala-view responsive
-       CamaraUtils.makeFroalaVideosResponsive();       
+       CamaraUtils.makeFroalaVideosResponsive();
+       {{#keywords}}
+          {{^print}}
+            showMarks();
+          {{/print}}
+       {{/keywords}}
    });
+
+   //show marks that highlights the keywords used in the search
+   function showMarks() {
+      CamaraUtils.highlight($('span#newsitemHeadline'), '{{keywords}}');
+      CamaraUtils.highlight($('div#newsitemBody'), '{{keywords}}');
+      $('#divShowMarks').css("display", "none");
+      $('#divRemoveMarks').css("display", "inline-block");
+   }
+
+   //hidden marks that highlights the keywords used in the search
+   function removeMarks() {
+      CamaraUtils.unhighlight($('span#newsitemHeadline'), '{{keywords}}');
+      CamaraUtils.unhighlight($('div#newsitemBody'), '{{keywords}}');
+      $('#divRemoveMarks').css("display", "none");
+      $('#divShowMarks').css("display", "inline-block");
+   }
 </script>
 {{/yield-scripts}}
 
@@ -32,6 +53,16 @@
          {{#changedDate}}
             <div class="time"><span class="ion-android-data icon"></span>atualizado em: {{ changedDate }}</div>
          {{/changedDate}}
+         {{#keywords}}
+            <div class="time" id="divShowMarks">
+               <span class="ion-pricetags icon"></span>
+               <a href="javascript:void(0)" onclick="showMarks()">Exibir marcações</a>
+            </div>
+            <div class="time" id="divRemoveMarks">
+               <span class="ion-pricetags icon"></span>
+               <a href="javascript:void(0)" onclick="removeMarks()">Remover marcações</a>
+            </div>
+         {{/keywords}}
         </div>
         {{#enableFacebookShareButton}}
         <div class="text-danger sub-info-nobordered">

@@ -23,11 +23,11 @@ var _getElasticSearchConnectionConfig = function() {
 }
 
 //build url for the hit item based on url mappings defined in config file
-var _buildUrl = function(hitItem) {
+var _buildUrl = function(hitItem, filter) {
    var urlMapping = _searchConfigService.getSearchResultUrlMappings()[hitItem['_source']['type']];
    if (urlMapping) {
       return {
-         url: _.template(urlMapping.urlPattern)({ id: hitItem['_source']['datasourceId'] }),
+         url: _.template(urlMapping.urlPattern)({ id: hitItem['_source']['datasourceId'], keywords: filter.keywords }),
          target: urlMapping.target
       }
    } else {
@@ -102,7 +102,7 @@ var _extractText = function(hitItem) {
    }
 }
 
-var _transformSearchHitsItem = function(prefix, hitItem) {
+var _transformSearchHitsItem = function(prefix, hitItem, filter) {
    var transformedItem = {};
    var urlResult;
    transformedItem[prefix + 'Titulo'] = _extractTitle(hitItem);
@@ -114,18 +114,18 @@ var _transformSearchHitsItem = function(prefix, hitItem) {
    transformedItem[prefix + 'Texto'] = _extractText(hitItem);
    transformedItem[prefix + 'Data'] = _formatHitItemDate(hitItem['_source']['date']);
    transformedItem[prefix + 'DataDescricao'] = _formatHitItemDay(hitItem['_source']['dateDescription']);
-   urlResult = _buildUrl(hitItem);
+   urlResult = _buildUrl(hitItem, filter);
    transformedItem[prefix + 'Url'] = urlResult.url;
    transformedItem[prefix + 'Target'] = urlResult.target;
    return transformedItem;
 }
 
-var _transformSearchHits = function (prefix, hits) {
+var _transformSearchHits = function (prefix, hits, filter) {
    var resultItems = [];
    var i;
    if (hits && hits.hits) {
       for (i = 0; i < hits.hits.length; i++) {
-         resultItems.push(_transformSearchHitsItem(prefix, hits.hits[i]))
+         resultItems.push(_transformSearchHitsItem(prefix, hits.hits[i], filter))
       }
    }
    return {
@@ -262,6 +262,6 @@ module.exports.search = function(filter) {
                          }
                }
             }).then(function(result) {
-               return _transformSearchHits('buscaItem', result.hits)
+               return _transformSearchHits('buscaItem', result.hits, filter)
             });
 }

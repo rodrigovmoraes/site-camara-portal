@@ -9,7 +9,28 @@
 
           //make videos in froala-view responsive
           CamaraUtils.makeFroalaVideosResponsive();
+
+          {{#keywords}}
+             {{^print}}
+               //show marks that highlights the keywords used in the search
+               showMarks();
+             {{/print}}
+          {{/keywords}}
       });
+
+      //show marks that highlights the keywords used in the search
+      function showMarks() {
+         CamaraUtils.highlight($('span#spanLegislativePropositionItemText'), '{{keywords}}');
+         $('#divShowMarks').css("display", "none");
+         $('#divRemoveMarks').css("display", "inline-block");
+      }
+
+      //hidden marks that highlights the keywords used in the search
+      function removeMarks() {
+         CamaraUtils.unhighlight($('span#spanLegislativePropositionItemText'));
+         $('#divRemoveMarks').css("display", "none");
+         $('#divShowMarks').css("display", "inline-block");
+      }
    </script>
 {{/yield-scripts}}
 
@@ -43,7 +64,7 @@
 
            {{^print}}
               <div class="time">
-                <a title="Clique aqui para abrir o texto consolidado desta propositura" href="/propositura.html?id={{legislativePropositionId}}">
+                <a title="Clique aqui para abrir o texto consolidado desta propositura" href="/propositura.html?id={{legislativePropositionId}}&keywords={{keywords}}">
                    <span class="ion-ios7-paper-outline icon"></span>Texto Consolidado
                 </a>
              </div>
@@ -52,7 +73,7 @@
            {{^print}}
               {{#legislativePropositionTextAttachment}}
               <div class="time">
-                <a title="Clique aqui para abrir o texto anexo" href="/propositura_texto_anexo.html?id={{legislativePropositionId}}">
+                <a title="Clique aqui para abrir o texto anexo" href="/propositura_texto_anexo.html?id={{legislativePropositionId}}&keywords={{keywords}}">
                    <span class="ion-ios7-paper icon"></span>Texto Anexo
                 </a>
              </div>
@@ -62,7 +83,7 @@
           {{^print}}
              {{#legislativePropositionFileAttachments.length}}
              <div class="time">
-                <a title="Clique aqui para abrir os arquivos anexos" href="/propositura_arquivos_anexos.html?id={{legislativePropositionId}}">
+                <a title="Clique aqui para abrir os arquivos anexos" href="/propositura_arquivos_anexos.html?id={{legislativePropositionId}}&keywords={{keywords}}">
                    <span class="ion-ios7-download icon"></span>Arquivos Anexos
                 </a>
              </div>
@@ -72,7 +93,7 @@
           {{^print}}
              {{#legislativePropositionRelationships.length}}
              <div class="time">
-                <a title="Clique aqui para ver outras proposituras vinculadas a esta" href="/propositura_alteracoes.html?id={{legislativePropositionId}}">
+                <a title="Clique aqui para ver outras proposituras vinculadas a esta" href="/propositura_alteracoes.html?id={{legislativePropositionId}}&keywords={{keywords}}">
                    <span class="ion-android-share icon"></span>Alterações
                 </a>
              </div>
@@ -90,13 +111,26 @@
           {{/print}}
 
           {{^print}}
+             {{#keywords}}
+                <div class="time" id="divShowMarks">
+                   <span class="ion-pricetags icon"></span>
+                   <a href="javascript:void(0)" onclick="showMarks()">Exibir marcações</a>
+                </div>
+                <div class="time" id="divRemoveMarks">
+                   <span class="ion-pricetags icon"></span>
+                   <a href="javascript:void(0)" onclick="removeMarks()">Remover marcações</a>
+                </div>
+             {{/keywords}}
+          {{/print}}
+
+          {{^print}}
              <span class="ion-android-printer"></span>
              <a href="?id={{legislativePropositionId}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>
           {{/print}}
         </div>
 
         <div class="fr-view">
-           <span class="legislativePropositionItem">
+           <span class="legislativePropositionItem" id="spanLegislativePropositionItemText">
               {{{legislativePropositionOriginalText}}}
            </span>
         </div>

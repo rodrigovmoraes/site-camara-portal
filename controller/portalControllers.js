@@ -268,7 +268,8 @@ module.exports.newsItemController = function(req, res, next) {
          //render the page
          res.render('newsitem', {
              'newsItem': newsItem,
-             'facebookNewsItemUrl': FacebookSharingConfig.getNewsItemUrl()
+             'facebookNewsItemUrl': FacebookSharingConfig.getNewsItemUrl(),
+             'keywords': req.query.keywords
          });
       }).catch(function(err) {
          //render the error page
@@ -817,6 +818,9 @@ module.exports.proposituraController = function(req, res, next) {
          //render the page
          result.facebookCamaraUrlBase = FacebookSharingConfig.getCamaraPortalUrlBase();
          result.facebookLegislativePropositionUrl = FacebookSharingConfig.getLegislativePropositionUrl();
+         if (req.query.keywords) {
+            result.keywords = req.query.keywords;
+         }
          res.render('propositura', result);
       }).catch(function(err) {
          //render the error page
@@ -835,6 +839,10 @@ module.exports.proposituraController = function(req, res, next) {
          }
          result.facebookCamaraUrlBase = FacebookSharingConfig.getCamaraPortalUrlBase();
          result.facebookLegislativePropositionUrl = FacebookSharingConfig.getLegislativePropositionUrl();
+         //keywords for highlighting
+         if (req.query.keywords) {
+            result.keywords = req.query.keywords;
+         }
          //render the page
          res.render('propositura', result);
       }).catch(function(err) {
@@ -884,6 +892,10 @@ module.exports.proposituraTextoAnexoController = function(req, res, next) {
          } else {
             result.print = false;
          }
+         //keywords for highlighting
+         if (req.query.keywords) {
+            result.keywords = req.query.keywords;
+         }
          //render the page
          res.render('propositura_texto_anexo', result);
       }).catch(function(err) {
@@ -908,6 +920,10 @@ module.exports.proposituraTextoOriginalController = function(req, res, next) {
          } else {
             result.print = false;
          }
+         //keywords for highlighting
+         if (req.query.keywords) {
+            result.keywords = req.query.keywords;
+         }
          //render the page
          res.render('propositura_texto_original', result);
       }).catch(function(err) {
@@ -927,7 +943,8 @@ module.exports.proposituraArquivosAnexosController = function(req, res, next) {
       .then(function(legislativeProposition) {
          //render the page
          res.render('propositura_arquivos_anexos', {
-             'legislativeProposition': legislativeProposition
+             'legislativeProposition': legislativeProposition,
+             'keywords': req.query.keywords //keywords for highlighting
          });
       }).catch(function(err) {
          //render the error page
@@ -950,6 +967,10 @@ module.exports.proposituraAlteracoesController = function(req, res, next) {
             result.print = true;
          } else {
             result.print = false;
+         }
+         //keywords for highlighting
+         if (req.query.keywords) {
+            result.keywords = req.query.keywords;
          }
          //render the page
          res.render('propositura_alteracoes', result);

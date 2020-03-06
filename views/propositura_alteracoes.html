@@ -34,14 +34,14 @@
            <div class="time"><span class="ion-android-data icon"></span>Promulgação: {{legislativePropositionDate}}</div>
            <div class="time"><span class="ion-ios7-information icon"></span>Tipo: {{legislativePropositionTypeDescription}}</div>
            <div class="time">
-             <a title="Clique aqui para abrir a redação da propositura" href="/propositura.html?id={{legislativePropositionId}}">
+             <a title="Clique aqui para abrir a redação da propositura" href="/propositura.html?id={{legislativePropositionId}}&keywords={{keywords}}">
                 <span class="ion-ios7-paper-outline icon"></span>Texto
              </a>
            </div>
            {{^print}}
               {{#legislativePropositionTextAttachment}}
               <div class="time">
-                <a title="Clique aqui para abrir o texto anexo" href="/propositura_texto_anexo.html?id={{legislativePropositionId}}">
+                <a title="Clique aqui para abrir o texto anexo" href="/propositura_texto_anexo.html?id={{legislativePropositionId}}&keywords={{keywords}}">
                    <span class="ion-ios7-paper icon"></span>Texto Anexo
                 </a>
               </div>
@@ -51,7 +51,7 @@
            {{^print}}
               {{#legislativePropositionFileAttachments.length}}
               <div class="time">
-                 <a title="Clique aqui para abrir os arquivos anexos" href="/propositura_arquivos_anexos.html?id={{legislativePropositionId}}">
+                 <a title="Clique aqui para abrir os arquivos anexos" href="/propositura_arquivos_anexos.html?id={{legislativePropositionId}}&keywords={{keywords}}">
                     <span class="ion-ios7-download icon"></span>Arquivos Anexos
                  </a>
               </div>
