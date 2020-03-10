@@ -21,6 +21,7 @@ var _materiaTextoOriginalUrlDownload ;//Ex: "http://www.camarasorocaba.sp.gov.br
 var _materiaTextoFinalUrlDownload;//Ex: "http://www.camarasorocaba.sp.gov.br:8383/syslegis/materiaLegislativa/imprimirTextoIntegralFinal?idMateria="
 var _documentoAcessorioUrlDownload;//Ex: "http://www.camarasorocaba.sp.gov.br:8383/syslegis/documentoAcessorio/imprimirTextoIntegral?idDocumentoAcessorio="
 var _ordensDoDiaMethodPath;//Ex: "ordensDoDia"
+var _ordemDoDiaMethodPath;//Ex: "ordemDoDia"
 var _ordemDoDiaListaDeAnosMethodPath;//Ex: "ordensDoDia/anos"
 var _comissoesMethodPath;//Ex: "comissoes"
 var _legislaturasMethodPath;//Ex: "legislaturas"
@@ -135,6 +136,14 @@ module.exports.setOrdensDoDiaMethodPath = function(ordensDoDiaMethodPath) {
 
 module.exports.getOrdensDoDiaMethodPath = function() {
    return _ordensDoDiaMethodPath;
+}
+
+module.exports.setOrdemDoDiaMethodPath = function(ordemDoDiaMethodPath) {
+   _ordemDoDiaMethodPath = ordemDoDiaMethodPath;
+}
+
+module.exports.getOrdemDoDiaMethodPath = function() {
+   return _ordemDoDiaMethodPath;
 }
 
 module.exports.setOrdemDoDiaListaDeAnosMethodPath = function(ordemDoDiaListaDeAnosMethodPath) {

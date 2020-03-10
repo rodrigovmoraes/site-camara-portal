@@ -1,0 +1,59 @@
+{{#yield-scripts}}
+   <script type="text/javascript">
+      $(document).ready(function() {
+          "use strict";
+
+          {{#print}}
+          window.print();
+          {{/print}}
+      });
+   </script>
+{{/yield-scripts}}
+
+<div class="container">
+  <div class="row">
+     {{#ordemDoDia}}
+        <div class="page-header">
+           <h1>{{OrdemDoDia_descricao}} {{OrdemDoDia_numero}}/{{OrdemDoDia_ano}} - Resumida</h1>
+           {{^print}}
+           <ol class="breadcrumb">
+             <li><a href="/">Home</a></li>
+             <li><a href="/ordens_do_dia.html">Pautas das Sessões</a></li>
+             <li><a href="#">Pauta</a></li>
+           </ol>
+           {{/print}}
+        </div>
+        <div class="text-danger sub-info-bordered" style="font-size: 16px">
+           <div class="time" title="Data da ordem do dia"><span class="ion-android-calendar icon"></span>Data: {{ OrdemDoDia_data }}</div>
+           <div class="time">
+             <span class="ion-ios7-information icon"></span>
+             Tipo: {{OrdemDoDia_descricao}}
+           </div>
+           <div class="time" title="Data da publicação da ordem do dia"><span class="ion-android-data icon"></span>Publicada em {{ OrdemDoDia_dataPostagem }}</div>
+           {{^print}}
+              <span class="ion-android-printer" style="margin-left: 7px"></span>
+              <a href="?id={{OrdemDoDia_id}}&print=1" target="_blank" style="margin-left: 7px">Versão de Impressão</a>
+           {{/print}}
+           {{^print}}
+              <div class="time ordemDoDiaAttachments">
+                {{#OrdemDoDia_urlPrimeiroExpediente}}
+                <div class="time">
+                   <span class="ion-archive icon"></span>
+                   <a href="{{OrdemDoDia_urlPrimeiroExpediente}}" target="_blank">1° Expediente</a>
+                </div>
+                {{/OrdemDoDia_urlPrimeiroExpediente}}
+                <div class="time">
+                   <span class="ion-archive icon"></span>
+                   <a href="{{OrdemDoDia_urlTextoCompleto}}" target="_blank">Ordem do Dia Completa</a>
+                </div>
+              </div>
+           {{/print}}
+        </div>
+        <div class="row">
+          <span class="legislativePropositionItem" id="spanLegislativePropositionItemText">
+             {{{OrdemDoDia_textoResumido}}}
+          </span>
+        </div>
+     {{/ordemDoDia}}
+  </div>
+</div>

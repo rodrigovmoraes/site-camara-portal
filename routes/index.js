@@ -75,6 +75,7 @@ router.post('/materias.html', portalControllers.materiasLegislativasController);
 router.get('/materia.html', portalControllers.materiaLegislativaController);
 router.get('/materia_sharing.html', portalControllers.materiaLegislativaSharingController);
 router.get('/ordens_do_dia.html', portalControllers.ordensDoDiaController);
+router.get('/ordem_do_dia.html', portalControllers.ordemDoDiaController);
 router.get('/comissoes.html', portalControllers.comissoesController);
 router.get('/mesa_diretora.html', portalControllers.mesaDiretoraController);
 router.get('/vereadores.html', portalControllers.vereadoresController);
@@ -88,4 +89,3 @@ router.get('/popup-render-flickr-set-big-single-image.html', popupRendersControl
 router.get('/flickr-photo-big-single-image.html', popupRendersControllers.flickrPhotoPopupRenderControllerOpenSingleImage);
 
 module.exports = router;
-

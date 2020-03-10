@@ -56,6 +56,11 @@ var _getOrdensDoDiaMethodURL = function() {
                _syslegisApiConfigService.getOrdensDoDiaMethodPath();
 }
 
+var _getOrdemDoDiaMethodURL = function() {
+   return _syslegisApiConfigService.getBaseUrl() +
+               _syslegisApiConfigService.getOrdemDoDiaMethodPath();
+}
+
 var _getOrdemDoDiaListaDeAnosMethodURL = function() {
    return _syslegisApiConfigService.getBaseUrl() +
                _syslegisApiConfigService.getOrdemDoDiaListaDeAnosMethodPath();
@@ -829,6 +834,28 @@ module.exports.getOrdensDoDia = function(filter) {
       return {
          ordensDoDia: data.ordensDoDia,
          total: data.total
+      }
+   });
+}
+
+module.exports.getOrdemDoDia = function(ordemDoDiaId) {
+   return _requestService({
+      url: _getOrdemDoDiaMethodURL() + "/" + ordemDoDiaId,
+      method: "GET",
+      json: true
+   }).then(function(data) {
+      var ordemDoDia = null;
+      if(data.ordemDoDia) {
+         ordemDoDia = data.ordemDoDia;
+         _transformMateriaObject("OrdemDoDia_", ordemDoDia);
+         ordemDoDia['OrdemDoDia_ano'] = ordemDoDia['OrdemDoDia_data'] ? _extractOrdemDoDiaAno(ordemDoDia['OrdemDoDia_data']) : "";
+         //set data
+         ordemDoDia['OrdemDoDia_data'] = ordemDoDia['OrdemDoDia_data'] ? _formatOrdemDoDiaData(ordemDoDia['OrdemDoDia_data']) : "";
+         //set data de postagem
+         ordemDoDia['OrdemDoDia_dataPostagem'] = ordemDoDia['OrdemDoDia_dataPostagem'] ? _formatOrdemDoDiaDataPostagem(ordemDoDia['OrdemDoDia_dataPostagem']) : "";
+      }
+      return {
+         ordemDoDia: ordemDoDia
       }
    });
 }

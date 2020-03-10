@@ -1478,6 +1478,29 @@ module.exports.ordensDoDiaController = function(req, res, next) {
       });
 }
 
+module.exports.ordemDoDiaController = function(req, res, next) {
+   if (req.query.id) {
+      return camaraSyslegisService
+      .getOrdemDoDia(req.query.id)
+      .then(function(result) {
+         //render the page
+         if(req.query.print) {
+            result.print = true;
+         } else {
+            result.print = false;
+         }
+         //render the page
+         result.ordemDoDia = result.ordemDoDia;
+         res.render('ordem_do_dia', result);
+      }).catch(function(err) {
+         //render the error page
+         Utils.next(err.statusCode, err, next);
+      });
+   } else {
+      Utils.next(400, { message: "O id da ordem do dia precisa ser definido" }, next);
+   }
+}
+
 /* GET '/comissoes.html' page */
 module.exports.comissoesController = function(req, res, next) {
    //set the page and pageSize

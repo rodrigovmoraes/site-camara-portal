@@ -3221,3 +3221,7 @@ span.ion-ios7-information.icon {
 span.ion-ios7-filing.icon {
   font-size: 16px
 }
+
+.ordemDoDiaAttachments {
+  display: "block"
+}
