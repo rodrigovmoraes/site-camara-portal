@@ -1213,9 +1213,23 @@ module.exports.materiasLegislativasController = function(req, res, next) {
 }
 
 module.exports.materiaLegislativaController = function(req, res, next) {
+   var filter = {};
+   filterOk = false;
+
    if (req.query.id) {
+      filter.id = req.query.id;
+      filterOk = true;
+   } else if (req.query.numero && req.query.ano) {
+      filter.numero = req.query.numero;
+      filter.ano = req.query.ano;
+      if (req.query.tipo) {
+         filter.tipo = req.query.tipo;
+      }
+      filterOk = true;
+   }
+   if (filterOk) {
       return camaraSyslegisService
-      .getMateriaLegislativa(req.query.id)
+      .getMateriaLegislativa(filter)
       .then(function(result) {
          //render the page
          result.materiaTextoOriginalUrlDownload = SyslegisApiConfigService.getMateriaTextoOriginalUrlDownload();
@@ -1243,7 +1257,7 @@ module.exports.materiaLegislativaController = function(req, res, next) {
 module.exports.materiaLegislativaSharingController = function(req, res, next) {
    if (req.query.id) {
       return camaraSyslegisService
-      .getMateriaLegislativa(req.query.id)
+      .getMateriaLegislativa({ id: req.query.id })
       .then(function(result) {
          //render the page
          result.materiaTextoOriginalUrlDownload = SyslegisApiConfigService.getMateriaTextoOriginalUrlDownload();

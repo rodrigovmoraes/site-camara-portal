@@ -672,9 +672,22 @@ module.exports.pesquisaMateriasLegislativas = function(filter) {
    });
 }
 
-module.exports.getMateriaLegislativa = function(idMateria) {
+module.exports.getMateriaLegislativa = function(filter) {
+   var materiaLegislativaMethodURL = "";
+   var tipoMateriaId;
+
+   if (filter.id) {
+      materiaLegislativaMethodURL = _getMateriaLegislativaMethodURL() + "/" + filter.id;
+   } else if (filter.numero && filter.ano) {
+      if (filter.tipo) {
+         tipoMateriaId = filter.tipo;
+      } else {
+         tipoMateriaId = "24";
+      }
+      materiaLegislativaMethodURL = _getMateriaLegislativaMethodURL() + "?numero=" + filter.numero + "&ano=" + filter.ano + "&tipo=" + tipoMateriaId;
+   }
    return _requestService({
-      url: _getMateriaLegislativaMethodURL() + "/" + idMateria,
+      url: materiaLegislativaMethodURL,
       method: "GET",
       json: true
    }).then(function(data) {

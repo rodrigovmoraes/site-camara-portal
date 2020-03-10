@@ -83,6 +83,22 @@
            {{#Materia_dataFimPrazoProcesso}}
              <div class="time"><span class="ion-android-calendar icon"></span>Prazo do processo: {{Materia_dataFimPrazoProcesso}}</div>
            {{/Materia_dataFimPrazoProcesso}}
+           {{#Materia_apensadas.length}}
+           <div class="time apensadasDocumentos">
+              <span class="ion-archive icon"></span>Apensadas:
+              {{#Materia_apensadas}}
+                 <a target="_self" href="materia.html?numero={{apensadaNumero}}&ano={{apensadaAno}}&tipo={{apensadaTipo}}" target="_blank"><span class="ion-paperclip icon"></span>{{apensadaDescricao}}</a>
+              {{/Materia_apensadas}}
+           </div>
+           {{/Materia_apensadas.length}}
+           {{#Materia_apensadasPor.length}}
+           <div class="time apensadasDocumentos">
+              <span class="ion-archive icon"></span>Apensada ao:
+              {{#Materia_apensadasPor}}
+                 <a target="_self" href="materia.html?numero={{apensadaNumero}}&ano={{apensadaAno}}&tipo={{apensadaTipo}}" target="_blank"><span class="ion-paperclip icon"></span>{{apensadaDescricao}}</a>
+              {{/Materia_apensadasPor}}
+           </div>
+           {{/Materia_apensadasPor.length}}
         </div>
 
         {{#tramitacoes.length}}

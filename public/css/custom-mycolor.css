@@ -3204,6 +3204,15 @@ div.time.tramitacaoDocumentos {
    padding-left: 5px
 }
 
+.apensadasDocumentos span.ion-paperclip.icon {
+   font-size: 18px
+}
+
+.apensadasDocumentos a {
+   white-space: nowrap;
+   padding-left: 5px
+}
+
 /*fix icons size*/
 span.ion-ios7-information.icon {
    font-size: 15px
