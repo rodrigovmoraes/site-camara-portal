@@ -146,6 +146,7 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
    var legislativePropositionRelationships = [];
    var legislativePropositionRelationshipsByType = [];
    var legislativePropositionRelationshipType = null;
+   var legislativePropositionTags = [];
    var i;
    if(legislativeProposition.consolidatedFileAttachments &&
          legislativeProposition.consolidatedFileAttachments.length > 0) {
@@ -213,6 +214,15 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
                   ? o.legislativePropositionRelationshipType.legislativePropositionRelationshipTypeDescription : "";
       }]);
    }
+   if (legislativeProposition.tags && legislativeProposition.tags.length > 0) {
+      for (i = 0; i < legislativeProposition.tags.length; i++) {
+         legislativePropositionTags.push({
+            legislativePropositionTagId: legislativeProposition.tags[i]._id,
+            legislativePropositionTagDescription: legislativeProposition.tags[i].description,
+            legislativePropositionTagLast: i === ( legislativeProposition.tags.length - 1 )
+         });
+      }
+   }
    return {
       'legislativePropositionId': legislativeProposition._id,
       'legislativePropositionNumber': _.padStart(legislativeProposition.number, 2, "0") + "/" + legislativeProposition.year,
@@ -225,6 +235,7 @@ var _transformGetLegislativePropositionResult = function(legislativeProposition)
       'legislativePropositionTextAttachment': legislativeProposition.consolidatedTextAttachment ? legislativeProposition.consolidatedTextAttachment : legislativeProposition.textAttachment,
       'legislativePropositionFileAttachments': legislativePropositionFileAttachments,
       'legislativePropositionRelationships': legislativePropositionRelationships,
+      'legislativePropositionTags': legislativePropositionTags,
       'legislativePropositionShowNumber': legislativeProposition.type &&  (legislativeProposition.type.code !== 5 && legislativeProposition.type.code !== 6)
    }
 }

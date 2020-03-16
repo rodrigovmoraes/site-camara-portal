@@ -3226,6 +3226,6 @@ span.ion-clipboard.icon {
   font-size: 20px
 }
 
-div.time.ordemDoDiaAttachments {
+div.time.ordemDoDiaAttachments, div.time.legislativePropositionTags {
   display: block
 }
