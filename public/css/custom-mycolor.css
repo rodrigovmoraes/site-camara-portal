@@ -3229,3 +3229,7 @@ span.ion-clipboard.icon {
 div.time.ordemDoDiaAttachments, div.time.legislativePropositionTags {
   display: block
 }
+
+span.newsitem div.fr-view .fr-file::after {
+   content: ""
+}
