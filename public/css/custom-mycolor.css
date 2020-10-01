@@ -2691,10 +2691,13 @@ footer  .list-unstyled li a:hover h4 {
    font-weight: bold
 }
 
+.licitacoes .sec-topic div.sec-info div.text-danger.sub-info div.time.covid {
+  color: rgb(209, 16, 26);
+}
+
 .licitacaoItem {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 15px;
-	font-color: black;
 }
 
 .licitacoesItemHeadline {
