@@ -123,16 +123,38 @@
                   <div class="sec-topic col-sm-16 col-md-16 wow fadeInDown animated animated" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
                        <a href="/licitacao.html?id={{_id}}">
                           <div class="sec-info">
-                            <h3 class="licitacaoTitle">{{categoryDescription}} nº {{licitacaoNumber}}</h3>
+                            {{#covid}}
+                            <h3 title="Necessidade de contratação para o enfrentamento ao Covid-19" class="licitacaoTitle covid">
+                            {{/covid}}
+                            {{^covid}}
+                            <h3 class="licitacaoTitle">
+                            {{/covid}}
+                               {{categoryDescription}} nº {{licitacaoNumber}}
+                            </h3>
+                            {{#covid}}
+                            <div class="text-danger sub-info-bordered covid">
+                            {{/covid}}
+                            {{^covid}}
                             <div class="text-danger sub-info-bordered">
+                            {{/covid}}
                                <div class="text-danger sub-info">
                                     <div class="time"  title="data do evento da licitação"><span class="ion-android-calendar icon"></span>Publicação: {{publicationDate}}</div>
                                     <div class="time"><span class="ion-ios7-information icon"></span>{{categoryDescription}}</div>
+                                    {{#covid}}
+                                    <div class="time"><span class="ion-ios7-information icon"></span>Enfrentamento ao Covid-19</div>
+                                    {{/covid}}
                                </div>
                             </div>
                           </div>
                        </a>
-                       <p class="headline" id="licitacaoHeadline">{{description}}</p>
+                       {{#covid}}
+                       <p class="headline covid" id="licitacaoHeadline">
+                       {{/covid}}
+                       {{^covid}}
+                       <p class="headline" id="licitacaoHeadline">
+                       {{/covid}}
+                          {{description}}
+                       </p>
                   </div>
                {{/licitacoes}}
 

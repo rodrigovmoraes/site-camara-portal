@@ -2648,7 +2648,6 @@ footer  .list-unstyled li a:hover h4 {
 	 margin-bottom: 5px;
 }
 
-/* licitacoes styling */
 .licitacoesFilter {
 	padding-bottom: 15px;
 	margin-bottom: 10px;
@@ -2662,10 +2661,34 @@ footer  .list-unstyled li a:hover h4 {
    margin-bottom: 25px;
 }
 
+.licitacoes .headline.covid {
+	/* height: 160px; */
+	font-weight: bold;
+}
+
 .licitacoes .licitacaoTitle {
    height: 23px;
 	max-height: 23px;
 	overflow: hidden;
+}
+
+.licitacoes .licitacaoTitle.covid {
+   font-weight: 900;
+}
+
+.licitacao h1.covid::before, .licitacoes .licitacaoTitle.covid::before {
+   display:inline-block;
+   height:15px;
+   width:15px;
+   margin-right: 5px;
+   content: "";
+   background:url(/images/covid19.jpg) no-repeat 0 0;
+   background-size: 15px 15px;
+}
+
+
+.licitacoes .sub-info-bordered.covid {
+   font-weight: bold
 }
 
 .licitacaoItem {
@@ -3237,4 +3260,25 @@ span.newsitem div.fr-view .fr-file::after {
 div.fr-view span.legislativePropositionItem {
    font-family: Calibri, sans-serif;
    font-size: 16px;
+}
+
+/*remove froala styling*/
+div.radioplayer {
+   font-size: 15px;
+}
+
+div.radioplayer img.fr-dii {
+   margin-left: 0px;
+   margin-right: 0px
+}
+
+div.radioplayer table td, div.radioplayer table th {
+  border: 0px
+}
+
+div.radioplayer table {
+   border: 0;
+   border-collapse: collapse;
+   empty-cells: show;
+   max-width: 100%;
 }
