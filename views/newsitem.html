@@ -4,6 +4,9 @@
        "use strict";
        //make videos in froala-view responsive
        CamaraUtils.makeFroalaVideosResponsive();
+       setTimeout(function () {
+          $('div.fb-like iframe').attr('style', 'border: none; visibility: visible; width: 175px; height: 20px;');
+       }, 1000);
        {{#keywords}}
           {{^print}}
             showMarks();
@@ -67,7 +70,7 @@
         {{#enableFacebookShareButton}}
         <div class="text-danger sub-info-nobordered">
            <img id="facebook-sharer-icon" src="images/faceicon.png" alt="Facebook" title="Facebook" width="20px" height="20px"></img>
-           <div class="fb-like" data-href="{{facebookNewsItemUrl}}{{_id}}" data-width="" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+           <div class="fb-like" data-href="{{facebookNewsItemUrl}}{{_id}}" data-width="175px" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
         </div>
         {{/enableFacebookShareButton}}
         {{#headline}}
